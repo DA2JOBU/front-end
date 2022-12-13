@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
-import Layout from 'common/components/layouts/Layout';
+import Layout from '@components/layouts/Layout';
 // import { useEffect } from 'react';
 
 declare global {

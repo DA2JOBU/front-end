@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import KakaoLoginBtn from 'common/components/elements/kakao-btn';
+import KakaoLoginBtn from './kakao-btn';
 
 // import { KAKO_LOGIN_URL } from 'common/api/kakaoLoginData';
 
