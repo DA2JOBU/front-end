@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import Search from './search';
+import Map from '../../common/components/elements/map';
 
 export interface propsType {
   searchKeyword: string
 }
 
-const Map = ():JSX.Element => {
+const Main = ():JSX.Element => {
   // 입력 폼 변화 감지하여 입력 값 관리
   const [Value, setValue] = useState("");
   // 제출한 검색어 관리
@@ -17,18 +17,18 @@ const Map = ():JSX.Element => {
     setValue(e.target.value);
   }
 
-// 제출한 검색어 state에 담아주는 함수
-const submitKeyword = (e: { preventDefault: () => void; }) => {
-  e.preventDefault();
-  setKeyword(Value);
-}
-
-// 검색어를 입력하지 않고 검색 버튼을 눌렀을 경우
-const valueChecker = () => {
-  if (Value === "") {
-    alert ("검색어를 입력해주세요.")
+  // 제출한 검색어 state에 담아주는 함수
+  const submitKeyword = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    setKeyword(Value);
   }
-}
+
+  // 검색어를 입력하지 않고 검색 버튼을 눌렀을 경우
+  const valueChecker = () => {
+    if (Value === "") {
+      alert ("검색어를 입력해주세요.")
+    }
+  }
 
 return (
   <div className="landing-page">
@@ -44,10 +44,10 @@ return (
         </form>
       </div>
       {/* 제출한 검색어 넘기기 */}
-      <Search searchKeyword={ Keyword }/>
+      <Map searchKeyword={ Keyword }/>
     </div>
   </div>
 )
 }
 
-export default Map;
+export default Main;

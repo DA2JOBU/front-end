@@ -5,7 +5,7 @@ import KakaoLoginBtn from './kakao-btn';
 
 const loginWithKakao = () => {
   const kakaoLogin = () => {    
-    window.Kakao.Auth.login({
+    window.kakao.Auth.login({
       
       success: function(Auth: any) {
         console.log(Auth.Auth);
