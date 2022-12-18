@@ -7,6 +7,7 @@ import Layout from '@components/layouts/Layout';
 declare global {
   interface Window {
     Kakao: any;
+    kakao: any;
   }
 }
 
