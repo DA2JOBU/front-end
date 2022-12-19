@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Map from '../../common/components/elements/map';
+import Map from '../../common/components/modules/map';
 
 export interface propsType {
   searchKeyword: string
