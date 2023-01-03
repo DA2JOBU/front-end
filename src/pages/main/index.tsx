@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import Map from '../../common/components/modules/map';
-
+import Button from '@components/elements/button';
+import React, { useEffect, useState, useRef } from 'react'
+import Sidebar from '../../common/components/modules/registerSideBar';
 export interface propsType {
   searchKeyword: string
 }
@@ -10,6 +10,12 @@ const Main = ():JSX.Element => {
   const [Value, setValue] = useState("");
   // 제출한 검색어 관리
   const [Keyword, setKeyword] = useState("");
+
+  const search = useRef();
+
+  useEffect(() => {
+    setKeyword("");
+  },[])
 
   // 입력 폼 변화 감지하여 입력 값을 state에 담아주는 함수
   const keywordChange = (e: { preventDefault: () => void; target: { value: string }; }) => {
@@ -33,6 +39,7 @@ const Main = ():JSX.Element => {
 return (
   <div className="landing-page">
     <div className="landing-page__inner">
+      <Button text='등록하기'/>
       <div className="search-form-container">
         <form className="search-form" onSubmit={ submitKeyword }>
           <label htmlFor="place" className="form__label">
@@ -44,7 +51,8 @@ return (
         </form>
       </div>
       {/* 제출한 검색어 넘기기 */}
-      <Map searchKeyword={ Keyword }/>
+      {/* <Map searchKeyword={Keyword} /> */}
+      <Sidebar searchKeyword={Keyword}/>
     </div>
   </div>
 )
