@@ -1,10 +1,11 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
+import { kakaoInit } from '@helper/index';
 import Layout from '@components/layouts/Layout';
 import '../styles/globals.css';
 import { RecoilRoot } from 'recoil';
-// import { useEffect } from 'react';
+import { useEffect } from 'react';
 
 declare global {
   interface Window {
@@ -14,12 +15,10 @@ declare global {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
-
-  const kakaoInit = () => {
-    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY);
-    console.log('성공', window.Kakao.isInitialized());
-  };
-
+  useEffect(() => {
+    kakaoInit();
+  }, []);
+  
   return (
     <>
       <Head>
