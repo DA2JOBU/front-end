@@ -68,6 +68,8 @@
 // export default Map;
 
 import React, { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { searchList } from 'state';
 import { propsType } from '../../../pages/main/index';
 
 interface placeType {
@@ -82,16 +84,10 @@ interface placeType {
 // const { kakao } = window as any;
 
 const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
+  //검색 결과를 담는 것
+  const setSearchList = useSetRecoilState(searchList);
   // 마커를 담는 배열
   let markers: any[] = [];
-  const [mapLoaded, setMapLoaded] = useState<boolean>(false);
-
-//   useEffect(() => {
-//     const $script = document.createElement('script');
-//     $script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY}&libraries=services&autoload=false`;
-//     $script.addEventListener('load', () => setMapLoaded(true));
-//     document.head.appendChild($script);
-//   }, []);
 
   // 검색어가 바뀔 때마다 재렌더링되도록 useEffect 사용
   useEffect(() => {
@@ -136,13 +132,20 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
       function searchPlaces() {
         let keyword = props.searchKeyword;
 
+                  //검색 옵션
+        const searchOption = {
+          location: map.getCenter(),
+          radius: 1000,
+          size:10//검색할 개수를 설정할 수 있다.
+        };
+
         if (!keyword.replace(/^\s+|\s+$/g, '')) {
           console.log('키워드를 입력해주세요!');
           return false;
         }
 
         // 장소검색 객체를 통해 키워드로 장소검색을 요청
-        ps.keywordSearch(keyword, placesSearchCB);
+        ps.keywordSearch(keyword, placesSearchCB, searchOption);
       }
 
       // 장소검색이 완료됐을 때 호출되는 콜백함수
@@ -151,6 +154,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
           // 정상적으로 검색이 완료됐으면
           // 검색 목록과 마커를 표출
           displayPlaces(data);
+          setSearchList(data);
 
           // 페이지 번호를 표출
           displayPagination(pagination);
@@ -172,6 +176,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
 
         // 검색 결과 목록에 추가된 항목들을 제거
         listEl && removeAllChildNods(listEl);
+        console.log(places);
 
         // 지도에 표시되고 있는 마커를 제거
         removeMarker();
@@ -331,7 +336,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
         }
       }
     });
-  }, [mapLoaded, props.searchKeyword]);
+  }, [mapContainer, props.searchKeyword]);
 
   return (
     <div className="map-container">
