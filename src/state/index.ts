@@ -4,3 +4,4 @@ export const searchList = atom<searchElement[]>({
     key: 'searchList',
     default: [],
 });
+
