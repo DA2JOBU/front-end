@@ -1,4 +1,4 @@
-import Button from '@components/elements/button';
+import Button from '@components/elements/Button';
 import React, { useEffect, useState, useRef } from 'react'
 import Sidebar from '../../common/components/modules/registerSideBar';
 export interface propsType {

@@ -12,7 +12,7 @@
 
 //   useEffect(() => {
 //     if (!mapLoaded) return;
-    
+
 //     // let markers = [
 //     //     {
 //     //         position: new window.kakao.maps.LatLng(33.450701, 126.570667)
@@ -33,23 +33,23 @@
 //         let map = new window.kakao.maps.Map(container, options);
 
 //         //마커 생성
-//         let marker = new window.kakao.maps.Marker({ 
-//             // 지도 중심좌표에 마커를 생성합니다 
+//         let marker = new window.kakao.maps.Marker({
+//             // 지도 중심좌표에 마커를 생성합니다
 //             position: map.getCenter()
-//         }); 
+//         });
 //         // 지도에 마커를 표시합니다
 //         marker.setMap(map);
 
 //         // 지도에 클릭 이벤트를 등록합니다
 //         // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-//         window.kakao.maps.event.addListener(map, 'click', function(mouseEvent:any) {        
-            
-//             // 클릭한 위도, 경도 정보를 가져옵니다 
-//             var latlng = mouseEvent.latLng; 
-            
+//         window.kakao.maps.event.addListener(map, 'click', function(mouseEvent:any) {
+
+//             // 클릭한 위도, 경도 정보를 가져옵니다
+//             var latlng = mouseEvent.latLng;
+
 //             // 마커 위치를 클릭한 위치로 옮깁니다
 //             marker.setPosition(latlng);
-            
+
 //         });
 //     });
 //   }, [mapLoaded]);
@@ -69,15 +69,15 @@
 
 import React, { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { searchList } from 'state';
+import { searchList } from 'src/state';
 import { propsType } from '../../../pages/main/index';
 
 interface placeType {
-  place_name: string,
-  road_address_name: string,
-  address_name: string,
-  phone: string,
-  place_url: string
+  place_name: string;
+  road_address_name: string;
+  address_name: string;
+  phone: string;
+  place_url: string;
 }
 
 // head에 작성한 kakao API 불러오기
@@ -132,11 +132,11 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
       function searchPlaces() {
         let keyword = props.searchKeyword;
 
-                  //검색 옵션
+        //검색 옵션
         const searchOption = {
           location: map.getCenter(),
           radius: 1000,
-          size:10//검색할 개수를 설정할 수 있다.
+          size: 10, //검색할 개수를 설정할 수 있다.
         };
 
         if (!keyword.replace(/^\s+|\s+$/g, '')) {
@@ -340,7 +340,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
 
   return (
     <div className="map-container">
-      <div id="map" className="map" style={{ width: 'auto', height: '100vh' }}></div>
+      <div id="map" className="map" style={{ width: '100vw', height: '100vh' }}></div>
       <div id="search-result">
         <p className="result-text">
           <span className="result-keyword">{props.searchKeyword}</span>
