@@ -1,6 +1,6 @@
 /* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
+  v2.0 | 20110126
+  License: none (public domain)
 */
 
 html,
@@ -313,7 +313,12 @@ textarea {
 button,
 input {
   /* 1 */
+  border: none;
   overflow: visible;
+}
+
+input:focus {
+  outline: none;
 }
 
 /**
@@ -517,6 +522,7 @@ sidebar
   border: 2px solid #202020;
   border-radius: 40px;
   overflow: hidden;
+  
 }
 .openBtn {
   width: 100%;

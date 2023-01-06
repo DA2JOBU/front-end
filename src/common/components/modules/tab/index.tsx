@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Tab from './tab';
 import SideTab from './tab';
 import Tabs from './tabs';
-import { SearchKeyword, SearchPlace } from './tab-contents';
+import { Search, SearchKeyword, SearchPlace } from './tab-contents';
 
-const SideTabs = () => {
+type Props = {
+  value: string;
+  handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+};
+
+const SideTabs = (props: Props): JSX.Element => {
+  const { value, handleOnChange, handleSubmit } = props;
+
   return (
     <Tabs>
       <Tab title="장소 검색">
-        <SearchPlace />
+        <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} />
       </Tab>
       <Tab title="키워드 검색">
         <SearchKeyword />

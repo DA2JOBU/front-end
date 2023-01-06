@@ -8,6 +8,7 @@ import theme from '@styles/theme';
 import { RecoilRoot } from 'recoil';
 import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
+import Navbar from 'src/common/templete/navbar';
 
 declare global {
   interface Window {
@@ -31,6 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <RecoilRoot>
         <ThemeProvider theme={theme}>
+          <Navbar />
           <Layout>
             <Component {...pageProps} />
           </Layout>

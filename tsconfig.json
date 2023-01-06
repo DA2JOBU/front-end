@@ -19,9 +19,10 @@
       "@components/*": ["src/common/components/*"],
       "@styles/*": ["src/styles/*"],
       "@helper/*": ["src/helper/*"],
-      "@api/*" : ["src/common/api/*"]
+      "@api/*": ["src/common/api/*"],
+      "@public/*": ["public/assets/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["custom.d.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

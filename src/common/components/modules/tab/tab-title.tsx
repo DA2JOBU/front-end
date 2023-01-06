@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import  theme  from '@styles/theme';
 
 const LiStyled = styled.li`
   width: 100%;
@@ -11,12 +10,13 @@ const ButtonStyle = styled.button`
   width: 100%;
   padding: 20px 0;
   font-size: ${({ theme }) => theme.fontSize.tabTitle};
-  color: #b1b1b1;
-  background: #f6f6f6;
+  color: ${({ theme }) => theme.color.gray70};
+  background: ${({ theme }) => theme.color.gray20};
 
   &.active {
-    color: #262626;
-    background: #fff;
+    color: ${({ theme }) => theme.color.black};
+    background: ${({ theme }) => theme.color.white};
+    font-weight: 600;
   }
 `;
 
