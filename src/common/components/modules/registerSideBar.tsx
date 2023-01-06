@@ -30,6 +30,7 @@ const Sidebar = (props: propsType, { width = 280 }): JSX.Element => {
     e.preventDefault();
     setKeyword(Value);
   };
+  
   // 검색어를 입력하지 않고 검색 버튼을 눌렀을 경우
   const valueChecker = () => {
     if (Value === '') {
@@ -72,7 +73,6 @@ const Sidebar = (props: propsType, { width = 280 }): JSX.Element => {
   return (
     <div className="container">
       {/* 여기가 탭컨테이너 부분 */}
-      <Tab />
       <div
         ref={side}
         className="sidebar"
@@ -102,7 +102,6 @@ const Sidebar = (props: propsType, { width = 280 }): JSX.Element => {
             </label>
           </form>
           <div>
-            {/* 확인부분 */}
             {searchResult.length !== 0 ? searchResult[0].place_name : null}
           </div>
         </div>

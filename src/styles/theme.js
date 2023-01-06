@@ -4,7 +4,10 @@ const pixelToRem = (size) => `${size / 16}rem`;
 
 const fontSize = {
   tabTitle: pixelToRem(18),
+  subTitle: pixelToRem(16),
 };
+
+
 
 const color = {
   black: '#262626',
