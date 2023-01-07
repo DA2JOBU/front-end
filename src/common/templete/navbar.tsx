@@ -54,7 +54,7 @@ const Navbar = (): JSX.Element => {
         </LiStyled>
         <LiStyled>로그인</LiStyled>
       </UlStyled>
-      {isOpen ? <Contents value={name} setIsOpen={setIsOpen} /> : ''}
+      {isOpen ? <Contents name={""} setIsOpen={isOpen} /> : ''}
     </NavContianer>
   );
 };

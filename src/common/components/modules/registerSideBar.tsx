@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState, forwardRef, useImperativeHandle } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { searchList } from 'src/state';
 import Map from '@components/modules/map';
 import Tab from '@components/modules/tab';
+import { keyword } from 'src/state';
 export interface propsType {
   searchKeyword: string;
 }
@@ -14,6 +15,8 @@ const Sidebar = (props: propsType, { width = 280 }): JSX.Element => {
   const [Keyword, setKeyword] = useState('');
 
   const searchResult = useRecoilValue(searchList); //검색 결과를 가져오는 것
+
+  const setWord = useSetRecoilState(keyword);
 
   useEffect(() => {
     setKeyword(props.searchKeyword);
@@ -28,6 +31,7 @@ const Sidebar = (props: propsType, { width = 280 }): JSX.Element => {
   // 제출한 검색어 state에 담아주는 함수
   const submitKeyword = (e: { preventDefault: () => void }) => {
     e.preventDefault();
+
     setKeyword(Value);
   };
   

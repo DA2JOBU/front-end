@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Input from '@components/elements/Input';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { searchList, searchPlace } from 'src/state';
+import { searchList } from 'src/state';
 import { SearchPlace } from './search-place';
 import { searchElement } from 'src/types/searchType';
 import { SearchHeader } from './search-header';

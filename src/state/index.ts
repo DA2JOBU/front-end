@@ -5,7 +5,7 @@ export const searchList = atom<searchElement[]>({
   default: [],
 });
 
-export const searchPlace = atom({
+export const keyword = atom({
   key: 'keyword',
   default: '',
 });

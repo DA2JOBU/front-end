@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { searchList } from 'src/state';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { keyword, searchList } from 'src/state';
 import { propsType } from '../../../pages/main/index';
 
 interface placeType {
@@ -19,6 +19,8 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
   const setSearchList = useSetRecoilState(searchList);
   // 마커를 담는 배열
   let markers: any[] = [];
+
+  const word = useRecoilValue(keyword);
 
   // 검색어가 바뀔 때마다 재렌더링되도록 useEffect 사용
   useEffect(() => {
@@ -88,7 +90,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
           setSearchList(data);
 
           // 페이지 번호를 표출
-          displayPagination(pagination);
+          //displayPagination(pagination);
         } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
           alert('검색 결과가 존재하지 않습니다.');
           return;
@@ -221,35 +223,35 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
       }
 
       // 검색결과 목록 하단에 페이지번호를 표시는 함수
-      function displayPagination(pagination: { last: number; current: number; gotoPage: (arg0: number) => void }) {
-        const paginationEl = document.getElementById('pagination') as HTMLElement;
-        let fragment = document.createDocumentFragment();
-        let i;
+      // function displayPagination(pagination: { last: number; current: number; gotoPage: (arg0: number) => void }) {
+      //   const paginationEl = document.getElementById('pagination') as HTMLElement;
+      //   let fragment = document.createDocumentFragment();
+      //   let i;
 
-        // 기존에 추가된 페이지번호를 삭제
-        while (paginationEl.hasChildNodes()) {
-          paginationEl.lastChild && paginationEl.removeChild(paginationEl.lastChild);
-        }
+      //   // 기존에 추가된 페이지번호를 삭제
+      //   while (paginationEl.hasChildNodes()) {
+      //     paginationEl.lastChild && paginationEl.removeChild(paginationEl.lastChild);
+      //   }
 
-        for (i = 1; i <= pagination.last; i++) {
-          const el = document.createElement('a') as HTMLAnchorElement;
-          el.href = '#';
-          el.innerHTML = i.toString();
+      //   for (i = 1; i <= pagination.last; i++) {
+      //     const el = document.createElement('a') as HTMLAnchorElement;
+      //     el.href = '#';
+      //     el.innerHTML = i.toString();
 
-          if (i === pagination.current) {
-            el.className = 'on';
-          } else {
-            el.onclick = (function (i) {
-              return function () {
-                pagination.gotoPage(i);
-              };
-            })(i);
-          }
+      //     if (i === pagination.current) {
+      //       el.className = 'on';
+      //     } else {
+      //       el.onclick = (function (i) {
+      //         return function () {
+      //           pagination.gotoPage(i);
+      //         };
+      //       })(i);
+      //     }
 
-          fragment.appendChild(el);
-        }
-        paginationEl.appendChild(fragment);
-      }
+      //     fragment.appendChild(el);
+      //   }
+      //   paginationEl.appendChild(fragment);
+      // }
 
       // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수
       // 인포윈도우에 장소명을 표시
