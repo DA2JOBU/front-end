@@ -56,7 +56,7 @@ const Contents = (): JSX.Element => {
           <SlideContainer>
             <SideTabs handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value} />
           </SlideContainer>
-          {value ? <SearchList /> : <></>}
+          {keyword ? <SearchList keyword={keyword} /> : <></>}
         </Nav>
         <Nav title="등록" onClick={() => !setIsOpen}>
           <SlideContainer></SlideContainer>
