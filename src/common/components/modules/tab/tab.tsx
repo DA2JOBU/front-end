@@ -3,11 +3,10 @@ import styled from 'styled-components';
 
 const TabContainer = styled.div`
   width: 380px;
-  height: 56px;
 `;
 type Props = {
-  title: string;
-  children: ReactElement | ReactElement[];
+  title?: string;
+  children?: ReactElement | ReactElement[];
 };
 
 const Tab = ({ children }: Props): JSX.Element => {

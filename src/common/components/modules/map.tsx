@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { keyword, searchList } from 'src/state';
-import { propsType } from '../../../pages/main/index';
+import { propsType } from '../../templete/contents';
 
 interface placeType {
   place_name: string;

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Tab from './tab';
 import SideTab from './tab';
 import Tabs from './tabs';
-import { Search, SearchKeyword, SearchPlace } from './tab-contents';
+import { Search, SearchKeyword } from './tab-contents';
 
 type Props = {
   value: string;

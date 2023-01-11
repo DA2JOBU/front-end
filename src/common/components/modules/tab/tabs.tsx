@@ -3,9 +3,12 @@ import styled from 'styled-components';
 import TabTitle, { Props as TabTitleProps } from './tab-title';
 
 const SearchContainer = styled.section`
-  position: absolute;
-  left: 0;
-  z-index: 1000;
+  overflow: hidden;
+  float: left;
+  position: relative;
+  z-index: 25;
+  clear: both;
+  height: calc(100vh - 64px);
 `;
 
 const UlStyled = styled.ul`
@@ -14,9 +17,10 @@ const UlStyled = styled.ul`
 `;
 
 const Contents = styled.article`
+  background-color: #f9f9f9;
   display: block;
-  height: 100vh;
-  background: #fff;
+  height: 100%;
+  width: 100%;
 `;
 
 type Props = {
@@ -42,7 +46,7 @@ const Tabs = (props: Props): JSX.Element => {
           />
         ))}
       </UlStyled>
-      <Contents>{children[selectedTabIndex]}</Contents>
+      {children[selectedTabIndex]}
     </SearchContainer>
   );
 };

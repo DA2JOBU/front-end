@@ -1,23 +1,24 @@
 import Button from '@components/elements/Button';
 import React, { useEffect, useState, useRef } from 'react';
 import Sidebar from '../components/modules/registerSideBar';
-import Tab from '@components/modules/tab';
+import SlideContainer from '@components/modules/slide-container';
+import SideTabs from '@components/modules/tab/side-tabs';
+import Navs from '@components/modules/nav/navs';
+import Nav from '@components/modules/nav/nav';
+import styled from 'styled-components';
+import { SearchList } from '@components/modules/tab/tab-contents';
 
 export interface propsType {
   searchKeyword: string;
 }
 
-type Props = {
-  name: string;
-  setIsOpen: boolean;
-};
-
-const Contents = (props: Props): JSX.Element => {
-  const { name, setIsOpen } = props;
+const Contents = (): JSX.Element => {
   // 입력 폼 변화 감지하여 입력 값 관리
   const [value, setValue] = useState('');
   // 제출한 검색어 관리
   const [keyword, setKeyword] = useState('');
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedNavIndex, setSelectedNavIndex] = useState<number>(0);
 
   const search = useRef();
 
@@ -46,7 +47,29 @@ const Contents = (props: Props): JSX.Element => {
 
   return (
     <>
-      {setIsOpen && <Tab handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value} />}
+      <Navs>
+        <Nav title="로고" onClick={() => !setIsOpen}>
+          <SlideContainer></SlideContainer>
+        </Nav>
+
+        <Nav title="검색" onClick={() => !setIsOpen}>
+          <SlideContainer>
+            <SideTabs handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value} />
+          </SlideContainer>
+          {value ? <SearchList /> : <></>}
+        </Nav>
+        <Nav title="등록" onClick={() => !setIsOpen}>
+          <SlideContainer></SlideContainer>
+        </Nav>
+
+        <Nav title="나의 회식 장소" onClick={() => !setIsOpen}>
+          <SlideContainer></SlideContainer>
+        </Nav>
+        <Nav title="로그인" onClick={() => !setIsOpen}>
+          <SlideContainer></SlideContainer>
+        </Nav>
+      </Navs>
+
       <Sidebar searchKeyword={keyword} />
     </>
   );

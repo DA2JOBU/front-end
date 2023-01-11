@@ -7,6 +7,7 @@ const InputContainer = styled.div`
   height: 116px;
   text-align: left;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
+  background: ${({ theme }) => theme.color.white};
 `;
 
 const InputWrapper = styled.form`
@@ -24,8 +25,6 @@ const InputStyled = styled.input`
   display: block;
   margin: 0;
   width: 100%;
-  font-size: ${({ theme }) => theme.fontSize.tabTitle};
-
   &::placeholder {
     color: ${({ theme }) => theme.color.gray40};
   }
@@ -35,10 +34,13 @@ type Props = {
   value: string;
   handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  setIsOpen?: () => boolean;
 };
 
 const Input = (props: Props) => {
   const { value, handleOnChange, handleSubmit } = props;
+
+  // const handleOnClick = useCallback(() => setIsOpen(true), []);
 
   return (
     <InputContainer>
@@ -53,3 +55,6 @@ const Input = (props: Props) => {
 };
 
 export default Input;
+function setIsOpen(arg0: boolean): any {
+  throw new Error('Function not implemented.');
+}

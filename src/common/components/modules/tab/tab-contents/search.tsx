@@ -1,10 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Input from '@components/elements/Input';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { searchList } from 'src/state';
-import { SearchPlace } from './search-place';
-import { searchElement } from 'src/types/searchType';
-import { SearchHeader } from './search-header';
+import { SearchList } from './search-list';
+import styled from 'styled-components';
 
 type Props = {
   value: string;
@@ -12,34 +9,24 @@ type Props = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
+const Contents = styled.article`
+  background-color: ${({ theme }) => theme.color.white};
+  display: block;
+  height: calc(100vh - 128px);
+  width: 100%;
+`;
+
 const Search = (props: Props) => {
   const { value, handleOnChange, handleSubmit } = props;
-
-  const lists = useRecoilValue<searchElement[]>(searchList);
-  const [read, setRead] = useState('');
-
-  useEffect(() => {
-    setRead(value);
-  });
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <section>
+    <>
       <Input handleOnChange={handleOnChange} value={value} handleSubmit={handleSubmit} />
-      {/* <SearchHeader length={lists.length} value={read} /> */}
-      {lists.map((list: searchElement, index: number) => {
-        console.log(lists.length);
-        const { address_name, category_group_name, place_name } = list;
-        return (
-          <SearchPlace
-            key={index}
-            index={index}
-            address_name={address_name}
-            category_group_name={category_group_name}
-            place_name={place_name}
-          />
-        );
-      })}
-    </section>
+      <Contents>
+        <p>fnffn</p>
+      </Contents>
+    </>
   );
 };
 

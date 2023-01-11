@@ -105,6 +105,12 @@ nav,
 section {
   display: block;
 }
+
+html {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
 body {
   line-height: 1;
 }
@@ -498,6 +504,12 @@ sidebar
 .container {
   background-color: #fff;
   display: flex;
+  position: absolute;
+  left: 0;
+  /* top: 64px; */
+  z-index: 0;
+  height: calc(100vh - 64px);
+  width: 100vw;
 }
 .sidebar {
   background-color: #e3ecf1;
@@ -522,7 +534,6 @@ sidebar
   border: 2px solid #202020;
   border-radius: 40px;
   overflow: hidden;
-  
 }
 .openBtn {
   width: 100%;

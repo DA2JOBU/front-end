@@ -7,13 +7,13 @@ const PlaceBox = styled.div`
   flex-direction: column;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
   .place {
-    font-size: ${({ theme }) => theme.fontSize.tabTitle};
+    font-size: ${({ theme }) => theme.fontSize.Gtitle};
     font-weight: 700;
     margin-bottom: 10px;
   }
   .food {
     padding-right: 6px;
-    font-size: ${({ theme }) => theme.fontSize.subTitle};
+    font-size: ${({ theme }) => theme.fontSize.Stitle};
     font-weight: 600;
     color: ${({ theme }) => theme.color.gray90};
     border-right: 1px solid ${({ theme }) => theme.color.gray40};
