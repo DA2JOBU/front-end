@@ -1,11 +1,8 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const Wrapper = styled.main`
   width: 100vw;
-  min-height: 100vh;
-  margin: auto;
-  display: flex;
-  justify-content: center;
+  height: 100vh;
 `;
 
 interface IProps {

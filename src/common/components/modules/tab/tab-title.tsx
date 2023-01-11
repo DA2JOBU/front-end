@@ -9,7 +9,7 @@ const LiStyled = styled.li`
 const ButtonStyle = styled.button`
   width: 100%;
   padding: 20px 0;
-  font-size: ${({ theme }) => theme.fontSize.tabTitle};
+  font-size: ${({ theme }) => theme.fontSize.Gtitle};
   color: ${({ theme }) => theme.color.gray70};
   background: ${({ theme }) => theme.color.gray20};
 

@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState, forwardRef, useImperativeHandle } f
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { searchList } from 'src/state';
 import Map from '@components/modules/map';
-import Tab from '@components/modules/tab';
 import { keyword } from 'src/state';
 export interface propsType {
   searchKeyword: string;
@@ -34,7 +33,7 @@ const Sidebar = (props: propsType, { width = 280 }): JSX.Element => {
 
     setKeyword(Value);
   };
-  
+
   // 검색어를 입력하지 않고 검색 버튼을 눌렀을 경우
   const valueChecker = () => {
     if (Value === '') {
@@ -44,7 +43,7 @@ const Sidebar = (props: propsType, { width = 280 }): JSX.Element => {
 
   const [isOpen, setOpen] = useState(false);
   const [xPosition, setX] = useState(-width);
-  const side = useRef<HTMLDivElement>(null);
+  const side = useRef<HTMLDivElement | null>(null);
 
   // button 클릭 시 토글
   const toggleMenu = () => {
@@ -105,9 +104,7 @@ const Sidebar = (props: propsType, { width = 280 }): JSX.Element => {
               </div>
             </label>
           </form>
-          <div>
-            {searchResult.length !== 0 ? searchResult[0].place_name : null}
-          </div>
+          <div>{searchResult.length !== 0 ? searchResult[0].place_name : null}</div>
         </div>
         {/* 검색 인풋 end */}
         {/* 스토어 리스트 */}
