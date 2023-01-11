@@ -9,13 +9,19 @@ const LiStyled = styled.li`
 const ButtonStyle = styled.button`
   width: 100%;
   padding: 20px 0;
-  font-size: ${({ theme }) => theme.fontSize.Gtitle};
+  font-size: ${({ theme }) => theme.fontSize.Stitle};
   color: ${({ theme }) => theme.color.gray70};
   background: ${({ theme }) => theme.color.gray20};
+  span {
+    font-weight: 400;
+  }
 
   &.active {
     color: ${({ theme }) => theme.color.black};
     background: ${({ theme }) => theme.color.white};
+  }
+
+  &.active span {
     font-weight: 600;
   }
 `;
