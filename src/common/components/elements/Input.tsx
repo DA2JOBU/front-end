@@ -12,11 +12,14 @@ const InputContainer = styled.div`
 
 const InputWrapper = styled.form`
   width: 324px;
-  padding: 11px 0;
+  padding: 11px 0 8px 0;
   display: flex;
   border-bottom: 2px solid ${({ theme }) => theme.color.black};
 
-  &:focus-within {
+  // &:focus-within {
+  //   border-bottom: 2px solid ${({ theme }) => theme.color.orange};
+  // }
+  &.active {
     border-bottom: 2px solid ${({ theme }) => theme.color.orange};
   }
 `;
@@ -34,20 +37,25 @@ type Props = {
   value: string;
   handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  setIsOpen?: () => boolean;
+  isActive: boolean;
 };
 
 const Input = (props: Props) => {
-  const { value, handleOnChange, handleSubmit } = props;
+  const { value, handleOnChange, handleSubmit, isActive } = props;
 
   // const handleOnClick = useCallback(() => setIsOpen(true), []);
 
   return (
     <InputContainer>
-      <InputWrapper onSubmit={handleSubmit}>
-        <InputStyled type="text" placeholder="장소명을 입력해 주세요" onChange={handleOnChange} value={value} />
+      <InputWrapper onSubmit={handleSubmit} className={`${isActive ? 'active' : ''}`}>
+        <InputStyled
+          type="text"
+          placeholder="장소명을 입력해 주세요"
+          onChange={handleOnChange}
+          value={value}
+        />
         <button type="submit">
-          <SearchIcon width="22" height="22" />
+          <SearchIcon width="22" height="22" stroke="#262626" className={`${isActive ? 'active' : ''}`} />
         </button>
       </InputWrapper>
     </InputContainer>
@@ -55,6 +63,3 @@ const Input = (props: Props) => {
 };
 
 export default Input;
-function setIsOpen(arg0: boolean): any {
-  throw new Error('Function not implemented.');
-}

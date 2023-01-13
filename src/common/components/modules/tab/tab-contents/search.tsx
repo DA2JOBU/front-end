@@ -22,7 +22,7 @@ const Search = (props: Props) => {
 
   return (
     <>
-      <Input handleOnChange={handleOnChange} value={value} handleSubmit={handleSubmit} />
+      <Input handleOnChange={handleOnChange} value={value} handleSubmit={handleSubmit} isActive={} />
       <Contents>
         <p>fnffn</p>
       </Contents>
