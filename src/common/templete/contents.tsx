@@ -7,6 +7,8 @@ import Navs from '@components/modules/nav/navs';
 import Nav from '@components/modules/nav/nav';
 import styled from 'styled-components';
 import { SearchList } from '@components/modules/tab/tab-contents';
+import RightTab from '@components/modules/rightTab';
+import Map from '@components/modules/map';
 
 export interface propsType {
   searchKeyword: string;
@@ -59,7 +61,9 @@ const Contents = (): JSX.Element => {
           {keyword ? <SearchList keyword={keyword} /> : <></>}
         </Nav>
         <Nav title="등록" onClick={() => !setIsOpen}>
-          <SlideContainer></SlideContainer>
+          <SlideContainer>
+            <RightTab handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value}/>
+          </SlideContainer>
         </Nav>
 
         <Nav title="나의 회식 장소" onClick={() => !setIsOpen}>
@@ -69,8 +73,9 @@ const Contents = (): JSX.Element => {
           <SlideContainer></SlideContainer>
         </Nav>
       </Navs>
+      <Map searchKeyword={keyword} />
 
-      <Sidebar searchKeyword={keyword} />
+      {/* <Sidebar searchKeyword={keyword} /> */}
     </>
   );
 };

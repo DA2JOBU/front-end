@@ -22,6 +22,8 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
 
   const word = useRecoilValue(keyword);
 
+  const searchWord = useState('');
+
   // 검색어가 바뀔 때마다 재렌더링되도록 useEffect 사용
   useEffect(() => {
     if (!mapContainer) return;
