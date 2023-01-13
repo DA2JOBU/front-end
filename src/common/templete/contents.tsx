@@ -1,11 +1,8 @@
-import Button from '@components/elements/Button';
 import React, { useEffect, useState, useRef } from 'react';
-import Sidebar from '../components/modules/registerSideBar';
 import SlideContainer from '@components/modules/slide-container';
 import SideTabs from '@components/modules/tab/side-tabs';
 import Navs from '@components/modules/nav/navs';
 import Nav from '@components/modules/nav/nav';
-import styled from 'styled-components';
 import { SearchList } from '@components/modules/tab/tab-contents';
 import RightTab from '@components/modules/rightTab';
 import Map from '@components/modules/map';
@@ -53,16 +50,15 @@ const Contents = (): JSX.Element => {
         <Nav title="로고" onClick={() => !setIsOpen}>
           <SlideContainer></SlideContainer>
         </Nav>
-
         <Nav title="검색" onClick={() => !setIsOpen}>
           <SlideContainer>
-            <SideTabs handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value} />
+            {/* <SideTabs handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value} /> */}
           </SlideContainer>
           {keyword ? <SearchList keyword={keyword} /> : <></>}
         </Nav>
         <Nav title="등록" onClick={() => !setIsOpen}>
           <SlideContainer>
-            <RightTab handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value}/>
+            <RightTab handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value} />
           </SlideContainer>
         </Nav>
 

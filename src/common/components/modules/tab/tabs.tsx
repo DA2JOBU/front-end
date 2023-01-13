@@ -8,6 +8,7 @@ const SearchContainer = styled.section`
   position: relative;
   z-index: 25;
   clear: both;
+  width: 380px;
   height: calc(100vh - 64px);
 `;
 
