@@ -52,7 +52,8 @@ const Contents = (): JSX.Element => {
         </Nav>
         <Nav title="검색" onClick={() => !setIsOpen}>
           <SlideContainer>
-            {/* <SideTabs handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value} /> */}
+      <SideTabs handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value} />
+
           </SlideContainer>
           {keyword ? <SearchList keyword={keyword} /> : <></>}
         </Nav>

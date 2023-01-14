@@ -7,7 +7,6 @@ import Map from '@components/modules/map';
 
 const RightTabContainer = styled.section`
   overflow: hidden;
-  float: left;
   position: absolute;
   z-index: 25;
   clear: both;
