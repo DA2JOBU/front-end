@@ -1,6 +1,7 @@
 import React, { ReactElement, useState, FC } from 'react';
 import styled from 'styled-components';
 import NavTitle, { NavTitleProps } from './nav-title';
+import NavLoginButton from './nav-login-button';
 
 const NavContainer = styled.nav`
   width: 100%;
@@ -22,20 +23,28 @@ type Props = {
 
 const Navs = (props: Props): JSX.Element => {
   const { children, preSelectedTabIndex } = props;
-
   const [selectedNavIndex, setSelectedNavIndex] = useState<number>(preSelectedTabIndex || 0);
 
   return (
     <NavContainer>
       <UlStyled>
         {children.map((item, index) => (
-          <NavTitle
-            key={item.props.title}
-            title={item.props.title}
-            index={index}
-            isActive={index === selectedNavIndex}
-            setSelectedNav={setSelectedNavIndex}
-          />
+          (item.props.title === '로그인') ? 
+            (
+              <NavLoginButton
+                key={item.props.title}
+                title={item.props.title}
+                onClick={item.props.onClick}
+              />
+            ): (
+              <NavTitle
+                key={item.props.title}
+                title={item.props.title}
+                index={index}
+                isActive={index === selectedNavIndex}
+                setSelectedNav={setSelectedNavIndex}
+              />
+            )
         ))}
       </UlStyled>
       {children[selectedNavIndex]}

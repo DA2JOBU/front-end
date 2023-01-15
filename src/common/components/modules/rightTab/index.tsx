@@ -30,15 +30,12 @@ type Props = {
 const rightTab = (props: Props): JSX.Element  => {
     const { value, handleOnChange, handleSubmit } = props;
     return (
-        <div>
-
-        <RightTabContainer>
-            <UlStyled>
-                <RightTabTitle title="장소 등록" />
-            </UlStyled>
-            <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} />
-        </RightTabContainer>
-        </div>
+      <RightTabContainer>
+        <UlStyled>
+          <RightTabTitle title="장소 등록" />
+        </UlStyled>
+        <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} />
+      </RightTabContainer>
     )
 }
 

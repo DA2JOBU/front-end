@@ -5,9 +5,9 @@ import SlideContainer from '@components/modules/slide-container';
 import SideTabs from '@components/modules/tab/side-tabs';
 import Navs from '@components/modules/nav/navs';
 import Nav from '@components/modules/nav/nav';
-import styled from 'styled-components';
 import { SearchList } from '@components/modules/tab/tab-contents';
 import RightTab from '@components/modules/rightTab';
+import Modal from '@components/modules/modal';
 import Map from '@components/modules/map';
 
 export interface propsType {
@@ -15,6 +15,21 @@ export interface propsType {
 }
 
 const Contents = (): JSX.Element => {
+  // @TODO API 연동 이후 jwt로 변경
+  const [accessToken, setAccessToken] = useState<string | null>(null);
+  useEffect(() => {
+    setAccessToken(sessionStorage.getItem('token'))
+  }, [accessToken]);
+  console.log(accessToken);
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+    // 모달창 노출
+  const showModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => setModalOpen(false)
+
   // 입력 폼 변화 감지하여 입력 값 관리
   const [value, setValue] = useState('');
   // 제출한 검색어 관리
@@ -69,11 +84,19 @@ const Contents = (): JSX.Element => {
         <Nav title="나의 회식 장소" onClick={() => !setIsOpen}>
           <SlideContainer></SlideContainer>
         </Nav>
-        <Nav title="로그인" onClick={() => !setIsOpen}>
-          <SlideContainer></SlideContainer>
-        </Nav>
+        {accessToken ? (
+          <Nav title="마이페이지" onClick={() => !setIsOpen}>
+            <SlideContainer></SlideContainer>
+          </Nav>
+        ) : (
+          <Nav title="로그인" onClick={showModal}>
+            <SlideContainer>
+            </SlideContainer>
+          </Nav>
+        )}
       </Navs>
       <Map searchKeyword={keyword} />
+      {modalOpen && <Modal onClose={closeModal} />}
 
       {/* <Sidebar searchKeyword={keyword} /> */}
     </>
