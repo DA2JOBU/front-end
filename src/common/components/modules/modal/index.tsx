@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import KakaoLoginButton from "./kakao-login-button";
 
 type ModalProps = {
   onClose: () => void;
@@ -9,9 +10,13 @@ const Modal = ({ onClose }: ModalProps) => {
   return (
       <Overlay>
         <ModalWrap>
+          <CloseButton onClick={onClose}>
+            X
+          </CloseButton>
           <Contents>
-            <h1>This is a Modal Dialog</h1>
+            <h1>로그인 임시 작업</h1>
             <Button onClick={onClose}>Close</Button>
+            <KakaoLoginButton />
           </Contents>
         </ModalWrap>
       </Overlay>
@@ -39,6 +44,18 @@ const ModalWrap = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+
+const CloseButton = styled.div`
+  float: right;
+  width: 40px;
+  height: 40px;
+  margin: 20px;
+  cursor: pointer;
+  i {
+    color: #5d5d5d;
+    font-size: 30px;
+  }
 `;
 
 const Contents = styled.div`

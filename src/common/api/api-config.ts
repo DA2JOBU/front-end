@@ -12,10 +12,13 @@ var api = {
   },
 
   setAccessToken(token: string) {
-    // console.log(token)
     sessionStorage.setItem("token", token);
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   },
+
+  setJwtToken(jwtToken: string) {
+    sessionStorage.setItem("jwtToken", jwtToken);
+  }
 }
 
 export default api;

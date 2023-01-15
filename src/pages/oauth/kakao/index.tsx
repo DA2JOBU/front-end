@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { REST_API_KEY, REDIRECT_URI, CLIENT_SECRET } from 'src/common/api/kakaoLoginData';
+import { login } from 'src/common/api/login';
 import { NextPage } from 'next';
 import api from '@api/api-config';
 
@@ -24,16 +25,15 @@ const KakaoWithLogin: NextPage = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           if (data.access_token) {
             api.setAccessToken(data.access_token);
-            // sessionStorage.setItem('token', data.access_token);
-            // setTokenFromKakao(data.access_token)
-            router.push('/main');
           } else {
-            router.push('/login');
+            router.push('/');
           }
         });
+      const loginResponse = await login(sessionStorage.getItem('token') || '');
+      api.setJwtToken(loginResponse.accessToken);
+      router.push('/main');
     } catch (err) {
       console.error(err);
     }

@@ -15,12 +15,10 @@ export interface propsType {
 }
 
 const Contents = (): JSX.Element => {
-  // @TODO API 연동 이후 jwt로 변경
   const [accessToken, setAccessToken] = useState<string | null>(null);
   useEffect(() => {
-    setAccessToken(sessionStorage.getItem('token'))
+    setAccessToken(sessionStorage.getItem('jwtToken'))
   }, [accessToken]);
-  console.log(accessToken);
 
   const [modalOpen, setModalOpen] = useState(false);
 
