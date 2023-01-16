@@ -6,14 +6,14 @@ import Link from 'next/link';
 
 const Wrapper = styled.div`
   width: 100%;
-  min-height: 100vh;
+  height: 100px;
   margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
 `;
 
-const KakaoWithLogin: NextPage = () => {
+const KakaoLoginButton: NextPage = () => {
 
   return (
     <Wrapper>
@@ -26,4 +26,4 @@ const KakaoWithLogin: NextPage = () => {
   );
 };
 
-export default KakaoWithLogin;
+export default KakaoLoginButton;

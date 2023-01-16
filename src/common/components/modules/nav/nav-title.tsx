@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 
-const LiStyled = styled.li`
+export const LiStyled = styled.li`
   display: table-cell;
   line-height: 64px;
   width: 100px;
@@ -28,7 +28,7 @@ const LiStyled = styled.li`
   }
 `;
 
-const ButtonStyle = styled.button`
+export const ButtonStyle = styled.button`
   cursor: pointer;
   padding: 0;
   font-size: ${({ theme }) => theme.fontSize.Gtitle};
@@ -70,6 +70,7 @@ export type NavTitleProps = {
   index: number;
   setSelectedNav: (index: number) => void;
   isActive: boolean;
+  onClick?: () => void;
 };
 
 const NavTitle = (props: NavTitleProps): JSX.Element => {
