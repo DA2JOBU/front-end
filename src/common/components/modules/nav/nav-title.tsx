@@ -11,7 +11,7 @@ const LiStyled = styled.li`
   }
   &:nth-child(2) {
     text-align: right;
-    padding-left: 8rem;
+    padding-left: 10rem;
   }
 
   &:nth-child(3) {
@@ -45,13 +45,22 @@ const ButtonStyle = styled.button`
     }
 
     &.search {
-      border-right: 1px solid ${({ theme }) => theme.color.black};
-      padding-right: 36px;
+      padding-right: 33px;
       margin: 0;
+      display: flex;
+      align-items: center;
+      ::after {
+        content: '';
+        flex: 1;
+        height: 14px;
+        width: 1px;
+        background: ${({ theme }) => theme.color.gray70};
+        margin: 0 0 0 33px;
+      }
     }
 
     &.regis {
-      padding-left: 36px;
+      // padding-left: 36px;
     }
   }
 `;

@@ -13,7 +13,7 @@ const Contents = styled.article`
   background-color: ${({ theme }) => theme.color.white};
   display: block;
   height: calc(100vh - 128px);
-  width: 100%;
+  // width: 100%;
 `;
 
 const Search = (props: Props) => {
@@ -22,7 +22,7 @@ const Search = (props: Props) => {
 
   return (
     <>
-      <Input handleOnChange={handleOnChange} value={value} handleSubmit={handleSubmit} />
+      <Input handleOnChange={handleOnChange} value={value} handleSubmit={handleSubmit} isActive={false}  />
       <Contents>
         <p>fnffn</p>
       </Contents>

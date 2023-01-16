@@ -1,6 +1,5 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Tab from './tab';
-import SideTab from './tab';
 import Tabs from './tabs';
 import { Search, SearchKeyword } from './tab-contents';
 

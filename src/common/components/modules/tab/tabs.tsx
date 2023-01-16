@@ -5,9 +5,10 @@ import TabTitle, { Props as TabTitleProps } from './tab-title';
 const SearchContainer = styled.section`
   overflow: hidden;
   float: left;
-  position: relative;
+  position: absolute;
   z-index: 25;
   clear: both;
+  width: 380px;
   height: calc(100vh - 64px);
 `;
 
@@ -16,12 +17,12 @@ const UlStyled = styled.ul`
   width: 380px;
 `;
 
-const Contents = styled.article`
-  background-color: #f9f9f9;
-  display: block;
-  height: 100%;
-  width: 100%;
-`;
+// const Contents = styled.article`
+//   background-color: #f9f9f9;
+//   display: block;
+//   height: 100%;
+//   width: 100%;
+// `;
 
 type Props = {
   children: ReactElement<TabTitleProps>[];
