@@ -276,16 +276,6 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
   return (
     <div className="map-container">
       <div id="map" className="map" style={{ width: '100vw', height: '100vh' }}></div>
-      <div id="search-result">
-        {/* <p className="result-text">
-          <span className="result-keyword">{props.searchKeyword}</span>
-          검색 결과
-        </p> */}
-        {/* <div className="scroll-wrapper">
-          <ul id="places-list"></ul>
-        </div>
-        <div id="pagination"></div> */}
-      </div>
     </div>
   );
 };

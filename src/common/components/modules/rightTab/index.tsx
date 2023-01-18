@@ -1,9 +1,9 @@
-import Tabs from "../tab/tabs";
-import TabTitle from "./tab";
 import styled from 'styled-components';
 import RightTabTitle from "./tab";
 import { Search } from '@components/modules/tab/tab-contents';
-import Map from '@components/modules/map';
+import BottomContent from "@components/elements/bottomContent";
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { searchList } from "src/state";
 
 const RightTabContainer = styled.section`
   overflow: hidden;
@@ -28,12 +28,17 @@ type Props = {
 
 const rightTab = (props: Props): JSX.Element  => {
     const { value, handleOnChange, handleSubmit } = props;
+    const searchResult = useRecoilValue(searchList); //검색 결과를 가져오는 것
     return (
       <RightTabContainer>
         <UlStyled>
           <RightTabTitle title="장소 등록" />
         </UlStyled>
         <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} />
+        <BottomContent>
+          <span>검색 결과 </span>
+          {searchResult.length > 0 && <span>{searchResult.length}</span>}
+        </BottomContent>
       </RightTabContainer>
     )
 }
