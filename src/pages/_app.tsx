@@ -4,8 +4,10 @@ import Script from 'next/script';
 import { kakaoInit } from '@helper/index';
 import Layout from '@components/layouts/Layout';
 import '../styles/globals.css';
+import theme from '@styles/theme';
 import { RecoilRoot } from 'recoil';
 import { useEffect } from 'react';
+import { ThemeProvider } from 'styled-components';
 
 declare global {
   interface Window {
@@ -18,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     kakaoInit();
   }, []);
-  
+
   return (
     <>
       <Head>
@@ -28,10 +30,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta charSet="utf-8" />
       </Head>
       <RecoilRoot>
-        <Layout>
-          <Script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js" onLoad={kakaoInit} integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossOrigin="anonymous"></Script>
-          <Component {...pageProps} />
-        </Layout>
+        <ThemeProvider theme={theme}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
       </RecoilRoot>
     </>
   );

@@ -1,12 +1,8 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+const Wrapper = styled.main`
+  width: 100vw;
+  height: 100vh;
 `;
 
 interface IProps {
@@ -14,8 +10,6 @@ interface IProps {
 }
 
 const Layout = ({ children }: IProps) => {
-
-
   return <Wrapper>{children}</Wrapper>;
 };
 

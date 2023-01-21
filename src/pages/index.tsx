@@ -1,5 +1,6 @@
 // import { useRouter } from 'next/router';
 // import { useEffect } from 'react';
+import Main from './main';
 
 export default function Home() {
   // const router = useRouter();
@@ -13,7 +14,7 @@ export default function Home() {
 
   return (
     <div>
-      home
+      <Main></Main>
     </div>
   );
 }
