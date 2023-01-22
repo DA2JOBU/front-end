@@ -1,3 +1,11 @@
+const Sidebar = () => {
+  return (
+    <div>
+  
+    </div>
+  )
+}
+export default Sidebar;
 // import React, { useEffect, useRef, useState, forwardRef, useImperativeHandle } from 'react';
 // import { useRecoilValue, useSetRecoilState } from 'recoil';
 // import { searchList } from 'src/state';
