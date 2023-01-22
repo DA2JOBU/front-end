@@ -26,7 +26,7 @@ type Props = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
-const rightTab = (props: Props): JSX.Element  => {
+const RightTab = (props: Props): JSX.Element  => {
     const { value, handleOnChange, handleSubmit } = props;
     const searchResult = useRecoilValue(searchList); //검색 결과를 가져오는 것
     return (
@@ -43,4 +43,4 @@ const rightTab = (props: Props): JSX.Element  => {
     )
 }
 
-export default rightTab;
+export default RightTab;
