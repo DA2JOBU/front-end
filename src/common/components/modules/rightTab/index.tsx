@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import RightTabTitle from "./tab";
 import { Search } from '@components/modules/tab/tab-contents';
 import BottomContent from "@components/elements/bottomContent";
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { searchList } from "src/state";
 import Place from './place';
 import { searchElement } from 'src/types/searchType';

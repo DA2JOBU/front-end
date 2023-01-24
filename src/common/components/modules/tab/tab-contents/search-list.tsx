@@ -1,11 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import Input from '@components/elements/Input';
+import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { keyword, searchList } from 'src/state';
+import { searchList } from 'src/state';
 import { SearchPlace } from './search-place';
 import { searchElement } from 'src/types/searchType';
 import styled from 'styled-components';
-import { type } from 'os';
 
 const SearchListContainer = styled.section`
   float: left;
@@ -39,7 +37,6 @@ type Props = {
 const SearchList = (props: Props) => {
   const { keyword } = props;
   const lists = useRecoilValue<searchElement[]>(searchList);
-  console.log(lists);
 
   return (
     <SearchListContainer>

@@ -1,6 +1,5 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import Script from 'next/script';
 import { kakaoInit } from '@helper/index';
 import Layout from '@components/layouts/Layout';
 import '../styles/globals.css';
