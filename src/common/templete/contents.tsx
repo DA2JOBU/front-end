@@ -84,7 +84,7 @@ const Contents = (): JSX.Element => {
         {accessToken ? (
           <Nav title="마이페이지" onClick={() => !setIsOpen}>
             <SlideContainer>
-              <MypageTab handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value} />
+              <MypageTab />
             </SlideContainer>
           </Nav>
         ) : (
