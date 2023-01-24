@@ -5,6 +5,7 @@ import Navs from '@components/modules/nav/navs';
 import Nav from '@components/modules/nav/nav';
 import { SearchList } from '@components/modules/tab/tab-contents';
 import RightTab from '@components/modules/rightTab';
+import MypageTab from '@components/modules/rightTab/mypageTab';
 import Modal from '@components/modules/modal';
 import Map from '@components/modules/map';
 
@@ -82,7 +83,9 @@ const Contents = (): JSX.Element => {
         </Nav>
         {accessToken ? (
           <Nav title="마이페이지" onClick={() => !setIsOpen}>
-            <SlideContainer></SlideContainer>
+            <SlideContainer>
+              <MypageTab handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value} />
+            </SlideContainer>
           </Nav>
         ) : (
           <Nav title="로그인" onClick={showModal}>
