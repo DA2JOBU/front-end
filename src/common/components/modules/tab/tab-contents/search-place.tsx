@@ -23,14 +23,17 @@ const PlaceBox = styled.div`
   }
 `;
 
-type Props = {
+export type PlaceProps = {
   address_name: string;
   category_group_name: string;
   place_name: string;
   index: number;
+  review?: string | number;
+  save?: string | number;
+  badge?: string | Element;
 };
 
-const SearchPlace = (props: Props): JSX.Element | null => {
+const SearchPlace = (props: PlaceProps): JSX.Element | null => {
   console.log('ㅇㅇㅇ', props);
   const { address_name, category_group_name, place_name } = props;
 
