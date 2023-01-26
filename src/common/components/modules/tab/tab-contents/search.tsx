@@ -3,7 +3,7 @@ import Input from '@components/elements/Input';
 import { SearchList } from './search-list';
 import styled from 'styled-components';
 
-type Props = {
+interface Props {
   value: string;
   handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;

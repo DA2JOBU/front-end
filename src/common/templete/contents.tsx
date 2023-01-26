@@ -8,6 +8,7 @@ import RightTab from '@components/modules/rightTab';
 import MypageTab from '@components/modules/rightTab/mypageTab';
 import Modal from '@components/modules/modal';
 import Map from '@components/modules/map';
+import { Place } from 'src/types/searchType';
 
 export interface propsType {
   searchKeyword: string;
@@ -20,6 +21,7 @@ const Contents = (): JSX.Element => {
   }, [accessToken]);
 
   const [modalOpen, setModalOpen] = useState(false);
+  
 
   // 모달창 노출
   const showModal = () => {
@@ -59,6 +61,13 @@ const Contents = (): JSX.Element => {
     }
   };
 
+  const sideValue = {
+    handleOnChange,
+    handleSubmit,
+    value,
+  };
+
+
   return (
     <>
       <Navs>
@@ -67,7 +76,7 @@ const Contents = (): JSX.Element => {
         </Nav>
         <Nav title="검색" onClick={() => !setIsOpen}>
           <SlideContainer>
-            <SideTabs handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value} />
+            <SideTabs sideValue={sideValue}/>
           </SlideContainer>
           {keyword ? <SearchList keyword={keyword} /> : <></>}
         </Nav>
