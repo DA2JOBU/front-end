@@ -9,10 +9,17 @@ import MypageTab from '@components/modules/rightTab/mypageTab';
 import Modal from '@components/modules/modal';
 import Map from '@components/modules/map';
 import { Place } from 'src/types/searchType';
+import styled from 'styled-components';
 
 export interface propsType {
   searchKeyword: string;
 }
+
+const Logo = styled.div`
+  position: absolute;
+  top: 8px;
+  left: 32px;
+`;
 
 const Contents = (): JSX.Element => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -69,7 +76,11 @@ const Contents = (): JSX.Element => {
   return (
     <>
       <Navs>
-        <img src="assets/images/logo.svg" alt="로고" className='logo' />
+        <Nav title="">
+          <Logo>
+            <img src="assets/images/logo.svg" alt="로고" className="logo" />
+          </Logo>
+        </Nav>
         <Nav title="검색" onClick={() => !setIsOpen}>
           <SlideContainer>
             <SideTabs sideValue={sideValue} />
