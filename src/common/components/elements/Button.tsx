@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 import { ReactNode } from 'react';
 
 type ButtonWrapperProps = Omit<IButtonProps, 'type' | 'text' | 'iconType'> & {
@@ -28,45 +28,46 @@ const StyledButton = styled.button`
     display: inline-flex;
     align-items: center;
     outline: none;
-    border-radius: 99px;
-    color: white;
-    font-weight: bold;
+    text-align: center;
+    border-radius: 50px;
+    font-weight: 600;
     cursor: pointer;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 1.6rem 2.4rem;
 
 
     /*크기*/
-    height: 2.25rem;
     font-size: 1rem;
 
     /*색상 */
-    background: #FF5100;
+    background:  ${({ theme }) => theme.color.gray20};
+    color: ${({ theme }) => theme.color.gray70};
+    color: 
     &:hover{
-        background: #FF844B;
+      background: #FF844B;
     }
     &:active{
-        background: #CE4607;
+      border: 1px solid  ${({ theme }) => theme.color.gray90};
+      background: ${({ theme }) => theme.color.orange};
     }
 
     /*기타 */
     & + & {
         margin-left: 1rem;
     }
-`
+`;
 function Button({
-    type = 'text',
-    text,
-    iconType,
-    isBlock = false,
-    size = 'medium',
-    disabled = false,
-    onClick,
-    href,
-    target = '_self',
-    className,
-}: IButtonProps){
-    return (
+  type = 'text',
+  text,
+  iconType,
+  isBlock = false,
+  size = 'medium',
+  disabled = false,
+  onClick,
+  href,
+  target = '_self',
+  className,
+}: IButtonProps) {
+  return (
     <Wrapper
       className={className}
       buttonType={type}
@@ -78,8 +79,8 @@ function Button({
       disabled={disabled}
     >
       {text}
-        </Wrapper>
-    )
+    </Wrapper>
+  );
 }
 
 type ButtonStyleProps = Pick<ButtonWrapperProps, 'size' | 'isBlock' | 'disabled' | 'buttonType'>;
@@ -88,6 +89,5 @@ function Wrapper(props: ButtonWrapperProps) {
   const { href, target, children, ...commonProps } = props;
   return <StyledButton {...commonProps}>{children}</StyledButton>;
 }
-
 
 export default Button;

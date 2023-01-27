@@ -1,3 +1,4 @@
+import KeywordCard from '@components/modules/card/keyword-card';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -7,7 +8,11 @@ const KeywordContainer = styled.section`
 `;
 
 const SearchKeyword = () => {
-  return <KeywordContainer>Keyword</KeywordContainer>;
+  return (
+    <KeywordContainer>
+      <KeywordCard />
+    </KeywordContainer>
+  );
 };
 
 export { SearchKeyword };

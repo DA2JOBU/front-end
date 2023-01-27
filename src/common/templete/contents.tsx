@@ -21,7 +21,6 @@ const Contents = (): JSX.Element => {
   }, [accessToken]);
 
   const [modalOpen, setModalOpen] = useState(false);
-  
 
   // 모달창 노출
   const showModal = () => {
@@ -67,16 +66,13 @@ const Contents = (): JSX.Element => {
     value,
   };
 
-
   return (
     <>
       <Navs>
-        <Nav title="로고" onClick={() => !setIsOpen}>
-          <SlideContainer></SlideContainer>
-        </Nav>
+        <img src="assets/images/logo.svg" alt="로고" className='logo' />
         <Nav title="검색" onClick={() => !setIsOpen}>
           <SlideContainer>
-            <SideTabs sideValue={sideValue}/>
+            <SideTabs sideValue={sideValue} />
           </SlideContainer>
           {keyword ? <SearchList keyword={keyword} /> : <></>}
         </Nav>

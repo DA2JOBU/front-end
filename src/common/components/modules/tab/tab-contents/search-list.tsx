@@ -19,15 +19,16 @@ const SearchListContainer = styled.section`
   border-left: 1px solid ${({ theme }) => theme.color.gray30};
 `;
 
-const SearchListTitle = styled.p`
+const SearchListTitle = styled.div`
   height: 60px;
   background-color: ${({ theme }) => theme.color.white};
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
 `;
 
-const SearchListContent = styled.p`
+const SearchListContent = styled.div`
   overflow-y: scroll;
   height: 100%;
+
 `;
 
 type Props = {

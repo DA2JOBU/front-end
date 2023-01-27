@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const BadgeContainer = styled.button`
   border: 1px solid ${({ theme }) => theme.color.gray30};
   color: ${({ theme }) => theme.color.gray85};
+  background: ${({ theme }) => theme.color.white};
   border-radius: 20px;
   font-size: 14px;
   padding: 8px 12px;
