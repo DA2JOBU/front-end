@@ -92,7 +92,7 @@ const Contents = (): JSX.Element => {
           </Nav>
         )}
       </Navs>
-      <Map searchKeyword={keyword} />
+      {/* <Map searchKeyword={keyword} /> */}
       {modalOpen && <Modal onClose={closeModal} />}
 
       {/* <Sidebar searchKeyword={keyword} /> */}

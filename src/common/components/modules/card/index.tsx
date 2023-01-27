@@ -85,7 +85,7 @@ const Card = () => {
         <span className="review">리뷰 2</span>
         <span className="save">저장 45</span>
       </CardBody>
-      <p className="comment">''2023 미쉐린가이드에 선정된 서울 평양냉면 맛집</p>
+      <p className="comment">&apos;&apos;2023 미쉐린가이드에 선정된 서울 평양냉면 맛집</p>
     </CardContainer>
   );
 };
