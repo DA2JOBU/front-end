@@ -16,16 +16,16 @@ export interface propsType {
 const Contents = (): JSX.Element => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   useEffect(() => {
-    setAccessToken(sessionStorage.getItem('jwtToken'))
+    setAccessToken(sessionStorage.getItem('jwtToken'));
   }, [accessToken]);
 
   const [modalOpen, setModalOpen] = useState(false);
 
-    // 모달창 노출
+  // 모달창 노출
   const showModal = () => {
     setModalOpen(true);
   };
-  const closeModal = () => setModalOpen(false)
+  const closeModal = () => setModalOpen(false);
 
   // 입력 폼 변화 감지하여 입력 값 관리
   const [value, setValue] = useState('');
@@ -67,8 +67,7 @@ const Contents = (): JSX.Element => {
         </Nav>
         <Nav title="검색" onClick={() => !setIsOpen}>
           <SlideContainer>
-      <SideTabs handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value} />
-
+            <SideTabs handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value} />
           </SlideContainer>
           {keyword ? <SearchList keyword={keyword} /> : <></>}
         </Nav>
@@ -89,12 +88,11 @@ const Contents = (): JSX.Element => {
           </Nav>
         ) : (
           <Nav title="로그인" onClick={showModal}>
-            <SlideContainer>
-            </SlideContainer>
+            <SlideContainer></SlideContainer>
           </Nav>
         )}
       </Navs>
-      <Map searchKeyword={keyword} />
+      {/* <Map searchKeyword={keyword} /> */}
       {modalOpen && <Modal onClose={closeModal} />}
 
       {/* <Sidebar searchKeyword={keyword} /> */}
