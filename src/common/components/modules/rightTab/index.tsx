@@ -39,7 +39,7 @@ const RightTab = (props: Props): JSX.Element  => {
         </UlStyled>
         <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} />
         <BottomContent>
-          <span style={{marginTop:"10px"}}>검색 결과</span>
+          <span style={{margin:"1em"}}>검색 결과</span>
           {searchResult.length > 0 && <span>{searchResult.length}</span>}
           {searchResult.map((info: searchElement, index: number) => {
             const { address_name, place_name, road_address_name } = info;

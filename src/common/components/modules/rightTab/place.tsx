@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const PlaceElement = styled.div`
-  margin: 10px;
-  color: ${({ theme }) => theme.color.gray85};
+const PlaceElement = styled.button`
+    margin:0.5em;
+    color: ${({ theme }) => theme.color.gray85};
 `;
 
 interface Props {
@@ -13,7 +13,13 @@ interface Props {
 }
 
 const Place = (props: Props) => {
-  const PlaceInfo = props;
-  return <PlaceElement>{PlaceInfo.placeName}</PlaceElement>;
-};
+    const PlaceInfo = props;
+    return (
+        <div>
+            <PlaceElement>
+                {PlaceInfo.placeName}
+            </PlaceElement>
+        </div>
+    )
+}
 export default Place;

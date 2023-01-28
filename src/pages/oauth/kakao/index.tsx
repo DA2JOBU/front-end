@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { REST_API_KEY, REDIRECT_URI, CLIENT_SECRET } from 'src/common/api/kakaoLoginData';
-import { login } from 'src/common/api/login';
+import { login } from '@api/auth';
 import { NextPage } from 'next';
 import api from '@api/api-config';
 
