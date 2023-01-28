@@ -75,12 +75,11 @@ const Contents = (): JSX.Element => {
 
   return (
     <>
+      <Logo>
+        <img src="assets/images/logo.svg" alt="로고" className="logo" />
+      </Logo>
       <Navs>
-        <Nav title="">
-          <Logo>
-            <img src="assets/images/logo.svg" alt="로고" className="logo" />
-          </Logo>
-        </Nav>
+        <Nav title="" children={undefined}></Nav>
         <Nav title="검색" onClick={() => !setIsOpen}>
           <SlideContainer>
             <SideTabs sideValue={sideValue} />

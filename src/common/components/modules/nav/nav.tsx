@@ -6,8 +6,8 @@ const NavContainer = styled.div`
 `;
 
 type Props = {
-  title: string;
-  children: ReactElement | ReactElement[];
+  title?: string;
+  children?: ReactElement | ReactElement[];
   onClick?: () => void;
 };
 

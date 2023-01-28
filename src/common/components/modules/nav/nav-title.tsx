@@ -66,7 +66,7 @@ export const ButtonStyle = styled.button`
 `;
 
 export type NavTitleProps = {
-  title: string;
+  title?: string;
   index: number;
   setSelectedNav: (index: number) => void;
   isActive: boolean;
