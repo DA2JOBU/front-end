@@ -6,6 +6,8 @@ import { useRecoilValue } from 'recoil';
 import { searchList } from "src/state";
 import Place from './place';
 import { searchElement } from 'src/types/searchType';
+import { useState } from 'react';
+import SearchList from './searchList';
 
 const RightTabContainer = styled.section`
   overflow: hidden;
@@ -32,14 +34,18 @@ type Props = {
 const RightTab = (props: Props): JSX.Element  => {
     const { value, handleOnChange, handleSubmit } = props;
     const searchResult = useRecoilValue<searchElement[]>(searchList); //검색 결과를 가져오는 것
+    const [detailPopup, setVisible] = useState(false);
     return (
       <RightTabContainer>
+        {detailPopup && 
+          <SearchList placeName='' address='' roadAddress=''/>
+        }
         <UlStyled>
           <RightTabTitle title="장소 등록" />
         </UlStyled>
         <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} />
         <BottomContent>
-          <span style={{margin:"1em"}}>검색 결과</span>
+          {searchResult.length > 0 && <span style={{margin:"1em"}}>검색 결과</span>}
           {searchResult.length > 0 && <span>{searchResult.length}</span>}
           {searchResult.map((info: searchElement, index: number) => {
             const { address_name, place_name, road_address_name } = info;
@@ -50,7 +56,8 @@ const RightTab = (props: Props): JSX.Element  => {
                 address={address_name}
                 roadAddress={road_address_name}
                 placeName={place_name}
-              />
+                onClick={()=>setVisible(!detailPopup)}
+                />
             );
           })}
         </BottomContent>

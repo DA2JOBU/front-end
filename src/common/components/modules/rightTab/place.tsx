@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import styled from 'styled-components';
+import SearchList from './searchList';
 
 const PlaceElement = styled.button`
     margin:0.5em;
@@ -6,10 +8,11 @@ const PlaceElement = styled.button`
 `;
 
 interface Props {
-  placeName: String;
-  roadAddress: String;
-  address: String;
+  placeName: string;
+  roadAddress: string;
+  address: string;
   index: number;
+  onClick?: (e?: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
 const Place = (props: Props) => {
