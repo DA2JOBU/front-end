@@ -35,10 +35,13 @@ const RightTab = (props: Props): JSX.Element  => {
     const { value, handleOnChange, handleSubmit } = props;
     const searchResult = useRecoilValue<searchElement[]>(searchList); //검색 결과를 가져오는 것
     const [detailPopup, setVisible] = useState(false);
+    const [placeName, setPlace] = useState('');
+    const [address, setAddress] = useState('');
+    const [roadAddress, setRoadAddress] =  useState('');
     return (
       <RightTabContainer>
         {detailPopup && 
-          <SearchList placeName='' address='' roadAddress=''/>
+          <SearchList placeName={placeName} address={address} roadAddress={roadAddress}/>
         }
         <UlStyled>
           <RightTabTitle title="장소 등록" />
@@ -56,7 +59,13 @@ const RightTab = (props: Props): JSX.Element  => {
                 address={address_name}
                 roadAddress={road_address_name}
                 placeName={place_name}
-                onClick={()=>setVisible(!detailPopup)}
+                onClick={()=>{
+                  setPlace(address);
+                  setAddress(address);
+                  setRoadAddress(roadAddress);
+                  setVisible(true);
+                  console.log(address, roadAddress, placeName);
+                }}
                 />
             );
           })}

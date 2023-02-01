@@ -1,14 +1,16 @@
 import Marker from '@public/images/marker.png';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import RightTabTitle from '../tab';
 const DetailContainer = styled.section`
   overflow: hidden;
   position: absolute;
-  z-index: -1;
+  z-index: 26;
   clear: both;
   right: 0px;
   width: 380px;
   height: 100vh;
+  background: ${({ theme }) => theme.color.white};
 `;
 
 const UlStyled = styled.ul`
@@ -22,10 +24,19 @@ export interface placeDetail{
     roadAddress:string;
 }
 
+
 const SearchList = (props: placeDetail) => {
-    const {placeName, address, roadAddress} = props;
+    const [placeName, setPlace] = useState(props.placeName);
+    const [address, setAddress] = useState(props.address);
+    const [roadAddress, setRoadAddress] =  useState(props.roadAddress);
+    useEffect(()=> {
+        setPlace(props.placeName);
+        setAddress(props.address);
+        setRoadAddress(props.roadAddress);
+        console.log(placeName);
+    },[props.placeName, props.address, props.roadAddress]);
     return (
-        <div>
+        <DetailContainer>
             <UlStyled>
                 <RightTabTitle title={placeName} />
             </UlStyled>
@@ -44,7 +55,7 @@ const SearchList = (props: placeDetail) => {
             <div>
                 한 줄 리뷰
             </div>
-        </div>
+        </DetailContainer>
     )
 }
 export default SearchList;

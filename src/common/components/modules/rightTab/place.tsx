@@ -19,7 +19,7 @@ const Place = (props: Props) => {
     const PlaceInfo = props;
     return (
         <div>
-            <PlaceElement>
+            <PlaceElement onClick={props.onClick}>
                 {PlaceInfo.placeName}
             </PlaceElement>
         </div>
