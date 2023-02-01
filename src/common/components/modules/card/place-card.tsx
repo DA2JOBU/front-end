@@ -1,19 +1,22 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import TopBadge from '../../elements/top-badge';
 import { Place } from 'src/types/searchType';
 import ComentBadge from '@components/elements/place-badge';
+import Icons from 'public/assets/images/icons';
+
 const CardContainer = styled.div`
   width: 100%;
   padding: 35px 30px;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
+  cursor: pointer;
 `;
 
 const CardHeader = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  padding-bottom: 5px;
+  padding-bottom: 0.3rem;
   justify-content: space-between;
 
   .title {
@@ -24,6 +27,14 @@ const CardHeader = styled.div`
       font-weight: 600;
       padding-right: 4px;
     }
+  }
+  .clicked {
+    fill: ${({ theme }) => theme.color.orange};
+    stroke: none;
+  }
+  .stroke {
+    fill: none;
+    stroke: ${({ theme }) => theme.color.gray80};
   }
 `;
 
@@ -47,7 +58,7 @@ const CardBody = styled.div`
     display: flex;
 
     .star {
-      color: ${({ theme }) => theme.color.gray90};
+      color: ${({ theme }) => theme.color.gray70};
       font-size: 14px;
       padding: 0 18px 0 2px;
       font-weight: 700;
@@ -64,6 +75,14 @@ const CardBody = styled.div`
       padding-right: 10px;
     }
   }
+  .on {
+    fill: ${({ theme }) => theme.color.orange};
+    stroke: none;
+  }
+  .off {
+    fill: ${({ theme }) => theme.color.gray70};
+    stroke: none;
+  }
 `;
 const CardFooter = styled.div`
   width: 100%;
@@ -75,38 +94,68 @@ const CardFooter = styled.div`
     margin-top: 14px;
     font-size: 14px;
   }
+  .coment-null {
+    background: ${({ theme }) => theme.color.gray20};
+    color: ${({ theme }) => theme.color.gray70};
+    font-size: 0.87rem;
+    width: 11rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 2rem;
+  }
 `;
 
-const PlaceCard = (props: { place: Place }): JSX.Element => {
-  const { address_name, category_group_name, place_name, review, save, badge } = props.place;
+type Props = {
+  place: Place;
+  isActive: boolean;
+  onClick: (event?: React.MouseEvent<Element, MouseEvent> | undefined) => void;
+  setSelectedPlace: (id: string | number | undefined) => void;
+};
+
+const PlaceCard = (props: Props): JSX.Element => {
+  const {
+    address_name,
+    category_group_name,
+    category_name,
+    place_name,
+    reviewCnt,
+    wantPlaceCnt,
+    ratingAvg,
+    coment,
+    id,
+  } = props.place;
+
+  const { onClick, isActive, setSelectedPlace } = props;
+
+  const handleOnClick = useCallback(() => {
+    setSelectedPlace(id);
+  }, [setSelectedPlace, id]);
 
   return (
     <CardContainer>
       <CardHeader>
-        <p className="title">
+        <div className="title">
           <h2 className="place">{place_name}</h2>
           {/* <TopBadge /> */}
-        </p>
-        <p className="favorites">
-          <img src="assets/images/favorites.svg" alt="favorites" />
-        </p>
+        </div>
+        <button className="favorites" onClick={onClick}>
+          <Icons.Favorites  fill='none' className={`${isActive} ? '#4444 : ''`} onClick={handleOnClick} />
+        </button>
       </CardHeader>
       <CardBody>
         <p className="title">
-          <span className="food">{category_group_name}</span>
+          <span className="food">{category_name}</span>
           <span className="address">{address_name}</span>
         </p>
         <p className="body">
-          <img src="assets/images/review-off.svg" alt="review" />
-          <span className="star">0</span>
-          <span className="review">리뷰 {review}</span>
-          <span className="save">저장 {save}</span>
+          <Icons.Star className="off" width={14} />
+          <span className="star">{ratingAvg ? ratingAvg : 0}</span>
+          <span className="review">리뷰 {reviewCnt ? reviewCnt : '-'}</span>
+          <span className="save">저장 {wantPlaceCnt ? wantPlaceCnt : '-'}</span>
         </p>
       </CardBody>
       <CardFooter>
         <p className="comment">
-          <ComentBadge />
-          {/* <p className="comment">''2023 미쉐린가이드에 선정된 서울 평양냉면 맛집</p> */}
+          {coment ? <ComentBadge /> : <span className="coment-null">리뷰를 기다리고 있어요</span>}
         </p>
       </CardFooter>
     </CardContainer>

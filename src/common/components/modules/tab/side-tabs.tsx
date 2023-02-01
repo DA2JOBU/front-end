@@ -11,16 +11,15 @@ type Props = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
-const SideTabs = (props: { sideValue: Props }): JSX.Element => {
+const SideTabs = (props: { sideValue: Props, isActive: boolean }): JSX.Element => {
   const { value, handleOnChange, handleSubmit } = props.sideValue;
+  const isActive = props.isActive;
 
   return (
     <Tabs>
       <Tab title="장소 검색">
-        <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} />
-        <BottomContent>
-          <SearchTopPlace />
-        </BottomContent>
+        <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} isActive={isActive} />
+        <SearchTopPlace />
       </Tab>
       <Tab title="키워드 검색">
         <SearchKeyword />

@@ -1,5 +1,5 @@
 import { getRegisterList } from '@api/mapApi';
-import { GetServerSideProps, InferGetServerSidePropsType} from 'next';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { keyword, searchList } from 'src/state';
@@ -15,14 +15,14 @@ interface placeType {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res:reviewedPlaceList[] = await getRegisterList();
+  const res: reviewedPlaceList[] = await getRegisterList();
   console.log(res, 'res');
   return {
     props: {
-      markerdata: res
-    }
-  }
-}
+      markerdata: res,
+    },
+  };
+};
 
 // head에 작성한 kakao API 불러오기
 // const { kakao } = window as any;
@@ -37,16 +37,16 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
   // 검색어가 바뀔 때마다 재렌더링되도록 useEffect 사용
   useEffect(() => {
     if (!mapContainer) return;
-          //등록된 장소 마커에 넣어 주기
-      // getRegisterList().then((res) => {
-      //   setRegister(res);
-      //   // for (let i = 0; i < registerPos?.length; i++){
-      //   //   let placePosition = new window.kakao.maps.LatLng(registerPos[i].x, registerPos[i].y);
-      //   //   addMarker(placePosition, i, undefined);
-      //   // }
-      //   //displayPlaces(registerPos);
-      // });
-    
+    //등록된 장소 마커에 넣어 주기
+    // getRegisterList().then((res) => {
+    //   setRegister(res);
+    //   // for (let i = 0; i < registerPos?.length; i++){
+    //   //   let placePosition = new window.kakao.maps.LatLng(registerPos[i].x, registerPos[i].y);
+    //   //   addMarker(placePosition, i, undefined);
+    //   // }
+    //   //displayPlaces(registerPos);
+    // });
+
     console.log(registerPos);
     window.kakao.maps.load(() => {
       const mapContainer = document.getElementById('map');
@@ -127,7 +127,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
       //   let placePosition = new window.kakao.maps.LatLng(registerPos[i].x, registerPos[i].y);
       //   addMarker(placePosition, i, undefined);
       // }
-      
+
       // 검색 결과 목록과 마커를 표출하는 함수
       function displayPlaces(places: string | any[]) {
         const listEl = document.getElementById('places-list'),

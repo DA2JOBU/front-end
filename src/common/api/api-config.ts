@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const defaultServerUrl = process.env.NEXT_PUBLIC_SERVER_URI;
+export const defaultServerUrl = process.env.NEXT_PUBLIC_SERVER_URI;
 
 
 var api = {

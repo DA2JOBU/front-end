@@ -15,6 +15,12 @@ export interface propsType {
   searchKeyword: string;
 }
 
+const MainContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+`;
+
 const Logo = styled.div`
   position: absolute;
   top: 8px;
@@ -74,7 +80,7 @@ const Contents = (): JSX.Element => {
   };
 
   return (
-    <>
+    <MainContainer>
       <Logo>
         <img src="assets/images/logo.svg" alt="로고" className="logo" />
       </Logo>
@@ -82,7 +88,7 @@ const Contents = (): JSX.Element => {
         <Nav title="" children={undefined}></Nav>
         <Nav title="검색" onClick={() => !setIsOpen}>
           <SlideContainer>
-            <SideTabs sideValue={sideValue} />
+            <SideTabs sideValue={sideValue}  isActive={value.length > 0} />
           </SlideContainer>
           {keyword ? <SearchList keyword={keyword} /> : <></>}
         </Nav>
@@ -111,7 +117,7 @@ const Contents = (): JSX.Element => {
       {modalOpen && <Modal onClose={closeModal} />}
 
       {/* <Sidebar searchKeyword={keyword} /> */}
-    </>
+    </MainContainer>
   );
 };
 

@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import TopBadge from '../../elements/top-badge';
 import { Place } from 'src/types/searchType';
 import ComentBadge from '@components/elements/place-badge';
 import Button from '@components/elements/Button';
+import PeopleButton from '@components/elements/keyword-button/people';
+import MoneyButton from '../../elements/keyword-button/money';
+import KeywordButton from '@components/elements/keyword-button/keyword';
+
+
 const CardContainer = styled.div`
   width: 100%;
   padding: 35px 30px;
@@ -14,10 +19,10 @@ const CardHeader = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  padding-bottom: 5px;
+  padding-bottom: 0.8rem;
 
   .people {
-    font-size: 14px;
+    font-size: 1rem;
     color: ${({ theme }) => theme.color.black};
     font-weight: 600;
     padding-right: 4px;
@@ -25,6 +30,12 @@ const CardHeader = styled.div`
 `;
 
 const CardBody = styled.div`
+margin-bottom: 1rem;
+
+  p {
+    display: flex;
+    margin-bottom: 0.4rem;
+  }
   .title {
     padding-bottom: 12px;
     .food {
@@ -75,19 +86,47 @@ const CardFooter = styled.div`
 `;
 
 const KeywordCard = (): JSX.Element => {
+
   return (
     <CardContainer>
       <CardHeader>
         <h2 className="people">참석인원수</h2>
         {/* <TopBadge /> */}
       </CardHeader>
-      <CardBody>
-        <Button size="large" text="4~8명" type="line" />
-        <Button size="large" text="4~8명" type="line" />
+      <CardBody>        
+        <PeopleButton />
+      </CardBody>
+      <CardHeader>
+        <h2 className="people">인당 가격대 </h2>
+        {/* <TopBadge /> */}
+      </CardHeader>
+      <CardBody>        
+        <MoneyButton />
+      </CardBody>
+      <CardHeader>
+        <h2 className="people">분위기 </h2>
+        {/* <TopBadge /> */}
+      </CardHeader>
+      <CardBody>        
+        <KeywordButton />
+      </CardBody>
+      <CardHeader>
+        <h2 className="people">조명 밝기 </h2>
+        {/* <TopBadge /> */}
+      </CardHeader>
+      <CardBody>        
+        <MoneyButton />
+      </CardBody>
+      <CardHeader>
+        <h2 className="people">기타</h2>
+        {/* <TopBadge /> */}
+      </CardHeader>
+      <CardBody>        
+        <MoneyButton />
       </CardBody>
       <CardFooter>
         <p className="comment">
-          <ComentBadge />
+          {/* <ComentBadge /> */}
           {/* <p className="comment">''2023 미쉐린가이드에 선정된 서울 평양냉면 맛집</p> */}
         </p>
       </CardFooter>

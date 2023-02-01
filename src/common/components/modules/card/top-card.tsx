@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import TopBadge from '../../elements/top-badge';
 import { Place } from 'src/types/searchType';
+import Icons from 'public/assets/images/icons';
+
 const CardContainer = styled.div`
   width: 100%;
   padding: 35px 30px;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
+  background: ${({ theme }) => theme.color.white};
 `;
 
 const CardHeader = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  padding-bottom: 5px;
+  padding-bottom: 0.3rem;
   justify-content: space-between;
 
   .title {
@@ -23,6 +26,14 @@ const CardHeader = styled.div`
       font-weight: 600;
       padding-right: 4px;
     }
+  }
+  .clicked {
+    fill: ${({ theme }) => theme.color.orange};
+    stroke: none;
+  }
+  .stroke {
+    fill: none;
+    stroke: ${({ theme }) => theme.color.gray80};
   }
 `;
 
@@ -63,6 +74,14 @@ const CardBody = styled.div`
       padding-right: 10px;
     }
   }
+  .on {
+    fill: ${({ theme }) => theme.color.orange};
+    stroke: none;
+  }
+  .off {
+    fill: ${({ theme }) => theme.color.gray70};
+    stroke: none;
+  }
 `;
 const CardFooter = styled.div`
   width: 100%;
@@ -77,40 +96,52 @@ const CardFooter = styled.div`
     padding: 10px;
     margin-top: 14px;
     font-size: 14px;
-  img {
-    padding-right: 4px;
-  }
+    img {
+      padding-right: 4px;
+    }
   }
 `;
 
 const TopCard = (props: { place: Place }): JSX.Element => {
-  const { address_name, category_group_name, place_name, review, save, badge } = props.place;
+  const { address_name, category_group_name, place_name, ratingAvg, reviewCnt, wantPlaceCnt, coment, rank, id } =
+    props.place;
+  const [active, setActive] = useState<boolean>(false);
+
+  const saveHandler = (e: React.MouseEvent) => {
+    setActive(!active);
+    // 등록으로 연결
+    
+  };
 
   return (
     <CardContainer>
       <CardHeader>
         <div className="title">
-          <h2 className="place">우래옥</h2>
-          <TopBadge />
+          <h2 className="place">{place_name}</h2>
+          <TopBadge rank={rank} />
         </div>
-        <p className="favorites">
-          <img src="assets/images/favorites.svg" alt="favorites" />
+        <p className="favorites" onClick={saveHandler}>
+          <Icons.Favorites className={active ? 'clicked' : 'stroke'} />
         </p>
       </CardHeader>
       <CardBody>
         <p className="title">
-          <span className="food">냉면</span>
-          <span className="address">서울 중구 주교동</span>
+          <span className="food">{category_group_name}</span>
+          <span className="address">{address_name}</span>
         </p>
         <p className="body">
-          <img src="assets/images/review-on.svg" alt="review" />
-          <span className="star">4.5</span>
-          <span className="review">리뷰 2</span>
-          <span className="save">저장 45</span>
+          <Icons.Star className={ratingAvg !== '0' ? 'on' : 'off'} width={14} />
+          <span className="star">{ratingAvg ? ratingAvg : 0}</span>
+
+          <span className="review">리뷰 {reviewCnt ? reviewCnt : '-'}</span>
+          <span className="save">저장 {wantPlaceCnt ? wantPlaceCnt : '-'}</span>
         </p>
       </CardBody>
       <CardFooter>
-        <p className="comment"><img  src="assets/images/quote.svg"/>2023 미쉐린가이드에 선정된 서울 평양냉면 맛집</p>
+        <p className="comment">
+          <img src="assets/images/quote.svg" />
+          {coment}
+        </p>
       </CardFooter>
     </CardContainer>
   );

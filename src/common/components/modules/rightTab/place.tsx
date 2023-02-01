@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import SearchList from './searchList';
 
 const PlaceElement = styled.button`
-    margin:0.5em;
-    color: ${({ theme }) => theme.color.gray85};
+  margin: 0.5em;
+  color: ${({ theme }) => theme.color.gray85};
 `;
 
 interface Props {

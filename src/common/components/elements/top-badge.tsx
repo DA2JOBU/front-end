@@ -7,10 +7,14 @@ const BadgeContainer = styled.span`
   font-size: 10px;
   font-weight: 800;
   padding: 5px 8px;
-  
-  `;
-const Badge = () => {
-  return <BadgeContainer>TOP 1</BadgeContainer>;
+`;
+
+type PropsType = {
+  rank?: string | number;
+};
+const Badge = (props: PropsType) => {
+  const { rank } = props;
+  return <BadgeContainer>TOP {rank}</BadgeContainer>;
 };
 
 export default Badge;

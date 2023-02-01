@@ -3,13 +3,12 @@ import styled from 'styled-components';
 import TabTitle, { Props as TabTitleProps } from './tab-title';
 
 const SearchContainer = styled.section`
-  overflow: hidden;
   float: left;
   position: absolute;
   z-index: 25;
   clear: both;
   width: 380px;
-  height: calc(100vh - 64px);
+  border-right: 1px solid ${({ theme }) => theme.color.gray30};
 `;
 
 const UlStyled = styled.ul`
