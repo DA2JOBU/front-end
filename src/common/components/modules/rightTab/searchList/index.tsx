@@ -28,13 +28,7 @@ export interface placeDetail{
 const SearchList = (props: placeDetail) => {
     const [placeName, setPlace] = useState(props.placeName);
     const [address, setAddress] = useState(props.address);
-    const [roadAddress, setRoadAddress] =  useState(props.roadAddress);
-    useEffect(()=> {
-        setPlace(props.placeName);
-        setAddress(props.address);
-        setRoadAddress(props.roadAddress);
-        console.log(placeName);
-    },[props.placeName, props.address, props.roadAddress]);
+    const [roadAddress, setRoadAddress] = useState(props.roadAddress);
     return (
         <DetailContainer>
             <UlStyled>

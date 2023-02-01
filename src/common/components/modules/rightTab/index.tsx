@@ -33,7 +33,7 @@ type Props = {
 
 const RightTab = (props: Props): JSX.Element  => {
     const { value, handleOnChange, handleSubmit } = props;
-    const searchResult = useRecoilValue<searchElement[]>(searchList); //검색 결과를 가져오는 것
+    const searchResult = useRecoilValue<searchElement[]>(searchList); //검색 결과를 가져오는 것s
     const [detailPopup, setVisible] = useState(false);
     const [placeName, setPlace] = useState('');
     const [address, setAddress] = useState('');
@@ -46,25 +46,23 @@ const RightTab = (props: Props): JSX.Element  => {
         <UlStyled>
           <RightTabTitle title="장소 등록" />
         </UlStyled>
-        <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} />
+        <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} isActive={true} />
         <BottomContent>
           {searchResult.length > 0 && <span style={{margin:"1em"}}>검색 결과</span>}
           {searchResult.length > 0 && <span>{searchResult.length}</span>}
           {searchResult.map((info: searchElement, index: number) => {
-            const { address_name, place_name, road_address_name } = info;
             return (
               <Place
                 key={index}
                 index={index}
-                address={address_name}
-                roadAddress={road_address_name}
-                placeName={place_name}
+                address={info.address_name}
+                roadAddress={info.road_address_name}
+                placeName={info.place_name}
                 onClick={()=>{
-                  setPlace(address);
-                  setAddress(address);
-                  setRoadAddress(roadAddress);
+                  setPlace(info.place_name);
+                  setAddress(info.address_name);
+                  setRoadAddress(info.road_address_name);
                   setVisible(true);
-                  console.log(address, roadAddress, placeName);
                 }}
                 />
             );
