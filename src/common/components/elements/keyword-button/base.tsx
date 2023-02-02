@@ -35,7 +35,7 @@ padding: 1rem;
 
 
 /*크기*/
-font-size: 1rem;
+font-size: 0.8rem;
 
 /*색상 */
 background:  ${({ theme }) => theme.color.gray20};

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import SearchList from './searchList';
+import DetailPlace from './detailPlace';
 
 const PlaceElement = styled.button`
   margin: 0.5em;

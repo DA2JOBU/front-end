@@ -7,7 +7,7 @@ import { searchList } from "src/state";
 import Place from './place';
 import { searchElement } from 'src/types/searchType';
 import { useState } from 'react';
-import SearchList from './searchList';
+import DetailPlace from './detailPlace';
 
 const RightTabContainer = styled.section`
   overflow: hidden;
@@ -41,7 +41,7 @@ const RightTab = (props: Props): JSX.Element  => {
     return (
       <RightTabContainer>
         {detailPopup && 
-          <SearchList placeName={placeName} address={address} roadAddress={roadAddress}/>
+          <DetailPlace placeName={placeName} address={address} roadAddress={roadAddress}/>
         }
         <UlStyled>
           <RightTabTitle title="장소 등록" />
