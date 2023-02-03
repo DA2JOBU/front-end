@@ -31,7 +31,7 @@ function SearchPlace(props: Props): JSX.Element | null {
 
   return (
     <PlaceContainer>
-      <PlaceCard place={place}  onClick={onClick} isActive={isActive} setSelectedPlace={setSelectedPlace} />
+      <PlaceCard place={place} onClick={onClick} isActive={isActive} setSelectedPlace={setSelectedPlace} />
     </PlaceContainer>
   );
 }

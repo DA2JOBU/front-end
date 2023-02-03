@@ -5,8 +5,17 @@ import styled from 'styled-components';
 const KeywordContainer = styled.section`
   background-color: ${({ theme }) => theme.color.white};
   height: 100vh;
-  overflow-y: auto;
   padding-bottom: 3.8rem;
+
+  overflow-y:auto;
+  
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: #ccc;
+  }
 `;
 
 const SearchKeyword = () => {

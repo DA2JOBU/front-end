@@ -138,7 +138,7 @@ const PlaceCard = (props: Props): JSX.Element => {
           {/* <TopBadge /> */}
         </div>
         <button className="favorites" onClick={onClick}>
-          <Icons.Favorites  fill='none' className={`${isActive} ? '#4444 : ''`} onClick={handleOnClick} />
+          <Icons.Favorites fill='none' className={`${isActive} ? '#4444 : ''`} onClick={handleOnClick} />
         </button>
       </CardHeader>
       <CardBody>

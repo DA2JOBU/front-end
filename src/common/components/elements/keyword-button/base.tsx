@@ -13,6 +13,7 @@ type ButtonProps = {
 
 interface Props {
   value?: string;
+  name?: string;
   onClick?: (e: any) => void;
   width?: string;
   disabled?: boolean;
@@ -57,7 +58,7 @@ color: ${({ theme }) => theme.color.gray70};
 }
 `;
 
-const KeywordButton = ({ value, active, height, disabled, value: children, onClick, width }: Props) => {
+const KeywordButton = ({ value, active, height, disabled, name, onClick, width }: Props) => {
   const [state, setState] = useState<boolean>(active || false);
   const onChange = () => {
     setState(!state);
@@ -75,6 +76,7 @@ const KeywordButton = ({ value, active, height, disabled, value: children, onCli
       className={!state ? 'disabled' : 'active'}
       disabled={disabled}
       type='button'
+      name={name}
     >
       {value}
     </StyledButton>

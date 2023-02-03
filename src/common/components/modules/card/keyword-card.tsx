@@ -119,35 +119,35 @@ const KeywordCard = (): JSX.Element => {
         {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
-        <PeopleButton onChange={onChange} />
+        <PeopleButton onChange={onChange} name='' />
       </CardBody>
       <CardHeader>
         <h2 className="people">인당 가격대 </h2>
         {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
-        <MoneyButton onChange={onChange} />
+        <MoneyButton onChange={onChange} name='' />
       </CardBody>
       <CardHeader>
         <h2 className="people">분위기 </h2>
         {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
-        <KeywordButton onChange={onChange} />
+        <KeywordButton onChange={onChange} name='' />
       </CardBody>
       <CardHeader>
         <h2 className="people">조명 밝기 </h2>
         {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
-        <MoneyButton onChange={onChange} />
+        <MoneyButton onChange={onChange} name='' />
       </CardBody>
       <CardHeader>
         <h2 className="people">기타</h2>
         {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
-        <MoneyButton onChange={onChange} />
+        <MoneyButton onChange={onChange} name='' />
       </CardBody>
       <CardFooter>
         <p className="comment">

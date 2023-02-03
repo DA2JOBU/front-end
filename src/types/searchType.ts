@@ -5,7 +5,7 @@ export interface searchElement {
   category_group_name?: string;
   category_name?: string;
   distance?: string;
-  id?: string;
+  id: string;
   phone?: string;
   place_name: string;
   place_url?: string;

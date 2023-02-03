@@ -125,6 +125,7 @@ const InputForm = styled.input`
 `;
 
 export interface placeDetail {
+  placeId: string;
   placeName: string;
   address: string;
   roadAddress: string;
@@ -134,7 +135,8 @@ export interface placeDetail {
 const DetailPlace = (props: placeDetail) => {
 
   //입력 데이터
-  const [inputDate, setInput] = useState({
+  const [inputData, setInput] = useState({
+    placeId: props.placeId,
     placeName: props.placeName,
     address: props.address,
     roadAddress: props.roadAddress,
@@ -155,17 +157,22 @@ const DetailPlace = (props: placeDetail) => {
   //입력 폼 전체 상태 관리
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
+    console.log(e.target);
     setInput({
-      ...inputDate,
+      ...inputData,
       [name]: value
     });
-    console.log(value);
+    console.log(inputData);
   };
+
+  const submitForm = async () => {
+
+  }
 
   return (
     <DetailContainer className='scrollBar'>
       <UlStyled>
-        <RightTabTitle title={inputDate.placeName} />
+        <RightTabTitle title={inputData.placeName} />
       </UlStyled>
       <CardContainer>
         <CardHeader>
@@ -173,49 +180,49 @@ const DetailPlace = (props: placeDetail) => {
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <PlaceKinds onChange={onChange} />
+          <PlaceKinds onChange={onChange} name='placeKinds' />
         </CardBody>
         <CardHeader>
           <h2 className="people">만족도 </h2>
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <Satisfaction onChange={onChange} />
+          <Satisfaction onChange={onChange} name='satisfaction' />
         </CardBody>
         <CardHeader>
           <h2 className="people">참석인원수 </h2>
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <InputForm placeholder='0' onChange={onChange} />
+          <InputForm placeholder='0' onChange={onChange} name='participants' />
         </CardBody>
         <CardHeader>
           <h2 className="people">인당 가격대 </h2>
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <MoneyButton onChange={onChange} />
+          <MoneyButton onChange={onChange} name='price' />
         </CardBody>
         <CardHeader>
           <h2 className="people">분위기 </h2>
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <Atmosphere onChange={onChange} />
+          <Atmosphere onChange={onChange} name='' />
         </CardBody>
         <CardHeader>
           <h2 className="people">조명 밝기</h2>
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <Brightness onChange={onChange} />
+          <Brightness onChange={onChange} name='' />
         </CardBody>
         <CardHeader>
           <h2 className="people">기타</h2>
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <Etc onChange={onChange} />
+          <Etc onChange={onChange} name='' />
         </CardBody>
         <CardHeader>
           <h2 className="people">한 줄 리뷰</h2>
@@ -224,7 +231,7 @@ const DetailPlace = (props: placeDetail) => {
           <InputForm placeholder='후기를 적어주세요.' onChange={onChange} />
         </CardBody>
         <CardFooter>
-          <SubmitButton text='등록하기' />
+          <SubmitButton text='등록하기' onClick={submitForm} />
         </CardFooter>
       </CardContainer>
     </DetailContainer>

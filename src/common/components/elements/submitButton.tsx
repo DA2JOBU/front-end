@@ -25,7 +25,6 @@ export interface IButtonProps {
 
 const StyledButton = styled.button`
     /*공통 스타일*/
-    display: flex;
     width: 100%;
     align-items: center;
     outline: none;

@@ -31,45 +31,47 @@ type Props = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
-const RightTab = (props: Props): JSX.Element  => {
-    const { value, handleOnChange, handleSubmit } = props;
-    const searchResult = useRecoilValue<searchElement[]>(searchList); //검색 결과를 가져오는 것s
-    const [detailPopup, setVisible] = useState(false);
-    const [placeName, setPlace] = useState('');
-    const [address, setAddress] = useState('');
-    const [roadAddress, setRoadAddress] =  useState('');
-    return (
-      <RightTabContainer>
-        {detailPopup && 
-          <DetailPlace placeName={placeName} address={address} roadAddress={roadAddress}/>
-        }
-        <UlStyled>
-          <RightTabTitle title="장소 등록" />
-        </UlStyled>
-        <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} isActive={true} />
-        <BottomContent>
-          {searchResult.length > 0 && <span style={{margin:"1em"}}>검색 결과</span>}
-          {searchResult.length > 0 && <span>{searchResult.length}</span>}
-          {searchResult.map((info: searchElement, index: number) => {
-            return (
-              <Place
-                key={index}
-                index={index}
-                address={info.address_name}
-                roadAddress={info.road_address_name}
-                placeName={info.place_name}
-                onClick={()=>{
-                  setPlace(info.place_name);
-                  setAddress(info.address_name);
-                  setRoadAddress(info.road_address_name);
-                  setVisible(true);
-                }}
-                />
-            );
-          })}
-        </BottomContent>
-      </RightTabContainer>
-    )
+const RightTab = (props: Props): JSX.Element => {
+  const { value, handleOnChange, handleSubmit } = props;
+  const searchResult = useRecoilValue<searchElement[]>(searchList); //검색 결과를 가져오는 것s
+  const [detailPopup, setVisible] = useState(false);
+  const [placeId, setPlaceId] = useState('');
+  const [placeName, setPlace] = useState('');
+  const [address, setAddress] = useState('');
+  const [roadAddress, setRoadAddress] = useState('');
+  return (
+    <RightTabContainer>
+      {detailPopup &&
+        <DetailPlace placeId={placeId} placeName={placeName} address={address} roadAddress={roadAddress} />
+      }
+      <UlStyled>
+        <RightTabTitle title="장소 등록" />
+      </UlStyled>
+      <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} isActive={true} />
+      <BottomContent>
+        {searchResult.length > 0 && <span style={{ margin: "1em" }}>검색 결과</span>}
+        {searchResult.length > 0 && <span>{searchResult.length}</span>}
+        {searchResult.map((info: searchElement, index: number) => {
+          return (
+            <Place
+              key={index}
+              index={index}
+              address={info.address_name}
+              roadAddress={info.road_address_name}
+              placeName={info.place_name}
+              onClick={() => {
+                setPlaceId(info.id);
+                setPlace(info.place_name);
+                setAddress(info.address_name);
+                setRoadAddress(info.road_address_name);
+                setVisible(true);
+              }}
+            />
+          );
+        })}
+      </BottomContent>
+    </RightTabContainer>
+  )
 }
 
 export default RightTab;
