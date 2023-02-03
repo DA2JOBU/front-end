@@ -1,56 +1,44 @@
 import React, { useState } from 'react';
 import BaseButton from '@components/elements/keyword-button/base';
 
-const Satisfaction = () => {
+interface Props {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+const Satisfaction = (props: Props) => {
   const [active, setActive] = useState<boolean>(false);
-
+  const onClick = props.onChange;
   return (
     <>
       <p>
         <BaseButton
-          disabled
-          children="5"
+          value="5"
           width="58px"
           height="58px"
-          onClick={() => {
-            setActive(!active);
-          }}
+          onClick={onClick}
         />
         <BaseButton
-          disabled
-          children="4"
+          value="4"
           width="58px"
           height="58px"
-          onClick={() => {
-            setActive(!active);
-          }}
+          onClick={onClick}
         />
         <BaseButton
-          disabled
-          children="3"
+          value="3"
           width="58px"
           height="58px"
-          onClick={() => {
-            setActive(!active);
-          }}
+          onClick={onClick}
         />
         <BaseButton
-          disabled
-          children="2"
+          value="2"
           width="58px"
           height="58px"
-          onClick={() => {
-            setActive(!active);
-          }}
+          onClick={onClick}
         />
         <BaseButton
-          disabled
-          children="1"
+          value="1"
           width="58px"
           height="58px"
-          onClick={() => {
-            setActive(!active);
-          }}
+          onClick={onClick}
         />
       </p>
       <p>

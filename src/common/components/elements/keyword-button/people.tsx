@@ -9,7 +9,7 @@ const PeopleButton = () => {
       <p>
         <BaseButton
           disabled
-          children="4~8명"
+          value="4~8명"
           width="158px"
           height="52px"
           onClick={() => {
@@ -18,7 +18,7 @@ const PeopleButton = () => {
         />
         <BaseButton
           disabled
-          children="9~12명"
+          value="9~12명"
           width="158px"
           height="52px"
           onClick={() => {
@@ -29,7 +29,7 @@ const PeopleButton = () => {
       <p>
         <BaseButton
           disabled
-          children="13~16명"
+          value="13~16명"
           width="158px"
           height="52px"
           onClick={() => {
@@ -38,7 +38,7 @@ const PeopleButton = () => {
         />
         <BaseButton
           disabled
-          children="17명 이상"
+          value="17명 이상"
           width="158px"
           height="52px"
           onClick={() => {

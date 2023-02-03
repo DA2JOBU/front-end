@@ -1,7 +1,8 @@
 import KeywordButton from '@components/elements/keyword-button/base';
 import MoneyButton from '@components/elements/keyword-button/money';
 import PeopleButton from '@components/elements/keyword-button/people';
-import Marker from '@public/images/marker.png';
+import SubmitButton from '@components/elements/submitButton';
+import BaseButton from '@components/elements/keyword-button/base';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import RightTabTitle from '../tab';
@@ -35,7 +36,7 @@ const UlStyled = styled.ul`
   width: 380px;
 `;
 
-const CardContainer = styled.div`
+const CardContainer = styled.form`
   width: 100%;
   padding: 35px 30px;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
@@ -100,77 +101,151 @@ margin-bottom: 1rem;
   }
 `;
 
-export interface placeDetail{
-    placeName:string;
-    address:string;
-    roadAddress:string;
-}
+const CardFooter = styled.div`
+  width: 100%;
+  align-items: center;
+`;
+
+const InputForm = styled.input`
+  margin: 0;
+  width: 100%;
+  width: 324px;
+  padding: 11px 0 8px 0;
+  display: flex;
+  border-bottom: 2px solid ${({ theme }) => theme.color.black};
+  &::placeholder {
+    color: ${({ theme }) => theme.color.gray40};
+  }
+  &:focus {
+    border-bottom: 2px solid ${({ theme }) => theme.color.orange};
+  }
+  &:focus + button > svg {
+    stroke: ${({ theme }) => theme.color.orange};
+  }
+`;
+
+export interface placeDetail {
+  placeName: string;
+  address: string;
+  roadAddress: string;
+};
 
 
 const DetailPlace = (props: placeDetail) => {
-    const [placeName, setPlace] = useState(props.placeName);
-    const [address, setAddress] = useState(props.address);
-    const [roadAddress, setRoadAddress] = useState(props.roadAddress);
-    return (
-        <DetailContainer className='scrollBar'>
-            <UlStyled>
-                <RightTabTitle title={placeName} />
-            </UlStyled>
-            <CardContainer>
-            <CardHeader>
-                <h2 className="people">장소 구분</h2>
-                {/* <TopBadge /> */}
-            </CardHeader>
-            <CardBody>        
-                <PlaceButton />
-            </CardBody>
-            <CardHeader>
-                <h2 className="people">만족도 </h2>
-                {/* <TopBadge /> */}
-            </CardHeader>
-            <CardBody>        
-                <Satisfaction />
-            </CardBody>
-            <CardHeader>
-                <h2 className="people">참석인원수 </h2>
-                {/* <TopBadge /> */}
-            </CardHeader>
-            <CardBody>        
-                <Satisfaction />
-            </CardBody>
-            <CardHeader>
-                <h2 className="people">인당 가격대 </h2>
-                {/* <TopBadge /> */}
-            </CardHeader>
-            <CardBody>        
-                <MoneyButton />
-            </CardBody>
-            <CardHeader>
-                <h2 className="people">분위기 </h2>
-                {/* <TopBadge /> */}
-            </CardHeader>
-            <CardBody>        
-                <Atmosphere />
-            </CardBody>
-            <CardHeader>
-                <h2 className="people">조명 밝기</h2>
-                {/* <TopBadge /> */}
-            </CardHeader>
-            <CardBody>        
-                <Brightness />
-            </CardBody>
-            <CardHeader>
-                <h2 className="people">기타</h2>
-                {/* <TopBadge /> */}
-            </CardHeader>
-            <CardBody>        
-                <Etc />
-            </CardBody>
-            <CardHeader>
-                <h2 className="people">한 줄 리뷰</h2>
-            </CardHeader>
-            </CardContainer>
-        </DetailContainer>
-    )
+  // const [placeName, setPlace] = useState(props.placeName);
+  // const [address, setAddress] = useState(props.address);
+  // const [roadAddress, setRoadAddress] = useState(props.roadAddress);
+  //const [participants, setPeople] = useState<number>(0);
+  //const [price, setPrice] = useState<string>('');
+
+  //입력 데이터
+  const [inputDate, setInput] = useState({
+    placeName: props.placeName,
+    address: props.address,
+    roadAddress: props.roadAddress,
+    placeKinds: '',
+    satisfaction: 0,
+    participants: 0,
+    price: '',
+    moodCategory: '',
+    mood: '',
+    isCorkCharge: false,
+    isRoom: false,
+    isParking: false,
+    isAdvancePayment: false,
+    isRent: false,
+    simpleReview: '',
+  });
+
+  //입력 폼 전체 상태 관리
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+    setInput({
+      ...inputDate,
+      [name]: value
+    });
+    console.log(value);
+  };
+
+  return (
+    <DetailContainer className='scrollBar'>
+      <UlStyled>
+        <RightTabTitle title={inputDate.placeName} />
+      </UlStyled>
+      <CardContainer>
+        <CardHeader>
+          <h2 className="people">장소 구분</h2>
+          {/* <TopBadge /> */}
+        </CardHeader>
+        <CardBody>
+          <p>
+            <BaseButton
+              value='가본 곳'
+              width="158px"
+              height="52px"
+              onClick={onChange}
+            />
+            <BaseButton
+              value='가고 싶은 곳'
+              width="158px"
+              height="52px"
+              onClick={onChange}
+            />
+          </p>
+        </CardBody>
+        <CardHeader>
+          <h2 className="people">만족도 </h2>
+          {/* <TopBadge /> */}
+        </CardHeader>
+        <CardBody>
+          <Satisfaction onChange={onChange} />
+        </CardBody>
+        <CardHeader>
+          <h2 className="people">참석인원수 </h2>
+          {/* <TopBadge /> */}
+        </CardHeader>
+        <CardBody>
+          <InputForm placeholder='0' onChange={onChange} />
+        </CardBody>
+        <CardHeader>
+          <h2 className="people">인당 가격대 </h2>
+          {/* <TopBadge /> */}
+        </CardHeader>
+        <CardBody>
+          <MoneyButton />
+        </CardBody>
+        <CardHeader>
+          <h2 className="people">분위기 </h2>
+          {/* <TopBadge /> */}
+        </CardHeader>
+        <CardBody>
+          <Atmosphere />
+        </CardBody>
+        <CardHeader>
+          <h2 className="people">조명 밝기</h2>
+          {/* <TopBadge /> */}
+        </CardHeader>
+        <CardBody>
+          <Brightness />
+        </CardBody>
+        <CardHeader>
+          <h2 className="people">기타</h2>
+          {/* <TopBadge /> */}
+        </CardHeader>
+        <CardBody>
+          <Etc />
+        </CardBody>
+        <CardHeader>
+          <h2 className="people">한 줄 리뷰</h2>
+        </CardHeader>
+        <CardBody>
+          <InputForm placeholder='후기를 적어주세요.' onChange={onChange} />
+        </CardBody>
+        <CardFooter>
+          <SubmitButton text='등록하기' />
+        </CardFooter>
+      </CardContainer>
+    </DetailContainer>
+  )
 }
 export default DetailPlace;

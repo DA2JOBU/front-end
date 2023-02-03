@@ -1,29 +1,27 @@
 import React, { useState } from 'react';
 import BaseButton from '@components/elements/keyword-button/base';
 
-const PlaceButton = () => {
+interface Props {
+  onChange: () => void;
+}
+const PlaceButton = (props: Props) => {
   const [active, setActive] = useState<boolean>(false);
-
+  const onChange = props.onChange;
   return (
     <>
       <p>
         <BaseButton
-          disabled
-          children="가본 곳"
+          value="가본 곳"
           width="158px"
           height="52px"
-          onClick={() => {
-            setActive(!active);
-          }}
+          onClick={onChange}
         />
         <BaseButton
           disabled
-          children="가고 싶은 곳"
+          value="가고 싶은 곳"
           width="158px"
           height="52px"
-          onClick={() => {
-            setActive(!active);
-          }}
+          onClick={onChange}
         />
       </p>
       <p>

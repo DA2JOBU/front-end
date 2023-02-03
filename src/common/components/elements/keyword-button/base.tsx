@@ -1,5 +1,5 @@
 import { type } from 'os';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 type ButtonSize = 'large' | 'medium' | 'small';
 
@@ -12,13 +12,13 @@ type ButtonProps = {
 };
 
 interface Props {
-  children?: React.ReactNode;
-  onClick?: () => void;
+  value?: string;
+  onClick?: (e: any) => void;
   width?: string;
   disabled?: boolean;
   className?: string;
   height?: string;
-  active? : boolean;
+  active?: boolean;
 }
 
 const StyledButton = styled.button`
@@ -38,10 +38,13 @@ padding: 1rem;
 font-size: 0.8rem;
 
 /*색상 */
+
 background:  ${({ theme }) => theme.color.gray20};
 color: ${({ theme }) => theme.color.gray70};
 
+.disabled{
 
+}
 .active{
   background: ${({ theme }) => theme.color.white};
   color:  ${({ theme }) => theme.color.orange};
@@ -54,18 +57,26 @@ color: ${({ theme }) => theme.color.gray70};
 }
 `;
 
-const KeywordButton = ({ active, height, disabled, children, onClick, width }: Props) => {
+const KeywordButton = ({ value, active, height, disabled, value: children, onClick, width }: Props) => {
+  const [state, setState] = useState<boolean>(active || false);
+  const onChange = () => {
+    setState(!state);
+    console.log(onClick);
+    return onClick;
+  }
   return (
     <StyledButton
+      value={value}
       onClick={onClick}
       style={{
         width,
         height
       }}
-      className={(disabled ? ' disabled' : '')}
+      className={!state ? 'disabled' : 'active'}
       disabled={disabled}
+      type='button'
     >
-      {children}
+      {value}
     </StyledButton>
   );
 };

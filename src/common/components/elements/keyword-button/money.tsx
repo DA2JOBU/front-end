@@ -9,7 +9,7 @@ const MoneyButton = () => {
       <p>
         <BaseButton
           disabled
-          children="3만 미만"
+          value="3만 미만"
           width="158px"
           height="52px"
           onClick={() => {
@@ -18,7 +18,7 @@ const MoneyButton = () => {
         />
         <BaseButton
           disabled
-          children="3만 이상 5만 미만"
+          value="3만 이상 5만 미만"
           width="158px"
           height="52px"
           onClick={() => {
@@ -29,7 +29,7 @@ const MoneyButton = () => {
       <p>
         <BaseButton
           disabled
-          children="5만 이상 10만 미만"
+          value="5만 이상 10만 미만"
           width="158px"
           height="52px"
           onClick={() => {
@@ -38,7 +38,7 @@ const MoneyButton = () => {
         />
         <BaseButton
           disabled
-          children="10만 이상"
+          value="10만 이상"
           width="158px"
           height="52px"
           onClick={() => {
