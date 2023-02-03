@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import BaseButton from '@components/elements/keyword-button/base';
 
-const PeopleButton = () => {
-  const [active, setActive] = useState<boolean>(false);
+interface Props {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
 
+const PeopleButton = (props: Props) => {
+  const [active, setActive] = useState<boolean>(false);
+  const onClick = props.onChange;
   return (
     <>
       <p>
@@ -12,18 +16,14 @@ const PeopleButton = () => {
           value="4~8명"
           width="158px"
           height="52px"
-          onClick={() => {
-            setActive(!active);
-          }}
+          onClick={onClick}
         />
         <BaseButton
           disabled
           value="9~12명"
           width="158px"
           height="52px"
-          onClick={() => {
-            setActive(!active);
-          }}
+          onClick={onClick}
         />
       </p>
       <p>
@@ -32,18 +32,14 @@ const PeopleButton = () => {
           value="13~16명"
           width="158px"
           height="52px"
-          onClick={() => {
-            setActive(!active);
-          }}
+          onClick={onClick}
         />
         <BaseButton
           disabled
           value="17명 이상"
           width="158px"
           height="52px"
-          onClick={() => {
-            setActive(!active);
-          }}
+          onClick={onClick}
         />
       </p>
     </>

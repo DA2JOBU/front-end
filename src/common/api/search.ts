@@ -31,6 +31,41 @@ export const places = [
     coment: '와인 콜키지 프리인 고급진 분위기의 한정식 맛집'
 
   },
+  {
+    address_name: '서울 중구 공덕동',
+    category_group_name: '고기',
+    place_name: '락희옥 마포본점',
+    reviewCnt: '2',
+    wantPlaceCnt: '45',
+    rank: '3',
+    ratingAvg: '4.5',
+    coment: '와인 콜키지 프리인 고급진 분위기의 한정식 맛집'
+
+  },
+  {
+    address_name: '서울 중구 공덕동',
+    category_group_name: '고기',
+    place_name: '락희옥 마포본점',
+    reviewCnt: '2',
+    wantPlaceCnt: '45',
+    rank: '3',
+    ratingAvg: '4.5',
+    coment: '와인 콜키지 프리인 고급진 분위기의 한정식 맛집'
+
+  },
+
+  {
+    address_name: '서울 중구 공덕동',
+    category_group_name: '고기',
+    place_name: '락희옥 마포본점',
+    reviewCnt: '2',
+    wantPlaceCnt: '45',
+    rank: '3',
+    ratingAvg: '4.5',
+    coment: '와인 콜키지 프리인 고급진 분위기의 한정식 맛집'
+
+  },
+
 
 
 ]; 

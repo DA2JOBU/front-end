@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import BaseButton from '@components/elements/keyword-button/base';
 
-const KeywordButton = () => {
-  const [active, setActive] = useState<boolean>(false);
+interface Props {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
 
+const KeywordButton = (props: Props) => {
+  const [active, setActive] = useState<boolean>(false);
+  const onClick = props.onChange;
   return (
     <p>
       <BaseButton
@@ -11,27 +15,21 @@ const KeywordButton = () => {
         value="가벼운"
         width="104px"
         height="52px"
-        onClick={() => {
-          setActive(!active);
-        }}
+        onClick={onClick}
       />
       <BaseButton
         disabled
         value="일반적인"
         width="104px"
         height="52px"
-        onClick={() => {
-          setActive(!active);
-        }}
+        onClick={onClick}
       />
       <BaseButton
         disabled
         value="무거운"
         width="104px"
         height="52px"
-        onClick={() => {
-          setActive(!active);
-        }}
+        onClick={onClick}
       />
     </p>
   )

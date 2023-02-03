@@ -9,7 +9,7 @@ import RightTabTitle from '../tab';
 import Atmosphere from './atmosphere';
 import Brightness from './brightness';
 import Etc from './etc';
-import PlaceButton from './placeKinds';
+import PlaceKinds from './placeKinds';
 import Satisfaction from './satisfaction';
 const DetailContainer = styled.section`
   overflow-y: auto;
@@ -132,11 +132,6 @@ export interface placeDetail {
 
 
 const DetailPlace = (props: placeDetail) => {
-  // const [placeName, setPlace] = useState(props.placeName);
-  // const [address, setAddress] = useState(props.address);
-  // const [roadAddress, setRoadAddress] = useState(props.roadAddress);
-  //const [participants, setPeople] = useState<number>(0);
-  //const [price, setPrice] = useState<string>('');
 
   //입력 데이터
   const [inputDate, setInput] = useState({
@@ -178,20 +173,7 @@ const DetailPlace = (props: placeDetail) => {
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <p>
-            <BaseButton
-              value='가본 곳'
-              width="158px"
-              height="52px"
-              onClick={onChange}
-            />
-            <BaseButton
-              value='가고 싶은 곳'
-              width="158px"
-              height="52px"
-              onClick={onChange}
-            />
-          </p>
+          <PlaceKinds onChange={onChange} />
         </CardBody>
         <CardHeader>
           <h2 className="people">만족도 </h2>
@@ -212,28 +194,28 @@ const DetailPlace = (props: placeDetail) => {
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <MoneyButton />
+          <MoneyButton onChange={onChange} />
         </CardBody>
         <CardHeader>
           <h2 className="people">분위기 </h2>
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <Atmosphere />
+          <Atmosphere onChange={onChange} />
         </CardBody>
         <CardHeader>
           <h2 className="people">조명 밝기</h2>
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <Brightness />
+          <Brightness onChange={onChange} />
         </CardBody>
         <CardHeader>
           <h2 className="people">기타</h2>
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <Etc />
+          <Etc onChange={onChange} />
         </CardBody>
         <CardHeader>
           <h2 className="people">한 줄 리뷰</h2>

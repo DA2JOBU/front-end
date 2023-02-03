@@ -4,6 +4,7 @@ import BaseButton from '@components/elements/keyword-button/base';
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
+
 const Satisfaction = (props: Props) => {
   const [active, setActive] = useState<boolean>(false);
   const onClick = props.onChange;

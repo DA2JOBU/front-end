@@ -86,6 +86,31 @@ const CardFooter = styled.div`
 `;
 
 const KeywordCard = (): JSX.Element => {
+  //입력 데이터
+  const [inputDate, setInput] = useState({
+    placeKinds: '',
+    satisfaction: 0,
+    participants: 0,
+    price: '',
+    moodCategory: '',
+    mood: '',
+    isCorkCharge: false,
+    isRoom: false,
+    isParking: false,
+    isAdvancePayment: false,
+    isRent: false,
+    simpleReview: '',
+  });
+
+  //입력 폼 전체 상태 관리
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+    setInput({
+      ...inputDate,
+      [name]: value
+    });
+    console.log(value);
+  };
 
   return (
     <CardContainer>
@@ -93,36 +118,36 @@ const KeywordCard = (): JSX.Element => {
         <h2 className="people">참석인원수</h2>
         {/* <TopBadge /> */}
       </CardHeader>
-      <CardBody>        
-        <PeopleButton />
+      <CardBody>
+        <PeopleButton onChange={onChange} />
       </CardBody>
       <CardHeader>
         <h2 className="people">인당 가격대 </h2>
         {/* <TopBadge /> */}
       </CardHeader>
-      <CardBody>        
-        <MoneyButton />
+      <CardBody>
+        <MoneyButton onChange={onChange} />
       </CardBody>
       <CardHeader>
         <h2 className="people">분위기 </h2>
         {/* <TopBadge /> */}
       </CardHeader>
-      <CardBody>        
-        <KeywordButton />
+      <CardBody>
+        <KeywordButton onChange={onChange} />
       </CardBody>
       <CardHeader>
         <h2 className="people">조명 밝기 </h2>
         {/* <TopBadge /> */}
       </CardHeader>
-      <CardBody>        
-        <MoneyButton />
+      <CardBody>
+        <MoneyButton onChange={onChange} />
       </CardBody>
       <CardHeader>
         <h2 className="people">기타</h2>
         {/* <TopBadge /> */}
       </CardHeader>
-      <CardBody>        
-        <MoneyButton />
+      <CardBody>
+        <MoneyButton onChange={onChange} />
       </CardBody>
       <CardFooter>
         <p className="comment">

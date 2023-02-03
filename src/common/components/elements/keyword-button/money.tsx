@@ -1,49 +1,41 @@
 import React, { useState } from 'react';
 import BaseButton from '@components/elements/keyword-button/base';
 
-const MoneyButton = () => {
-  const [active, setActive] = useState<boolean>(false);
+interface Props {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
 
+const MoneyButton = (props: Props) => {
+  const [active, setActive] = useState<boolean>(false);
+  const onClick = props.onChange;
   return (
     <>
       <p>
         <BaseButton
-          disabled
           value="3만 미만"
           width="158px"
           height="52px"
-          onClick={() => {
-            setActive(!active);
-          }}
+          onClick={onClick}
         />
         <BaseButton
-          disabled
           value="3만 이상 5만 미만"
           width="158px"
           height="52px"
-          onClick={() => {
-            setActive(!active);
-          }}
+          onClick={onClick}
         />
       </p>
       <p>
         <BaseButton
-          disabled
           value="5만 이상 10만 미만"
           width="158px"
           height="52px"
-          onClick={() => {
-            setActive(!active);
-          }}
+          onClick={onClick}
         />
         <BaseButton
-          disabled
           value="10만 이상"
           width="158px"
           height="52px"
-          onClick={() => {
-            setActive(!active);
-          }}
+          onClick={onClick}
         />
       </p>
     </>

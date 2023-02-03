@@ -10,6 +10,16 @@ const SearchTopContainer = styled.div`
   background: ${({ theme }) => theme.color.white};
   position: relative;
   height: 100vh;
+  
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: #ccc;
+  }
 `;
 
 const SearchBanner = styled.div`

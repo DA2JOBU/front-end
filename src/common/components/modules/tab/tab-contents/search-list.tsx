@@ -6,7 +6,7 @@ import { PlaceRegister, searchElement } from 'src/types/searchType';
 import styled from 'styled-components';
 import { channel } from 'diagnostics_channel';
 import { run } from 'node:test';
-import { placeExist, registerPlace } from '@api/mapApi';
+import { placeExist, registerFirstPlace } from '@api/mapApi';
 
 const SearchListContainer = styled.section`
   float: left;
@@ -43,6 +43,15 @@ const SearchListTitle = styled.div`
 
 const SearchListContent = styled.div`
   overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: #ccc;
+  }
+
   height: 100%;
   // position: absolute;
   // top: 64px;
@@ -84,7 +93,7 @@ const SearchList = (props: Props) => {
         roadAddress: list.road_address_name,
       },
     };
-    registerPlace(data);
+    registerFirstPlace(data);
     setMyPlaceList(data);
     setRegistrantion(data);
   };
