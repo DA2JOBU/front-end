@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BaseButton from '@components/elements/keyword-button/base';
+import { ButtonContainer } from "@components/elements/keyword-button/people";
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -10,10 +11,10 @@ const Brightness = (props: Props) => {
   const [active, setActive] = useState<boolean>(false);
   const { onChange, name } = props;
   return (
-    <p>
+    <ButtonContainer>
       <BaseButton
         value="밝은"
-        width="104px"
+        width="102px"
         height="52px"
         fontSize="16px" 
         onClick={onChange}
@@ -21,7 +22,7 @@ const Brightness = (props: Props) => {
       />
       <BaseButton
         value="일반적인"
-        width="104px"
+        width="102px"
         height="52px"
         fontSize="16px" 
         onClick={onChange}
@@ -29,13 +30,13 @@ const Brightness = (props: Props) => {
       />
       <BaseButton
         value="어두운"
-        width="104px"
+        width="102px"
         height="52px"
         fontSize="16px" 
         onClick={onChange}
         name={name}
       />
-    </p>
+    </ButtonContainer>
   )
 }
 

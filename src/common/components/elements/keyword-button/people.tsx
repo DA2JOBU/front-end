@@ -5,6 +5,7 @@ import styled from 'styled-components';
 export const ButtonContainer = styled.div`
   display: inline-flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 `;
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
