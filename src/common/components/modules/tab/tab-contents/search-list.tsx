@@ -64,10 +64,9 @@ type Props = {
 
 const SearchList = (props: Props) => {
   const { keyword } = props;
-  const [registration, setRegistrantion] = useState<PlaceRegister[]>([]);
-  const [isSelected, setIsSelected] = useState<boolean>(false)
+  const [registration, setRegistrantion] = useState<string>('');
+  const [isSelected, setIsSelected] = useState<boolean>(false);
   const lists = useRecoilValue<searchElement[]>(searchList);
-  console.log(registration);
   const setMyPlaceList = useSetRecoilState(myPlace);
 
   const getCategory = (category_name: string) => {
@@ -95,8 +94,12 @@ const SearchList = (props: Props) => {
     };
     registerFirstPlace(data);
     setMyPlaceList(data);
-    setRegistrantion(data);
+    setRegistrantion({
+      ...data,
+      data,
+    });
   };
+  console.log('눌러', registration);
 
   return (
     <SearchListContainer>
@@ -113,8 +116,8 @@ const SearchList = (props: Props) => {
               setSelectedPlace={setRegistrantion}
               key={index}
               list={list}
+              id={list.id}
               category={category}
-              isActive={list.id === registration}
               onClick={() => handlerPlace(list, category)}
             />
           );

@@ -1,5 +1,6 @@
 import { type } from 'os';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { StoreID } from 'recoil';
 import styled from 'styled-components';
 type ButtonSize = 'large' | 'medium' | 'small';
 
@@ -20,66 +21,54 @@ interface Props {
   className?: string;
   height?: string;
   active?: boolean;
+  fontSize?: string;
 }
 
-const StyledButton = styled.button`
-/*공통 스타일*/
-display: inline-flex;
-justify-content: center;
-align-items: center;
-outline: none;
-text-align: center;
-border-radius: 50px;
-font-weight: 600;
-cursor: pointer;
-padding: 1rem;
+const StyledButton = styled.label`
+  /*공통 스타일*/
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  text-align: center;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 1rem;
 
+  /*크기*/
+  font-size: 0.8rem;
 
-/*크기*/
-font-size: 0.8rem;
-
-/*색상 */
-
-background:  ${({ theme }) => theme.color.gray20};
-color: ${({ theme }) => theme.color.gray70};
-
-.disabled{
-
-}
-.active{
-  background: ${({ theme }) => theme.color.white};
-  color:  ${({ theme }) => theme.color.orange};
-  border: 1px solid ${({ theme }) => theme.color.orange};
-}
-
-/*기타 */
-& + & {
-  margin-left: 0.5rem;
-}
+  /*색상 */
+  background: ${({ theme }) => theme.color.gray20};
+  color: ${({ theme }) => theme.color.gray70};
 `;
 
-const KeywordButton = ({ value, active, height, disabled, name, onClick, width }: Props) => {
-  const [state, setState] = useState<boolean>(active || false);
-  const onChange = () => {
-    setState(!state);
-    console.log(onClick);
-    return onClick;
+const Container = styled.p`
+  .active {
+    background: ${({ theme }) => theme.color.white};
+    color: ${({ theme }) => theme.color.orange};
+    border: 1px solid ${({ theme }) => theme.color.orange};
   }
+`;
+
+const KeywordButton = ({ value, active, height, disabled, name, onClick, width, fontSize }: Props) => {
+  const [state, setState] = useState<boolean>(active || false);
+
   return (
-    <StyledButton
-      value={value}
-      onClick={onClick}
-      style={{
-        width,
-        height
-      }}
-      className={!state ? 'disabled' : 'active'}
-      disabled={disabled}
-      type='button'
-      name={name}
-    >
-      {value}
-    </StyledButton>
+    <Container>
+      <StyledButton
+        style={{
+          width,
+          height,
+          fontSize,
+        }}
+        className={state ? 'active' : ''}
+      >
+        <span>{value}</span>
+        <input type="checkbox" value={value} onChange={() => setState(!state)} onClick={onClick} />
+      </StyledButton>
+    </Container>
   );
 };
 

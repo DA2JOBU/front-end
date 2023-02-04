@@ -7,11 +7,15 @@ import Button from '@components/elements/Button';
 import PeopleButton from '@components/elements/keyword-button/people';
 import MoneyButton from '../../elements/keyword-button/money';
 import KeywordButton from '@components/elements/keyword-button/keyword';
-
+import SubmitButton from '@components/elements/submitButton';
+import Atmosphere from '../rightTab/detailPlace/atmosphere';
+import Brightness from '../rightTab/detailPlace/brightness';
+import Etc from '../rightTab/detailPlace/etc';
 
 const CardContainer = styled.div`
   width: 100%;
-  padding: 35px 30px;
+  padding: 45px 28px 35px 28px;
+
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
 `;
 
@@ -30,11 +34,10 @@ const CardHeader = styled.div`
 `;
 
 const CardBody = styled.div`
-margin-bottom: 1rem;
-
+  margin-bottom: 1rem;
   p {
     display: flex;
-    margin-bottom: 0.4rem;
+    margin: 0.3rem 0.1rem;
   }
   .title {
     padding-bottom: 12px;
@@ -102,15 +105,19 @@ const KeywordCard = (): JSX.Element => {
     simpleReview: '',
   });
 
+  const onClick = () => {};
+
   //입력 폼 전체 상태 관리
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setInput({
       ...inputDate,
-      [name]: value
+      [name]: value,
     });
     console.log(value);
   };
+
+  const submitForm = async () => {};
 
   return (
     <CardContainer>
@@ -119,41 +126,38 @@ const KeywordCard = (): JSX.Element => {
         {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
-        <PeopleButton onChange={onChange} name='' />
+        <PeopleButton onChange={onChange} name="" />
       </CardBody>
       <CardHeader>
         <h2 className="people">인당 가격대 </h2>
         {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
-        <MoneyButton onChange={onChange} name='' />
+        <MoneyButton onChange={onChange} name="" />
       </CardBody>
       <CardHeader>
-        <h2 className="people">분위기 </h2>
-        {/* <TopBadge /> */}
-      </CardHeader>
-      <CardBody>
-        <KeywordButton onChange={onChange} name='' />
-      </CardBody>
-      <CardHeader>
-        <h2 className="people">조명 밝기 </h2>
-        {/* <TopBadge /> */}
-      </CardHeader>
-      <CardBody>
-        <MoneyButton onChange={onChange} name='' />
-      </CardBody>
-      <CardHeader>
-        <h2 className="people">기타</h2>
-        {/* <TopBadge /> */}
-      </CardHeader>
-      <CardBody>
-        <MoneyButton onChange={onChange} name='' />
-      </CardBody>
+          <h2 className="people">분위기 </h2>
+          {/* <TopBadge /> */}
+        </CardHeader>
+        <CardBody>
+          <Atmosphere onChange={onChange} name="" />
+        </CardBody>
+        <CardHeader>
+          <h2 className="people">조명 밝기</h2>
+          {/* <TopBadge /> */}
+        </CardHeader>
+        <CardBody>
+          <Brightness onChange={onChange} name="" />
+        </CardBody>
+        <CardHeader>
+          <h2 className="people">기타</h2>
+          {/* <TopBadge /> */}
+        </CardHeader>
+        <CardBody>
+          <Etc onChange={onChange} name="" />
+        </CardBody>
       <CardFooter>
-        <p className="comment">
-          {/* <ComentBadge /> */}
-          {/* <p className="comment">''2023 미쉐린가이드에 선정된 서울 평양냉면 맛집</p> */}
-        </p>
+        <SubmitButton text="결과보기" onClick={submitForm} />
       </CardFooter>
     </CardContainer>
   );

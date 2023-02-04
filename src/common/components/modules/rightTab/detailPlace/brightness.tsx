@@ -15,6 +15,7 @@ const Brightness = (props: Props) => {
         value="밝은"
         width="104px"
         height="52px"
+        fontSize="16px" 
         onClick={onChange}
         name={name}
       />
@@ -22,6 +23,7 @@ const Brightness = (props: Props) => {
         value="일반적인"
         width="104px"
         height="52px"
+        fontSize="16px" 
         onClick={onChange}
         name={name}
       />
@@ -29,6 +31,7 @@ const Brightness = (props: Props) => {
         value="어두운"
         width="104px"
         height="52px"
+        fontSize="16px" 
         onClick={onChange}
         name={name}
       />

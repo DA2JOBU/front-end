@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import BaseButton from '@components/elements/keyword-button/base';
+import { ButtonContainer } from '@components/elements/keyword-button/people';
 
 interface Props {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -7,29 +8,12 @@ interface Props {
 }
 
 const PlaceKinds = (props: Props) => {
-  const [active, setActive] = useState<boolean>(false);
   const { onChange, name } = props;
   return (
-    <>
-      <p>
-        <BaseButton
-          value="가본 곳"
-          width="158px"
-          height="52px"
-          onClick={onChange}
-          name={name}
-        />
-        <BaseButton
-          value="가고 싶은 곳"
-          width="158px"
-          height="52px"
-          onClick={onChange}
-          name={name}
-        />
-      </p>
-      <p>
-      </p>
-    </>
+    <ButtonContainer>
+      <BaseButton value="가본 곳" width="156px" height="52px" fontSize="16px" onClick={onChange} name={name} />
+      <BaseButton value="가고 싶은 곳" width="156px" height="52px" fontSize="16px" onClick={onChange} name={name} />
+    </ButtonContainer>
   );
 };
 

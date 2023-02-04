@@ -66,6 +66,11 @@ const Contents = (): JSX.Element => {
     setKeyword(value);
   };
 
+  const handleDelete = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    setValue('');
+  };
+
   // 검색어를 입력하지 않고 검색 버튼을 눌렀을 경우
   const valueChecker = () => {
     if (value === '') {
@@ -77,6 +82,7 @@ const Contents = (): JSX.Element => {
     handleOnChange,
     handleSubmit,
     value,
+    handleDelete,
   };
 
   return (
@@ -88,7 +94,7 @@ const Contents = (): JSX.Element => {
         <Nav title="" children={undefined}></Nav>
         <Nav title="검색" onClick={() => !setIsOpen}>
           <SlideContainer>
-            <SideTabs sideValue={sideValue}  isActive={value.length > 0} />
+            <SideTabs sideValue={sideValue} />
           </SlideContainer>
           {keyword ? <SearchList keyword={keyword} /> : <></>}
         </Nav>

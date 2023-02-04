@@ -11,6 +11,7 @@ import Quote from './quote.svg';
 import Logo from './logo.svg';
 import Review from './review-off.svg';
 import Star from './star.svg';
+import Delete from './delete.svg';
 
 const importedIcons = {
   Check,
@@ -24,6 +25,7 @@ const importedIcons = {
   Search,
   SearchOn,
   Star,
+  Delete,
 };
 
 type IconName = keyof typeof importedIcons;

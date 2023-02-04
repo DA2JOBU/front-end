@@ -22,18 +22,7 @@ const SearchTopContainer = styled.div`
   }
 `;
 
-const SearchBanner = styled.div`
-  width: 100%;
-  height: 2.85rem;
-  padding: 0 28px;
-  display: flex;
-  align-items: center;
-  color: ${({ theme }) => theme.color.black};
-  background: ${({ theme }) => theme.color.brightOrange};
-  .title {
-    padding-left: 0.2rem;
-  }
-`;
+
 
 const SearchContent = styled.div`
   overflow-y: auto;
@@ -52,10 +41,6 @@ export type PropsPlace = {
 const SearchTopPlace = (): JSX.Element => {
   return (
     <SearchTopContainer>
-      <SearchBanner>
-        <Icons.Hand />
-        <span className="title"> 회식장소 Top 10</span>
-      </SearchBanner>
       <SearchContent>
         {places.map((place, index) => {
           return <TopCard place={place} key={index} />;

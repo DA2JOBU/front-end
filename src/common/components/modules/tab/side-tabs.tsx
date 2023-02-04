@@ -9,16 +9,16 @@ type Props = {
   value: string;
   handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleDelete: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const SideTabs = (props: { sideValue: Props, isActive: boolean }): JSX.Element => {
-  const { value, handleOnChange, handleSubmit } = props.sideValue;
-  const isActive = props.isActive;
+const SideTabs = (props: { sideValue: Props }): JSX.Element => {
+  const { value, handleOnChange, handleSubmit, handleDelete } = props.sideValue;
 
   return (
     <Tabs>
       <Tab title="장소 검색">
-        <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} isActive={isActive} />
+        <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} handleDelete={handleDelete} />
         <SearchTopPlace />
       </Tab>
       <Tab title="키워드 검색">

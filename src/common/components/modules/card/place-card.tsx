@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import TopBadge from '../../elements/top-badge';
 import { Place } from 'src/types/searchType';
@@ -7,7 +7,7 @@ import Icons from 'public/assets/images/icons';
 
 const CardContainer = styled.div`
   width: 100%;
-  padding: 35px 30px;
+  padding: 45px 28px 35px 28px;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
   cursor: pointer;
 `;
@@ -106,28 +106,25 @@ const CardFooter = styled.div`
 
 type Props = {
   place: Place;
-  isActive: boolean;
+  id: string;
   onClick: (event?: React.MouseEvent<Element, MouseEvent> | undefined) => void;
-  setSelectedPlace: (id: string | number | undefined) => void;
+  setSelectedPlace: (id: string) => void;
 };
 
 const PlaceCard = (props: Props): JSX.Element => {
-  const {
-    address_name,
-    category_group_name,
-    category_name,
-    place_name,
-    reviewCnt,
-    wantPlaceCnt,
-    ratingAvg,
-    coment,
-    id,
-  } = props.place;
+  const { address_name, category_name, place_name, reviewCnt, wantPlaceCnt, ratingAvg, coment } = props.place;
+  const { onClick, setSelectedPlace, id } = props;
+  const [active, setActive] = useState<boolean>(false);
 
-  const { onClick, isActive, setSelectedPlace } = props;
+  const saveHandler = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setActive(!active);
+    // 등록으로 연결
+  };
 
   const handleOnClick = useCallback(() => {
     setSelectedPlace(id);
+    setActive(!active);
   }, [setSelectedPlace, id]);
 
   return (
@@ -137,9 +134,11 @@ const PlaceCard = (props: Props): JSX.Element => {
           <h2 className="place">{place_name}</h2>
           {/* <TopBadge /> */}
         </div>
-        <button className="favorites" onClick={onClick}>
-          <Icons.Favorites fill='none' className={`${isActive} ? '#4444 : ''`} onClick={handleOnClick} />
-        </button>
+        <label className="label" onClick={onClick}>
+          {active ? <img src="assets/images/favorites-on.png" /> : <img src="assets/images/favorites.png" />}
+
+          <input type="checkbox" className="favorites" onClick={handleOnClick} />
+        </label>
       </CardHeader>
       <CardBody>
         <p className="title">

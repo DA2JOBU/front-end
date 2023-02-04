@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import SearchIcon from '@public/images/search.svg';
 import Icon from '../../../../public/assets/images/icons';
@@ -38,36 +38,50 @@ const Button = styled.button`
   position: absolute;
   right: 2px;
   bottom: 12px;
-  .active {
-    stroke: ${({ theme }) => theme.color.orange};
-  }
+`;
+
+const DeleteButton = styled.button`
+  position: absolute;
+  right: 36px;
+  bottom: 16px;
+  margin-left: 10px;
 `;
 
 type Props = {
   value: string;
   handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  isActive: boolean;
+  handleDelete: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 const Input = (props: Props) => {
-  const { value, handleOnChange, handleSubmit, isActive } = props;
+  const ref = useRef<HTMLInputElement>(null);
+  const { value, handleOnChange, handleSubmit, handleDelete } = props;
+  const [hasFocus, setFocus] = useState<boolean>(false);
 
-  const iconFocus = () => {};
+  useEffect(() => {
+    if (document.hasFocus() && ref.current?.contains(document.activeElement)) {
+      setFocus(true);
+    }
+  }, []);
 
   return (
     <InputContainer>
       <InputWrapper onSubmit={handleSubmit}>
         <InputStyled
+          ref={ref}
           type="text"
           placeholder="장소명을 입력해 주세요"
           onChange={handleOnChange}
           value={value}
           id="search"
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
         />
-        <Button type="submit" onChange={iconFocus}>
-          <Icon.Search />
+        <Button type="submit">
+          <Icon.Search color={hasFocus ? '#ff5100' : '#262626'} />
         </Button>
+        <DeleteButton onClick={handleDelete}>{value ? <Icon.Delete /> : ''}</DeleteButton>
       </InputWrapper>
     </InputContainer>
   );

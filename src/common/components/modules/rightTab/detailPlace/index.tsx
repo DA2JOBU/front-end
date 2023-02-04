@@ -20,7 +20,7 @@ const DetailContainer = styled.section`
   width: 380px;
   height: 100vh;
   background: ${({ theme }) => theme.color.white};
-  
+
   &::-webkit-scrollbar {
     width: 4px;
   }
@@ -28,7 +28,6 @@ const DetailContainer = styled.section`
     border-radius: 2px;
     background: #ccc;
   }
-
 `;
 
 const UlStyled = styled.ul`
@@ -38,7 +37,7 @@ const UlStyled = styled.ul`
 
 const CardContainer = styled.form`
   width: 100%;
-  padding: 35px 30px;
+  padding: 45px 28px 35px 28px;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
 `;
 
@@ -57,11 +56,12 @@ const CardHeader = styled.div`
 `;
 
 const CardBody = styled.div`
-margin-bottom: 1rem;
+  margin-bottom: 1rem;
 
   p {
     display: flex;
-    margin-bottom: 0.4rem;
+    justify-content: space-between;
+    margin: 0.3rem 0.1rem;
   }
   .title {
     padding-bottom: 12px;
@@ -129,11 +129,9 @@ export interface placeDetail {
   placeName: string;
   address: string;
   roadAddress: string;
-};
-
+}
 
 const DetailPlace = (props: placeDetail) => {
-
   //입력 데이터
   const [inputData, setInput] = useState({
     placeId: props.placeId,
@@ -160,17 +158,15 @@ const DetailPlace = (props: placeDetail) => {
     console.log(e.target);
     setInput({
       ...inputData,
-      [name]: value
+      [name]: value,
     });
     console.log(inputData);
   };
 
-  const submitForm = async () => {
-
-  }
+  const submitForm = async () => {};
 
   return (
-    <DetailContainer className='scrollBar'>
+    <DetailContainer className="scrollBar">
       <UlStyled>
         <RightTabTitle title={inputData.placeName} />
       </UlStyled>
@@ -180,61 +176,61 @@ const DetailPlace = (props: placeDetail) => {
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <PlaceKinds onChange={onChange} name='placeKinds' />
+          <PlaceKinds onChange={onChange} name="placeKinds" />
         </CardBody>
         <CardHeader>
           <h2 className="people">만족도 </h2>
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <Satisfaction onChange={onChange} name='satisfaction' />
+          <Satisfaction onChange={onChange} name="satisfaction" />
         </CardBody>
         <CardHeader>
           <h2 className="people">참석인원수 </h2>
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <InputForm placeholder='0' onChange={onChange} name='participants' />
+          <InputForm placeholder="0" onChange={onChange} name="participants" />
         </CardBody>
         <CardHeader>
           <h2 className="people">인당 가격대 </h2>
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <MoneyButton onChange={onChange} name='price' />
+          <MoneyButton onChange={onChange} name="price" />
         </CardBody>
         <CardHeader>
           <h2 className="people">분위기 </h2>
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <Atmosphere onChange={onChange} name='' />
+          <Atmosphere onChange={onChange} name="" />
         </CardBody>
         <CardHeader>
           <h2 className="people">조명 밝기</h2>
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <Brightness onChange={onChange} name='' />
+          <Brightness onChange={onChange} name="" />
         </CardBody>
         <CardHeader>
           <h2 className="people">기타</h2>
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <Etc onChange={onChange} name='' />
+          <Etc onChange={onChange} name="" />
         </CardBody>
         <CardHeader>
           <h2 className="people">한 줄 리뷰</h2>
         </CardHeader>
         <CardBody>
-          <InputForm placeholder='후기를 적어주세요.' onChange={onChange} />
+          <InputForm placeholder="후기를 적어주세요." onChange={onChange} />
         </CardBody>
         <CardFooter>
-          <SubmitButton text='등록하기' onClick={submitForm} />
+          <SubmitButton text="등록하기" onClick={submitForm} />
         </CardFooter>
       </CardContainer>
     </DetailContainer>
-  )
-}
+  );
+};
 export default DetailPlace;

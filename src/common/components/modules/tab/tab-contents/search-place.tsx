@@ -11,27 +11,26 @@ const PlaceContainer = styled.div`
 
 type Props = {
   list: searchElement;
+  id: string;
   category: string;
-  isActive: boolean;
   onClick: (event?: React.MouseEvent<Element, MouseEvent> | undefined) => void;
-  setSelectedPlace: (id: any) => void;
+  setSelectedPlace: (id: string) => void;
 };
 
 function SearchPlace(props: Props): JSX.Element | null {
-  const { address_name, category_group_name, place_name, id, category_name } = props.list;
-  const { onClick, category, isActive, setSelectedPlace } = props;
+  const { address_name, category_group_name, place_name, category_name } = props.list;
+  const { onClick, category, setSelectedPlace, id } = props;
 
   const place = {
     address_name,
     category_group_name,
     place_name,
-    id,
     category_name: category,
   };
 
   return (
     <PlaceContainer>
-      <PlaceCard place={place} onClick={onClick} isActive={isActive} setSelectedPlace={setSelectedPlace} />
+      <PlaceCard place={place} id={id} onClick={onClick} setSelectedPlace={setSelectedPlace} />
     </PlaceContainer>
   );
 }

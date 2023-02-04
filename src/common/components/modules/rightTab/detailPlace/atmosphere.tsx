@@ -15,6 +15,7 @@ const Atmosphere = (props: Props) => {
         value="가벼운"
         width="104px"
         height="52px"
+        fontSize="16px" 
         onClick={onChange}
         name={name}
       />
@@ -22,6 +23,7 @@ const Atmosphere = (props: Props) => {
         value="일반적인"
         width="104px"
         height="52px"
+        fontSize="16px" 
         onClick={onChange}
         name={name}
       />
@@ -29,6 +31,7 @@ const Atmosphere = (props: Props) => {
         value="무거운"
         width="104px"
         height="52px"
+        fontSize="16px" 
         onClick={onChange}
         name={name}
       />

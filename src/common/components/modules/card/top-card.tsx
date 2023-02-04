@@ -6,7 +6,8 @@ import Icons from 'public/assets/images/icons';
 
 const CardContainer = styled.div`
   width: 100%;
-  padding: 35px 30px;
+  padding: 45px 28px 35px 28px;
+
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
   background: ${({ theme }) => theme.color.white};
 `;
@@ -27,14 +28,15 @@ const CardHeader = styled.div`
       padding-right: 4px;
     }
   }
-  .clicked {
+  .checked {
     fill: ${({ theme }) => theme.color.orange};
-    stroke: none;
+    stroke: ;
   }
   .stroke {
     fill: none;
     stroke: ${({ theme }) => theme.color.gray80};
   }
+  
 `;
 
 const CardBody = styled.div`
@@ -110,7 +112,6 @@ const TopCard = (props: { place: Place }): JSX.Element => {
   const saveHandler = (e: React.MouseEvent) => {
     setActive(!active);
     // 등록으로 연결
-    
   };
 
   return (
@@ -120,9 +121,11 @@ const TopCard = (props: { place: Place }): JSX.Element => {
           <h2 className="place">{place_name}</h2>
           <TopBadge rank={rank} />
         </div>
-        <p className="favorites" onClick={saveHandler}>
-          <Icons.Favorites className={active ? 'clicked' : 'stroke'} />
-        </p>
+        <label className="label">
+          {active ? <img src="assets/images/favorites-on.png" /> : <img src="assets/images/favorites.png" />}
+          {/* <Icons.Favorites className={active ? 'checked' : 'stroke'} /> */}
+          <input type="checkbox" className="favorites" onClick={saveHandler} />
+        </label>
       </CardHeader>
       <CardBody>
         <p className="title">
