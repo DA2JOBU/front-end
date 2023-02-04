@@ -29,10 +29,11 @@ type Props = {
   value: string;
   handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleDelete: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 const RightTab = (props: Props): JSX.Element => {
-  const { value, handleOnChange, handleSubmit } = props;
+  const { value, handleOnChange, handleSubmit, handleDelete } = props;
   const searchResult = useRecoilValue<searchElement[]>(searchList); //검색 결과를 가져오는 것s
   const [detailPopup, setVisible] = useState(false);
   const [placeId, setPlaceId] = useState('');
@@ -47,7 +48,7 @@ const RightTab = (props: Props): JSX.Element => {
       <UlStyled>
         <RightTabTitle title="장소 등록" />
       </UlStyled>
-      <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} isActive={true} />
+      <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} handleDelete={handleDelete} />
       <BottomContent>
         {searchResult.length > 0 && <span style={{ margin: "1em" }}>검색 결과</span>}
         {searchResult.length > 0 && <span>{searchResult.length}</span>}

@@ -43,19 +43,6 @@ const SearchMap = styled.button`
   }
 `;
 
-const SearchBanner = styled.div`
-  width: 100%;
-  height: 2.85rem;
-  padding: 0 28px;
-  display: flex;
-  align-items: center;
-  color: ${({ theme }) => theme.color.black};
-  background: ${({ theme }) => theme.color.brightOrange};
-  .title {
-    padding-left: 0.2rem;
-  }
-`;
-
 interface Props {
   value: string;
   handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -80,10 +67,6 @@ const Search = (props: Props) => {
           <span className={check ? 'map' : 'map-active'}>지도 내 검색</span>
         </SearchMap>
       </Contents>
-      <SearchBanner>
-        <Icons.Hand />
-        <span className="title"> 회식장소 Top 10</span>
-      </SearchBanner>
     </>
   );
 };

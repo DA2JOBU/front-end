@@ -163,7 +163,7 @@ const DetailPlace = (props: placeDetail) => {
     console.log(inputData);
   };
 
-  const submitForm = async () => {};
+  const submitForm = async () => { };
 
   return (
     <DetailContainer className="scrollBar">
@@ -176,7 +176,7 @@ const DetailPlace = (props: placeDetail) => {
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <PlaceKinds onChange={onChange} name="placeKinds" />
+          <PlaceKinds onChange={onChange} name='placeKinds' />
         </CardBody>
         <CardHeader>
           <h2 className="people">만족도 </h2>
@@ -224,7 +224,7 @@ const DetailPlace = (props: placeDetail) => {
           <h2 className="people">한 줄 리뷰</h2>
         </CardHeader>
         <CardBody>
-          <InputForm placeholder="후기를 적어주세요." onChange={onChange} />
+          <InputForm placeholder="후기를 적어주세요." onChange={onChange} name='simpleReview' />
         </CardBody>
         <CardFooter>
           <SubmitButton text="등록하기" onClick={submitForm} />

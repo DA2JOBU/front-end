@@ -10,7 +10,7 @@ const SearchTopContainer = styled.div`
   background: ${({ theme }) => theme.color.white};
   position: relative;
   height: 100vh;
-  
+
   overflow-y: auto;
 
   &::-webkit-scrollbar {
@@ -38,9 +38,27 @@ export type PropsPlace = {
   coment?: string;
 };
 
+const SearchBanner = styled.div`
+  width: 100%;
+  height: 2.85rem;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  color: ${({ theme }) => theme.color.black};
+  background: ${({ theme }) => theme.color.brightOrange};
+  .title {
+    padding-left: 0.2rem;
+  }
+`;
+
 const SearchTopPlace = (): JSX.Element => {
   return (
     <SearchTopContainer>
+      <SearchBanner>
+        <Icons.Hand />
+        <span className="title"> 회식장소 Top 10</span>
+      </SearchBanner>
+
       <SearchContent>
         {places.map((place, index) => {
           return <TopCard place={place} key={index} />;

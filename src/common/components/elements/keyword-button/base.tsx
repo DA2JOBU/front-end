@@ -66,7 +66,7 @@ const KeywordButton = ({ value, active, height, disabled, name, onClick, width, 
         className={state ? 'active' : ''}
       >
         <span>{value}</span>
-        <input type="checkbox" value={value} onChange={() => setState(!state)} onClick={onClick} />
+        <input type="checkbox" value={value} onChange={() => setState(!state)} onClick={onClick} name={name} />
       </StyledButton>
     </Container>
   );
