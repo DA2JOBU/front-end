@@ -52,7 +52,6 @@ interface Props {
 
 const Search = (props: Props) => {
   const { value, handleOnChange, handleSubmit, handleDelete } = props;
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [check, setCheck] = useState<boolean>(false);
   const handlerCheck = () => {
     setCheck(!check);

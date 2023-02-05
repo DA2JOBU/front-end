@@ -7,7 +7,7 @@ type ButtonWrapperProps = Omit<IButtonProps, 'type' | 'text' | 'iconType'> & {
   children: React.ReactNode;
 };
 
-export type ButtonType = 'submit' | 'text';
+export type ButtonType = 'submit' | 'text' | 'button';
 export type ButtonSize = 'large' | 'medium' | 'small';
 
 export interface IButtonProps {
@@ -23,7 +23,7 @@ export interface IButtonProps {
   className?: string;
 }
 
-const StyledButton = styled.button`
+const StyledButton = styled.label`
     /*공통 스타일*/
     width: 100%;
     align-items: center;
@@ -53,7 +53,7 @@ const StyledButton = styled.button`
     }
 `;
 function SubmitButton({
-  type = 'submit',
+  type = 'text',
   text,
   iconType,
   isBlock = false,

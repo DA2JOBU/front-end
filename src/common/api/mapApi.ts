@@ -20,7 +20,7 @@ export const getRegisterList = async () => {
 
 //처음 장소등록인지 아닌지 확인하는 api
 export const placeExist = async (kakaoId: string) => {
-  const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + 'place/exists' + kakaoId;
+  const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + 'place/exists/' + kakaoId;
   return await fetch(apiUrl, {
     method: 'GET',
     headers: {

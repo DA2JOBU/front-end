@@ -5,7 +5,6 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { keyword, searchList } from 'src/state';
 import { reviewedPlaceList } from 'src/types/searchType';
 import { propsType } from '../../templete/contents';
-
 interface placeType {
   place_name: string;
   road_address_name: string;
@@ -27,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 // head에 작성한 kakao API 불러오기
 // const { kakao } = window as any;
 
-const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
+const Map = (props: propsType, mapContainer: HTMLDivElement | null, markerdata: reviewedPlaceList[]) => {
   //검색 결과를 담는 것
   const setSearchList = useSetRecoilState(searchList);
   // 마커를 담는 배열
@@ -37,17 +36,8 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
   // 검색어가 바뀔 때마다 재렌더링되도록 useEffect 사용
   useEffect(() => {
     if (!mapContainer) return;
-    //등록된 장소 마커에 넣어 주기
-    // getRegisterList().then((res) => {
-    //   setRegister(res);
-    //   // for (let i = 0; i < registerPos?.length; i++){
-    //   //   let placePosition = new window.kakao.maps.LatLng(registerPos[i].x, registerPos[i].y);
-    //   //   addMarker(placePosition, i, undefined);
-    //   // }
-    //   //displayPlaces(registerPos);
-    // });
 
-    console.log(registerPos);
+    console.log(markerdata, 'test');
     window.kakao.maps.load(() => {
       const mapContainer = document.getElementById('map');
       const mapOption = {
@@ -57,23 +47,6 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
 
       // 지도를 생성
       const map = new window.kakao.maps.Map(mapContainer, mapOption);
-
-      let marker = new window.kakao.maps.Marker({
-        // 지도 중심좌표에 마커를 생성합니다
-        position: map.getCenter(),
-      });
-      // 지도에 마커를 표시합니다
-      marker.setMap(map);
-
-      // 지도에 클릭 이벤트를 등록합니다
-      // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-      window.kakao.maps.event.addListener(map, 'click', function (mouseEvent: any) {
-        // 클릭한 위도, 경도 정보를 가져옵니다
-        var latlng = mouseEvent.latLng;
-
-        // 마커 위치를 클릭한 위치로 옮깁니다
-        marker.setPosition(latlng);
-      });
 
       // 장소 검색 객체를 생성
       const ps = new window.kakao.maps.services.Places();
@@ -127,6 +100,16 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
       //   let placePosition = new window.kakao.maps.LatLng(registerPos[i].x, registerPos[i].y);
       //   addMarker(placePosition, i, undefined);
       // }
+
+      //등록된 장소 마커에 넣어 주기
+      // getRegisterList().then((res) => {
+      //   setRegister(res);
+      //   for (let i = 0; i < registerPos?.length; i++) {
+      //     let placePosition = new window.kakao.maps.LatLng(registerPos[i].x, registerPos[i].y);
+      //     addMarker(placePosition, i, undefined);
+      //   }
+      //   displayPlaces(registerPos);
+      // });
 
       // 검색 결과 목록과 마커를 표출하는 함수
       function displayPlaces(places: string | any[]) {
@@ -196,18 +179,17 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
             </span>
             <a href="${places.place_url}">
               <h5 class="info-item place-name">${places.place_name}</h5>
-              ${
-                places.road_address_name
-                  ? `<span class="info-item road-address-name">
+              ${places.road_address_name
+            ? `<span class="info-item road-address-name">
                     ${places.road_address_name}
                    </span>
                    <span class="info-item address-name">
                  	 ${places.address_name}
                	   </span>`
-                  : `<span class="info-item address-name">
+            : `<span class="info-item address-name">
              	     ${places.address_name}
                   </span>`
-              }
+          }
               <span class="info-item tel">
                 ${places.phone}
               </span>
@@ -223,14 +205,14 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
 
       // 마커를 생성하고 지도 위에 마커를 표시하는 함수
       function addMarker(position: any, idx: number, title: undefined) {
-        var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지
-          imageSize = new window.kakao.maps.Size(36, 37), // 마커 이미지의 크기
-          imgOptions = {
-            spriteSize: new window.kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
-            spriteOrigin: new window.kakao.maps.Point(0, idx * 46 + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
-            offset: new window.kakao.maps.Point(13, 37), // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-          },
-          markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+        var imageSrc = 'assets/images/marker.svg', // 마커 이미지 url, 스프라이트 이미지
+          imageSize = new window.kakao.maps.Size(24, 40), // 마커 이미지의 크기
+          // imgOptions = {
+          //   spriteSize: new window.kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+          //   spriteOrigin: new window.kakao.maps.Point(0, idx * 46 + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+          //   offset: new window.kakao.maps.Point(13, 37), // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+          // },
+          markerImage = new window.kakao.maps.MarkerImage(imageSrc, imageSize),
           marker = new window.kakao.maps.Marker({
             position: position, // 마커의 위치
             image: markerImage,
@@ -250,37 +232,6 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
         markers = [];
       }
 
-      // 검색결과 목록 하단에 페이지번호를 표시는 함수
-      // function displayPagination(pagination: { last: number; current: number; gotoPage: (arg0: number) => void }) {
-      //   const paginationEl = document.getElementById('pagination') as HTMLElement;
-      //   let fragment = document.createDocumentFragment();
-      //   let i;
-
-      //   // 기존에 추가된 페이지번호를 삭제
-      //   while (paginationEl.hasChildNodes()) {
-      //     paginationEl.lastChild && paginationEl.removeChild(paginationEl.lastChild);
-      //   }
-
-      //   for (i = 1; i <= pagination.last; i++) {
-      //     const el = document.createElement('a') as HTMLAnchorElement;
-      //     el.href = '#';
-      //     el.innerHTML = i.toString();
-
-      //     if (i === pagination.current) {
-      //       el.className = 'on';
-      //     } else {
-      //       el.onclick = (function (i) {
-      //         return function () {
-      //           pagination.gotoPage(i);
-      //         };
-      //       })(i);
-      //     }
-
-      //     fragment.appendChild(el);
-      //   }
-      //   paginationEl.appendChild(fragment);
-      // }
-
       // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수
       // 인포윈도우에 장소명을 표시
       function displayInfowindow(marker: any, title: string) {
@@ -297,7 +248,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
         }
       }
     });
-  }, [mapContainer, props.searchKeyword]);
+  }, [mapContainer, props.searchKeyword, registerPos]);
 
   return (
     <div className="map-container">

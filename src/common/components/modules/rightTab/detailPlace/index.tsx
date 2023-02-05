@@ -11,6 +11,7 @@ import Brightness from './brightness';
 import Etc from './etc';
 import PlaceKinds from './placeKinds';
 import Satisfaction from './satisfaction';
+import { placeExist, registerFirstPlace } from '@api/mapApi';
 const DetailContainer = styled.section`
   overflow-y: auto;
   position: absolute;
@@ -163,7 +164,23 @@ const DetailPlace = (props: placeDetail) => {
     console.log(inputData);
   };
 
-  const submitForm = async () => { };
+  //등록 버튼 클릭시 있는지 확인 후 없으면 새로 장소 등록 후 리뷰 등록
+  const submitForm = async () => {
+    const requestData = inputData;
+    const existRes = await placeExist(requestData.placeId)
+      .then((res) => {
+        console.log(requestData.placeId);
+        //있다면 리뷰만 등록
+        if (res) {
+          console.log('test');
+        }
+        else {
+          const firstPlaceres = registerFirstPlace(requestData).then((ress) => {
+            console.log(ress);
+          });
+        }
+      });
+  };
 
   return (
     <DetailContainer className="scrollBar">
