@@ -1,12 +1,68 @@
-import axios, { AxiosPromise } from "axios";
-import { searchElement } from "src/types/searchType";
+import axios, { AxiosPromise } from 'axios';
+import { registerPlace } from 'src/types/registerType';
+import { reviewedPlaceList, searchElement } from 'src/types/searchType';
 
-export const registerPlace = (data: searchElement) => {
-
-}
 
 //등록된 리스트 가져오기
 export const getRegisterList = async () => {
-    return await axios.get(process.env.NEXT_PUBLIC_SERVER_URI + '/place/reviewed',)
-        .then(function (res) { console.log(res) });
+  const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + 'place/reviewed';
+  return await fetch(apiUrl, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((resp) => resp.json())
+    .then((resp: reviewedPlaceList[]) => {
+      return resp;
+    });
+};
+
+//처음 장소등록인지 아닌지 확인하는 api
+export const placeExist = async (kakaoId: string) => {
+  const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + 'place/exists/' + kakaoId;
+  return await fetch(apiUrl, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((res) => res.json())
+    .then((res: boolean) => res);
+};
+
+//첫 장소 등록
+export const registerFirstPlace = async (data: any) => {
+  console.log('data', data)
+
+  const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + 'place';
+  return await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+};
+
+//리뷰 등록
+export const registerReview = async (data: registerPlace) => {
+  const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + 'place/review';
+  return await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+}
+
+export const deletedPlace = async (id: string) => {
+  const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + 'want-place';
+  return await fetch(apiUrl, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 }

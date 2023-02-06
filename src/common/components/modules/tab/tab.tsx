@@ -1,8 +1,10 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 
-const TabContainer = styled.div`
+const TabContainer = styled.article`
   width: 380px;
+  height: 100%;
+
 `;
 type Props = {
   title?: string;

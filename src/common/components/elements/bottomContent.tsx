@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Contents = styled.article`
   background-color: ${({ theme }) => theme.color.white};
@@ -6,16 +6,15 @@ const Contents = styled.article`
   height: calc(100vh - 128px);
   width: 100%;
   margin: 0;
+  position: relative;
+  overflow: auto;
+  padding-bottom: 3rem;
 `;
 
 interface Props {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
-const BottomContent = ({children}: Props) => {
-    return (
-        <Contents>
-            {children}
-        </Contents>
-    )
-}
+const BottomContent = ({ children }: Props) => {
+  return <Contents>{children}</Contents>;
+};
 export default BottomContent;

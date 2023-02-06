@@ -15,7 +15,6 @@ export default class MyDocument extends Document {
           <script
             type="text/javascript"
             src="https://developers.kakao.com/sdk/js/kakao.min.js"
-            async
           >
           </script>
         </Head>

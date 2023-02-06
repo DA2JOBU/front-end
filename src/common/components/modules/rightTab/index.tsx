@@ -6,6 +6,8 @@ import { useRecoilValue } from 'recoil';
 import { searchList } from "src/state";
 import Place from './place';
 import { searchElement } from 'src/types/searchType';
+import { useState } from 'react';
+import DetailPlace from './detailPlace';
 
 const RightTabContainer = styled.section`
   overflow: hidden;
@@ -22,40 +24,62 @@ const UlStyled = styled.ul`
   width: 380px;
 `;
 
-
 type Props = {
   value: string;
   handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleDelete: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const RightTab = (props: Props): JSX.Element  => {
-    const { value, handleOnChange, handleSubmit } = props;
-    const searchResult = useRecoilValue<searchElement[]>(searchList); //검색 결과를 가져오는 것
-    return (
-      <RightTabContainer>
-        <UlStyled>
-          <RightTabTitle title="장소 등록" />
-        </UlStyled>
-        <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} />
-        <BottomContent>
-          <span style={{marginTop:"10px"}}>검색 결과</span>
-          {searchResult.length > 0 && <span>{searchResult.length}</span>}
-          {searchResult.map((info: searchElement, index: number) => {
-            const { address_name, place_name, road_address_name } = info;
-            return (
-              <Place
-                key={index}
-                index={index}
-                address={address_name}
-                roadAddress={road_address_name}
-                placeName={place_name}
-              />
-            );
-          })}
-        </BottomContent>
-      </RightTabContainer>
-    )
+const RightTab = (props: Props): JSX.Element => {
+  const { value, handleOnChange, handleSubmit, handleDelete } = props;
+  const searchResult = useRecoilValue<searchElement[]>(searchList); //검색 결과를 가져오는 것s
+  const [detailPopup, setVisible] = useState(false);
+  const [placeId, setPlaceId] = useState('');
+  const [placeName, setName] = useState('');
+  const [address, setAddress] = useState('');
+  const [roadAddress, setRoadAddress] = useState('');
+  const [category, setCategory] = useState('');
+  const [placeUrl, setPlaceUrl] = useState('');
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
+  return (
+    <RightTabContainer>
+      {detailPopup &&
+        <DetailPlace placeId={placeId} placeName={placeName} address={address} roadAddress={roadAddress} category={category} placeUrl={placeUrl} x={x} y={y} />
+      }
+      <UlStyled>
+        <RightTabTitle title="장소 등록" />
+      </UlStyled>
+      <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} handleDelete={handleDelete} />
+      <BottomContent>
+        {searchResult.length > 0 && <span style={{ margin: "1em" }}>검색 결과</span>}
+        {searchResult.length > 0 && <span>{searchResult.length}</span>}
+        {searchResult.map((info: searchElement, index: number) => {
+          return (
+            <Place
+              key={index}
+              index={index}
+              address={info.address_name}
+              roadAddress={info.road_address_name}
+              placeName={info.place_name}
+              onClick={() => {
+                setPlaceId(info.id);
+                setName(info.place_name);
+                setAddress(info.address_name);
+                setRoadAddress(info.road_address_name);
+                setCategory(info.category_name);
+                setPlaceUrl(info.place_url);
+                setX(info.x);
+                setY(info.y);
+                setVisible(true);
+              }}
+            />
+          );
+        })}
+      </BottomContent>
+    </RightTabContainer>
+  )
 }
 
 export default RightTab;

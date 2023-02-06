@@ -9,3 +9,7 @@ export const login = async (accessToken: string) => {
 
   return data;
 }
+
+export const logout = async () => {
+
+}

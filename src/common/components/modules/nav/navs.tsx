@@ -5,6 +5,7 @@ import NavLoginButton from './nav-login-button';
 
 const NavContainer = styled.nav`
   width: 100%;
+  height: 100%;
 `;
 
 const UlStyled = styled.ul`
@@ -28,24 +29,19 @@ const Navs = (props: Props): JSX.Element => {
   return (
     <NavContainer>
       <UlStyled>
-        {children.map((item, index) => (
-          (item.props.title === '로그인') ? 
-            (
-              <NavLoginButton
-                key={item.props.title}
-                title={item.props.title}
-                onClick={item.props.onClick}
-              />
-            ): (
-              <NavTitle
-                key={item.props.title}
-                title={item.props.title}
-                index={index}
-                isActive={index === selectedNavIndex}
-                setSelectedNav={setSelectedNavIndex}
-              />
-            )
-        ))}
+        {children.map((item, index) =>
+          item.props.title === '로그인' ? (
+            <NavLoginButton key={item.props.title} title={item.props.title} onClick={item.props.onClick} />
+          ) : (
+            <NavTitle
+              key={item.props.title}
+              title={item.props.title}
+              index={index}
+              isActive={index === selectedNavIndex}
+              setSelectedNav={setSelectedNavIndex}
+            />
+          )
+        )}
       </UlStyled>
       {children[selectedNavIndex]}
     </NavContainer>

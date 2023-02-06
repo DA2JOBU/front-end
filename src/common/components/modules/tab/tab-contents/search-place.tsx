@@ -1,51 +1,38 @@
 import React from 'react';
 import styled from 'styled-components';
-const PlaceBox = styled.div`
-  height: 150px;
-  padding: 40px 30px 0 30px;
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
-  .place {
-    font-size: ${({ theme }) => theme.fontSize.Gtitle};
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-  .food {
-    padding-right: 6px;
-    font-size: ${({ theme }) => theme.fontSize.Stitle};
-    font-weight: 600;
-    color: ${({ theme }) => theme.color.gray90};
-    border-right: 1px solid ${({ theme }) => theme.color.gray40};
-  }
-  .address {
-    padding-left: 6px;
-  }
+import { Place } from 'src/types/searchType';
+import PlaceCard from '@components/modules/card/place-card';
+import { searchElement } from 'src/types/searchType';
+
+const PlaceContainer = styled.div`
+  // height: 100%;
+  // overflow: auto;
 `;
 
-export type PlaceProps = {
-  address_name: string;
-  category_group_name: string;
-  place_name: string;
-  index: number;
-  review?: string | number;
-  save?: string | number;
-  badge?: string | Element;
+type Props = {
+  list: searchElement;
+  id: string;
+  category: string;
+  onClick: (event?: React.MouseEvent<Element, MouseEvent> | undefined) => void;
+  setSelectedPlace: (id: string) => void;
 };
 
-const SearchPlace = (props: PlaceProps): JSX.Element | null => {
-  console.log('ㅇㅇㅇ', props);
-  const { address_name, category_group_name, place_name } = props;
+function SearchPlace(props: Props): JSX.Element | null {
+  const { address_name, category_group_name, place_name, category_name } = props.list;
+  const { onClick, category, setSelectedPlace, id } = props;
+
+  const place = {
+    address_name,
+    category_group_name,
+    place_name,
+    category_name: category,
+  };
 
   return (
-    <PlaceBox>
-      <span className="place">{place_name}</span>
-      <p>
-        <span className="food">{category_group_name}</span>
-        <span className="address">{address_name}</span>
-      </p>
-    </PlaceBox>
+    <PlaceContainer onClick={onClick}>
+      <PlaceCard place={place} id={id} onClick={onClick} setSelectedPlace={setSelectedPlace}  />
+    </PlaceContainer>
   );
-};
+}
 
 export { SearchPlace };

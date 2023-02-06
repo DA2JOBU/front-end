@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Badge from '../../elements/badge';
-import { PlaceProps } from '../tab/tab-contents/search-place';
+import Badge from '../../elements/top-badge';
 
 const CardContainer = styled.div`
   width: 100%;
@@ -85,7 +84,7 @@ const Card = () => {
         <span className="review">리뷰 2</span>
         <span className="save">저장 45</span>
       </CardBody>
-      <p className="comment">&apos;&apos;2023 미쉐린가이드에 선정된 서울 평양냉면 맛집</p>
+      <p className="comment"><img src='asstes/images/quote.svg' />2023 미쉐린가이드에 선정된 서울 평양냉면 맛집</p>
     </CardContainer>
   );
 };

@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { searchElement } from 'src/types/searchType';
+import { PlaceRegister, searchElement } from 'src/types/searchType';
 export const searchList = atom<searchElement[]>({
   key: 'searchList',
   default: [],
@@ -8,4 +8,9 @@ export const searchList = atom<searchElement[]>({
 export const keyword = atom({
   key: 'keyword',
   default: '',
+});
+
+export const myPlace = atom<PlaceRegister[]>({
+  key: 'myPlace',
+  default: [],
 });

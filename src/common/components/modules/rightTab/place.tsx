@@ -1,23 +1,28 @@
-import styled from "styled-components";
+import { useState } from 'react';
+import styled from 'styled-components';
+import DetailPlace from './detailPlace';
 
-const PlaceElement = styled.div`
-    margin:10px;
-    color: ${({ theme }) => theme.color.gray85};
+const PlaceElement = styled.button`
+  margin: 0.5em;
+  color: ${({ theme }) => theme.color.gray85};
 `;
 
 interface Props {
-    placeName: String;
-    roadAddress: String;
-    address: String;
-    index: number;
-};
+  placeName: string;
+  roadAddress: string;
+  address: string;
+  index: number;
+  onClick?: (e?: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+}
 
 const Place = (props: Props) => {
     const PlaceInfo = props;
     return (
-        <PlaceElement>
-            {PlaceInfo.placeName}
-        </PlaceElement>
+        <div>
+            <PlaceElement onClick={props.onClick}>
+                {PlaceInfo.placeName}
+            </PlaceElement>
+        </div>
     )
 }
 export default Place;

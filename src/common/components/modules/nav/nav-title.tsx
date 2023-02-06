@@ -66,7 +66,7 @@ export const ButtonStyle = styled.button`
 `;
 
 export type NavTitleProps = {
-  title: string;
+  title?: string;
   index: number;
   setSelectedNav: (index: number) => void;
   isActive: boolean;
@@ -93,8 +93,6 @@ const NavTitle = (props: NavTitleProps): JSX.Element => {
               ? 'mypage'
               : title === '나의 회식 장소'
               ? 'myPlace'
-              : title === '로고'
-              ? 'logo'
               : 'span'
           }`}
         >

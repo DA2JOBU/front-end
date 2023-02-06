@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import React, { useEffect, useState, useRef } from 'react';
 import SlideContainer from '@components/modules/slide-container';
 import SideTabs from '@components/modules/tab/side-tabs';
@@ -8,10 +9,24 @@ import RightTab from '@components/modules/rightTab';
 import MypageTab from '@components/modules/rightTab/mypageTab';
 import Modal from '@components/modules/modal';
 import Map from '@components/modules/map';
+import { Place } from 'src/types/searchType';
+import styled from 'styled-components';
 
 export interface propsType {
   searchKeyword: string;
 }
+
+const MainContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+`;
+
+const Logo = styled.div`
+  position: absolute;
+  top: 8px;
+  left: 32px;
+`;
 
 const Contents = (): JSX.Element => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -52,6 +67,11 @@ const Contents = (): JSX.Element => {
     setKeyword(value);
   };
 
+  const handleDelete = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    setValue('');
+  };
+
   // 검색어를 입력하지 않고 검색 버튼을 눌렀을 경우
   const valueChecker = () => {
     if (value === '') {
@@ -59,21 +79,29 @@ const Contents = (): JSX.Element => {
     }
   };
 
+  const sideValue = {
+    handleOnChange,
+    handleSubmit,
+    value,
+    handleDelete,
+  };
+
   return (
-    <>
+    <MainContainer>
+      <Logo>
+        <img src="assets/images/logo.svg" alt="로고" className="logo" />
+      </Logo>
       <Navs>
-        <Nav title="로고" onClick={() => !setIsOpen}>
-          <SlideContainer></SlideContainer>
-        </Nav>
+        <Nav title="" children={undefined}></Nav>
         <Nav title="검색" onClick={() => !setIsOpen}>
           <SlideContainer>
-            <SideTabs handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value} />
+            <SideTabs sideValue={sideValue} />
           </SlideContainer>
           {keyword ? <SearchList keyword={keyword} /> : <></>}
         </Nav>
         <Nav title="등록" onClick={() => !setIsOpen}>
           <SlideContainer>
-            <RightTab handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value} />
+            <RightTab handleOnChange={handleOnChange} handleSubmit={handleSubmit} handleDelete={handleDelete} value={value} />
           </SlideContainer>
         </Nav>
 
@@ -96,7 +124,7 @@ const Contents = (): JSX.Element => {
       {modalOpen && <Modal onClose={closeModal} />}
 
       {/* <Sidebar searchKeyword={keyword} /> */}
-    </>
+    </MainContainer>
   );
 };
 
