@@ -24,7 +24,6 @@ const UlStyled = styled.ul`
   width: 380px;
 `;
 
-
 type Props = {
   value: string;
   handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -37,13 +36,17 @@ const RightTab = (props: Props): JSX.Element => {
   const searchResult = useRecoilValue<searchElement[]>(searchList); //검색 결과를 가져오는 것s
   const [detailPopup, setVisible] = useState(false);
   const [placeId, setPlaceId] = useState('');
-  const [placeName, setPlace] = useState('');
+  const [placeName, setName] = useState('');
   const [address, setAddress] = useState('');
   const [roadAddress, setRoadAddress] = useState('');
+  const [category, setCategory] = useState('');
+  const [placeUrl, setPlaceUrl] = useState('');
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
   return (
     <RightTabContainer>
       {detailPopup &&
-        <DetailPlace placeId={placeId} placeName={placeName} address={address} roadAddress={roadAddress} />
+        <DetailPlace placeId={placeId} placeName={placeName} address={address} roadAddress={roadAddress} category={category} placeUrl={placeUrl} x={x} y={y} />
       }
       <UlStyled>
         <RightTabTitle title="장소 등록" />
@@ -62,9 +65,13 @@ const RightTab = (props: Props): JSX.Element => {
               placeName={info.place_name}
               onClick={() => {
                 setPlaceId(info.id);
-                setPlace(info.place_name);
+                setName(info.place_name);
                 setAddress(info.address_name);
                 setRoadAddress(info.road_address_name);
+                setCategory(info.category_name);
+                setPlaceUrl(info.place_url);
+                setX(info.x);
+                setY(info.y);
                 setVisible(true);
               }}
             />

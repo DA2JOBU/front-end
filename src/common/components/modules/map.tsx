@@ -14,16 +14,6 @@ interface placeType {
   place_url: string;
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const res: reviewedPlaceList[] = await getRegisterList();
-  console.log(res, 'res');
-  return {
-    props: {
-      markerdata: res,
-    },
-  };
-};
-
 // head에 작성한 kakao API 불러오기
 // const { kakao } = window as any;
 
@@ -46,7 +36,6 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
   // 검색어가 바뀔 때마다 재렌더링되도록 useEffect 사용
   useEffect(() => {
     if (!mapContainer && registerPos.length == 0) return;
-    console.log(registerPos);
     window.kakao.maps.load(() => {
       const mapContainer = document.getElementById('map');
       const mapOption = {
@@ -93,6 +82,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
           // 검색 목록과 마커를 표출
           displayPlaces(data);
           setSearchList(data);
+          console.log(data);
 
           // 페이지 번호를 표출
           //displayPagination(pagination);
@@ -110,16 +100,6 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
         addMarker(placePosition, i, undefined);
       }
       displayPlaces(registerPos);
-
-      //등록된 장소 마커에 넣어 주기
-      // getRegisterList().then((res) => {
-      //   setRegister(res);
-      //   for (let i = 0; i < registerPos?.length; i++) {
-      //     let placePosition = new window.kakao.maps.LatLng(registerPos[i].x, registerPos[i].y);
-      //     addMarker(placePosition, i, undefined);
-      //   }
-      //   displayPlaces(registerPos);
-      // });
 
       // 검색 결과 목록과 마커를 표출하는 함수
       function displayPlaces(places: string | any[]) {

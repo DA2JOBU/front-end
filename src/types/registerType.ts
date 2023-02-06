@@ -15,8 +15,23 @@ export interface searchElementInfo {
   roadAddress: string;
 }
 
+//첫 장소 등록
+export interface PlaceRegister {
+  kakaoId?: string | undefined;
+  name?: string | undefined;
+  category?: string | undefined;
+  x?: string | undefined;
+  y?: string | undefined;
+  info: {
+    url?: string | undefined;
+    address?: string | undefined;
+    roadAddress?: string | undefined;
+  };
+}
+
+
 //리뷰 등록하기
-export interface registerReview {
+export interface registerReviewType {
   placeId: string;
   participants: number;
   rating: number;

@@ -11,7 +11,9 @@ import Brightness from './brightness';
 import Etc from './etc';
 import PlaceKinds from './placeKinds';
 import Satisfaction from './satisfaction';
-import { placeExist, registerFirstPlace } from '@api/mapApi';
+import { placeExist, registerFirstPlace, registerReview } from '@api/mapApi';
+import { registerReviewType } from 'src/types/registerType';
+
 const DetailContainer = styled.section`
   overflow-y: auto;
   position: absolute;
@@ -130,6 +132,10 @@ export interface placeDetail {
   placeName: string;
   address: string;
   roadAddress: string;
+  category: string;//양식
+  placeUrl : string;
+  x: number;
+  y: number;
 }
 
 const DetailPlace = (props: placeDetail) => {
@@ -139,6 +145,10 @@ const DetailPlace = (props: placeDetail) => {
     placeName: props.placeName,
     address: props.address,
     roadAddress: props.roadAddress,
+    category: props.category,
+    url: props.placeUrl,
+    x: props.x,
+    y: props.y,
     placeKinds: '',
     satisfaction: 0,
     participants: 0,
@@ -168,17 +178,23 @@ const DetailPlace = (props: placeDetail) => {
   const submitForm = async () => {
     const requestData = inputData;
     const existRes = await placeExist(requestData.placeId)
-      .then((res) => {
+      .then(async (res) => {
         console.log(requestData.placeId);
-        //있다면 리뷰만 등록
-        if (res) {
-          console.log('test');
-        }
-        else {
-          const firstPlaceres = registerFirstPlace(requestData).then((ress) => {
+        //없다면 장소 등록
+        if (!res) {
+          const firstPlaceres = await registerFirstPlace(requestData).then((ress) => {
             console.log(ress);
           });
         }
+        
+        //리뷰 등록
+        // const reqData:registerReviewType = {
+
+        // };
+
+        // const firstPlaceres = await registerReview(requestData).then((ress) => {
+        //   console.log(ress);
+        // });
       });
   };
 
