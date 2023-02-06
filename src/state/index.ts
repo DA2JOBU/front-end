@@ -1,5 +1,7 @@
 import { atom } from 'recoil';
-import { PlaceRegister, searchElement } from 'src/types/searchType';
+import { searchElement } from 'src/types/searchType';
+import { PlaceRegister } from 'src/types/registerType';
+
 export const searchList = atom<searchElement[]>({
   key: 'searchList',
   default: [],
