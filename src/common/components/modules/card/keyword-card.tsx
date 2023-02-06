@@ -12,7 +12,7 @@ import Atmosphere from '../rightTab/detailPlace/atmosphere';
 import Brightness from '../rightTab/detailPlace/brightness';
 import Etc from '../rightTab/detailPlace/etc';
 
-const CardContainer = styled.div`
+const CardContainer = styled.form`
   width: 100%;
   padding: 45px 28px 35px 28px;
 
@@ -97,6 +97,7 @@ const KeywordCard = (): JSX.Element => {
     price: '',
     moodCategory: '',
     mood: '',
+    lighting: '',
     isCorkCharge: false,
     isRoom: false,
     isParking: false,
@@ -112,12 +113,15 @@ const KeywordCard = (): JSX.Element => {
     const { value, name } = e.target;
     setInput({
       ...inputDate,
-      [name]: value,
+      [name]: value.trim(),
     });
     console.log(value);
   };
 
-  const submitForm = async () => {};
+  const submitForm = (e?: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    console.log(e);
+    console.log(inputDate);
+  };
 
   return (
     <CardContainer>
@@ -126,36 +130,36 @@ const KeywordCard = (): JSX.Element => {
         {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
-        <PeopleButton onChange={onChange} name="" />
+        <PeopleButton onChange={onChange} name="participants" />
       </CardBody>
       <CardHeader>
         <h2 className="people">인당 가격대 </h2>
         {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
-        <MoneyButton onChange={onChange} name="" />
+        <MoneyButton onChange={onChange} name="price" />
       </CardBody>
       <CardHeader>
-          <h2 className="people">분위기 </h2>
-          {/* <TopBadge /> */}
-        </CardHeader>
-        <CardBody>
-          <Atmosphere onChange={onChange} name="" />
-        </CardBody>
-        <CardHeader>
-          <h2 className="people">조명 밝기</h2>
-          {/* <TopBadge /> */}
-        </CardHeader>
-        <CardBody>
-          <Brightness onChange={onChange} name="" />
-        </CardBody>
-        <CardHeader>
-          <h2 className="people">기타</h2>
-          {/* <TopBadge /> */}
-        </CardHeader>
-        <CardBody>
-          <Etc onChange={onChange} name="" />
-        </CardBody>
+        <h2 className="people">분위기 </h2>
+        {/* <TopBadge /> */}
+      </CardHeader>
+      <CardBody>
+        <Atmosphere onChange={onChange} name="mood" />
+      </CardBody>
+      <CardHeader>
+        <h2 className="people">조명 밝기</h2>
+        {/* <TopBadge /> */}
+      </CardHeader>
+      <CardBody>
+        <Brightness onChange={onChange} name="lighting" />
+      </CardBody>
+      <CardHeader>
+        <h2 className="people">기타</h2>
+        {/* <TopBadge /> */}
+      </CardHeader>
+      <CardBody>
+        <Etc onChange={onChange} name="" />
+      </CardBody>
       <CardFooter>
         <SubmitButton text="결과보기" onClick={submitForm} />
       </CardFooter>

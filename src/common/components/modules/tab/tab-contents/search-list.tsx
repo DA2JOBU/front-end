@@ -6,7 +6,8 @@ import { PlaceRegister, searchElement } from 'src/types/searchType';
 import styled from 'styled-components';
 import { channel } from 'diagnostics_channel';
 import { run } from 'node:test';
-import { placeExist, registerFirstPlace } from '@api/mapApi';
+import { deletedPlace, placeExist, registerFirstPlace } from '@api/mapApi';
+import SearchDetail from './serach-detail';
 
 const SearchListContainer = styled.section`
   float: left;
@@ -66,6 +67,8 @@ const SearchList = (props: Props) => {
   const { keyword } = props;
   const [registration, setRegistrantion] = useState<string>('');
   const [isSelected, setIsSelected] = useState<boolean>(false);
+  const [detailPopup, setVisible] = useState(false);
+
   const lists = useRecoilValue<searchElement[]>(searchList);
   const setMyPlaceList = useSetRecoilState(myPlace);
 
@@ -103,6 +106,7 @@ const SearchList = (props: Props) => {
 
   return (
     <SearchListContainer>
+      {detailPopup && <SearchDetail />}
       <SearchListTitle>
         <span className="title">{keyword}</span>
         <span className="count">검색 결과 {lists.length}</span>
@@ -118,7 +122,11 @@ const SearchList = (props: Props) => {
               list={list}
               id={list.id}
               category={category}
-              onClick={() => handlerPlace(list, category)}
+              onClick={() => {
+                setIsSelected(true);
+                setVisible(true);
+                handlerPlace(list, category);
+              }}
             />
           );
         })}

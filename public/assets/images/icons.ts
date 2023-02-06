@@ -3,7 +3,8 @@ import { ReactElement, SVGProps } from 'react';
 import Check from './check.svg';
 import Search from './search.svg'
 import SearchOn from './search-active.svg';
-import Close from './close-button.svg';
+import CloseBox from './close-button.svg';
+import Close from './close.svg';
 import Favorites from './favorites.svg';
 import Hand from './hand.svg';
 import Marker from './marker.svg';
@@ -12,9 +13,13 @@ import Logo from './logo.svg';
 import Review from './review-off.svg';
 import Star from './star.svg';
 import Delete from './delete.svg';
+import KakaoButton from './kakao-button.svg';
+import Content from './content.svg';
+import LoginLogo from './login-logo.svg';
 
 const importedIcons = {
   Check,
+  CloseBox,
   Close,
   Favorites,
   Hand,
@@ -26,6 +31,9 @@ const importedIcons = {
   SearchOn,
   Star,
   Delete,
+  KakaoButton,
+  Content,
+  LoginLogo, 
 };
 
 type IconName = keyof typeof importedIcons;

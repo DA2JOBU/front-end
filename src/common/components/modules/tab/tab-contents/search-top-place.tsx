@@ -22,8 +22,6 @@ const SearchTopContainer = styled.div`
   }
 `;
 
-
-
 const SearchContent = styled.div`
   overflow-y: auto;
 `;
@@ -53,18 +51,19 @@ const SearchBanner = styled.div`
 
 const SearchTopPlace = (): JSX.Element => {
   return (
-    <SearchTopContainer>
+    <>
       <SearchBanner>
         <Icons.Hand />
         <span className="title"> 회식장소 Top 10</span>
       </SearchBanner>
-
-      <SearchContent>
-        {places.map((place, index) => {
-          return <TopCard place={place} key={index} />;
-        })}
-      </SearchContent>
-    </SearchTopContainer>
+      <SearchTopContainer>
+        <SearchContent>
+          {places.map((place, index) => {
+            return <TopCard place={place} key={index} />;
+          })}
+        </SearchContent>
+      </SearchTopContainer>
+    </>
   );
 };
 

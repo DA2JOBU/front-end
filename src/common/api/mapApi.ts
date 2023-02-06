@@ -34,6 +34,7 @@ export const placeExist = async (kakaoId: string) => {
 //첫 장소 등록
 export const registerFirstPlace = async (data: any) => {
   console.log('data', data)
+
   const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + 'place';
   return await fetch(apiUrl, {
     method: 'POST',

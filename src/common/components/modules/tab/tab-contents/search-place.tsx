@@ -29,8 +29,8 @@ function SearchPlace(props: Props): JSX.Element | null {
   };
 
   return (
-    <PlaceContainer>
-      <PlaceCard place={place} id={id} onClick={onClick} setSelectedPlace={setSelectedPlace} />
+    <PlaceContainer onClick={onClick}>
+      <PlaceCard place={place} id={id} onClick={onClick} setSelectedPlace={setSelectedPlace}  />
     </PlaceContainer>
   );
 }

@@ -1,27 +1,33 @@
-import React from "react";
-import styled from "styled-components";
-import KakaoLoginButton from "./kakao-login-button";
+import React from 'react';
+import styled from 'styled-components';
+import KakaoLoginButton from './kakao-login-button';
+import Icons from 'public/assets/images/icons';
 
 type ModalProps = {
   onClose: () => void;
-}
+};
 
 const Modal = ({ onClose }: ModalProps) => {
   return (
-      <Overlay>
-        <ModalWrap>
-          <CloseButton onClick={onClose}>
-            X
-          </CloseButton>
-          <Contents>
-            <h1>로그인 임시 작업</h1>
-            <Button onClick={onClose}>Close</Button>
+    <Overlay>
+      <ModalWrap>
+        <Container>
+          <ModalHeader onClick={onClose}>
+            <Icons.Close />
+          </ModalHeader>
+          <ModalBody>
+            <Icons.LoginLogo />
+            <Icons.Content />
+            <p>로그인하고 장소를 저장해 보세요!</p>
+          </ModalBody>
+          <ModalFooter>
             <KakaoLoginButton />
-          </Contents>
-        </ModalWrap>
-      </Overlay>
+          </ModalFooter>
+        </Container>
+      </ModalWrap>
+    </Overlay>
   );
-}
+};
 
 const Overlay = styled.div`
   position: fixed;
@@ -36,8 +42,9 @@ const Overlay = styled.div`
 `;
 
 const ModalWrap = styled.div`
-  width: 600px;
-  height: fit-content;
+  width: 22.24rem;
+  height: 32rem;
+  padding: 20px;
   border-radius: 15px;
   background-color: #fff;
   position: absolute;
@@ -46,29 +53,31 @@ const ModalWrap = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const CloseButton = styled.div`
-  float: right;
-  width: 40px;
-  height: 40px;
-  margin: 20px;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+`;
+
+const ModalHeader = styled.div`
+  text-align: end;
   cursor: pointer;
-  i {
-    color: #5d5d5d;
-    font-size: 30px;
+`;
+const ModalBody = styled.div`
+  text-align: center;
+  padding-bottom: 20px;
+  p {
+    padding-top: 10px;
+    font-size: 14px;
+  }
+  svg {
+    padding-top: 10px;
   }
 `;
 
-const Contents = styled.div`
-  margin: 50px 30px;
-  h1 {
-    font-size: 30px;
-    font-weight: 600;
-    margin-bottom: 60px;
-  }
-  img {
-    margin-top: 60px;
-    width: 300px;
-  }
+const ModalFooter = styled.div`
+  text-align: center;
 `;
 const Button = styled.button`
   font-size: 14px;
