@@ -1,5 +1,5 @@
 import axios, { AxiosPromise } from 'axios';
-import { registerPlace } from 'src/types/registerType';
+import { PlaceRegister, registerPlace, registerReviewType } from 'src/types/registerType';
 import { reviewedPlaceList, searchElement } from 'src/types/searchType';
 
 
@@ -32,7 +32,7 @@ export const placeExist = async (kakaoId: string) => {
 };
 
 //첫 장소 등록
-export const registerFirstPlace = async (data: any) => {
+export const registerFirstPlace = async (data: PlaceRegister) => {
   console.log('data', data)
 
   const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + 'place';
@@ -46,12 +46,13 @@ export const registerFirstPlace = async (data: any) => {
 };
 
 //리뷰 등록
-export const registerReview = async (data: registerPlace) => {
-  const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + 'place/review';
+export const registerReview = async (data: registerReviewType) => {
+  const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + 'place-review';
   return await fetch(apiUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + sessionStorage.getItem('jwtToken'),
     },
     body: JSON.stringify(data),
   })

@@ -20,8 +20,8 @@ export interface PlaceRegister {
   kakaoId?: string | undefined;
   name?: string | undefined;
   category?: string | undefined;
-  x?: string | undefined;
-  y?: string | undefined;
+  x?: number;
+  y?: number;
   info: {
     url?: string | undefined;
     address?: string | undefined;
@@ -40,10 +40,10 @@ export interface registerReviewType {
   is_room: boolean;
   is_reservation: boolean;
   is_parking: boolean;
-  is_advance_payment: true;
-  is_rent: true;
+  is_advance_payment: boolean;
+  is_rent: boolean;
   simple_review: string;
-  reveiwMoodDto: reviewMoodDto;
+  reveiwMoodDto: reviewMoodDto[];
 }
 
 //분위기 타입
