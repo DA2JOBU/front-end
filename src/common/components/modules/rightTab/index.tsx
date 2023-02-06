@@ -24,6 +24,25 @@ const UlStyled = styled.ul`
   width: 380px;
 `;
 
+const SearchListTitle = styled.div`
+  height: 60px;
+  background-color: ${({ theme }) => theme.color.white};
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+
+  .title {
+    color: ${({ theme }) => theme.color.gray90};
+    font-size: 1rem;
+    font-weight: 600;
+    padding-right: 0.4rem;
+  }
+  .count {
+    color: ${({ theme }) => theme.color.gray80};
+    font-size: 0.9rem;
+  }
+`;
+
 type Props = {
   value: string;
   handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -41,8 +60,8 @@ const RightTab = (props: Props): JSX.Element => {
   const [roadAddress, setRoadAddress] = useState('');
   const [category, setCategory] = useState('');
   const [placeUrl, setPlaceUrl] = useState('');
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
+  const [x, setX] = useState<number>(0);
+  const [y, setY] = useState<number>(0);
   return (
     <RightTabContainer>
       {detailPopup &&
@@ -53,8 +72,9 @@ const RightTab = (props: Props): JSX.Element => {
       </UlStyled>
       <Search value={value} handleOnChange={handleOnChange} handleSubmit={handleSubmit} handleDelete={handleDelete} />
       <BottomContent>
-        {searchResult.length > 0 && <span style={{ margin: "1em" }}>검색 결과</span>}
-        {searchResult.length > 0 && <span>{searchResult.length}</span>}
+        <SearchListTitle>
+          {searchResult.length > 0 && <span className="count">검색 결과 {searchResult.length}</span>}
+        </SearchListTitle>
         {searchResult.map((info: searchElement, index: number) => {
           return (
             <Place

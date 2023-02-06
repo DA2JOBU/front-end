@@ -12,7 +12,7 @@ import Etc from './etc';
 import PlaceKinds from './placeKinds';
 import Satisfaction from './satisfaction';
 import { placeExist, registerFirstPlace, registerReview } from '@api/mapApi';
-import { registerReviewType } from 'src/types/registerType';
+import { PlaceRegister, registerReviewType } from 'src/types/registerType';
 
 const DetailContainer = styled.section`
   overflow-y: auto;
@@ -133,7 +133,7 @@ export interface placeDetail {
   address: string;
   roadAddress: string;
   category: string;//양식
-  placeUrl : string;
+  placeUrl: string;
   x: number;
   y: number;
 }
@@ -153,10 +153,11 @@ const DetailPlace = (props: placeDetail) => {
     satisfaction: 0,
     participants: 0,
     price: '',
-    moodCategory: '',
     mood: '',
+    light: '',
     isCorkCharge: false,
     isRoom: false,
+    isReservation: false,
     isParking: false,
     isAdvancePayment: false,
     isRent: false,
@@ -182,19 +183,50 @@ const DetailPlace = (props: placeDetail) => {
         console.log(requestData.placeId);
         //없다면 장소 등록
         if (!res) {
-          const firstPlaceres = await registerFirstPlace(requestData).then((ress) => {
+          const requestD: PlaceRegister = {
+            kakaoId: requestData.placeId,
+            name: requestData.placeName,
+            category: requestData.category,
+            x: requestData.x,
+            y: requestData.y,
+            info: {
+              url: requestData.url,
+              address: requestData.address,
+              roadAddress: requestData.roadAddress
+            }
+          }
+          const firstPlaceres = await registerFirstPlace(requestD).then((ress) => {
             console.log(ress);
           });
         }
-        
+
         //리뷰 등록
-        // const reqData:registerReviewType = {
+        const reqData: registerReviewType = {
+          placeId: requestData.placeId,
+          participants: requestData.participants,
+          rating: requestData.satisfaction,
+          price_range: requestData.price,
+          is_cork_charge: requestData.isCorkCharge,
+          is_room: requestData.isRoom,
+          is_reservation: requestData.isReservation,
+          is_parking: requestData.isParking,
+          is_advance_payment: requestData.isAdvancePayment,
+          is_rent: requestData.isRent,
+          simple_review: requestData.simpleReview,
+          reveiwMoodDto: [{
+            mood_category: 'Mood',
+            mood: requestData.mood
+          },
+          {
+            mood_category: 'Lighting',
+            mood: requestData.light
+          }
+          ]
+        };
 
-        // };
-
-        // const firstPlaceres = await registerReview(requestData).then((ress) => {
-        //   console.log(ress);
-        // });
+        const firstPlaceres = await registerReview(reqData).then((ress) => {
+          console.log(ress);
+        });
       });
   };
 
@@ -237,14 +269,14 @@ const DetailPlace = (props: placeDetail) => {
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <Atmosphere onChange={onChange} name="" />
+          <Atmosphere onChange={onChange} name="mood" />
         </CardBody>
         <CardHeader>
           <h2 className="people">조명 밝기</h2>
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <Brightness onChange={onChange} name="" />
+          <Brightness onChange={onChange} name="light" />
         </CardBody>
         <CardHeader>
           <h2 className="people">기타</h2>

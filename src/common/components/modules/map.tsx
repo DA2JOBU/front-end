@@ -25,8 +25,8 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
 
   let markers: any[] = [];
 
-  useEffect(()=>{
-    if(registerPos.length > 0)
+  useEffect(() => {
+    if (registerPos.length > 0)
       return;
     getRegisterList().then((res) => {
       setRegister(res);
@@ -95,8 +95,8 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
         }
       }
 
-      for (let i = 0; i < registerPos?.length; i++){
-        let placePosition = new window.kakao.maps.LatLng(registerPos[i].x, registerPos[i].y);
+      for (let i = 0; i < registerPos?.length; i++) {
+        let placePosition = new window.kakao.maps.LatLng(registerPos[i].y, registerPos[i].x);
         addMarker(placePosition, i, undefined);
       }
       displayPlaces(registerPos);

@@ -17,10 +17,10 @@ const PeopleButton = (props: Props) => {
   const { onChange, name } = props;
   return (
     <ButtonContainer>
-      <BaseButton value="4~8명" width="158px" height="52px" fontSize="16px" onClick={onChange} name={name} />
-      <BaseButton value="9~12명" width="158px" fontSize="16px" height="52px" onClick={onChange} name={name} />
-      <BaseButton value="13~16명" width="158px" fontSize="16px" height="52px" onClick={onChange} name={name} />
-      <BaseButton value="17명 이상" width="158px" fontSize="16px" height="52px" onClick={onChange} name={name} />
+      <BaseButton value="4~8명" width="156px" height="52px" fontSize="16px" onClick={onChange} name={name} />
+      <BaseButton value="9~12명" width="156px" fontSize="16px" height="52px" onClick={onChange} name={name} />
+      <BaseButton value="13~16명" width="156px" fontSize="16px" height="52px" onClick={onChange} name={name} />
+      <BaseButton value="17명 이상" width="156px" fontSize="16px" height="52px" onClick={onChange} name={name} />
     </ButtonContainer>
   );
 };
