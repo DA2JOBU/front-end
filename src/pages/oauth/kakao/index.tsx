@@ -33,7 +33,7 @@ const KakaoWithLogin: NextPage = () => {
         });
       const loginResponse = await login(sessionStorage.getItem('token') || '');
       api.setJwtToken(loginResponse.accessToken);
-      router.push('/main');
+      router.push('/');
     } catch (err) {
       console.error(err);
     }
