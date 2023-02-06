@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { channel } from 'diagnostics_channel';
 import { run } from 'node:test';
 import { deletedPlace, placeExist, registerFirstPlace } from '@api/mapApi';
-import SearchDetail from './serach-detail';
+import SearchDetail from '../tab-detail/serach-detail';
 
 const SearchListContainer = styled.section`
   float: left;
@@ -83,6 +83,8 @@ const SearchList = (props: Props) => {
     console.log(id);
   };
 
+  const onClose = () => {};
+
   const handlerPlace = (list: searchElement, category: string) => {
     const data: any = {
       kakaoId: list.id,
@@ -107,7 +109,7 @@ const SearchList = (props: Props) => {
 
   return (
     <SearchListContainer>
-      {detailPopup && <SearchDetail />}
+      {detailPopup && <SearchDetail onClose={() => setVisible(false)} registration={registration} />}
       <SearchListTitle>
         <span className="title">{keyword}</span>
         <span className="count">검색 결과 {lists.length}</span>

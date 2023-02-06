@@ -18,7 +18,7 @@ const SearchMap = styled.button`
   padding:  6px 8px;
   font-size: 0.75rem;
   display: flex;
-  width: 96px;
+  width: 6.4rem;
   align-items: center;
   border 1px solid ${({ theme }) => theme.color.gray30};
   color: ${({ theme }) => theme.color.gray70};
