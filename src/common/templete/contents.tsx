@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import React, { useEffect, useState, useRef } from 'react';
 import SlideContainer from '@components/modules/slide-container';
 import SideTabs from '@components/modules/tab/side-tabs';
