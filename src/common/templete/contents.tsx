@@ -100,7 +100,7 @@ const Contents = (): JSX.Element => {
         </Nav>
         <Nav title="등록" onClick={() => !setIsOpen}>
           <SlideContainer>
-            <RightTab handleOnChange={handleOnChange} handleSubmit={handleSubmit} value={value} />
+            <RightTab handleOnChange={handleOnChange} handleSubmit={handleSubmit} handleDelete={handleDelete} value={value} />
           </SlideContainer>
         </Nav>
 

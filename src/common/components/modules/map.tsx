@@ -5,6 +5,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { keyword, searchList } from 'src/state';
 import { reviewedPlaceList } from 'src/types/searchType';
 import { propsType } from '../../templete/contents';
+
 interface placeType {
   place_name: string;
   road_address_name: string;
@@ -26,18 +27,26 @@ export const getServerSideProps: GetServerSideProps = async () => {
 // head에 작성한 kakao API 불러오기
 // const { kakao } = window as any;
 
-const Map = (props: propsType, mapContainer: HTMLDivElement | null, markerdata: reviewedPlaceList[]) => {
+const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
   //검색 결과를 담는 것
   const setSearchList = useSetRecoilState(searchList);
   // 마커를 담는 배열
-  const [registerPos, setRegister] = useState<reviewedPlaceList[] | []>([]);
+  const [registerPos, setRegister] = useState<reviewedPlaceList[]>([]);
 
   let markers: any[] = [];
+
+  useEffect(()=>{
+    if(registerPos.length > 0)
+      return;
+    getRegisterList().then((res) => {
+      setRegister(res);
+    });
+  }, [registerPos]);
+
   // 검색어가 바뀔 때마다 재렌더링되도록 useEffect 사용
   useEffect(() => {
-    if (!mapContainer) return;
-
-    console.log(markerdata, 'test');
+    if (!mapContainer && registerPos.length == 0) return;
+    console.log(registerPos);
     window.kakao.maps.load(() => {
       const mapContainer = document.getElementById('map');
       const mapOption = {
@@ -96,10 +105,11 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null, markerdata: 
         }
       }
 
-      // for (let i = 0; i < registerPos?.length; i++){
-      //   let placePosition = new window.kakao.maps.LatLng(registerPos[i].x, registerPos[i].y);
-      //   addMarker(placePosition, i, undefined);
-      // }
+      for (let i = 0; i < registerPos?.length; i++){
+        let placePosition = new window.kakao.maps.LatLng(registerPos[i].x, registerPos[i].y);
+        addMarker(placePosition, i, undefined);
+      }
+      displayPlaces(registerPos);
 
       //등록된 장소 마커에 넣어 주기
       // getRegisterList().then((res) => {
@@ -120,7 +130,6 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null, markerdata: 
 
         // 검색 결과 목록에 추가된 항목들을 제거
         listEl && removeAllChildNods(listEl);
-        console.log(places);
 
         // 지도에 표시되고 있는 마커를 제거
         removeMarker();
