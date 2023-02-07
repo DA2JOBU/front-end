@@ -23,7 +23,7 @@ const MainContainer = styled.div`
   position: relative;
 `;
 
-const Logo = styled.button`
+const Logo = styled.div`
   position: absolute;
   top: 8px;
   left: 32px;
