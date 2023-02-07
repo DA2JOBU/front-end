@@ -13,6 +13,7 @@ type ButtonProps = {
 };
 
 interface Props {
+  text?: string;
   value?: string;
   name?: string;
   onClick?: (e: any) => void;
@@ -53,9 +54,9 @@ const Container = styled.p`
   }
 `;
 
-const KeywordButton = ({ value, active, height, disabled, name, onClick, width, fontSize, count }: Props) => {
+const KeywordButton = ({ text, value, active, height, disabled, name, onClick, width, fontSize, count }: Props) => {
   const [state, setState] = useState<boolean>(active || false);
-
+  const [val, setValue] = useState(value);
   return (
     <Container>
       {count ? (
@@ -68,10 +69,13 @@ const KeywordButton = ({ value, active, height, disabled, name, onClick, width, 
           className={state ? 'active' : ''}
         >
           <span>
-            {value}
+            {text}
             {count}
           </span>
-          <input type="checkbox" value={value} onChange={() => setState(!state)} onClick={onClick} name={name} />
+          <input type="checkbox" value={val} onChange={() => {
+            setState(!state);
+            setValue(state ? value : '');
+          }} onClick={onClick} name={name} />
         </StyledButton>
       ) : (
         <StyledButton
@@ -82,8 +86,11 @@ const KeywordButton = ({ value, active, height, disabled, name, onClick, width, 
           }}
           className={state ? 'active' : ''}
         >
-          <span>{value}</span>
-          <input type="checkbox" value={value} onChange={() => setState(!state)} onClick={onClick} name={name} />
+          <span>{text}</span>
+          <input type="checkbox" value={val} onChange={() => {
+            setState(!state);
+            setValue(state ? value : '');
+          }} onClick={onClick} name={name} />
         </StyledButton>
       )}
     </Container>

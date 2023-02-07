@@ -13,26 +13,29 @@ const Brightness = (props: Props) => {
   return (
     <ButtonContainer>
       <BaseButton
-        value="밝은"
+        text='밝은'
+        value="Light"
         width="6.4rem"
         height="52px"
-        fontSize="16px" 
+        fontSize="16px"
         onClick={onChange}
         name={name}
       />
       <BaseButton
-        value="일반적인"
+        text='일반적인'
+        value="Nomal"
         width="6.4rem"
         height="52px"
-        fontSize="16px" 
+        fontSize="16px"
         onClick={onChange}
         name={name}
       />
       <BaseButton
-        value="어두운"
+        text='어두운'
+        value="Dark"
         width="6.4rem"
         height="52px"
-        fontSize="16px" 
+        fontSize="16px"
         onClick={onChange}
         name={name}
       />
