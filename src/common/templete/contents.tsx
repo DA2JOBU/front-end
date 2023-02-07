@@ -92,7 +92,7 @@ const Contents = (): JSX.Element => {
   return (
     <MainContainer>
       <Logo>
-        <a href='/'><img src="assets/images/logo.svg" alt="로고" className="logo" /></a>
+        <img src="assets/images/logo.svg" alt="로고" className="logo" />
       </Logo>
       <Navs>
         <Nav title="" children={undefined}></Nav>
