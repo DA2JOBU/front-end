@@ -92,7 +92,7 @@ const Contents = (): JSX.Element => {
   return (
     <MainContainer>
       <Logo>
-        <a href='/'><img src="assets/images/logo.svg" alt="로고" className="logo" onClick={() => router.push('/')} /></a>
+        <a href='/'><img src="assets/images/logo.svg" alt="로고" className="logo" /></a>
       </Logo>
       <Navs>
         <Nav title="" children={undefined}></Nav>
