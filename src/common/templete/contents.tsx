@@ -11,6 +11,7 @@ import Modal from '@components/modules/modal';
 import Map from '@components/modules/map';
 import { Place } from 'src/types/searchType';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 export interface propsType {
   searchKeyword: string;
@@ -22,7 +23,7 @@ const MainContainer = styled.div`
   position: relative;
 `;
 
-const Logo = styled.div`
+const Logo = styled.button`
   position: absolute;
   top: 8px;
   left: 32px;
@@ -86,10 +87,12 @@ const Contents = (): JSX.Element => {
     handleDelete,
   };
 
+  const router = useRouter();
+
   return (
     <MainContainer>
       <Logo>
-        <img src="assets/images/logo.svg" alt="로고" className="logo" />
+        <a href='/'><img src="assets/images/logo.svg" alt="로고" className="logo" onClick={() => router.push('/')} /></a>
       </Logo>
       <Navs>
         <Nav title="" children={undefined}></Nav>
