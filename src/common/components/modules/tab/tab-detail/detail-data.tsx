@@ -4,10 +4,36 @@ import Etc from '@components/modules/rightTab/detailPlace/etc';
 import React from 'react';
 import { searchElement } from 'src/types/searchType';
 import styled from 'styled-components';
+import Icons from 'public/assets/images/icons';
 
-const CardContainer = styled.form`
+const DataContainer = styled.form`
   width: 100%;
   padding: 45px 28px 35px 28px;
+`;
+
+const DataHeader = styled.div`
+  width: 100%;
+  padding: 25px 0;
+  // margin: 0 28px;
+  .address {
+    display: flex;
+    padding-bottom: 0.5rem;
+    align-items: center;
+  }
+  .text {
+    display: fit-content;
+    border-radius: 6px;
+    padding: 4px 6px;
+    font-size: 0.75rem;
+    color: ${({ theme }) => theme.color.gray85};
+    border: 1px solid ${({ theme }) => theme.color.gray30};
+  }
+  .name {
+    padding: 0 0.4rem;
+    color: ${({ theme }) => theme.color.gray85};
+  }
+
+  border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
 `;
 
 const CardHeader = styled.div`
@@ -85,9 +111,23 @@ const onChange = () => {
 const DetailData = (props: { placeList: any }) => {
   const { placeList } = props;
   console.log('ddd', placeList);
-
+const onClick = () => {
+  console.log('복사')
+}
   return (
-    <CardContainer>
+    <DataContainer>
+      <DataHeader>
+        <p className="address">
+          <span className="text">도로명</span>
+          <span className="name">{placeList.road_address_name}</span>
+          <Icons.Copy onClick={onClick}/>
+        </p>
+        <p className="address">
+          <span className="text">지번</span>
+          <span className="name">{placeList.address_name}</span>
+          <Icons.Copy onClick={onClick} />
+        </p>
+      </DataHeader>
       <CardHeader>
         <h2 className="people">분위기 </h2>
         {/* <TopBadge /> */}
@@ -110,7 +150,7 @@ const DetailData = (props: { placeList: any }) => {
         <Etc onChange={onChange}/>
       </CardBody>
       <CardFooter>{/* <SubmitButton text="결과보기" onClick={submitForm} /> */}</CardFooter>
-    </CardContainer>
+    </DataContainer>
   );
 };
 

@@ -37,6 +37,13 @@ const DetailHeader = styled.div`
   padding: 0 30px;
   display: flex;
   align-items: center;
+  .place-name {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: ${({ theme }) => theme.color.black};
+  }
 `;
 const DetailBody = styled.div`
   width: 100%;
@@ -48,7 +55,7 @@ const SearchDetail = (props: Props) => {
     <DetailContainer>
       <DetailHeader>
         <Icons.Back onClick={onClose} />
-        <span>{registration.name}</span>
+        <span className="place-name">{registration.place_name}</span>
       </DetailHeader>
       <DetailBody>
         <Tabs>

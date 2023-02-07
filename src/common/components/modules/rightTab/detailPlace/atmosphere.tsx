@@ -14,16 +14,17 @@ const Atmosphere = (props: Props) => {
   return (
     <ButtonContainer>
       <BaseButton
-        value="가벼운"
-        width="102px"
+        text='가벼운'
+        value="Light"
+        width="6.4rem"
         height="52px"
         fontSize="16px"
         onClick={onChange}
         name={name}
         count={count}
       />
-      <BaseButton value="일반적인" width="102px" height="52px" fontSize="16px" onClick={onChange} name={name} />
-      <BaseButton value="무거운" width="102px" height="52px" fontSize="16px" onClick={onChange} name={name} />
+      <BaseButton text='일반적인' value="Nomal" width="6.4rem" height="52px" fontSize="16px" onClick={onChange} name={name} />
+      <BaseButton text='무거운' value="Heavy" width="6.4rem" height="52px" fontSize="16px" onClick={onChange} name={name} />
     </ButtonContainer>
   );
 };

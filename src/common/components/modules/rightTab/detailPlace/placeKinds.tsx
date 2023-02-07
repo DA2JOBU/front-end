@@ -11,8 +11,8 @@ const PlaceKinds = (props: Props) => {
   const { onChange, name } = props;
   return (
     <ButtonContainer>
-      <BaseButton value="가본 곳" width="156px" height="52px" fontSize="16px" onClick={onChange} name={name} />
-      <BaseButton value="가고 싶은 곳" width="156px" height="52px" fontSize="16px" onClick={onChange} name={name} />
+      <BaseButton text='가본 곳' value="가본 곳" width="156px" height="52px" fontSize="16px" onClick={onChange} name={name} />
+      <BaseButton text='가고 싶은 곳' value="가고 싶은 곳" width="156px" height="52px" fontSize="16px" onClick={onChange} name={name} />
     </ButtonContainer>
   );
 };

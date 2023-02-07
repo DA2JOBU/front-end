@@ -107,25 +107,24 @@ const CardFooter = styled.div`
 type Props = {
   place: Place;
   id: string;
-  onClick: (event?: React.MouseEvent<Element, MouseEvent> | undefined) => void;
-  setSelectedPlace: (id: string) => void;
 };
 
 const PlaceCard = (props: Props): JSX.Element => {
   const { address_name, category_name, place_name, reviewCnt, wantPlaceCnt, ratingAvg, coment } = props.place;
-  const { onClick, setSelectedPlace, id } = props;
+  const { id } = props;
   const [active, setActive] = useState<boolean>(false);
 
   const saveHandler = (e: React.MouseEvent) => {
     e.stopPropagation();
     setActive(!active);
+    
     // 등록으로 연결
   };
 
-  const handleOnClick = useCallback(() => {
-    setSelectedPlace(id);
-    setActive(!active);
-  }, [setSelectedPlace, id]);
+  // const handleOnClick = useCallback(() => {
+  //   setSelectedPlace(id);
+  //   setActive(!active);
+  // }, [setSelectedPlace, id]);
 
   return (
     <CardContainer>
@@ -134,10 +133,10 @@ const PlaceCard = (props: Props): JSX.Element => {
           <h2 className="place">{place_name}</h2>
           {/* <TopBadge /> */}
         </div>
-        <label className="label" onClick={onClick}>
+        <label className="label" onClick={() => setActive(!active)}>
           {active ? <img src="assets/images/favorites-on.png" /> : <img src="assets/images/favorites.png" />}
 
-          <input type="checkbox" className="favorites" onClick={handleOnClick} />
+          <input type="checkbox" className="favorites" />
         </label>
       </CardHeader>
       <CardBody>

@@ -174,12 +174,12 @@ const DetailPlace = (props: placeDetail) => {
     price: '',
     mood: '',
     light: '',
-    isCorkCharge: false,
-    isRoom: false,
-    isReservation: false,
-    isParking: false,
-    isAdvancePayment: false,
-    isRent: false,
+    isCorkCharge: '',
+    isRoom: '',
+    isReservation: '',
+    isParking: '',
+    isAdvancePayment: '',
+    isRent: '',
     simpleReview: '',
   });
 
@@ -221,12 +221,12 @@ const DetailPlace = (props: placeDetail) => {
               participants: requestData.participants,
               rating: requestData.satisfaction,
               price_range: requestData.price,
-              is_cork_charge: requestData.isCorkCharge,
-              is_room: requestData.isRoom,
-              is_reservation: requestData.isReservation,
-              is_parking: requestData.isParking,
-              is_advance_payment: requestData.isAdvancePayment,
-              is_rent: requestData.isRent,
+              is_cork_charge: requestData.isCorkCharge != '' ? true : false,
+              is_room: requestData.isRoom != '' ? true : false,
+              is_reservation: requestData.isReservation != '' ? true : false,
+              is_parking: requestData.isParking != '' ? true : false,
+              is_advance_payment: requestData.isAdvancePayment != '' ? true : false,
+              is_rent: requestData.isRent != '' ? true : false,
               simple_review: requestData.simpleReview,
               reveiwMoodDto: [{
                 mood_category: 'Mood',
@@ -241,23 +241,24 @@ const DetailPlace = (props: placeDetail) => {
 
             const firstPlaceres = await registerReview(reqData).then((ress) => {
               console.log(ress);
+              alert('장소가 등록되었습니다');
             });
           });
         }
         //있는 id면
-        else{
+        else {
           //리뷰 등록
           const reqData: registerReviewType = {
             placeId: res.id,
             participants: requestData.participants,
             rating: requestData.satisfaction,
             price_range: requestData.price,
-            is_cork_charge: requestData.isCorkCharge != false? true: false,
-            is_room: requestData.isRoom != false? true: false,
-            is_reservation: requestData.isReservation != false? true: false,
-            is_parking: requestData.isParking != false? true: false,
-            is_advance_payment: requestData.isAdvancePayment != false? true: false,
-            is_rent: requestData.isRent != false? true: false,
+            is_cork_charge: requestData.isCorkCharge != '' ? true : false,
+            is_room: requestData.isRoom != '' ? true : false,
+            is_reservation: requestData.isReservation != '' ? true : false,
+            is_parking: requestData.isParking != '' ? true : false,
+            is_advance_payment: requestData.isAdvancePayment != '' ? true : false,
+            is_rent: requestData.isRent != '' ? true : false,
             simple_review: requestData.simpleReview,
             reveiwMoodDto: [{
               mood_category: 'Mood',
@@ -274,6 +275,7 @@ const DetailPlace = (props: placeDetail) => {
 
           const firstPlaceres = await registerReview(reqData).then((ress) => {
             console.log(ress);
+            alert('장소가 등록되었습니다');
           });
         }
       });
@@ -285,7 +287,7 @@ const DetailPlace = (props: placeDetail) => {
         <RightTabTitle title={inputData.placeName} />
       </UlStyled>
       <PlaceInfo>
-          <span><AddressInfo>도로명 </AddressInfo>{inputData.roadAddress}</span>
+        <span><AddressInfo>도로명 </AddressInfo>{inputData.roadAddress}</span>
       </PlaceInfo>
       <CardContainer>
         <CardHeader>
@@ -295,7 +297,7 @@ const DetailPlace = (props: placeDetail) => {
         <CardBody>
           <PlaceKinds onChange={onChange} name='placeKinds' />
         </CardBody>
-        <DivideLine/>
+        <DivideLine />
         <CardHeader>
           <h2 className="people">만족도 </h2>
           {/* <TopBadge /> */}
@@ -317,7 +319,7 @@ const DetailPlace = (props: placeDetail) => {
         <CardBody>
           <MoneyButton onChange={onChange} name="price" />
         </CardBody>
-        <DivideLine/>
+        <DivideLine />
         <CardHeader>
           <h2 className="people">분위기 </h2>
           {/* <TopBadge /> */}
@@ -337,9 +339,9 @@ const DetailPlace = (props: placeDetail) => {
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <Etc onChange={onChange}/>
+          <Etc onChange={onChange} />
         </CardBody>
-        <DivideLine/>
+        <DivideLine />
         <CardHeader>
           <h2 className="people">한 줄 리뷰</h2>
         </CardHeader>
