@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Icons from 'public/assets/images/icons';
 
 const SearchTopContainer = styled.div`
-  padding-bottom: 4.5rem;
+  padding-bottom: 8rem;
   background: ${({ theme }) => theme.color.white};
   position: relative;
   height: 100vh;

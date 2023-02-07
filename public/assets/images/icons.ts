@@ -1,7 +1,7 @@
 import { ReactElement, SVGProps } from 'react';
 
 import Check from './check.svg';
-import Search from './search.svg'
+import Search from './search.svg';
 import SearchOn from './search-active.svg';
 import CloseBox from './close-button.svg';
 import Close from './close.svg';
@@ -16,6 +16,8 @@ import Delete from './delete.svg';
 import KakaoButton from './kakao-button.svg';
 import Content from './content.svg';
 import LoginLogo from './login-logo.svg';
+import Back from './back.svg';
+import ReviewBoard from './review.svg';
 
 const importedIcons = {
   Check,
@@ -33,9 +35,11 @@ const importedIcons = {
   Delete,
   KakaoButton,
   Content,
-  LoginLogo, 
+  LoginLogo,
+  Back,
+  ReviewBoard,
 };
 
 type IconName = keyof typeof importedIcons;
 type ReactComponent = (props: SVGProps<SVGElement>) => ReactElement;
-export default importedIcons as Record<IconName,  ReactComponent>;
+export default importedIcons as Record<IconName, ReactComponent>;

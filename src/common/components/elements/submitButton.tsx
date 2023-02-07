@@ -23,7 +23,7 @@ export interface IButtonProps {
   className?: string;
 }
 
-const StyledButton = styled.button`
+const StyledButton = styled.label`
     /*공통 스타일*/
     width: 100%;
     align-items: center;
@@ -53,7 +53,7 @@ const StyledButton = styled.button`
     }
 `;
 function SubmitButton({
-  type = 'button',
+  type = 'text',
   text,
   iconType,
   isBlock = false,

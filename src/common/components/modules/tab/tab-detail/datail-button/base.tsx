@@ -51,6 +51,9 @@ const Container = styled.p`
     color: ${({ theme }) => theme.color.orange};
     border: 1px solid ${({ theme }) => theme.color.orange};
   }
+  .count {
+    background: ${({ theme }) => theme.color.white};
+  }
 `;
 
 const KeywordButton = ({ value, active, height, disabled, name, onClick, width, fontSize, count }: Props) => {
@@ -65,13 +68,13 @@ const KeywordButton = ({ value, active, height, disabled, name, onClick, width, 
             height,
             fontSize,
           }}
-          className={state ? 'active' : ''}
+          className={count ? 'count' : ''}
         >
           <span>
             {value}
             {count}
           </span>
-          <input type="checkbox" value={value} onChange={() => setState(!state)} onClick={onClick} name={name} />
+          <input type="checkbox" value={value} name={name} />
         </StyledButton>
       ) : (
         <StyledButton

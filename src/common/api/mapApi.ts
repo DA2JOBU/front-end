@@ -1,5 +1,5 @@
 import axios, { AxiosPromise } from 'axios';
-import { PlaceRegister, registerPlace, registerReviewType } from 'src/types/registerType';
+import { PlaceRegister, placeUUID, registerPlace, registerReviewType } from 'src/types/registerType';
 import { reviewedPlaceList, searchElement } from 'src/types/searchType';
 
 
@@ -28,7 +28,7 @@ export const placeExist = async (kakaoId: string) => {
     },
   })
     .then((res) => res.json())
-    .then((res: boolean) => res);
+    .then((res: placeUUID) => res);
 };
 
 //첫 장소 등록

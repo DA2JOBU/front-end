@@ -18,7 +18,11 @@ var api = {
 
   setJwtToken(jwtToken: string) {
     sessionStorage.setItem("jwtToken", jwtToken);
-  }
+  },
+
+  deleteJwtToken() {
+    sessionStorage.removeItem("jwtToken");
+  },
 }
 
 export default api;
