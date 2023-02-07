@@ -51,3 +51,8 @@ export interface reviewMoodDto {
   mood_category: string;
   mood: string;
 }
+
+//uuid
+export interface placeUUID{
+  id: string;
+}

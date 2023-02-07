@@ -40,15 +40,15 @@ const UlStyled = styled.ul`
 
 const CardContainer = styled.form`
   width: 100%;
-  padding: 45px 28px 35px 28px;
+  padding: 45px 0px 35px 0px;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
 `;
 
 const CardHeader = styled.div`
+  padding: 0px 28px 0.8rem 28px;
   width: 100%;
   display: flex;
   align-items: center;
-  padding-bottom: 0.8rem;
 
   .people {
     font-size: 1rem;
@@ -59,8 +59,8 @@ const CardHeader = styled.div`
 `;
 
 const CardBody = styled.div`
-  margin-bottom: 1rem;
-
+  margin-bottom: 1.5rem;
+  padding: 0px 28px 0px 28px;
   p {
     display: flex;
     justify-content: space-between;
@@ -105,12 +105,12 @@ const CardBody = styled.div`
 `;
 
 const CardFooter = styled.div`
+  padding: 0px 28px 0px 28px;
   width: 100%;
   align-items: center;
 `;
 
 const InputForm = styled.input`
-  margin: 0;
   width: 100%;
   width: 324px;
   padding: 11px 0 8px 0;
@@ -126,6 +126,25 @@ const InputForm = styled.input`
     stroke: ${({ theme }) => theme.color.orange};
   }
 `;
+
+const DivideLine = styled.div`
+  border-top: 1px solid ${({ theme }) => theme.color.gray30};
+  margin: 30px auto;
+  width: 100%;        
+`
+
+const PlaceInfo = styled.div`
+  padding: 30px 28px 30px 28px;
+  background: ${({ theme }) => theme.color.gray20};
+  border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
+`
+
+const AddressInfo = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`
 
 export interface placeDetail {
   placeId: string;
@@ -180,9 +199,9 @@ const DetailPlace = (props: placeDetail) => {
     const requestData = inputData;
     const existRes = await placeExist(requestData.placeId)
       .then(async (res) => {
-        console.log(requestData.placeId);
+        console.log(res);
         //없다면 장소 등록
-        if (!res) {
+        if (res.id === '') {
           const requestD: PlaceRegister = {
             kakaoId: requestData.placeId,
             name: requestData.placeName,
@@ -195,38 +214,68 @@ const DetailPlace = (props: placeDetail) => {
               roadAddress: requestData.roadAddress
             }
           }
-          const firstPlaceres = await registerFirstPlace(requestD).then((ress) => {
+          const firstPlaceres = await registerFirstPlace(requestD).then(async (ress) => {
+            //리뷰 등록
+            const reqData: registerReviewType = {
+              placeId: res.id,
+              participants: requestData.participants,
+              rating: requestData.satisfaction,
+              price_range: requestData.price,
+              is_cork_charge: requestData.isCorkCharge,
+              is_room: requestData.isRoom,
+              is_reservation: requestData.isReservation,
+              is_parking: requestData.isParking,
+              is_advance_payment: requestData.isAdvancePayment,
+              is_rent: requestData.isRent,
+              simple_review: requestData.simpleReview,
+              reveiwMoodDto: [{
+                mood_category: 'Mood',
+                mood: requestData.mood
+              },
+              {
+                mood_category: 'Lighting',
+                mood: requestData.light
+              }
+              ]
+            };
+
+            const firstPlaceres = await registerReview(reqData).then((ress) => {
+              console.log(ress);
+            });
+          });
+        }
+        //있는 id면
+        else{
+          //리뷰 등록
+          const reqData: registerReviewType = {
+            placeId: res.id,
+            participants: requestData.participants,
+            rating: requestData.satisfaction,
+            price_range: requestData.price,
+            is_cork_charge: requestData.isCorkCharge != false? true: false,
+            is_room: requestData.isRoom != false? true: false,
+            is_reservation: requestData.isReservation != false? true: false,
+            is_parking: requestData.isParking != false? true: false,
+            is_advance_payment: requestData.isAdvancePayment != false? true: false,
+            is_rent: requestData.isRent != false? true: false,
+            simple_review: requestData.simpleReview,
+            reveiwMoodDto: [{
+              mood_category: 'Mood',
+              mood: requestData.mood
+            },
+            {
+              mood_category: 'Lighting',
+              mood: requestData.light
+            }
+            ]
+          };
+
+          console.log(reqData);
+
+          const firstPlaceres = await registerReview(reqData).then((ress) => {
             console.log(ress);
           });
         }
-
-        //리뷰 등록
-        const reqData: registerReviewType = {
-          placeId: requestData.placeId,
-          participants: requestData.participants,
-          rating: requestData.satisfaction,
-          price_range: requestData.price,
-          is_cork_charge: requestData.isCorkCharge,
-          is_room: requestData.isRoom,
-          is_reservation: requestData.isReservation,
-          is_parking: requestData.isParking,
-          is_advance_payment: requestData.isAdvancePayment,
-          is_rent: requestData.isRent,
-          simple_review: requestData.simpleReview,
-          reveiwMoodDto: [{
-            mood_category: 'Mood',
-            mood: requestData.mood
-          },
-          {
-            mood_category: 'Lighting',
-            mood: requestData.light
-          }
-          ]
-        };
-
-        const firstPlaceres = await registerReview(reqData).then((ress) => {
-          console.log(ress);
-        });
       });
   };
 
@@ -235,6 +284,9 @@ const DetailPlace = (props: placeDetail) => {
       <UlStyled>
         <RightTabTitle title={inputData.placeName} />
       </UlStyled>
+      <PlaceInfo>
+          <span><AddressInfo>도로명 </AddressInfo>{inputData.roadAddress}</span>
+      </PlaceInfo>
       <CardContainer>
         <CardHeader>
           <h2 className="people">장소 구분</h2>
@@ -243,6 +295,7 @@ const DetailPlace = (props: placeDetail) => {
         <CardBody>
           <PlaceKinds onChange={onChange} name='placeKinds' />
         </CardBody>
+        <DivideLine/>
         <CardHeader>
           <h2 className="people">만족도 </h2>
           {/* <TopBadge /> */}
@@ -264,6 +317,7 @@ const DetailPlace = (props: placeDetail) => {
         <CardBody>
           <MoneyButton onChange={onChange} name="price" />
         </CardBody>
+        <DivideLine/>
         <CardHeader>
           <h2 className="people">분위기 </h2>
           {/* <TopBadge /> */}
@@ -283,8 +337,9 @@ const DetailPlace = (props: placeDetail) => {
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <Etc onChange={onChange} name="" />
+          <Etc onChange={onChange}/>
         </CardBody>
+        <DivideLine/>
         <CardHeader>
           <h2 className="people">한 줄 리뷰</h2>
         </CardHeader>

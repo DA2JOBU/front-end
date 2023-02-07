@@ -158,7 +158,7 @@ const KeywordCard = (): JSX.Element => {
         {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
-        <Etc onChange={onChange} name="" />
+        <Etc onChange={onChange} />
       </CardBody>
       <CardFooter>
         <SubmitButton text="결과보기" onClick={submitForm} />
