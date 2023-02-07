@@ -13,6 +13,7 @@ import PlaceKinds from './placeKinds';
 import Satisfaction from './satisfaction';
 import { placeExist, registerFirstPlace, registerReview } from '@api/mapApi';
 import { PlaceRegister, registerReviewType } from 'src/types/registerType';
+import { useRouter } from 'next/router';
 
 const DetailContainer = styled.section`
   overflow-y: auto;
@@ -134,16 +135,23 @@ const DivideLine = styled.div`
 `
 
 const PlaceInfo = styled.div`
-  padding: 30px 28px 30px 28px;
+  padding: 30px 28px 12px 28px;
   background: ${({ theme }) => theme.color.gray20};
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
 `
 
-const AddressInfo = styled.button`
-  display: flex;
+const AddressContainer = styled.div`
+  margin-bottom: 18px;
+`
+
+const AddressInfo = styled.label`
+  border-radius: 6px;
   flex-direction: row;
-  justify-content: center;
+  background : ${({ theme }) => theme.color.gray20};
+  font-weight : ${({ theme }) => theme.color.gray20};
   align-items: center;
+  border: 1px solid #D5D5D5;
+  padding: 4px 6px;
 `
 
 export interface placeDetail {
@@ -287,7 +295,12 @@ const DetailPlace = (props: placeDetail) => {
         <RightTabTitle title={inputData.placeName} />
       </UlStyled>
       <PlaceInfo>
-        <span><AddressInfo>도로명 </AddressInfo>{inputData.roadAddress}</span>
+        <AddressContainer>
+          <AddressInfo>도로명</AddressInfo> {inputData.roadAddress}
+        </AddressContainer>
+        <AddressContainer>
+          <AddressInfo>지번</AddressInfo> {inputData.address}
+        </AddressContainer>
       </PlaceInfo>
       <CardContainer>
         <CardHeader>
