@@ -14,12 +14,11 @@ type Props = {
   id: string;
   category: string;
   onClick: (event?: React.MouseEvent<Element, MouseEvent> | undefined) => void;
-  setSelectedPlace: (id: string) => void;
 };
 
 function SearchPlace(props: Props): JSX.Element | null {
   const { address_name, category_group_name, place_name, category_name } = props.list;
-  const { onClick, category, setSelectedPlace, id } = props;
+  const { onClick, category, id } = props;
 
   const place = {
     address_name,
@@ -30,7 +29,7 @@ function SearchPlace(props: Props): JSX.Element | null {
 
   return (
     <PlaceContainer onClick={onClick}>
-      <PlaceCard place={place} id={id} onClick={onClick} setSelectedPlace={setSelectedPlace}  />
+      <PlaceCard place={place} id={id}  />
     </PlaceContainer>
   );
 }

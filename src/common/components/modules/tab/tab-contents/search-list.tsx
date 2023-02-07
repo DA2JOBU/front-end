@@ -76,7 +76,7 @@ const SearchList = (props: Props) => {
   const getCategory = (category_name: string) => {
     const category_list = category_name.split('>');
     let category = category_list[3] ? category_list[3] : category_list[2] || category_list[1];
-    return category;
+    return category.trim();
   };
 
   const handlerlOnChange = (id: string) => {
@@ -86,6 +86,7 @@ const SearchList = (props: Props) => {
   const onClose = () => {};
 
   const handlerPlace = (list: searchElement, category: string) => {
+    console.log(category);
     const data: any = {
       kakaoId: list.id,
       name: list.place_name,
@@ -119,8 +120,6 @@ const SearchList = (props: Props) => {
           let category = getCategory(list.category_name);
           return (
             <SearchPlace
-              // onChange={handlerlOnChange}
-              setSelectedPlace={setRegistrantion}
               key={index}
               list={list}
               id={list.id}
@@ -128,7 +127,7 @@ const SearchList = (props: Props) => {
               onClick={() => {
                 setIsSelected(true);
                 setVisible(true);
-                handlerPlace(list, category);
+                setRegistrantion(list);
               }}
             />
           );
