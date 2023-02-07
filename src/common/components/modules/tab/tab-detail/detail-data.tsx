@@ -5,16 +5,17 @@ import React from 'react';
 import { searchElement } from 'src/types/searchType';
 import styled from 'styled-components';
 import Icons from 'public/assets/images/icons';
+import BaseButton from './datail-button/base-link';
 
 const DataContainer = styled.form`
   width: 100%;
-  padding: 45px 28px 35px 28px;
+  padding-top: 45px;
 `;
 
 const DataHeader = styled.div`
+  padding: 0 28px;
   width: 100%;
-  padding: 25px 0;
-  // margin: 0 28px;
+  padding-bottom: 25px;
   .address {
     display: flex;
     padding-bottom: 0.5rem;
@@ -36,6 +37,10 @@ const DataHeader = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
 `;
 
+const DataBody = styled.div`
+  padding: 28px;
+`;
+
 const CardHeader = styled.div`
   width: 100%;
   display: flex;
@@ -47,6 +52,9 @@ const CardHeader = styled.div`
     color: ${({ theme }) => theme.color.black};
     font-weight: 600;
     padding-right: 4px;
+  }
+  img {
+    width: 100%;
   }
 `;
 
@@ -105,51 +113,72 @@ const CardFooter = styled.div`
   }
 `;
 
+const DataFooter = styled.div`
+  display: flex;
+  padding: 0 28px 6px 28px;
+
+  justify-content: space-around;
+`;
+
 const onChange = () => {
   console.log('e');
 };
 const DetailData = (props: { placeList: any }) => {
   const { placeList } = props;
   console.log('ddd', placeList);
-const onClick = () => {
-  console.log('복사')
-}
+  const onClick = () => {
+    console.log('복사');
+  };
   return (
     <DataContainer>
       <DataHeader>
         <p className="address">
           <span className="text">도로명</span>
           <span className="name">{placeList.road_address_name}</span>
-          <Icons.Copy onClick={onClick}/>
+          <Icons.Copy onClick={onClick} />
         </p>
         <p className="address">
           <span className="text">지번</span>
           <span className="name">{placeList.address_name}</span>
           <Icons.Copy onClick={onClick} />
         </p>
+        <img src="/assets/images/data.png" style={{ width: '100%' }} />
+        {/* <span>만족도</span>
+        <span>평균인원</span>
+        <span>음식종류</span>
+        <span>가격대</span> */}
       </DataHeader>
-      <CardHeader>
-        <h2 className="people">분위기 </h2>
-        {/* <TopBadge /> */}
-      </CardHeader>
-      <CardBody>
-        <Atmosphere onChange={onChange} count={6} name="mood" />
-      </CardBody>
-      <CardHeader>
-        <h2 className="people">조명 밝기</h2>
-        {/* <TopBadge /> */}
-      </CardHeader>
-      <CardBody>
-        <Brightness onChange={onChange} name="lighting" />
-      </CardBody>
-      <CardHeader>
-        <h2 className="people">기타</h2>
-        {/* <TopBadge /> */}
-      </CardHeader>
-      <CardBody>
-        <Etc onChange={onChange}/>
-      </CardBody>
-      <CardFooter>{/* <SubmitButton text="결과보기" onClick={submitForm} /> */}</CardFooter>
+      <DataBody>
+        <CardHeader>
+          <h2 className="people">분위기 </h2>
+          {/* <TopBadge /> */}
+        </CardHeader>
+        <CardBody>
+          <Atmosphere onChange={onChange} count={undefined} name="mood" />
+        </CardBody>
+        <CardHeader>
+          <h2 className="people">조명 밝기</h2>
+          {/* <TopBadge /> */}
+        </CardHeader>
+        <CardBody>
+          <Brightness onChange={onChange} name="lighting" />
+        </CardBody>
+        <CardHeader>
+          <h2 className="people">기타</h2>
+          {/* <TopBadge /> */}
+        </CardHeader>
+        <CardBody>
+          <Etc onChange={onChange} />
+        </CardBody>
+        <CardFooter>{/* <SubmitButton text="결과보기" onClick={submitForm} /> */}</CardFooter>
+      </DataBody>
+      <DataFooter>
+        <BaseButton value="자세히 보기" width="11.4rem" height="52px" fontSize="16px" />
+        <BaseButton value="등록하기" width="8rem" height="52px" fontSize="16px" />
+      </DataFooter>
+      <DataFooter>
+        <BaseButton value="공유하기" width="20rem" height="52px" fontSize="16px" />
+      </DataFooter>
     </DataContainer>
   );
 };

@@ -12,7 +12,7 @@ const UlStyled = styled.ul`
   display: table;
   padding: 0 28px;
   height: 64px;
-  width: 96%;
+  width: 100%;
   margin: 0;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
 `;
