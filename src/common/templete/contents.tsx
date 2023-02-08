@@ -8,7 +8,9 @@ import { SearchList } from '@components/modules/tab/tab-contents';
 import RightTab from '@components/modules/rightTab';
 import MypageTab from '@components/modules/rightTab/mypageTab';
 import Modal from '@components/modules/modal';
+import UserModal from '@components/modules/modal/user';
 import Map from '@components/modules/map';
+import { useUserInfoModalOpen } from '../hook/modal.hook';
 import { Place } from 'src/types/searchType';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
@@ -35,6 +37,7 @@ const Contents = (): JSX.Element => {
     setAccessToken(sessionStorage.getItem('jwtToken'));
   }, [accessToken]);
 
+  const { userInfoModalOpen } = useUserInfoModalOpen();
   const [modalOpen, setModalOpen] = useState(false);
 
   // 모달창 노출
@@ -124,7 +127,8 @@ const Contents = (): JSX.Element => {
         )}
       </Navs>
       <Map searchKeyword={keyword} />
-      {modalOpen && <Modal onClose={closeModal} />}
+      { modalOpen && <Modal onClose={closeModal} />}
+      { userInfoModalOpen && <UserModal /> }
 
       {/* <Sidebar searchKeyword={keyword} /> */}
     </MainContainer>

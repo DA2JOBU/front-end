@@ -29,7 +29,7 @@ const Modal = ({ onClose }: ModalProps) => {
   );
 };
 
-const Overlay = styled.div`
+export const Overlay = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
@@ -41,7 +41,7 @@ const Overlay = styled.div`
   z-index: 9999;
 `;
 
-const ModalWrap = styled.div`
+export const ModalWrap = styled.div`
   width: 22.24rem;
   height: 32rem;
   padding: 20px;
@@ -53,18 +53,18 @@ const ModalWrap = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
   justify-content: space-between;
 `;
 
-const ModalHeader = styled.div`
+export const ModalHeader = styled.div`
   text-align: end;
   cursor: pointer;
 `;
-const ModalBody = styled.div`
+export const ModalBody = styled.div`
   text-align: center;
   padding-bottom: 20px;
   p {
