@@ -34,6 +34,14 @@ const DataHeader = styled.div`
     color: ${({ theme }) => theme.color.gray85};
   }
 
+  .text-small {
+    font-size: 12px;
+    color: ${({ theme }) => theme.color.gray70};
+  }
+  .star {
+    fill: ${({ theme }) => theme.color.gray85};
+  }
+
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
 `;
 
@@ -143,10 +151,19 @@ const DetailData = (props: { placeList: any }) => {
           <Icons.Copy onClick={onClick} />
         </p>
         <img src="/assets/images/data.png" style={{ width: '100%' }} />
-        {/* <span>만족도</span>
-        <span>평균인원</span>
-        <span>음식종류</span>
-        <span>가격대</span> */}
+        <p>
+          <span className="text-small">만족도</span>
+          <Icons.Star className="star" width={14} /><span className=''>4.3</span><span>/5</span>
+        </p>
+        <p>
+          <span className="text-small">평균인원</span>
+        </p>
+        <p>
+          <span className="text-small">음식종류</span>
+        </p>
+        <p>
+          <span className="text-small">가격대</span>
+        </p>
       </DataHeader>
       <DataBody>
         <CardHeader>

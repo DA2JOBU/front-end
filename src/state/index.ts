@@ -12,7 +12,7 @@ export const keyword = atom({
   default: '',
 });
 
-export const myPlace = atom<PlaceRegister[]>({
-  key: 'myPlace',
-  default: [],
-});
+// export const myPlace = atom<PlaceRegister[]>({
+//   key: 'myPlace',
+//   default: [],
+// });

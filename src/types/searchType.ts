@@ -35,3 +35,28 @@ export interface reviewedPlaceList {
   x: string;
   y: string;
 }
+
+export interface PlaceTopTen {
+  id?: string;
+  kakaoId?: string;
+  name?: string;
+  category?: string;
+  x?: string;
+  y?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  place_stats?: null;
+  place_Info?: {
+    rank?: string | number;
+    id?: string;
+    url?: string;
+    address?: string;
+    roadAddress?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    wantPlaceCnt?: number | string;
+    reviewCnt?: number | string;
+    ratingAvg?: number | string;
+    simple_review?: string;
+  };
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { myPlace, searchList } from 'src/state';
+import {  searchList } from 'src/state';
 import { SearchPlace } from './search-place';
 import { searchElement } from 'src/types/searchType';
 import { PlaceRegister } from 'src/types/registerType';
@@ -71,7 +71,7 @@ const SearchList = (props: Props) => {
   const [detailPopup, setVisible] = useState(false);
 
   const lists = useRecoilValue<searchElement[]>(searchList);
-  const setMyPlaceList = useSetRecoilState(myPlace);
+  // const setMyPlaceList = useSetRecoilState(myPlace);
 
   const getCategory = (category_name: string) => {
     const category_list = category_name.split('>');
@@ -100,7 +100,7 @@ const SearchList = (props: Props) => {
       },
     };
     registerFirstPlace(data);
-    setMyPlaceList(data);
+    // setMyPlaceList(data);
     setRegistrantion({
       ...data,
       data,
