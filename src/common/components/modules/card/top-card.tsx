@@ -154,12 +154,6 @@ const TopCard = (props: { place: PlaceTopTen }): JSX.Element => {
         </p>
       </CardBody>
       <CardFooter>
-        {/* <span className="coment-null">리뷰를 기다리고 있어요</span>
-        <p className="comment">
-          <img src="assets/images/quote.svg" />
-          {place_Info?.simple_review}
-        </p> */}
-
         {place_Info?.simple_review ? (
           <p className="comment">
             <img src="assets/images/quote.svg" />
