@@ -306,7 +306,7 @@ const DetailPlace = (props: placeDetail) => {
   return (
     <DetailContainer className="scrollBar">
       <DetailHeader>
-        <Icons.Back onClick={props.onClose}/>
+        <Icons.Back style={{cursor: 'pointer'}} onClick={props.onClose}/>
         <span className="place-name">{inputData.placeName}</span>
       </DetailHeader>
       <PlaceInfo>

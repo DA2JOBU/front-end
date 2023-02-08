@@ -55,7 +55,7 @@ const SearchDetail = (props: Props) => {
   return (
     <DetailContainer>
       <DetailHeader>
-        <Icons.Back onClick={onClose} />
+        <Icons.Back style={{cursor: 'pointer'}} onClick={onClose} />
         <span className="place-name">{registration.place_name}</span>
       </DetailHeader>
       <DetailBody>
