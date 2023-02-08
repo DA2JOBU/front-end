@@ -13,7 +13,7 @@ import PlaceKinds from './placeKinds';
 import Satisfaction from './satisfaction';
 import { placeExist, registerFirstPlace, registerReview } from '@api/mapApi';
 import { PlaceRegister, registerReviewType } from 'src/types/registerType';
-import { useRouter } from 'next/router';
+import Icons from 'public/assets/images/icons';
 
 const DetailContainer = styled.section`
   overflow-y: auto;
@@ -34,9 +34,21 @@ const DetailContainer = styled.section`
   }
 `;
 
-const UlStyled = styled.ul`
+const DetailHeader = styled.div`
+  height: 60px;
+  background-color: ${({ theme }) => theme.color.white};
+  border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
+  padding: 0 18px;
   display: flex;
-  width: 380px;
+  align-items: center;
+  .place-name {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    margin-right: 18px;
+    color: ${({ theme }) => theme.color.black};
+  }
 `;
 
 const CardContainer = styled.form`
@@ -152,9 +164,11 @@ const AddressInfo = styled.label`
   align-items: center;
   border: 1px solid #D5D5D5;
   padding: 4px 6px;
+  font-size: 1rem;
 `
 
 export interface placeDetail {
+  onClose: ()=>void;
   placeId: string;
   placeName: string;
   address: string;
@@ -291,9 +305,10 @@ const DetailPlace = (props: placeDetail) => {
 
   return (
     <DetailContainer className="scrollBar">
-      <UlStyled>
-        <RightTabTitle title={inputData.placeName} />
-      </UlStyled>
+      <DetailHeader>
+        <Icons.Back onClick={props.onClose}/>
+        <span className="place-name">{inputData.placeName}</span>
+      </DetailHeader>
       <PlaceInfo>
         <AddressContainer>
           <AddressInfo>도로명</AddressInfo> {inputData.roadAddress}

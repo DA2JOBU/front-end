@@ -40,6 +40,7 @@ const DetailHeader = styled.div`
   .place-name {
     width: 100%;
     text-align: center;
+    margin-right: 18px;
     font-size: 18px;
     font-weight: 600;
     color: ${({ theme }) => theme.color.black};

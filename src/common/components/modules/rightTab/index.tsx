@@ -65,7 +65,7 @@ const RightTab = (props: Props): JSX.Element => {
   return (
     <RightTabContainer>
       {detailPopup &&
-        <DetailPlace placeId={placeId} placeName={placeName} address={address} roadAddress={roadAddress} category={category} placeUrl={placeUrl} x={x} y={y} />
+        <DetailPlace onClose={() => setVisible(false)} placeId={placeId} placeName={placeName} address={address} roadAddress={roadAddress} category={category} placeUrl={placeUrl} x={x} y={y} />
       }
       <UlStyled>
         <RightTabTitle title="장소 등록" />
