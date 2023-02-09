@@ -14,6 +14,7 @@ import { useUserInfoModalOpen } from '../hook/modal.hook';
 import { Place } from 'src/types/searchType';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
+import MyPlace from './myPlace';
 
 export interface propsType {
   searchKeyword: string;
@@ -112,8 +113,11 @@ const Contents = (): JSX.Element => {
         </Nav>
 
         <Nav title="나의 회식 장소" onClick={() => !setIsOpen}>
-          <SlideContainer></SlideContainer>
+          <SlideContainer>
+            <MyPlace />
+          </SlideContainer>
         </Nav>
+
         {accessToken ? (
           <Nav title="마이페이지" onClick={() => !setIsOpen}>
             <SlideContainer>
@@ -127,8 +131,8 @@ const Contents = (): JSX.Element => {
         )}
       </Navs>
       <Map searchKeyword={keyword} />
-      { modalOpen && <Modal onClose={closeModal} />}
-      { userInfoModalOpen && <UserModal /> }
+      {modalOpen && <Modal onClose={closeModal} />}
+      {userInfoModalOpen && <UserModal />}
 
       {/* <Sidebar searchKeyword={keyword} /> */}
     </MainContainer>
