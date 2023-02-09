@@ -34,7 +34,7 @@ const StyledButton = styled.button`
     cursor: pointer;
     padding: 1rem;
     margin-top: 1.2rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 3rem;
 
     /*크기*/
     font-size: 1rem;

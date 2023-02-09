@@ -27,6 +27,7 @@ const SearchMap = styled.button`
     background-color: #fff;
     color: ${({ theme }) => theme.color.gray90};
     padding-left: 0.2rem;
+    font-size:0.7rem;
   }
   .clicked{
     stroke: none;
@@ -40,6 +41,7 @@ const SearchMap = styled.button`
     color:  ${({ theme }) => theme.color.gray70};
     background-color: #fff;
     padding-left: 0.2rem;
+    font-size:0.7rem;
   }
 `;
 

@@ -40,6 +40,7 @@ const DetailHeader = styled.div`
   .place-name {
     width: 100%;
     text-align: center;
+    margin-right: 18px;
     font-size: 18px;
     font-weight: 600;
     color: ${({ theme }) => theme.color.black};
@@ -54,7 +55,7 @@ const SearchDetail = (props: Props) => {
   return (
     <DetailContainer>
       <DetailHeader>
-        <Icons.Back onClick={onClose} />
+        <Icons.Back style={{cursor: 'pointer'}} onClick={onClose} />
         <span className="place-name">{registration.place_name}</span>
       </DetailHeader>
       <DetailBody>

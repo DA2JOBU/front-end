@@ -1,9 +1,10 @@
 import TopCard from '@components/modules/card/top-card';
-import React from 'react';
-import { Place } from 'src/types/searchType';
-import { places } from 'src/common/api/search';
+import React, { useEffect, useState } from 'react';
+import { Place, PlaceTopTen } from 'src/types/searchType';
+import { getPlaceTopTen, places } from 'src/common/api/search';
 import styled from 'styled-components';
 import Icons from 'public/assets/images/icons';
+import axios from 'axios';
 
 const SearchTopContainer = styled.div`
   padding-bottom: 8rem;
@@ -50,6 +51,18 @@ const SearchBanner = styled.div`
 `;
 
 const SearchTopPlace = (): JSX.Element => {
+  const [places, setPlaces] = useState<Array<PlaceTopTen>>([]);
+
+  useEffect(() => {
+    getPlaceTopTen();
+  }, []);
+
+  const getPlaceTopTen = async () => {
+    const response = await axios.get(process.env.NEXT_PUBLIC_SERVER_URI + 'chart/top5');
+    console.log(response.data);
+    setPlaces(response.data);
+  };
+
   return (
     <>
       <SearchBanner>
@@ -58,7 +71,7 @@ const SearchTopPlace = (): JSX.Element => {
       </SearchBanner>
       <SearchTopContainer>
         <SearchContent>
-          {places.map((place, index) => {
+          {places.map((place: PlaceTopTen, index: React.Key | null | undefined) => {
             return <TopCard place={place} key={index} />;
           })}
         </SearchContent>

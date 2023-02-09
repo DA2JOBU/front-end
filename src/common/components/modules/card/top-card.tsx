@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import TopBadge from '../../elements/top-badge';
-import { Place } from 'src/types/searchType';
+import { Place, PlaceTopTen } from 'src/types/searchType';
 import Icons from 'public/assets/images/icons';
+import ComentBadge from '@components/elements/place-badge';
 
 const CardContainer = styled.div`
   width: 100%;
@@ -36,7 +37,6 @@ const CardHeader = styled.div`
     fill: none;
     stroke: ${({ theme }) => theme.color.gray80};
   }
-  
 `;
 
 const CardBody = styled.div`
@@ -65,6 +65,13 @@ const CardBody = styled.div`
       font-weight: 700;
     }
 
+    .unstar {
+      color: ${({ theme }) => theme.color.gray80};
+      font-size: 14px;
+      padding: 0 18px 0 2px;
+      font-weight: 700;
+    }
+
     .review {
       color: ${({ theme }) => theme.color.gray80};
       font-size: 14px;
@@ -87,26 +94,31 @@ const CardBody = styled.div`
 `;
 const CardFooter = styled.div`
   width: 100%;
-  .title {
-    display: flex;
-  }
+  margin-top: 14px;
+
   .comment {
     background: ${({ theme }) => theme.color.gray20};
     border-radius: 6px;
     color: ${({ theme }) => theme.color.gray90};
     display: fit-contents;
     padding: 10px;
-    margin-top: 14px;
     font-size: 14px;
     img {
       padding-right: 4px;
     }
   }
+  .coment-null {
+    background: ${({ theme }) => theme.color.gray20};
+    color: ${({ theme }) => theme.color.gray70};
+    font-size: 0.87rem;
+    width: 11rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 2rem;
+  }
 `;
 
-const TopCard = (props: { place: Place }): JSX.Element => {
-  const { address_name, category_group_name, place_name, ratingAvg, reviewCnt, wantPlaceCnt, coment, rank, id } =
-    props.place;
+const TopCard = (props: { place: PlaceTopTen }): JSX.Element => {
+  const { name, category, place_Info } = props.place;
   const [active, setActive] = useState<boolean>(false);
 
   const saveHandler = (e: React.MouseEvent) => {
@@ -118,33 +130,38 @@ const TopCard = (props: { place: Place }): JSX.Element => {
     <CardContainer>
       <CardHeader>
         <div className="title">
-          <h2 className="place">{place_name}</h2>
-          <TopBadge rank={rank} />
+          <h2 className="place">{name}</h2>
+          <TopBadge rank={place_Info?.rank} />
         </div>
         <label className="label">
           {active ? <img src="assets/images/favorites-on.png" /> : <img src="assets/images/favorites.png" />}
-          {/* <Icons.Favorites className={active ? 'checked' : 'stroke'} /> */}
           <input type="checkbox" className="favorites" onClick={saveHandler} />
         </label>
       </CardHeader>
       <CardBody>
         <p className="title">
-          <span className="food">{category_group_name}</span>
-          <span className="address">{address_name}</span>
+          <span className="food">{category}</span>
+          <span className="address">{place_Info?.roadAddress}</span>
         </p>
         <p className="body">
-          <Icons.Star className={ratingAvg !== '0' ? 'on' : 'off'} width={14} />
-          <span className="star">{ratingAvg ? ratingAvg : 0}</span>
+          <Icons.Star className={place_Info?.ratingAvg !== 0 ? 'off' : 'on'} width={14} />
+          <span className={place_Info?.ratingAvg !== 0 ? 'unstar' : 'star'}>
+            {place_Info?.ratingAvg ? place_Info?.ratingAvg : 0}
+          </span>
 
-          <span className="review">리뷰 {reviewCnt ? reviewCnt : '-'}</span>
-          <span className="save">저장 {wantPlaceCnt ? wantPlaceCnt : '-'}</span>
+          <span className="review">리뷰 {place_Info?.reviewCnt ? place_Info?.reviewCnt : '-'}</span>
+          <span className="save">저장 {place_Info?.wantPlaceCnt ? place_Info?.wantPlaceCnt : '-'}</span>
         </p>
       </CardBody>
       <CardFooter>
-        <p className="comment">
-          <img src="assets/images/quote.svg" />
-          {coment}
-        </p>
+        {place_Info?.simple_review ? (
+          <p className="comment">
+            <img src="assets/images/quote.svg" />
+            {place_Info?.simple_review}
+          </p>
+        ) : (
+          <span className="coment-null">리뷰를 기다리고 있어요</span>
+        )}
       </CardFooter>
     </CardContainer>
   );

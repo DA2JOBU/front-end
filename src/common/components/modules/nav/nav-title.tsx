@@ -11,7 +11,7 @@ export const LiStyled = styled.li`
   }
   &:nth-child(2) {
     text-align: right;
-    padding-left: 10rem;
+    padding-left: 8rem;
   }
 
   &:nth-child(3) {

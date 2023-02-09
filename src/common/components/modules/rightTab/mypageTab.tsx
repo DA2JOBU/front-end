@@ -2,6 +2,7 @@ import NextLink from 'next/link';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import api from '@api/api-config';
+import { useUserInfoModalOpen } from '../../../hook/modal.hook';
 
 // @TODO 높이 맞추는 방법 고민해야됨
 const MyPageTabContainer = styled.section`
@@ -31,15 +32,17 @@ const MyPageContent = styled.button`
   text-align: left;
   vertical-align: middle;
   padding: 30px 20px 20px 20px;
+  margin: 2px;
 `;
 
 const MypageTab = (): JSX.Element => {
   const router = useRouter();
+  const { openUserInfoModal } = useUserInfoModalOpen();
 
   return (
     <MyPageTabContainer>
       <Contents>
-        <MyPageContent>내 정보</MyPageContent>
+        <MyPageContent onClick={() => openUserInfoModal()}>내 정보</MyPageContent>
         <NextLink href='https://www.naver.com'>
           <MyPageContent>의견 및 오류정보</MyPageContent>
         </NextLink>

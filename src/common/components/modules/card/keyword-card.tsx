@@ -15,8 +15,6 @@ import Etc from '../rightTab/detailPlace/etc';
 const CardContainer = styled.form`
   width: 100%;
   padding: 45px 28px 35px 28px;
-
-  border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
 `;
 
 const CardHeader = styled.div`
