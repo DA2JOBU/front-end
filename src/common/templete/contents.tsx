@@ -11,7 +11,6 @@ import Modal from '@components/modules/modal';
 import UserModal from '@components/modules/modal/user';
 import Map from '@components/modules/map';
 import { useUserInfoModalOpen } from '../hook/modal.hook';
-import { Place } from 'src/types/searchType';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 

@@ -5,7 +5,6 @@ export const login = async (accessToken: string) => {
     accessToken,
     vendor: 'kakao'
   });
-  console.log(data);
 
   return data;
 }
@@ -13,3 +12,14 @@ export const login = async (accessToken: string) => {
 export const logout = async () => {
 
 }
+
+export const getUserInfo = async (jwt: string) => {
+  const { data } = await axios.get(process.env.NEXT_PUBLIC_SERVER_URI + 'auth', {
+    headers: {
+      Authorization: `Bearer ${jwt}`,
+    }
+  });
+  console.log('chk', data);
+
+  return data;
+};
