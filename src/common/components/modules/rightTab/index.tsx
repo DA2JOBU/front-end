@@ -8,6 +8,7 @@ import Place from './place';
 import { searchElement } from 'src/types/searchType';
 import { useState } from 'react';
 import DetailPlace from './detailPlace';
+import MapPin from '@public/images/map-pin.svg';
 
 const RightTabContainer = styled.section`
   overflow: hidden;
@@ -21,7 +22,6 @@ const RightTabContainer = styled.section`
 
 const UlStyled = styled.ul`
   display: flex;
-  width: 380px;
 `;
 
 const SearchListTitle = styled.div`

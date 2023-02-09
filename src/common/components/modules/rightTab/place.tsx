@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import DetailPlace from './detailPlace';
+import MapPin from '@public/images/map-pin.svg';
 
 const PlaceElement = styled.button`
   margin: 0.5em;
@@ -16,13 +17,14 @@ interface Props {
 }
 
 const Place = (props: Props) => {
-    const PlaceInfo = props;
-    return (
-        <div>
-            <PlaceElement onClick={props.onClick}>
-                {PlaceInfo.placeName}
-            </PlaceElement>
-        </div>
-    )
+  const PlaceInfo = props;
+  return (
+    <div>
+      <PlaceElement onClick={props.onClick}>
+        <MapPin />
+        {PlaceInfo.placeName}
+      </PlaceElement>
+    </div>
+  )
 }
 export default Place;
