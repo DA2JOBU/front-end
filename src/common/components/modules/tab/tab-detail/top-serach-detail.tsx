@@ -55,13 +55,6 @@ const DetailBody = styled.div`
 const SearchDetail = (props: Props) => {
   const { onClose, places } = props;
 
-  const getCategory = (category_name: string) => {
-    const category_list = category_name.split('>');
-    let category = category_list[1];
-    console.log(category)
-    return category.trim();
-  };
-
   return (
     <DetailContainer>
       <DetailHeader>
@@ -72,10 +65,10 @@ const SearchDetail = (props: Props) => {
       <DetailBody>
         <Tabs>
           <Tab title="데이터">
-            <DetailData placeList={places} info={places.place_Info} category={getCategory(places.category_name)} status={places.place_stats} />
+            <TopDetailData placeList={places} info={places.place_Info} status={places.place_stats} />
           </Tab>
           <Tab title="리뷰">
-            <DetailReview placeStatus={places.place_stats} />
+            <TopDetailReview placeStatus={places.place_stats} />
           </Tab>
         </Tabs>
       </DetailBody>

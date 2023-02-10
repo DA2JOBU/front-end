@@ -48,8 +48,8 @@ export interface PlaceTopTen {
   place_stats?: {
     rank?: string | number;
     id?: string;
-    lighting?:string;
-    mood?:string;
+    lighting?: string;
+    mood?: string;
     ratingAvrg?: number;
     reviewCnt?: number;
     updatedAt?: string;
@@ -63,5 +63,23 @@ export interface PlaceTopTen {
     updatedAt?: string;
     wantPlaceCnt?: number | string;
     simple_review?: string;
+  };
+}
+
+export interface KeywordSearchDto {
+  participants?: {
+    min?: number | null;
+    max?: number | null;
+  };
+  price?: string | null;
+  lighting?: string | null;
+  mood?: string | null;
+  etc?: {
+    is_cork_charge?: boolean;
+    is_rent?: boolean
+    is_room?: boolean;
+    is_reservation?: boolean;
+    is_parking?: boolean;
+    is_advance_payment?: boolean;
   };
 }

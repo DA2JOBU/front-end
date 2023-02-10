@@ -59,7 +59,7 @@ const Review = styled.span`
 
 const TopDetailReview = (props: {placeStatus: any}) => {
   const { placeStatus } = props;
-  console.log(placeStatus.simpleReview)
+  // console.log(placeStatus.simpleReview)
   return (
     <Container>
       <p className="review-text">

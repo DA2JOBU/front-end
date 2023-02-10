@@ -51,7 +51,7 @@ const DataHeader = styled.div`
 `;
 
 const DataBody = styled.div`
-  padding: 1.75rem;
+  padding: 1.75rem 1.75rem 0.7rem;
 `;
 
 const CardHeader = styled.div`
@@ -159,8 +159,9 @@ const Container = styled.div`
 const onChange = () => {
   console.log('e');
 };
-const DetailData = (props: { placeList: any; info?: any; status?: any }) => {
-  const { placeList, info, status } = props;
+const DetailData = (props: { placeList: any; info?: any; status?: any; category: string}) => {
+  const { placeList, info, status, category} = props;
+  console.log('ddd', category)
 
   const onClick = () => {
     console.log('복사');
@@ -201,21 +202,21 @@ const DetailData = (props: { placeList: any; info?: any; status?: any }) => {
             <span className="text-small">평균인원</span>
             <p className="content-body">
               <Icons.User />
-              <span className="content-text">6 명</span>
+              <span className="content-text">-</span>
             </p>
           </Container>
           <Container>
             <span className="text-small">음식종류</span>
             <p className="content-body">
               <Icons.Point />
-              <span className="content-text">베트남 음식</span>
+              <span className="content-text">{category}</span>
             </p>
           </Container>
           <Container>
             <span className="text-small">가격대</span>
             <p className="content-body">
               <Icons.Tag />
-              <span className="content-text">3만원</span>
+              <span className="content-text">-</span>
             </p>
           </Container>
         </ContentContainer>
@@ -225,7 +226,7 @@ const DetailData = (props: { placeList: any; info?: any; status?: any }) => {
           <h2 className="people">분위기 </h2>
         </CardHeader>
         <CardBody>
-          <Atmosphere onChange={onChange} count={3} name="mood" value="Nomal" />
+          <Atmosphere onChange={onChange}  name="mood"  />
         </CardBody>
         <CardHeader>
           <h2 className="people">조명 밝기</h2>

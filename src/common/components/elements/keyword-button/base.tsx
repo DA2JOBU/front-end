@@ -73,7 +73,7 @@ const KeywordButton = ({ text, value, active, height, disabled, name, onClick, w
             height,
             fontSize,
           }}
-          className="count"
+          className={count ? 'active' : ''}
         >
           <span>
             {text}

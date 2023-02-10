@@ -10,6 +10,10 @@ import { run } from 'node:test';
 import { deletedPlace, placeExist, registerFirstPlace } from '@api/mapApi';
 import SearchDetail from '../tab-detail/serach-detail';
 import Icons from 'public/assets/images/icons';
+import { User } from 'src/types/userType';
+import { useUserInfoModalOpen } from 'src/common/hook/modal.hook';
+import { getUserInfo } from '@api/auth';
+import Modal from '@components/modules/modal';
 
 const SearchListContainer = styled.section`
   float: left;
@@ -86,7 +90,11 @@ const SearchList = (props: Props) => {
   const [place, setPlace] = useState<string>('');
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [detailPopup, setVisible] = useState<boolean>(false);
-  const [active, setActive] = useState<string>('');
+  const [active, setActive] = useState<boolean>(false);
+  const [isModal, setIsModal] = useState<boolean>(false);
+  const [userInfo, setUserInfo] = useState<User | null>(null);
+  const { openUserInfoModal } = useUserInfoModalOpen();
+  const accessToken = sessionStorage.getItem('jwtToken');
 
   const lists = useRecoilValue<searchElement[]>(searchList);
   // const setMyPlaceList = useSetRecoilState(myPlace);
@@ -111,11 +119,11 @@ const SearchList = (props: Props) => {
       },
     };
     registerFirstPlace(data);
-    // setMyPlaceList(data);
   };
 
   return (
     <SearchListContainer>
+      {accessToken === null && isModal && <Modal onClose={() => setIsModal(false)} />}
       {detailPopup && <SearchDetail onClose={() => setVisible(false)} places={place} />}
       <SearchListTitle>
         <span className="title">{keyword}</span>
@@ -125,14 +133,13 @@ const SearchList = (props: Props) => {
         {lists.map((list: searchElement | any, index: number) => {
           let category = getCategory(list.category_name);
           return (
-            <SearchPlaceContainer>
+            <SearchPlaceContainer key={list.id}>
               <label className="label">
                 <Icons.Favorites
                   className={active ? 'save' : 'delete'}
                   onClick={() => {
                     handlerPlace(list, category);
-                    setActive(list.id);
-                    console.log(list.id)
+                    setIsModal(true);
                   }}
                 />
                 <input type="checkbox" className="favorites" />

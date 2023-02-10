@@ -1,11 +1,10 @@
 import TopCard from '@components/modules/card/top-card';
 import React, { useEffect, useState } from 'react';
-import { Place, PlaceTopTen } from 'src/types/searchType';
-import { getPlaceTopTen, places } from 'src/common/api/search';
+import { PlaceTopTen } from 'src/types/searchType';
 import styled from 'styled-components';
 import Icons from 'public/assets/images/icons';
 import axios from 'axios';
-import SearchDetail from '../tab-detail/serach-detail';
+import TopSearchDetail from '../tab-detail/top-serach-detail';
 
 const SearchContainer = styled.section`
   float: left;
@@ -79,13 +78,11 @@ const SearchTopPlace = (): JSX.Element => {
     setPlaces(response.data);
   };
 
-  const placeDetail = () => {};
-
   return (
     <>
       {detailPopup && (
         <SearchContainer>
-          <SearchDetail onClose={() => setVisible(false)} places={place} />
+          <TopSearchDetail onClose={() => setVisible(false)} places={place} />
         </SearchContainer>
       )}
       <SearchBanner>
@@ -96,10 +93,9 @@ const SearchTopPlace = (): JSX.Element => {
         <SearchContent>
           {places.map((place: any, index: React.Key | null | undefined) => {
             return (
-              <div>
+              <div key={place.id}>
                 <TopCard
                   place={place}
-                  key={index}
                   onClick={() => {
                     setVisible(true);
                     setPlace(place);

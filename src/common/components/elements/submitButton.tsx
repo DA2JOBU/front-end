@@ -23,7 +23,7 @@ export interface IButtonProps {
   className?: string;
 }
 
-const StyledButton = styled.button`
+const StyledButton = styled.div`
     /*공통 스타일*/
     width: 100%;
     align-items: center;

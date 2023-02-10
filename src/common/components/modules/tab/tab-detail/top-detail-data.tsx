@@ -52,7 +52,7 @@ const DataHeader = styled.div`
 `;
 
 const DataBody = styled.div`
-  padding: 1.75rem;
+  padding: 1.75rem 1.75rem 0.7rem;
 `;
 
 const CardHeader = styled.div`
@@ -209,14 +209,14 @@ const TopDetailData = (props: { placeList: any; info?: any; status?: any }) => {
             <span className="text-small">음식종류</span>
             <p className="content-body">
               <Icons.Point />
-              <span className="content-text">베트남 음식</span>
+              <span className="content-text">{placeList.category}</span>
             </p>
           </Container>
           <Container>
             <span className="text-small">가격대</span>
             <p className="content-body">
               <Icons.Tag />
-              <span className="content-text">3만원</span>
+              <span className="content-text">-</span>
             </p>
           </Container>
         </ContentContainer>
@@ -226,7 +226,7 @@ const TopDetailData = (props: { placeList: any; info?: any; status?: any }) => {
           <h2 className="people">분위기 </h2>
         </CardHeader>
         <CardBody>
-          <Atmosphere onChange={onChange} count={3} name="mood" value="Nomal" />
+          <Atmosphere onChange={onChange} name="mood" value="Nomal" />
         </CardBody>
         <CardHeader>
           <h2 className="people">조명 밝기</h2>
