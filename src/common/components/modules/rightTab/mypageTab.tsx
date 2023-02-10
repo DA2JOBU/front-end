@@ -43,11 +43,8 @@ const MypageTab = (): JSX.Element => {
     <MyPageTabContainer>
       <Contents>
         <MyPageContent onClick={() => openUserInfoModal()}>내 정보</MyPageContent>
-        <NextLink href='https://www.naver.com'>
+        <NextLink href='https://docs.google.com/forms/d/10kUG8UGW62uxh-LA0Op3TghRpTkC47bt3qBGX2fAyTo/edit?usp=forms_home&ths=true&pli=1'>
           <MyPageContent>의견 및 오류정보</MyPageContent>
-        </NextLink>
-        <NextLink href='https://www.naver.com'>
-          <MyPageContent>자주 묻는 질문</MyPageContent>
         </NextLink>
         <MyPageContent onClick={() => {
           api.deleteJwtToken();
