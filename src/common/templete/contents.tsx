@@ -113,7 +113,7 @@ const Contents = (): JSX.Element => {
 
         <Nav title="나의 회식 장소" onClick={() => !setIsOpen}>
           <SlideContainer>
-            <MyPlace />
+            <MyPlace handleOnChange={handleOnChange} handleSubmit={handleSubmit} handleDelete={handleDelete} value={value}/>
           </SlideContainer>
         </Nav>
 

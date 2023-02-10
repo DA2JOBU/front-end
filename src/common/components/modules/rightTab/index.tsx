@@ -11,7 +11,6 @@ import DetailPlace from './detailPlace';
 import MapPin from '@public/images/map-pin.svg';
 
 const RightTabContainer = styled.section`
-  overflow: hidden;
   position: absolute;
   z-index: 25;
   clear: both;

@@ -33,8 +33,6 @@ const StyledButton = styled.button`
     font-weight: 600;
     cursor: pointer;
     padding: 1rem;
-    margin-top: 1.2rem;
-    margin-bottom: 3rem;
 
     /*크기*/
     font-size: 1rem;

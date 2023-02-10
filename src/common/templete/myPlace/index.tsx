@@ -1,4 +1,3 @@
-import BottomContent from "@components/elements/bottomContent";
 import PlaceBottomContent from "@components/modules/myPlace/placeBottomContent";
 import RightTabTitle from "@components/modules/rightTab/tab";
 import Tab from "@components/modules/tab/tab";
@@ -13,6 +12,7 @@ const MyPlaceContainer = styled.section`
   height: calc(100vh - 64px);
   right: 0px;
   width: 380px;
+  background-color: ${({ theme }) => theme.color.white};
 `;
 
 const UlStyled = styled.ul`
@@ -24,7 +24,7 @@ const TeamPlaceContent = styled.div`
     position: absolute;
     left: 50%;
     top: 40%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 150%);
     
     .text{
         color: ${({ theme }) => theme.color.gray80};
@@ -32,7 +32,21 @@ const TeamPlaceContent = styled.div`
     }
 `;
 
-const MyPlace = () => {
+const BottomContent = styled.div`
+    width: 23.75rem;
+    z-index: 26;
+    background-color: ${({ theme }) => theme.color.white};
+`;
+
+interface Props {
+    value: string;
+    handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+    handleDelete: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  };
+
+const MyPlace = (props: Props) => {
+    const { value, handleOnChange, handleSubmit, handleDelete } = props;
     return (
         <MyPlaceContainer>
             <UlStyled>
@@ -40,7 +54,7 @@ const MyPlace = () => {
             </UlStyled>
             <Tabs>
                 <Tab title="내 장소">
-                    <PlaceBottomContent />
+                    <PlaceBottomContent handleOnChange={handleOnChange} handleSubmit={handleSubmit} handleDelete={handleDelete} value={value}/>
                 </Tab>
                 <Tab title="팀 장소">
                     <BottomContent>

@@ -2,11 +2,14 @@ import styled from "styled-components";
 import Icons from 'public/assets/images/icons';
 import { useEffect, useState } from "react";
 import { wantPlaceList } from "@api/myPlace";
+import Pencle from '@public/images/pencle.svg';
+import BaseButton from '@components/modules/tab/tab-detail/datail-button/base-link';
+import RightTab from "../rightTab";
+
 const BottomContainers = styled.article`
   background-color: ${({ theme }) => theme.color.white};
   height: calc(100vh - 128px);
-  width: 100%;
-  margin: 0;
+  width: 23.75rem;
   position: relative;
   overflow: auto;
   padding-bottom: 3rem;
@@ -54,13 +57,76 @@ const SearchMap = styled.button`
   }
 `;
 
-const PlaceListContainer = styled.div`
-
+const Footer = styled.div`
+  position : fixed;
+  bottom : 0;
+  text-align: center;
+  width: 23.75rem;
+  padding: 0px 28px 0rem 28px;
+  margin-bottom: 1rem;
 `;
 
-const PlaceBottomContent = () => {
+const EmptyList = styled.div`
+  border: 1px solid #D5D5D5;
+  align-items: center;
+  vertical-align: center;
+  text-align: center;
+  color:  ${({ theme }) => theme.color.gray70};
+  width: 20.25rem;
+  height: 22.375rem;
+  margin: 0 28px;
+`;
+
+const PlaceListContainer = styled.div`
+  left: 50%;
+  transform: translate(-0%, 90%);
+`;
+
+const GotoRegister =styled.button`
+  background:  ${({ theme }) => theme.color.gray20};
+  border-radius: 99px;
+  padding: 8px 20px;
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  &:hover{
+    background: ${({ theme }) => theme.color.gray30};
+  }
+`;
+
+const EditButton = styled.button`
+  border-radius: 20px;
+  padding:  6px 8px;
+  font-size: 0.75rem;
+  text-align: right;
+  margin-left: 6.5rem;
+  color: ${({ theme }) => theme.color.gray70};
+
+  background: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.color.black};
+  border: 1px solid ${({ theme }) => theme.color.black};
+  right: 0px;
+`;
+
+interface Props {
+  value: string;
+  handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleDelete: (e: React.MouseEvent<HTMLButtonElement>) => void;
+};
+
+const PlaceBottomContent = (props:Props) => {
+  const { value, handleOnChange, handleSubmit, handleDelete } = props;
     const [wentList, setWentList] = useState([]);
     const [hopeList, setHopeList] = useState([]);
+
+    const [editState, setEditState] = useState(false);
+
+    const [listState, setListState] = useState([]);//went가 false, hope가 true
+
+    const setEdit = () => {
+      setEditState(!editState);
+    }
 
     useEffect(() => {
         if (sessionStorage.getItem('jwtToken') == null) {
@@ -79,11 +145,13 @@ const PlaceBottomContent = () => {
     const handlerWent = () => {
         setWent(true);
         setHope(false);
+        setListState(wentList);
     }
 
     const handlerHope = () => {
         setWent(false);
         setHope(true);
+        setListState(hopeList);
     }
 
     return (
@@ -95,6 +163,24 @@ const PlaceBottomContent = () => {
             <SearchMap onClick={handlerHope}>
                 <span className={checkHope ? 'font' : 'font-active'}>가보고 싶은 곳 {hopeList.length}</span>
             </SearchMap>
+            <EditButton onClick={setEdit}>편집</EditButton>
+            {listState.length == 0 ? 
+              <EmptyList>
+                <PlaceListContainer>
+                  <Pencle/>
+                  <p>장소를 등록해 주세요</p>
+                  <GotoRegister onClick={(()=><RightTab handleOnChange={handleOnChange} handleSubmit={handleSubmit} handleDelete={handleDelete} value={value} />)}>등록하기</GotoRegister>
+                </PlaceListContainer>
+              </EmptyList>
+            : listState}
+            {editState == true ?
+              <Footer>
+                <BaseButton value="취소" width="100%" height="52px" fontSize="1rem" />
+                <br/>
+                <BaseButton value="삭제하기" width="100%" height="52px" fontSize="1rem" />
+              </Footer>
+              : null
+            }
         </BottomContainers>
     )
 }

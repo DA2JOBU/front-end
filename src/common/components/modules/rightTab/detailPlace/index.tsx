@@ -16,7 +16,6 @@ import { PlaceRegister, registerReviewType } from 'src/types/registerType';
 import Icons from 'public/assets/images/icons';
 
 const DetailContainer = styled.section`
-  overflow-y: auto;
   position: absolute;
   z-index: 26;
   clear: both;
@@ -25,13 +24,6 @@ const DetailContainer = styled.section`
   height: 100vh;
   background: ${({ theme }) => theme.color.white};
 
-  &::-webkit-scrollbar {
-    width: 4px;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    background: #ccc;
-  }
 `;
 
 const DetailHeader = styled.div`
@@ -52,6 +44,16 @@ const DetailHeader = styled.div`
 `;
 
 const CardContainer = styled.form`
+  overflow-y: auto;
+  height: 62%;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: #ccc;
+  }
+
   width: 100%;
   padding: 45px 0px 35px 0px;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
@@ -165,7 +167,19 @@ const AddressInfo = styled.label`
   border: 1px solid #D5D5D5;
   padding: 4px 6px;
   font-size: 1rem;
-`
+`;
+
+const BottomContent = styled.div`
+  position: fixed;
+  padding: 0px 28px;
+  z-index: 26;
+  right: 0px;
+  width: 23.75rem;
+  background: ${({ theme }) => theme.color.white};
+  bottom: 0;
+  vertical-align:middle;
+  margin-bottom: 2rem;
+`;
 
 export interface placeDetail {
   onClose: () => void;
@@ -180,13 +194,20 @@ export interface placeDetail {
 }
 
 const DetailPlace = (props: placeDetail) => {
+  //카테고리 추출 함수
+  const categoryFC = (word: string) => {
+    let result = word.slice(word.indexOf('>') + 2);
+    result = result.slice(0, result.indexOf(' '));
+    console.log(result);
+    return result;
+  }
   //입력 데이터
   const [inputData, setInput] = useState({
     placeId: props.placeId,
     placeName: props.placeName,
     address: props.address,
     roadAddress: props.roadAddress,
-    category: props.category,
+    category: categoryFC(props.category),
     url: props.placeUrl,
     x: props.x,
     y: props.y,
@@ -369,17 +390,16 @@ const DetailPlace = (props: placeDetail) => {
         <CardBody>
           <Etc onChange={onChange} />
         </CardBody>
-        <DivideLine />
         <CardHeader>
           <h2 className="people">한 줄 리뷰</h2>
         </CardHeader>
         <CardBody>
           <InputForm placeholder="후기를 적어주세요." onChange={onChange} name='simpleReview' />
         </CardBody>
-        <CardFooter>
-          <SubmitButton text="등록하기" onClick={submitForm} />
-        </CardFooter>
       </CardContainer>
+      <BottomContent>
+        <SubmitButton text="등록하기" onClick={submitForm} />
+      </BottomContent>
     </DetailContainer>
   );
 };
