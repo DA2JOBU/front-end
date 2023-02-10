@@ -19,6 +19,9 @@ import LoginLogo from './login-logo.svg';
 import Back from './back.svg';
 import ReviewBoard from './review.svg';
 import Copy from './copy.svg';
+import User from './user.svg';
+import Tag from './tag.svg';
+import Point from './point.svg';
 
 const importedIcons = {
   Check,
@@ -40,6 +43,9 @@ const importedIcons = {
   Back,
   ReviewBoard,
   Copy,
+  User,
+  Tag,
+  Point,
 };
 
 type IconName = keyof typeof importedIcons;

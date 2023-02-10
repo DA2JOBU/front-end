@@ -3,16 +3,15 @@ import styled from 'styled-components';
 import Icons from 'public/assets/images/icons';
 import Tabs from '../tabs';
 import Tab from '../tab';
-import DetailData from './detail-data';
-import DetailReview from './detail-review';
+import TopDetailData from './top-detail-data';
+import TopDetailReview from './top-detail-review';
 
 type Props = {
   onClose: () => void;
-  registration: any;
+  places: any;
 };
 
 const DetailContainer = styled.section`
-  overflow-y: auto;
   position: absolute;
   z-index: 26;
   clear: both;
@@ -20,6 +19,7 @@ const DetailContainer = styled.section`
   width: 380px;
   height: 100vh;
   background: ${({ theme }) => theme.color.white};
+  border-left: 1px solid ${({ theme }) => theme.color.gray30};
 
   &::-webkit-scrollbar {
     width: 4px;
@@ -48,23 +48,25 @@ const DetailHeader = styled.div`
 `;
 const DetailBody = styled.div`
   width: 100%;
+  overflow-y: auto;
 `;
 const SearchDetail = (props: Props) => {
-  const { onClose, registration } = props;
-  console.log(registration);
+  const { onClose, places } = props;
+  console.log('ddddd', places);
   return (
     <DetailContainer>
       <DetailHeader>
-        <Icons.Back style={{cursor: 'pointer'}} onClick={onClose} />
-        <span className="place-name">{registration.place_name}</span>
+        <Icons.Back style={{ cursor: 'pointer' }} onClick={onClose} />
+        <span className="place-name">{places.place_name || places.name}</span>
+        {/* <span className="place-name">{places.name}</span> */}
       </DetailHeader>
       <DetailBody>
         <Tabs>
           <Tab title="데이터">
-            <DetailData placeList={registration} />
+            <TopDetailData placeList={places} info={places.place_Info} status={places.place_stats} />
           </Tab>
           <Tab title="리뷰">
-            <DetailReview simpleReview={'맛이 좋네요'} ratingAvg={4.5} updatedAt={'2.2 화'} name={'불타는 닭다리'} />
+            <TopDetailReview placeStatus={places.place_stats} />
           </Tab>
         </Tabs>
       </DetailBody>

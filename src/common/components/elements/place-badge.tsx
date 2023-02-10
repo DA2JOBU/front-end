@@ -9,6 +9,10 @@ const BadgeContainer = styled.button`
   padding: 8px 12px;
   margin-right: 4px;
 `;
+
+type Props = {
+
+}
 const ComentBadge = () => {
   return (
     <>

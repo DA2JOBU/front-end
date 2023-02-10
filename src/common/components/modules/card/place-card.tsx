@@ -58,7 +58,14 @@ const CardBody = styled.div`
     display: flex;
 
     .star {
-      color: ${({ theme }) => theme.color.gray70};
+      color: ${({ theme }) => theme.color.gray90};
+      font-size: 14px;
+      padding: 0 18px 0 2px;
+      font-weight: 700;
+    }
+
+    .unstar {
+      color: ${({ theme }) => theme.color.gray80};
       font-size: 14px;
       padding: 0 18px 0 2px;
       font-weight: 700;
@@ -107,37 +114,19 @@ const CardFooter = styled.div`
 type Props = {
   place: Place;
   id: string;
+  // onClick: () => void;
 };
 
 const PlaceCard = (props: Props): JSX.Element => {
   const { address_name, category_name, place_name, reviewCnt, wantPlaceCnt, ratingAvg, coment } = props.place;
   const { id } = props;
-  const [active, setActive] = useState<boolean>(false);
-
-  const saveHandler = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setActive(!active);
-    
-    // 등록으로 연결
-  };
-
-  // const handleOnClick = useCallback(() => {
-  //   setSelectedPlace(id);
-  //   setActive(!active);
-  // }, [setSelectedPlace, id]);
 
   return (
     <CardContainer>
       <CardHeader>
         <div className="title">
           <h2 className="place">{place_name}</h2>
-          {/* <TopBadge /> */}
         </div>
-        <label className="label" onClick={() => setActive(!active)}>
-          {active ? <img src="assets/images/favorites-on.png" /> : <img src="assets/images/favorites.png" />}
-
-          <input type="checkbox" className="favorites" />
-        </label>
       </CardHeader>
       <CardBody>
         <p className="title">
@@ -145,8 +134,8 @@ const PlaceCard = (props: Props): JSX.Element => {
           <span className="address">{address_name}</span>
         </p>
         <p className="body">
-          <Icons.Star className="off" width={14} />
-          <span className="star">{ratingAvg ? ratingAvg : 0}</span>
+          <Icons.Star className={ratingAvg ? 'on' : 'off'} width={14} />
+          <span className={ratingAvg ? 'star' : 'unstar'}>{ratingAvg ? ratingAvg : 0}</span>
           <span className="review">리뷰 {reviewCnt ? reviewCnt : '-'}</span>
           <span className="save">저장 {wantPlaceCnt ? wantPlaceCnt : '-'}</span>
         </p>

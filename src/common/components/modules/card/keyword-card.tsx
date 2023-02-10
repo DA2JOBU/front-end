@@ -104,7 +104,9 @@ const KeywordCard = (): JSX.Element => {
     simpleReview: '',
   });
 
-  const onClick = () => {};
+  const onClick = () => {
+
+  };
 
   //입력 폼 전체 상태 관리
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -125,35 +127,30 @@ const KeywordCard = (): JSX.Element => {
     <CardContainer>
       <CardHeader>
         <h2 className="people">참석인원수</h2>
-        {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
         <PeopleButton onChange={onChange} name="participants" />
       </CardBody>
       <CardHeader>
         <h2 className="people">인당 가격대 </h2>
-        {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
         <MoneyButton onChange={onChange} name="price" />
       </CardBody>
       <CardHeader>
         <h2 className="people">분위기 </h2>
-        {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
         <Atmosphere onChange={onChange} name="mood" />
       </CardBody>
       <CardHeader>
         <h2 className="people">조명 밝기</h2>
-        {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
         <Brightness onChange={onChange} name="lighting" />
       </CardBody>
       <CardHeader>
         <h2 className="people">기타</h2>
-        {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
         <Etc onChange={onChange} />

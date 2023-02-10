@@ -52,6 +52,13 @@ const Container = styled.p`
     color: ${({ theme }) => theme.color.orange};
     border: 1px solid ${({ theme }) => theme.color.orange};
   }
+  .count {
+    background: ${({ theme }) => theme.color.brightOrange};
+    color: ${({ theme }) => theme.color.gray85};
+  }
+  .orange {
+    color: ${({ theme }) => theme.color.orange};
+  }
 `;
 
 const KeywordButton = ({ text, value, active, height, disabled, name, onClick, width, fontSize, count }: Props) => {
@@ -66,16 +73,22 @@ const KeywordButton = ({ text, value, active, height, disabled, name, onClick, w
             height,
             fontSize,
           }}
-          className={state ? 'active' : ''}
+          className="count"
         >
           <span>
             {text}
-            {count}
+            <span className="orange">{count}</span>
           </span>
-          <input type="checkbox" value={val} onChange={() => {
-            setState(!state);
-            setValue(state ? value : '');
-          }} onClick={onClick} name={name} />
+          <input
+            type="checkbox"
+            value={val}
+            onChange={() => {
+              setState(!state);
+              setValue(state ? value : '');
+            }}
+            onClick={onClick}
+            name={name}
+          />
         </StyledButton>
       ) : (
         <StyledButton
@@ -87,10 +100,16 @@ const KeywordButton = ({ text, value, active, height, disabled, name, onClick, w
           className={state ? 'active' : ''}
         >
           <span>{text}</span>
-          <input type="checkbox" value={val} onChange={() => {
-            setState(!state);
-            setValue(state ? value : '');
-          }} onClick={onClick} name={name} />
+          <input
+            type="checkbox"
+            value={val}
+            onChange={() => {
+              setState(!state);
+              setValue(state ? value : '');
+            }}
+            onClick={onClick}
+            name={name}
+          />
         </StyledButton>
       )}
     </Container>

@@ -23,6 +23,7 @@ const DetailContainer = styled.section`
   width: 380px;
   height: 100vh;
   background: ${({ theme }) => theme.color.white};
+  border-left: 1px solid ${({ theme }) => theme.color.gray30};
 
 `;
 

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Place } from 'src/types/searchType';
 import PlaceCard from '@components/modules/card/place-card';
 import { searchElement } from 'src/types/searchType';
+import SearchDetail from '../tab-detail/serach-detail';
 
 const PlaceContainer = styled.div`
   // height: 100%;

@@ -2,6 +2,7 @@ import Atmosphere from '@components/modules/rightTab/detailPlace/atmosphere';
 import Brightness from '@components/modules/rightTab/detailPlace/brightness';
 import Etc from '@components/modules/rightTab/detailPlace/etc';
 import React from 'react';
+import { searchElement } from 'src/types/searchType';
 import styled from 'styled-components';
 import Icons from 'public/assets/images/icons';
 import BaseButton from './datail-button/base-link';
@@ -159,7 +160,7 @@ const Container = styled.div`
 const onChange = () => {
   console.log('e');
 };
-const DetailData = (props: { placeList: any; info?: any; status?: any }) => {
+const TopDetailData = (props: { placeList: any; info?: any; status?: any }) => {
   const { placeList, info, status } = props;
 
   const onClick = () => {
@@ -251,4 +252,4 @@ const DetailData = (props: { placeList: any; info?: any; status?: any }) => {
   );
 };
 
-export default DetailData;
+export default TopDetailData;
