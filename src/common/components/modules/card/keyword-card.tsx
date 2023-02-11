@@ -20,6 +20,7 @@ const CardContainer = styled.form`
 
 const CardHeader = styled.div`
   width: 100%;
+  height: 70%;
   display: flex;
   align-items: center;
   padding-bottom: 0.8rem;
@@ -103,7 +104,7 @@ const KeywordCard = (): JSX.Element => {
     isReservation: '',
   });
 
-  const onClick = () => {};
+  const onClick = () => { };
 
   //입력 폼 전체 상태 관리
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

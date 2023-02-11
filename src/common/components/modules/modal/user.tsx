@@ -25,8 +25,7 @@ const UserModal = () => {
             <Icons.Close />
           </ModalHeader>
           <ModalBody>
-            {/* 닉네임: {userInfo?.nickname}
-            가입 일자: {userInfo?.createdAt} */}
+             닉네임: {userInfo?.nickname}
           </ModalBody>
         </Container>
       </ModalWrap>
