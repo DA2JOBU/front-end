@@ -19,9 +19,8 @@ const DetailContainer = styled.section`
   position: absolute;
   z-index: 26;
   clear: both;
-  right: 0px;
   width: 380px;
-  height: 100vh;
+  height: calc(100vh - 64px);
   background: ${({ theme }) => theme.color.white};
   border-left: 1px solid ${({ theme }) => theme.color.gray30};
 
@@ -48,7 +47,7 @@ const CardContainer = styled.form`
   overflow-y: auto;
   height: 62%;
   &::-webkit-scrollbar {
-    width: 4px;
+    width: 3px;
   }
   &::-webkit-scrollbar-thumb {
     border-radius: 2px;
@@ -56,12 +55,12 @@ const CardContainer = styled.form`
   }
 
   width: 100%;
-  padding: 45px 0px 35px 0px;
+  padding: 45px 28px 35px 28px;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
 `;
 
 const CardHeader = styled.div`
-  padding: 0px 28px 0.8rem 28px;
+  padding: 0px 0px 0.8rem 0px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -70,22 +69,19 @@ const CardHeader = styled.div`
     font-size: 1rem;
     color: ${({ theme }) => theme.color.black};
     font-weight: 600;
-    padding-right: 4px;
   }
 `;
 
 const CardBody = styled.div`
   margin-bottom: 1.5rem;
-  padding: 0px 28px 0px 28px;
+  width: 100%;
   p {
     display: flex;
-    justify-content: space-between;
     margin: 0.3rem 0.1rem;
   }
   .title {
     padding-bottom: 12px;
     .food {
-      padding-right: 6px;
       font-size: ${({ theme }) => theme.fontSize.Stitle};
       // font-weight: 600;
       color: ${({ theme }) => theme.color.gray90};
