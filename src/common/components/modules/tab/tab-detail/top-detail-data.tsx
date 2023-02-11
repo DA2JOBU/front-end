@@ -1,4 +1,3 @@
-import Atmosphere from '@components/modules/rightTab/detailPlace/atmosphere';
 import Brightness from '@components/modules/rightTab/detailPlace/brightness';
 import Etc from '@components/modules/rightTab/detailPlace/etc';
 import React from 'react';
@@ -6,6 +5,7 @@ import { searchElement } from 'src/types/searchType';
 import styled from 'styled-components';
 import Icons from 'public/assets/images/icons';
 import BaseButton from './datail-button/base-link';
+import Atmosphere from '@components/modules/rightTab/detailPlace/atmosphere';
 
 const DataContainer = styled.form`
   width: 100%;
@@ -226,13 +226,13 @@ const TopDetailData = (props: { placeList: any; info?: any; status?: any }) => {
           <h2 className="people">분위기 </h2>
         </CardHeader>
         <CardBody>
-          <Atmosphere onChange={onChange} name="mood" value="Nomal" />
+          <Atmosphere name="mood" mood={status?.mood} />
         </CardBody>
         <CardHeader>
           <h2 className="people">조명 밝기</h2>
         </CardHeader>
         <CardBody>
-          <Brightness onChange={onChange} name="lighting" />
+          <Brightness onChange={onChange} name="lighting" lighting={status?.lighting} />
         </CardBody>
         <CardHeader>
           <h2 className="people">기타</h2>

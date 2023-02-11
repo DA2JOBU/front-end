@@ -24,6 +24,8 @@ interface Props {
   active?: boolean;
   fontSize?: string;
   count?: number | undefined;
+  mood?: string;
+  lighting?: string;
 }
 
 const StyledButton = styled.label`
@@ -61,23 +63,36 @@ const Container = styled.p`
   }
 `;
 
-const KeywordButton = ({ text, value, active, height, disabled, name, onClick, width, fontSize, count }: Props) => {
+const KeywordButton = ({
+  text,
+  value,
+  active,
+  height,
+  disabled,
+  name,
+  onClick,
+  width,
+  fontSize,
+  mood,
+  lighting,
+}: Props) => {
   const [state, setState] = useState<boolean>(active || false);
   const [val, setValue] = useState(value);
+  console.log('ss', mood, lighting, text);
   return (
     <Container>
-      {count ? (
+      {mood  === text ?(
         <StyledButton
           style={{
             width,
             height,
             fontSize,
           }}
-          className={count ? 'active' : ''}
+          className={mood  === text ? 'count' : ''}
         >
           <span>
             {text}
-            <span className="orange">{count}</span>
+            {/* <span className="orange">{count}</span> */}
           </span>
           <input
             type="checkbox"
