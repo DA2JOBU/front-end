@@ -11,7 +11,6 @@ import Modal from '@components/modules/modal';
 import UserModal from '@components/modules/modal/user';
 import Map from '@components/modules/map';
 import { useUserInfoModalOpen } from '../hook/modal.hook';
-import { Place } from 'src/types/searchType';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import MyPlace from './myPlace';
@@ -114,7 +113,7 @@ const Contents = (): JSX.Element => {
 
         <Nav title="나의 회식 장소" onClick={() => !setIsOpen}>
           <SlideContainer>
-            <MyPlace />
+            <MyPlace handleOnChange={handleOnChange} handleSubmit={handleSubmit} handleDelete={handleDelete} value={value}/>
           </SlideContainer>
         </Nav>
 

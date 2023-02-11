@@ -8,7 +8,6 @@ const SearchContainer = styled.section`
   z-index: 25;
   clear: both;
   width: 380px;
-  border-right: 1px solid ${({ theme }) => theme.color.gray30};
 `;
 
 const UlStyled = styled.ul`

@@ -1,17 +1,29 @@
 import TopCard from '@components/modules/card/top-card';
 import React, { useEffect, useState } from 'react';
-import { Place, PlaceTopTen } from 'src/types/searchType';
-import { getPlaceTopTen, places } from 'src/common/api/search';
+import { PlaceTopTen } from 'src/types/searchType';
 import styled from 'styled-components';
 import Icons from 'public/assets/images/icons';
 import axios from 'axios';
+import TopSearchDetail from '../tab-detail/top-serach-detail';
+
+const SearchContainer = styled.section`
+  float: left;
+  position: absolute;
+  top: 0;
+  z-index: 30;
+  clear: both;
+  width: 380px;
+  left: 380px;
+  height: calc(100vh - 64px);
+  background-color: ${({ theme }) => theme.color.white};
+  border-left: 1px solid ${({ theme }) => theme.color.gray30};
+  padding-bottom: 3.8rem;
+`;
 
 const SearchTopContainer = styled.div`
   padding-bottom: 8rem;
   background: ${({ theme }) => theme.color.white};
-  position: relative;
   height: 100vh;
-
   overflow-y: auto;
 
   &::-webkit-scrollbar {
@@ -26,6 +38,7 @@ const SearchTopContainer = styled.div`
 const SearchContent = styled.div`
   overflow-y: auto;
 `;
+
 export type PropsPlace = {
   address_name?: string;
   category_group_name?: string;
@@ -51,7 +64,9 @@ const SearchBanner = styled.div`
 `;
 
 const SearchTopPlace = (): JSX.Element => {
+  const [detailPopup, setVisible] = useState<boolean>(false);
   const [places, setPlaces] = useState<Array<PlaceTopTen>>([]);
+  const [place, setPlace] = useState<Array<PlaceTopTen>>([]);
 
   useEffect(() => {
     getPlaceTopTen();
@@ -65,14 +80,29 @@ const SearchTopPlace = (): JSX.Element => {
 
   return (
     <>
+      {detailPopup && (
+        <SearchContainer>
+          <TopSearchDetail onClose={() => setVisible(false)} places={place} />
+        </SearchContainer>
+      )}
       <SearchBanner>
         <Icons.Hand />
         <span className="title"> 회식장소 Top 10</span>
       </SearchBanner>
       <SearchTopContainer>
         <SearchContent>
-          {places.map((place: PlaceTopTen, index: React.Key | null | undefined) => {
-            return <TopCard place={place} key={index} />;
+          {places.map((place: any, index: React.Key | null | undefined) => {
+            return (
+              <div key={place.id}>
+                <TopCard
+                  place={place}
+                  onClick={() => {
+                    setVisible(true);
+                    setPlace(place);
+                  }}
+                />
+              </div>
+            );
           })}
         </SearchContent>
       </SearchTopContainer>

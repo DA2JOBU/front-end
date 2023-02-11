@@ -3,13 +3,15 @@ import BaseButton from '@components/elements/keyword-button/base';
 import { ButtonContainer } from "@components/elements/keyword-button/people";
 
 interface Props {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name: string;
+  lighting?: string;
 }
 
 const Brightness = (props: Props) => {
   const [active, setActive] = useState<boolean>(false);
-  const { onChange, name } = props;
+  const { onChange, name, lighting } = props;
+  console.log(lighting)
   return (
     <ButtonContainer>
       <BaseButton
@@ -20,6 +22,7 @@ const Brightness = (props: Props) => {
         fontSize="16px"
         onClick={onChange}
         name={name}
+        lighting={lighting}
       />
       <BaseButton
         text='일반적인'
@@ -29,6 +32,7 @@ const Brightness = (props: Props) => {
         fontSize="16px"
         onClick={onChange}
         name={name}
+        lighting={lighting}
       />
       <BaseButton
         text='어두운'
@@ -38,6 +42,7 @@ const Brightness = (props: Props) => {
         fontSize="16px"
         onClick={onChange}
         name={name}
+        lighting={lighting}
       />
     </ButtonContainer>
   )

@@ -117,8 +117,14 @@ const CardFooter = styled.div`
   }
 `;
 
-const TopCard = (props: { place: PlaceTopTen }): JSX.Element => {
-  const { name, category, place_Info } = props.place;
+type Props = {
+  onClick: () => void;
+  place: PlaceTopTen;
+};
+
+const TopCard = (props: Props): JSX.Element => {
+  const { place_name, category, place_stats, place_Info } = props.place;
+  const { onClick } = props;
   const [active, setActive] = useState<boolean>(false);
 
   const saveHandler = (e: React.MouseEvent) => {
@@ -127,16 +133,12 @@ const TopCard = (props: { place: PlaceTopTen }): JSX.Element => {
   };
 
   return (
-    <CardContainer>
+    <CardContainer onClick={onClick}>
       <CardHeader>
         <div className="title">
-          <h2 className="place">{name}</h2>
-          <TopBadge rank={place_Info?.rank} />
+          <h2 className="place">{place_name}</h2>
+          <TopBadge rank={place_stats?.rank} />
         </div>
-        <label className="label">
-          {active ? <img src="assets/images/favorites-on.png" /> : <img src="assets/images/favorites.png" />}
-          <input type="checkbox" className="favorites" onClick={saveHandler} />
-        </label>
       </CardHeader>
       <CardBody>
         <p className="title">
@@ -144,12 +146,12 @@ const TopCard = (props: { place: PlaceTopTen }): JSX.Element => {
           <span className="address">{place_Info?.roadAddress}</span>
         </p>
         <p className="body">
-          <Icons.Star className={place_Info?.ratingAvg !== 0 ? 'off' : 'on'} width={14} />
-          <span className={place_Info?.ratingAvg !== 0 ? 'unstar' : 'star'}>
-            {place_Info?.ratingAvg ? place_Info?.ratingAvg : 0}
+          <Icons.Star className={place_stats?.ratingAvrg ? 'on' : 'off'} width={14} />
+          <span className={place_stats?.ratingAvrg ? 'star' : 'unstar'}>
+            {place_stats?.ratingAvrg ? place_stats?.ratingAvrg : 0}
           </span>
 
-          <span className="review">리뷰 {place_Info?.reviewCnt ? place_Info?.reviewCnt : '-'}</span>
+          <span className="review">리뷰 {place_stats?.reviewCnt ? place_stats?.reviewCnt : '-'}</span>
           <span className="save">저장 {place_Info?.wantPlaceCnt ? place_Info?.wantPlaceCnt : '-'}</span>
         </p>
       </CardBody>

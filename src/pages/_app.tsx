@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>회식일지도</title>
+        <title>회식이지</title>
         <meta name="description" content="get-together" />
         <meta key="viewport" name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />

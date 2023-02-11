@@ -57,9 +57,9 @@ const Review = styled.span`
   }
 `;
 
-const DetailReview = (props: {placeStatus: any}) => {
+const TopDetailReview = (props: {placeStatus: any}) => {
   const { placeStatus } = props;
-  console.log(placeStatus.simpleReview)
+  // console.log(placeStatus.simpleReview)
   return (
     <Container>
       <p className="review-text">
@@ -82,4 +82,4 @@ const DetailReview = (props: {placeStatus: any}) => {
   );
 };
 
-export default DetailReview;
+export default TopDetailReview;

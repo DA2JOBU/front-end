@@ -1,10 +1,11 @@
-import Atmosphere from '@components/modules/rightTab/detailPlace/atmosphere';
 import Brightness from '@components/modules/rightTab/detailPlace/brightness';
 import Etc from '@components/modules/rightTab/detailPlace/etc';
 import React from 'react';
+import { searchElement } from 'src/types/searchType';
 import styled from 'styled-components';
 import Icons from 'public/assets/images/icons';
 import BaseButton from './datail-button/base-link';
+import Atmosphere from '@components/modules/rightTab/detailPlace/atmosphere';
 
 const DataContainer = styled.form`
   width: 100%;
@@ -159,9 +160,8 @@ const Container = styled.div`
 const onChange = () => {
   console.log('e');
 };
-const DetailData = (props: { placeList: any; info?: any; status?: any; category: string}) => {
-  const { placeList, info, status, category} = props;
-  console.log('ddd', category)
+const TopDetailData = (props: { placeList: any; info?: any; status?: any }) => {
+  const { placeList, info, status } = props;
 
   const onClick = () => {
     console.log('복사');
@@ -202,14 +202,14 @@ const DetailData = (props: { placeList: any; info?: any; status?: any; category:
             <span className="text-small">평균인원</span>
             <p className="content-body">
               <Icons.User />
-              <span className="content-text">-</span>
+              <span className="content-text">6 명</span>
             </p>
           </Container>
           <Container>
             <span className="text-small">음식종류</span>
             <p className="content-body">
               <Icons.Point />
-              <span className="content-text">{category}</span>
+              <span className="content-text">{placeList.category}</span>
             </p>
           </Container>
           <Container>
@@ -226,13 +226,13 @@ const DetailData = (props: { placeList: any; info?: any; status?: any; category:
           <h2 className="people">분위기 </h2>
         </CardHeader>
         <CardBody>
-          <Atmosphere onChange={onChange}  name="mood"  />
+          <Atmosphere name="mood" mood={status?.mood} />
         </CardBody>
         <CardHeader>
           <h2 className="people">조명 밝기</h2>
         </CardHeader>
         <CardBody>
-          <Brightness onChange={onChange} name="lighting" />
+          <Brightness onChange={onChange} name="lighting" lighting={status?.lighting} />
         </CardBody>
         <CardHeader>
           <h2 className="people">기타</h2>
@@ -252,4 +252,4 @@ const DetailData = (props: { placeList: any; info?: any; status?: any; category:
   );
 };
 
-export default DetailData;
+export default TopDetailData;

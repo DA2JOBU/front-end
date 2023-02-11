@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import TopBadge from '../../elements/top-badge';
-import { Place } from 'src/types/searchType';
+import { KeywordSearchDto, Place } from 'src/types/searchType';
 import ComentBadge from '@components/elements/place-badge';
 import Button from '@components/elements/Button';
 import PeopleButton from '@components/elements/keyword-button/people';
@@ -11,6 +11,7 @@ import SubmitButton from '@components/elements/submitButton';
 import Atmosphere from '../rightTab/detailPlace/atmosphere';
 import Brightness from '../rightTab/detailPlace/brightness';
 import Etc from '../rightTab/detailPlace/etc';
+import { getKeyword } from '@api/search';
 
 const CardContainer = styled.form`
   width: 100%;
@@ -88,20 +89,18 @@ const CardFooter = styled.div`
 
 const KeywordCard = (): JSX.Element => {
   //입력 데이터
-  const [inputDate, setInput] = useState({
-    placeKinds: '',
-    satisfaction: 0,
-    participants: 0,
+  const [inputData, setInput] = useState({
+    participants: '',
     price: '',
-    moodCategory: '',
     mood: '',
     lighting: '',
-    isCorkCharge: false,
-    isRoom: false,
-    isParking: false,
-    isAdvancePayment: false,
-    isRent: false,
-    simpleReview: '',
+
+    isCorkCharge: '',
+    isRoom: '',
+    isParking: '',
+    isAdvancePayment: '',
+    isRent: '',
+    isReservation: '',
   });
 
   const onClick = () => {};
@@ -110,50 +109,63 @@ const KeywordCard = (): JSX.Element => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setInput({
-      ...inputDate,
+      ...inputData,
       [name]: value.trim(),
     });
-    console.log(value);
   };
 
-  const submitForm = (e?: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    console.log(e);
-    console.log(inputDate);
+  const submitForm = async () => {
+    console.log(inputData);
+    let param = inputData.participants.split(',');
+    const data: KeywordSearchDto = {
+      participants: {
+        min: Number(param[0]),
+        max: Number(param[1]),
+      },
+      price: inputData.price,
+      lighting: inputData.lighting,
+      mood: inputData.mood,
+      etc: {
+        is_cork_charge: (inputData.isCorkCharge != '' ? true : false),
+        is_rent: (inputData.isRent != '' ? true : false),
+        is_room: (inputData.isRoom != '' ? true : false),
+        is_reservation: (inputData.isReservation != '' ? true : false),
+        is_parking: (inputData.isParking != '' ? true : false),
+        is_advance_payment: (inputData.isAdvancePayment != '' ? true : false),
+      },
+    };
+    console.log(data);
+    getKeyword(data);
   };
 
   return (
     <CardContainer>
       <CardHeader>
         <h2 className="people">참석인원수</h2>
-        {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
         <PeopleButton onChange={onChange} name="participants" />
       </CardBody>
       <CardHeader>
         <h2 className="people">인당 가격대 </h2>
-        {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
         <MoneyButton onChange={onChange} name="price" />
       </CardBody>
       <CardHeader>
         <h2 className="people">분위기 </h2>
-        {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
         <Atmosphere onChange={onChange} name="mood" />
       </CardBody>
       <CardHeader>
         <h2 className="people">조명 밝기</h2>
-        {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
         <Brightness onChange={onChange} name="lighting" />
       </CardBody>
       <CardHeader>
         <h2 className="people">기타</h2>
-        {/* <TopBadge /> */}
       </CardHeader>
       <CardBody>
         <Etc onChange={onChange} />
