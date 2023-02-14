@@ -11,7 +11,7 @@ const MyPlaceContainer = styled.section`
   clear: both;
   height: calc(100vh - 64px);
   right: 0px;
-  width: 380px;
+  width: 23.75rem;
   background-color: ${({ theme }) => theme.color.white};
 `;
 

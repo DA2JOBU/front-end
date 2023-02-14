@@ -12,7 +12,7 @@ const MyPageTabContainer = styled.section`
   clear: both;
   height: calc(100vh);
   right: 0px;
-  width: 380px;
+  width: 23.75rem;
 `;
 
 const Contents = styled.article`

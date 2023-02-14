@@ -20,8 +20,8 @@ const SearchListContainer = styled.section`
   position: absolute;
   z-index: 25;
   clear: both;
-  width: 380px;
-  left: 380px;
+  width: 23.75rem;
+  left: 23.75rem;
   height: calc(100vh - 64px);
   background-color: ${({ theme }) => theme.color.white};
   border-left: 1px solid ${({ theme }) => theme.color.gray30};

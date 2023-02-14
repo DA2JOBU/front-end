@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 
 const TabContainer = styled.article`
-  width: 380px;
+  width: 23.75rem;
   height: 100%;
 
 `;
