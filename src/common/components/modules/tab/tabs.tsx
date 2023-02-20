@@ -7,12 +7,12 @@ const SearchContainer = styled.section`
   position: absolute;
   z-index: 25;
   clear: both;
-  width: 380px;
+  width: 23.75rem;
 `;
 
 const UlStyled = styled.ul`
   display: flex;
-  width: 380px;
+  width: 23.75rem;
 `;
 
 // const Contents = styled.article`

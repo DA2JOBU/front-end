@@ -18,7 +18,7 @@ const DetailContainer = styled.section`
   z-index: 26;
   clear: both;
   right: 0px;
-  width: 380px;
+  width: 23.75rem;
   height: 100vh;
   background: ${({ theme }) => theme.color.white};
   border-left: 1px solid ${({ theme }) => theme.color.gray30};
