@@ -13,7 +13,6 @@ interface Props {
 //벨류인것만 카운트
 
 const Atmosphere = (props: Props) => {
-  const [active, setActive] = useState<boolean>(false);
   const { onChange, name, count, mood } = props;
 
   const [light, setLight] = useState(false);
