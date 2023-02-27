@@ -9,12 +9,35 @@ interface Props {
 }
 
 const Brightness = (props: Props) => {
-  const [active, setActive] = useState<boolean>(false);
   const { onChange, name, lighting } = props;
-  console.log(lighting)
+
+  const [bright, setBright] = useState(false);
+  const [normal, setNormal] = useState(false);
+  const [dark, setDark] = useState(false);
+  const [state, setState] = useState('');
+  const clickEvent = (val: string) => {
+    setState(val);
+    if (val === 'Light') {
+      setBright(true);
+      setNormal(false);
+      setDark(false);
+    }
+    else if (val === 'Nomal') {
+      setBright(false);
+      setNormal(true);
+      setDark(false);
+    }
+    else if (val === 'Dark') {
+      setBright(false);
+      setNormal(false);
+      setDark(true);
+    }
+  }
   return (
     <ButtonContainer>
       <BaseButton
+        mClick={clickEvent}
+        active={bright}
         text='밝은'
         value="Light"
         width="6.4rem"
@@ -25,6 +48,8 @@ const Brightness = (props: Props) => {
         lighting={lighting}
       />
       <BaseButton
+        mClick={clickEvent}
+        active={normal}
         text='일반적인'
         value="Nomal"
         width="6.4rem"
@@ -35,6 +60,8 @@ const Brightness = (props: Props) => {
         lighting={lighting}
       />
       <BaseButton
+        mClick={clickEvent}
+        active={dark}
         text='어두운'
         value="Dark"
         width="6.4rem"

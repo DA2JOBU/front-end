@@ -6,7 +6,6 @@ import ComentBadge from '@components/elements/place-badge';
 import Button from '@components/elements/Button';
 import PeopleButton from '@components/elements/keyword-button/people';
 import MoneyButton from '../../elements/keyword-button/money';
-import KeywordButton from '@components/elements/keyword-button/keyword';
 import SubmitButton from '@components/elements/submitButton';
 import Atmosphere from '../rightTab/detailPlace/atmosphere';
 import Brightness from '../rightTab/detailPlace/brightness';
