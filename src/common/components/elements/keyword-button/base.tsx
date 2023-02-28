@@ -17,6 +17,7 @@ interface Props {
   value?: string;
   name?: string;
   onClick?: (e: any) => void;
+  mClick: (val: string) => void;
   width?: string;
   disabled?: boolean;
   className?: string;
@@ -71,62 +72,36 @@ const KeywordButton = ({
   disabled,
   name,
   onClick,
+  mClick,
   width,
   fontSize,
   mood,
   lighting,
 }: Props) => {
-  const [state, setState] = useState<boolean>(active || false);
-  const [val, setValue] = useState(value);
-  console.log('ss', mood, lighting, text);
   return (
     <Container>
-      {mood  === text ?(
-        <StyledButton
-          style={{
-            width,
-            height,
-            fontSize,
+      <StyledButton
+        style={{
+          width,
+          height,
+          fontSize,
+        }}
+        className={active ? 'active' : ''}
+      >
+        <span>
+          {text}
+          {/* <span className="orange">{count}</span> */}
+        </span>
+        <input
+          type="checkbox"
+          value={value}
+          onChange={(e) => {
+            mClick(e.target.value);
           }}
-          className={mood  === text ? 'count' : ''}
-        >
-          <span>
-            {text}
-            {/* <span className="orange">{count}</span> */}
-          </span>
-          <input
-            type="checkbox"
-            value={val}
-            onChange={() => {
-              setState(!state);
-              setValue(state ? value : '');
-            }}
-            onClick={onClick}
-            name={name}
-          />
-        </StyledButton>
-      ) : (
-        <StyledButton
-          style={{
-            width,
-            height,
-            fontSize,
-          }}
-          className={state ? 'active' : ''}
-        >
-          <span>{text}</span>
-          <input
-            type="checkbox"
-            value={val}
-            onChange={() => {
-              setState(!state);
-              setValue(state ? value : '');
-            }}
-            onClick={onClick}
-            name={name}
-          />
-        </StyledButton>
-      )}
+          onClick={onClick}
+          name={name}
+        />
+      </StyledButton>
     </Container>
   );
 };

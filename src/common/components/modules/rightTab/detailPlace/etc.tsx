@@ -8,14 +8,42 @@ interface Props {
 
 const Etc = (props: Props) => {
   const { onChange } = props;
+  const [call, setCall] = useState(false);
+  const [room, setRoom] = useState(false);
+  const [pay, setPay] = useState(false);
+  const [reservation, setReservation] = useState(false);
+  const [park, setPark] = useState(false);
+  const [lent, setLent] = useState(false);
+  const [state, setState] = useState('');
+  const clickEvent = (val: string) => {
+    setState(val);
+    if (val === '콜키지') {
+      setCall(!call);
+    }
+    else if (val === '룸') {
+      setRoom(!room);
+    }
+    else if (val === '선결제') {
+      setPay(!pay);
+    }
+    else if (val === '예약필수') {
+      setReservation(!reservation);
+    }
+    else if (val === '주차가능') {
+      setPark(!park);
+    }
+    else if (val === '대관가능') {
+      setLent(!lent);
+    }
+  }
   return (
     <ButtonContainer>
-      <BaseButton text='콜키지' value='콜키지' width="102px" height="52px" fontSize="16px" onClick={onChange} name='isCorkCharge' />
-      <BaseButton text='룸' value="룸" width="102px" height="52px" fontSize="16px" onClick={onChange} name='isRoom' />
-      <BaseButton text='선결제' value="선결제" width="102px" height="52px" fontSize="16px" onClick={onChange} name='isAdvancePayment' />
-      <BaseButton text='예약필수' value="예약필수" width="102px" height="52px" fontSize="16px" onClick={onChange} name='isReservation' />
-      <BaseButton text='주차가능' value="주차가능" width="102px" height="52px" fontSize="16px" onClick={onChange} name='isParking' />
-      <BaseButton text='대관가능' value="대관가능" width="102px" height="52px" fontSize="16px" onClick={onChange} name='isRent' />
+      <BaseButton mClick={clickEvent} active={call} text='콜키지' value='콜키지' width="102px" height="52px" fontSize="16px" onClick={onChange} name='isCorkCharge' />
+      <BaseButton mClick={clickEvent} active={room} text='룸' value="룸" width="102px" height="52px" fontSize="16px" onClick={onChange} name='isRoom' />
+      <BaseButton mClick={clickEvent} active={pay} text='선결제' value="선결제" width="102px" height="52px" fontSize="16px" onClick={onChange} name='isAdvancePayment' />
+      <BaseButton mClick={clickEvent} active={reservation} text='예약필수' value="예약필수" width="102px" height="52px" fontSize="16px" onClick={onChange} name='isReservation' />
+      <BaseButton mClick={clickEvent} active={park} text='주차가능' value="주차가능" width="102px" height="52px" fontSize="16px" onClick={onChange} name='isParking' />
+      <BaseButton mClick={clickEvent} active={lent} text='대관가능' value="대관가능" width="102px" height="52px" fontSize="16px" onClick={onChange} name='isRent' />
     </ButtonContainer>
   );
 };

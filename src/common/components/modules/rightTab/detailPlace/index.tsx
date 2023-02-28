@@ -194,8 +194,8 @@ const DetailPlace = (props: placeDetail) => {
   //카테고리 추출 함수
   const categoryFC = (word: string) => {
     let result = word.slice(word.indexOf('>') + 2);
-    result = result.slice(0, result.indexOf(' '));
-    console.log(result);
+    if (result.indexOf(' ') > 0)
+      result = result.slice(0, result.indexOf(' '));
     return result;
   }
   //입력 데이터
