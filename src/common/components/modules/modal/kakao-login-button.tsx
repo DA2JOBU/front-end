@@ -7,7 +7,7 @@ import Icons from 'public/assets/images/icons';
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 60px;
+  height: 3.75rem;
   margin: 0;
 `;
 

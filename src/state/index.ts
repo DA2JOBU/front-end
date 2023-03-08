@@ -9,7 +9,7 @@ export const searchList = atom<searchElement[]>({
   default: [],
 });
 
-export const keyword = atom({
+export const keyword = atom<string>({
   key: 'keyword',
   default: '',
 });

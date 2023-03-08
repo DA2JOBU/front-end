@@ -55,8 +55,8 @@ const PeopleButton = (props: Props) => {
         text="4~8명"
         value='4,8'
         width="9.8rem"
-        height="52px"
-        fontSize="16px"
+        height="3.25rem"
+        fontSize="1rem"
         onClick={onChange}
         name={name}
       />
@@ -66,8 +66,8 @@ const PeopleButton = (props: Props) => {
         text="9~12명"
         value="9,12"
         width="9.8rem"
-        fontSize="16px"
-        height="52px"
+        fontSize="1rem"
+        height="3.25rem"
         onClick={onChange}
         name={name}
       />
@@ -77,8 +77,8 @@ const PeopleButton = (props: Props) => {
         text="13~16명"
         value="13,16"
         width="9.8rem"
-        fontSize="16px"
-        height="52px"
+        fontSize="1rem"
+        height="3.25rem"
         onClick={onChange}
         name={name}
       />
@@ -88,8 +88,8 @@ const PeopleButton = (props: Props) => {
         text="17명 이상"
         value="17"
         width="9.8rem"
-        fontSize="16px"
-        height="52px"
+        fontSize="1rem"
+        height="3.25rem"
         onClick={onChange}
         name={name}
       />

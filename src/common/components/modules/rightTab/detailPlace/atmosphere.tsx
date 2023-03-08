@@ -45,14 +45,14 @@ const Atmosphere = (props: Props) => {
         text='가벼운'
         value="mood"
         width="6.4rem"
-        height="52px"
-        fontSize="16px"
+        height="3.25rem"
+        fontSize="1rem"
         onClick={onChange}
         name={name}
         mood={mood}
       />
-      <BaseButton mClick={clickEvent} active={normal} text='일반적인' value="Nomal" width="6.4rem" height="52px" fontSize="16px" onClick={onChange} name={name} mood={mood} />
-      <BaseButton mClick={clickEvent} active={heavy} text='무거운' value="Heavy" width="6.4rem" height="52px" fontSize="16px" onClick={onChange} name={name} mood={mood} />
+      <BaseButton mClick={clickEvent} active={normal} text='일반적인' value="Nomal" width="6.4rem" height="3.25rem" fontSize="1rem" onClick={onChange} name={name} mood={mood} />
+      <BaseButton mClick={clickEvent} active={heavy} text='무거운' value="Heavy" width="6.4rem" height="3.25rem" fontSize="1rem" onClick={onChange} name={name} mood={mood} />
     </ButtonContainer>
   );
 };

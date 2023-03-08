@@ -4,7 +4,7 @@ const InputStyled = styled.input`
   margin: 0;
   width: 100%;
   text-align: right;
-  width: 324px;
+  width: 20.25rem;
   padding: 11px 0 8px 0;
   display: flex;
   border-bottom: 2px solid ${({ theme }) => theme.color.black};

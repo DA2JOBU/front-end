@@ -56,11 +56,11 @@ const Satisfaction = (props: Props) => {
   }
   return (
     <ButtonContainer>
-      <BaseButton mClick={clickEvent} active={five} text='5' value="5" width="58px" height="58px" onClick={onChange} name={name} />
-      <BaseButton mClick={clickEvent} active={four} text='4' value="4" width="58px" height="58px" onClick={onChange} name={name} />
-      <BaseButton mClick={clickEvent} active={three} text='3' value="3" width="58px" height="58px" onClick={onChange} name={name} />
-      <BaseButton mClick={clickEvent} active={two} text='2' value="2" width="58px" height="58px" onClick={onChange} name={name} />
-      <BaseButton mClick={clickEvent} active={one} text='1' value="1" width="58px" height="58px" onClick={onChange} name={name} />
+      <BaseButton mClick={clickEvent} active={five} text='5' value="5" width="3.625rem" height="3.625rem" onClick={onChange} name={name} />
+      <BaseButton mClick={clickEvent} active={four} text='4' value="4" width="3.625rem" height="3.625rem" onClick={onChange} name={name} />
+      <BaseButton mClick={clickEvent} active={three} text='3' value="3" width="3.625rem" height="3.625rem" onClick={onChange} name={name} />
+      <BaseButton mClick={clickEvent} active={two} text='2' value="2" width="3.625rem" height="3.625rem" onClick={onChange} name={name} />
+      <BaseButton mClick={clickEvent} active={one} text='1' value="1" width="3.625rem" height="3.625rem" onClick={onChange} name={name} />
     </ButtonContainer>
   );
 };
