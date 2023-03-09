@@ -12,7 +12,7 @@ import Brightness from '../rightTab/detailPlace/brightness';
 import Etc from '../rightTab/detailPlace/etc';
 import { getKeyword } from '@api/search';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { searchList, setSeachList } from 'src/state';
+import { searchList } from 'src/state';
 
 const CardContainer = styled.form`
   width: 100%;
@@ -91,7 +91,7 @@ const CardFooter = styled.div`
 
 const KeywordCard = (): JSX.Element => {
   //검색 결과를 담는 것
-  const setSearchList = useSetRecoilState(setSeachList);
+  //const setSearchList = useSetRecoilState(setSeachList);
   const getSearchList = useRecoilValue(searchList);
   //입력 데이터
   const [inputData, setInput] = useState({
@@ -178,7 +178,7 @@ const KeywordCard = (): JSX.Element => {
           wantPlaceCnt: o.wantPlaceCnt
         });
       })
-      setSearchList(resData);
+      //setSearchList(resData);
       console.log('여긴 키워드', resData);
     });
   };

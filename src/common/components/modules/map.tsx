@@ -2,7 +2,7 @@ import { getRegisterList } from '@api/mapApi';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { keyword, searchList, setSeachList } from 'src/state';
+import { keyword, searchList } from 'src/state';
 import { reviewedPlaceList } from 'src/types/searchType';
 import { propsType } from '../../templete/contents';
 
@@ -21,7 +21,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
   //검색 결과를 담는 것
   const setterSearchList = useSetRecoilState(searchList);
   const getterSearchList = useRecoilValue(searchList);
-  const getRegisterList = useRecoilValue(setSeachList);
+  // const getRegisterList = useRecoilValue(setSeachList);
   // 마커를 담는 배열
   const [registerPos, setRegister] = useState<any[]>([]);
 
@@ -30,15 +30,15 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
   useEffect(() => {
     if (registerPos.length > 0)
       return;
-    if (getterSearchList.length == 0) {
-      setRegister(getRegisterList);
-      // console.log("현재 setSearchList: ", getRegisterList);
-      return;
-    }
+    //if (getterSearchList.length == 0) {
+    // setRegister(getRegisterList);
+    // console.log("현재 setSearchList: ", getRegisterList);
+    //return;
+    //}
     // console.log("현재 searchList: ", getterSearchList);
-    // getRegisterList().then((res) => {
-    //   setRegister(res);
-    // });
+    getRegisterList().then((res: any) => {
+      setRegister(res);
+    });
   }, [registerPos]);
 
   // 검색어가 바뀔 때마다 재렌더링되도록 useEffect 사용

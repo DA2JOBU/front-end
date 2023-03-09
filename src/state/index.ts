@@ -10,16 +10,16 @@ export const searchList = atom<searchElement[]>({
   default: [],
 });
 
-export const setSeachList = selector({
-  key: 'setSearchList',
-  get: async () => {
-    const res = await getRegisterList();
-    return res;
-  },
-  set: ({ set }, newValue: any) => {
-    set(searchList, newValue);
-  }
-});
+// export const setSeachList = selector({
+//   key: 'setSearchList',
+//   get: async () => {
+//     const res = await getRegisterList();
+//     return res;
+//   },
+//   set: ({ set }, newValue: any) => {
+//     set(searchList, newValue);
+//   }
+// });
 
 export const keyword = atom<string>({
   key: 'keyword',

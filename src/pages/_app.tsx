@@ -30,13 +30,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta charSet="utf-8" />
       </Head>
       <RecoilRoot>
-        <React.Suspense fallback={<div>Loading...</div>}>
-          <ThemeProvider theme={theme}>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </ThemeProvider>
-        </React.Suspense>
+        <ThemeProvider theme={theme}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
       </RecoilRoot>
     </>
   );
