@@ -76,10 +76,25 @@ export interface KeywordSearchDto {
   mood?: string | null;
   etc?: {
     is_cork_charge?: boolean;
-    is_rent?: boolean
+    is_rent?: boolean;
     is_room?: boolean;
     is_reservation?: boolean;
     is_parking?: boolean;
     is_advance_payment?: boolean;
   };
+}
+
+export interface KeywordSearchResult {
+  E_address: string;
+  id: string;
+  name: string;
+  kakaoid: string;
+  category: string;
+  x: string;
+  y: string;
+  wantPlaceCnt: number,
+  mood: string;
+  lighting: string;
+  review_cnt: number;
+  rating_avrg: number;
 }

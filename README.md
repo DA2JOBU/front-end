@@ -1,3 +1,65 @@
+## 인기 회식장소 추천 서비스 - 회식이지
+
+![Group 1732](/Users/mac/Desktop/Group 1732.png)
+
+
+
+## Concept
+
+- 회식장소 의사결정의 어려움
+- 수용인원, 주차장 등 상세정보 파악이 쉽지 않음
+- 쉬운 방법으로 서로 돕는 회식장소 공유 서비스
+
+
+
+## Function
+
+- 카카오 맵 검색 API를 통한 장소 검색
+- 리뷰 등록
+- 리뷰 등록 기반 키워드 검색
+
+
+
+## Service
+
+- URL: https://moimeasy.com/
+
+
+
+## Stack
+
+#### Lang
+
+- Typescript
+
+#### Library
+
+- React 18
+- NextJS 12.3
+- Recoil
+- Styled-Components
+- Kakao 지도 API
+- vercel
+
+
+
+## 성능
+
+![스크린샷 2023-03-09 오후 12.38.11](/Users/mac/Library/Application Support/typora-user-images/스크린샷 2023-03-09 오후 12.38.11.png)
+
+
+
+## 참여자
+
+- 기획: 2명
+- 디자이너: 2명
+- FE 개발자: 2명
+- BE 개발자: 2명
+
+
+
+## 실행방법
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

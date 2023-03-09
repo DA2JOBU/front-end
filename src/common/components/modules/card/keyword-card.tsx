@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import TopBadge from '../../elements/top-badge';
-import { KeywordSearchDto, Place } from 'src/types/searchType';
+import { KeywordSearchDto, KeywordSearchResult, Place, searchElement } from 'src/types/searchType';
 import ComentBadge from '@components/elements/place-badge';
 import Button from '@components/elements/Button';
 import PeopleButton from '@components/elements/keyword-button/people';
@@ -11,6 +11,8 @@ import Atmosphere from '../rightTab/detailPlace/atmosphere';
 import Brightness from '../rightTab/detailPlace/brightness';
 import Etc from '../rightTab/detailPlace/etc';
 import { getKeyword } from '@api/search';
+import { useSetRecoilState } from 'recoil';
+import { searchList } from 'src/state';
 
 const CardContainer = styled.form`
   width: 100%;
@@ -88,6 +90,9 @@ const CardFooter = styled.div`
 `;
 
 const KeywordCard = (): JSX.Element => {
+  //검색 결과를 담는 것
+  const setSearchList = useSetRecoilState(searchList);
+
   //입력 데이터
   const [inputData, setInput] = useState({
     participants: '',
@@ -134,8 +139,43 @@ const KeywordCard = (): JSX.Element => {
         is_advance_payment: (inputData.isAdvancePayment != '' ? true : false),
       },
     };
-    console.log(data);
-    getKeyword(data);
+    // console.log(data);
+    getKeyword(data).then((res: any) => {
+      console.log(res);
+      let resData: searchElement[] = [];
+      /*
+        address_name: string;
+        category_group_code: string;
+        category_group_name: string;
+        category_name: string;
+        distance: string;
+        id: string;
+        phone: string;
+        place_name: string;
+        place_url: string;
+        road_address_name: string;
+        x: number;
+        y: number;
+      */
+
+      // res.map((o: KeywordSearchResult) => {
+      //   resData.push({
+      //     address_name: o.E_address,
+      //     category_group_code: o.category,
+      //     category_group_name: string;
+      //     category_name: string;
+      //     distance: string;
+      //     id: o.id,
+      //     phone: string;
+      //     place_name: string;
+      //     place_url: string;
+      //     road_address_name: string,
+      //     x: parseInt(o.x),
+      //     y: parseInt(o.y)
+      //   });
+      // })
+      // setSearchList(res);
+    });
   };
 
   return (
@@ -171,7 +211,7 @@ const KeywordCard = (): JSX.Element => {
         <Etc onChange={onChange} />
       </CardBody>
       <CardFooter>
-        <SubmitButton text="결과보기" onClick={submitForm} />
+        <SubmitButton text="검색하기" onClick={submitForm} />
       </CardFooter>
     </CardContainer>
   );
