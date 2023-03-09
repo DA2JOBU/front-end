@@ -32,10 +32,10 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
       return;
     if (getterSearchList.length == 0) {
       setRegister(getRegisterList);
-      console.log("현재 setSearchList: ", getRegisterList);
+      // console.log("현재 setSearchList: ", getRegisterList);
       return;
     }
-    console.log("현재 searchList: ", getterSearchList);
+    // console.log("현재 searchList: ", getterSearchList);
     // getRegisterList().then((res) => {
     //   setRegister(res);
     // });
