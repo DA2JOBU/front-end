@@ -7,6 +7,7 @@ import theme from '@styles/theme';
 import { RecoilRoot } from 'recoil';
 import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
+import React from 'react';
 
 declare global {
   interface Window {
@@ -29,11 +30,13 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta charSet="utf-8" />
       </Head>
       <RecoilRoot>
-        <ThemeProvider theme={theme}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ThemeProvider>
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <ThemeProvider theme={theme}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ThemeProvider>
+        </React.Suspense>
       </RecoilRoot>
     </>
   );

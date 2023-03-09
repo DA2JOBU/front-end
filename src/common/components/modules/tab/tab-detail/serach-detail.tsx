@@ -56,9 +56,11 @@ const SearchDetail = (props: Props) => {
   const { onClose, places } = props;
 
   const getCategory = (category_name: string) => {
+    if (category_name == "")
+      return "";
+
     const category_list = category_name.split('>');
-    let category = category_list[1];
-    console.log(category)
+    let category = category_list[3] ? category_list[3] : category_list[2] || category_list[1];
     return category.trim();
   };
 

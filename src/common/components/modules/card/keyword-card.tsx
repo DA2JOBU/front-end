@@ -11,8 +11,8 @@ import Atmosphere from '../rightTab/detailPlace/atmosphere';
 import Brightness from '../rightTab/detailPlace/brightness';
 import Etc from '../rightTab/detailPlace/etc';
 import { getKeyword } from '@api/search';
-import { useSetRecoilState } from 'recoil';
-import { searchList } from 'src/state';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { searchList, setSeachList } from 'src/state';
 
 const CardContainer = styled.form`
   width: 100%;
@@ -91,8 +91,8 @@ const CardFooter = styled.div`
 
 const KeywordCard = (): JSX.Element => {
   //검색 결과를 담는 것
-  const setSearchList = useSetRecoilState(searchList);
-
+  const setSearchList = useSetRecoilState(setSeachList);
+  const getSearchList = useRecoilValue(searchList);
   //입력 데이터
   const [inputData, setInput] = useState({
     participants: '',
@@ -140,7 +140,7 @@ const KeywordCard = (): JSX.Element => {
       },
     };
     // console.log(data);
-    getKeyword(data).then((res: any) => {
+    getKeyword(data).then((res) => {
       console.log(res);
       let resData: searchElement[] = [];
       /*
@@ -158,23 +158,28 @@ const KeywordCard = (): JSX.Element => {
         y: number;
       */
 
-      // res.map((o: KeywordSearchResult) => {
-      //   resData.push({
-      //     address_name: o.E_address,
-      //     category_group_code: o.category,
-      //     category_group_name: string;
-      //     category_name: string;
-      //     distance: string;
-      //     id: o.id,
-      //     phone: string;
-      //     place_name: string;
-      //     place_url: string;
-      //     road_address_name: string,
-      //     x: parseInt(o.x),
-      //     y: parseInt(o.y)
-      //   });
-      // })
-      // setSearchList(res);
+      res.data.map((o: KeywordSearchResult) => {
+        resData.push({
+          address_name: o.E_address,
+          category_group_code: o.category,
+          category_group_name: "",
+          category_name: "",
+          distance: "",
+          id: o.id,
+          phone: "",
+          place_name: o.name,
+          place_url: "",
+          road_address_name: "",
+          x: parseInt(o.x),
+          y: parseInt(o.y),
+          lighting: o.lighting,
+          rating_avrg: o.rating_avrg,
+          review_cnt: o.review_cnt,
+          wantPlaceCnt: o.wantPlaceCnt
+        });
+      })
+      setSearchList(resData);
+      console.log('여긴 키워드', resData);
     });
   };
 

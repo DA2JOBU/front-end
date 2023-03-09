@@ -12,6 +12,11 @@ export interface searchElement {
   road_address_name: string;
   x: number;
   y: number;
+  lighting?: string;
+  mood?: string;
+  rating_avrg?: number;
+  review_cnt?: number;
+  wantPlaceCnt?: number;
 }
 
 export interface Place {
