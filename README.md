@@ -1,6 +1,6 @@
 ## 인기 회식장소 추천 서비스 - 회식이지
 
-![Group 1732](/Users/mac/Desktop/Group 1732.png)
+![Group 1732](https://user-images.githubusercontent.com/52316270/223913181-91a9f790-fcdd-4ffd-bfee-5c8c37c7b164.png)
 
 
 
@@ -45,7 +45,7 @@
 
 ## 성능
 
-![스크린샷 2023-03-09 오후 12.38.11](/Users/mac/Library/Application Support/typora-user-images/스크린샷 2023-03-09 오후 12.38.11.png)
+<img width="401" alt="스크린샷 2023-03-09 오후 12 38 40" src="https://user-images.githubusercontent.com/52316270/223913209-ed7936da-1117-4120-9ac5-e98c4213cff9.png">
 
 
 
