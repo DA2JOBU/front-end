@@ -21,6 +21,11 @@ export const searchList = atom<searchElement[]>({
 //   }
 // });
 
+export const mapInSearch = atom<boolean>({
+  key: 'inMap',
+  default:false,
+})
+
 export const keyword = atom<string>({
   key: 'keyword',
   default: '',

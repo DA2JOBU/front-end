@@ -14,6 +14,7 @@ import Satisfaction from './satisfaction';
 import { placeExist, registerFirstPlace, registerReview } from '@api/mapApi';
 import { PlaceRegister, registerReviewType } from 'src/types/registerType';
 import Icons from 'public/assets/images/icons';
+import { useRouter } from 'next/router';
 
 const DetailContainer = styled.section`
   position: absolute;
@@ -191,6 +192,7 @@ export interface placeDetail {
 }
 
 const DetailPlace = (props: placeDetail) => {
+  const router = useRouter();
   //카테고리 추출 함수
   const categoryFC = (word: string) => {
     let result = word.slice(word.indexOf('>') + 2);
@@ -282,6 +284,7 @@ const DetailPlace = (props: placeDetail) => {
             const firstPlaceres = await registerReview(reqData).then((ress) => {
               console.log(ress);
               alert('장소가 등록되었습니다');
+              router.reload();
             });
           });
         }
@@ -316,6 +319,7 @@ const DetailPlace = (props: placeDetail) => {
           const firstPlaceres = await registerReview(reqData).then((ress) => {
             console.log(ress);
             alert('장소가 등록되었습니다');
+            router.reload();
           });
         }
       });

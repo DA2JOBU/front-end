@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Input from '@components/elements/Input';
 import styled from 'styled-components';
 import Icons from 'public/assets/images/icons';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { mapInSearch } from 'src/state';
 
 const Contents = styled.article`
   padding: 26px 28px 28px 28px;
@@ -55,8 +57,12 @@ interface Props {
 const Search = (props: Props) => {
   const { value, handleOnChange, handleSubmit, handleDelete } = props;
   const [check, setCheck] = useState<boolean>(false);
+  const mapState = useSetRecoilState(mapInSearch);
+  const mapStates = useRecoilValue(mapInSearch);
   const handlerCheck = () => {
+    console.log(mapStates);
     setCheck(!check);
+    mapState(!check);
   };
 
   return (
