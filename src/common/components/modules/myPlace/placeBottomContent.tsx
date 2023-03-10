@@ -175,9 +175,9 @@ const PlaceBottomContent = (props:Props) => {
             : listState}
             {editState == true ?
               <Footer>
-                <BaseButton value="취소" width="100%" height="52px" fontSize="1rem" />
+                <BaseButton value="취소" width="100%" height="3.25rem" fontSize="1rem" />
                 <br/>
-                <BaseButton value="삭제하기" width="100%" height="52px" fontSize="1rem" />
+                <BaseButton value="삭제하기" width="100%" height="3.25rem" fontSize="1rem" />
               </Footer>
               : null
             }

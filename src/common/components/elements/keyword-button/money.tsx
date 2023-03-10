@@ -45,14 +45,14 @@ const MoneyButton = (props: Props) => {
 
   return (
     <ButtonContainer>
-      <BaseButton mClick={clickEvent} active={under3} text='3만 미만' value="3만 미만" width="9.8rem" height="52px" fontSize="16px" onClick={onChange} name={name} />
+      <BaseButton mClick={clickEvent} active={under3} text='3만 미만' value="3만 미만" width="9.8rem" height="3.25rem" fontSize="1rem" onClick={onChange} name={name} />
       <BaseButton
         mClick={clickEvent} active={under5}
         text='3만 이상 5만 미만'
         value="3만 이상 5만 미만"
         width="9.8rem"
-        height="52px"
-        fontSize="16px"
+        height="3.25rem"
+        fontSize="1rem"
         onClick={onChange}
         name={name}
       />
@@ -61,12 +61,12 @@ const MoneyButton = (props: Props) => {
         text='5만 이상 10만 미만'
         value="5만 이상 10만 미만"
         width="9.8rem"
-        height="52px"
-        fontSize="16px"
+        height="3.25rem"
+        fontSize="1rem"
         onClick={onChange}
         name={name}
       />
-      <BaseButton mClick={clickEvent} active={up10} text='10만 이상' value="10만 이상" width="9.8rem" height="52px" fontSize="16px" onClick={onChange} name={name} />
+      <BaseButton mClick={clickEvent} active={up10} text='10만 이상' value="10만 이상" width="9.8rem" height="3.25rem" fontSize="1rem" onClick={onChange} name={name} />
     </ButtonContainer>
   );
 };

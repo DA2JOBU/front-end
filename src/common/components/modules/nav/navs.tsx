@@ -11,7 +11,7 @@ const NavContainer = styled.nav`
 const UlStyled = styled.ul`
   display: table;
   padding: 0 28px;
-  height: 64px;
+  height: 4rem;
   width: 100%;
   margin: 0;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};

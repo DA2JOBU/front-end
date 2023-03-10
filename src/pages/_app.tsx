@@ -7,6 +7,7 @@ import theme from '@styles/theme';
 import { RecoilRoot } from 'recoil';
 import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
+import React from 'react';
 
 declare global {
   interface Window {

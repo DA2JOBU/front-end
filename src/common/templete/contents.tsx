@@ -14,6 +14,8 @@ import { useUserInfoModalOpen } from '../hook/modal.hook';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import MyPlace from './myPlace';
+import { useRecoilValue } from 'recoil';
+import { searchList } from 'src/state';
 
 export interface propsType {
   searchKeyword: string;
@@ -51,9 +53,7 @@ const Contents = (): JSX.Element => {
   // 제출한 검색어 관리
   const [keyword, setKeyword] = useState('');
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedNavIndex, setSelectedNavIndex] = useState<number>(0);
-
-  const search = useRef();
+  const searchResult = useRecoilValue(searchList);
 
   useEffect(() => {
     setKeyword('');
@@ -103,7 +103,7 @@ const Contents = (): JSX.Element => {
           <SlideContainer>
             <SideTabs sideValue={sideValue} />
           </SlideContainer>
-          {keyword ? <SearchList keyword={keyword} /> : <></>}
+          {keyword || searchResult.length > 0 ? <SearchList keyword={keyword} /> : <></>}
         </Nav>
         <Nav title="등록" onClick={() => !setIsOpen}>
           <SlideContainer>
@@ -113,7 +113,7 @@ const Contents = (): JSX.Element => {
 
         <Nav title="나의 회식 장소" onClick={() => !setIsOpen}>
           <SlideContainer>
-            <MyPlace handleOnChange={handleOnChange} handleSubmit={handleSubmit} handleDelete={handleDelete} value={value}/>
+            <MyPlace handleOnChange={handleOnChange} handleSubmit={handleSubmit} handleDelete={handleDelete} value={value} />
           </SlideContainer>
         </Nav>
 

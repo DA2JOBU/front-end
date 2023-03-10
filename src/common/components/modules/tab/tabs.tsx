@@ -15,13 +15,6 @@ const UlStyled = styled.ul`
   width: 23.75rem;
 `;
 
-// const Contents = styled.article`
-//   background-color: #f9f9f9;
-//   display: block;
-//   height: 100%;
-//   width: 100%;
-// `;
-
 type Props = {
   children: ReactElement<TabTitleProps>[];
   preSelectedTabIndex?: number;

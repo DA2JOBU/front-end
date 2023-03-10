@@ -41,8 +41,8 @@ const Brightness = (props: Props) => {
         text='밝은'
         value="Light"
         width="6.4rem"
-        height="52px"
-        fontSize="16px"
+        height="3.25rem"
+        fontSize="1rem"
         onClick={onChange}
         name={name}
         lighting={lighting}
@@ -53,8 +53,8 @@ const Brightness = (props: Props) => {
         text='일반적인'
         value="Nomal"
         width="6.4rem"
-        height="52px"
-        fontSize="16px"
+        height="3.25rem"
+        fontSize="1rem"
         onClick={onChange}
         name={name}
         lighting={lighting}
@@ -65,8 +65,8 @@ const Brightness = (props: Props) => {
         text='어두운'
         value="Dark"
         width="6.4rem"
-        height="52px"
-        fontSize="16px"
+        height="3.25rem"
+        fontSize="1rem"
         onClick={onChange}
         name={name}
         lighting={lighting}

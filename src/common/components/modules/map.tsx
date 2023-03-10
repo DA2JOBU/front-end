@@ -19,16 +19,24 @@ interface placeType {
 
 const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
   //검색 결과를 담는 것
-  const setSearchList = useSetRecoilState(searchList);
+  const setterSearchList = useSetRecoilState(searchList);
+  const getterSearchList = useRecoilValue(searchList);
+  // const getRegisterList = useRecoilValue(setSeachList);
   // 마커를 담는 배열
-  const [registerPos, setRegister] = useState<reviewedPlaceList[]>([]);
+  const [registerPos, setRegister] = useState<any[]>([]);
 
   let markers: any[] = [];
 
   useEffect(() => {
     if (registerPos.length > 0)
       return;
-    getRegisterList().then((res) => {
+    //if (getterSearchList.length == 0) {
+    // setRegister(getRegisterList);
+    // console.log("현재 setSearchList: ", getRegisterList);
+    //return;
+    //}
+    // console.log("현재 searchList: ", getterSearchList);
+    getRegisterList().then((res: any) => {
       setRegister(res);
     });
   }, [registerPos]);
@@ -81,7 +89,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
           // 정상적으로 검색이 완료됐으면
           // 검색 목록과 마커를 표출
           displayPlaces(data);
-          setSearchList(data);
+          setterSearchList(data);
           console.log(data);
 
           // 페이지 번호를 표출

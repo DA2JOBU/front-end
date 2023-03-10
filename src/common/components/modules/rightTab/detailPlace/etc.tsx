@@ -38,12 +38,12 @@ const Etc = (props: Props) => {
   }
   return (
     <ButtonContainer>
-      <BaseButton mClick={clickEvent} active={call} text='콜키지' value='콜키지' width="102px" height="52px" fontSize="16px" onClick={onChange} name='isCorkCharge' />
-      <BaseButton mClick={clickEvent} active={room} text='룸' value="룸" width="102px" height="52px" fontSize="16px" onClick={onChange} name='isRoom' />
-      <BaseButton mClick={clickEvent} active={pay} text='선결제' value="선결제" width="102px" height="52px" fontSize="16px" onClick={onChange} name='isAdvancePayment' />
-      <BaseButton mClick={clickEvent} active={reservation} text='예약필수' value="예약필수" width="102px" height="52px" fontSize="16px" onClick={onChange} name='isReservation' />
-      <BaseButton mClick={clickEvent} active={park} text='주차가능' value="주차가능" width="102px" height="52px" fontSize="16px" onClick={onChange} name='isParking' />
-      <BaseButton mClick={clickEvent} active={lent} text='대관가능' value="대관가능" width="102px" height="52px" fontSize="16px" onClick={onChange} name='isRent' />
+      <BaseButton mClick={clickEvent} active={call} text='콜키지' value='콜키지' width="6.375rem" height="3.25rem" fontSize="1rem" onClick={onChange} name='isCorkCharge' />
+      <BaseButton mClick={clickEvent} active={room} text='룸' value="룸" width="6.375rem" height="3.25rem" fontSize="1rem" onClick={onChange} name='isRoom' />
+      <BaseButton mClick={clickEvent} active={pay} text='선결제' value="선결제" width="6.375rem" height="3.25rem" fontSize="1rem" onClick={onChange} name='isAdvancePayment' />
+      <BaseButton mClick={clickEvent} active={reservation} text='예약필수' value="예약필수" width="6.375rem" height="3.25rem" fontSize="1rem" onClick={onChange} name='isReservation' />
+      <BaseButton mClick={clickEvent} active={park} text='주차가능' value="주차가능" width="6.375rem" height="3.25rem" fontSize="1rem" onClick={onChange} name='isParking' />
+      <BaseButton mClick={clickEvent} active={lent} text='대관가능' value="대관가능" width="6.375rem" height="3.25rem" fontSize="1rem" onClick={onChange} name='isRent' />
     </ButtonContainer>
   );
 };

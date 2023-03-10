@@ -1,6 +1,6 @@
 import axios, { AxiosPromise } from 'axios';
 import { PlaceRegister, placeUUID, registerPlace, registerReviewType } from 'src/types/registerType';
-import { reviewedPlaceList, searchElement } from 'src/types/searchType';
+import { reviewedPlaceList } from 'src/types/searchType';
 
 
 //등록된 리스트 가져오기
