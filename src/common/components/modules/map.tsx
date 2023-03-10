@@ -2,7 +2,7 @@ import { getRegisterList } from '@api/mapApi';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { keyword, searchList } from 'src/state';
+import { keyword, mapInSearch, searchList } from 'src/state';
 import { reviewedPlaceList } from 'src/types/searchType';
 import { propsType } from '../../templete/contents';
 
@@ -24,6 +24,8 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
   // const getRegisterList = useRecoilValue(setSeachList);
   // 마커를 담는 배열
   const [registerPos, setRegister] = useState<any[]>([]);
+
+  const inMap = useRecoilValue(mapInSearch);
 
   let markers: any[] = [];
 
@@ -68,11 +70,11 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
         let keyword = props.searchKeyword;
 
         //검색 옵션
-        const searchOption = {
-          location: map.getCenter(),
-          radius: 1000,
-          size: 10, //검색할 개수를 설정할 수 있다.
-        };
+        // const searchOption = {
+        //   location: map.getCenter(),
+        //   radius: 1000,
+        //   size: 10, //검색할 개수를 설정할 수 있다.
+        // };
 
         if (!keyword.replace(/^\s+|\s+$/g, '')) {
           // console.log('키워드를 입력해주세요!');
@@ -80,7 +82,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
         }
 
         // 장소검색 객체를 통해 키워드로 장소검색을 요청
-        ps.keywordSearch(keyword, placesSearchCB, null);
+        ps.keywordSearch(keyword, placesSearchCB, !inMap ? null : {location: map.getCenter(), radius: 1000});
       }
 
       // 장소검색이 완료됐을 때 호출되는 콜백함수
