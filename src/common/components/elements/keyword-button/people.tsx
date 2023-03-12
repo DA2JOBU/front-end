@@ -40,7 +40,7 @@ const PeopleButton = (props: Props) => {
       setUnder16(true);
       setUp17(false);
     }
-    else if (val === '17') {
+    else if (val === '17,100') {
       setUnder8(false);
       setUnder12(false);
       setUnder16(false);
@@ -86,7 +86,7 @@ const PeopleButton = (props: Props) => {
         mClick={clickEvent}
         active={up17}
         text="17명 이상"
-        value="17"
+        value="17,100"
         width="9.8rem"
         fontSize="1rem"
         height="3.25rem"

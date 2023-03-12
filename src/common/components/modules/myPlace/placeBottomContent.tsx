@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Icons from 'public/assets/images/icons';
 import { useEffect, useState } from "react";
-import { wantPlaceList } from "@api/myPlace";
+import { wantPlaceList, wentPlaceList } from "@api/myPlace";
 import Pencle from '@public/images/pencle.svg';
 import BaseButton from '@components/modules/tab/tab-detail/datail-button/base-link';
 import RightTab from "../rightTab";
@@ -82,7 +82,7 @@ const PlaceListContainer = styled.div`
   transform: translate(-0%, 90%);
 `;
 
-const GotoRegister =styled.button`
+const GotoRegister = styled.button`
   background:  ${({ theme }) => theme.color.gray20};
   border-radius: 99px;
   padding: 8px 20px;
@@ -115,74 +115,86 @@ interface Props {
   handleDelete: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const PlaceBottomContent = (props:Props) => {
+const PlaceBottomContent = (props: Props) => {
   const { value, handleOnChange, handleSubmit, handleDelete } = props;
-    const [wentList, setWentList] = useState([]);
-    const [hopeList, setHopeList] = useState([]);
+  const [wentList, setWentList] = useState([]);
+  const [hopeList, setHopeList] = useState([]);
 
-    const [editState, setEditState] = useState(false);
+  //편집 상태인지 아닌지
+  const [editState, setEditState] = useState(false);
 
-    const [listState, setListState] = useState([]);//went가 false, hope가 true
+  const [listState, setListState] = useState([]);//went가 false, hope가 true
 
-    const setEdit = () => {
-      setEditState(!editState);
+  //등록 창
+  const [register, setRegister] = useState(false);
+  //버튼 상태
+  const [checkWent, setWent] = useState(true);
+  const [checkHope, setHope] = useState(false);
+
+  const setEdit = () => {
+    setEditState(!editState);
+  }
+
+  useEffect(() => {
+    if (sessionStorage.getItem('jwtToken') == null) {
+      return;
     }
+    wentPlaceList().then((res) => {
+      setWentList(res);
+    }).catch((error) => {
+      alert('로그인을 해주세요');
+    })
+    wantPlaceList().then((res) => {
+      console.log(res);
+      setHopeList(res);
+    }).catch((error) => {
+      alert('로그인을 해주세요');
+    });
+  }, [listState]);
 
-    useEffect(() => {
-        if (sessionStorage.getItem('jwtToken') == null) {
-            return;
-        }
-        wantPlaceList().then((res) => {
-            setHopeList(res);
-        }).catch((error) => {
-            alert('로그인을 해주세요');
-        });
-    }, []);
+  const handlerWent = () => {
+    setWent(true);
+    setHope(false);
+    setListState(wentList);
+  }
 
-    const [checkWent, setWent] = useState(true);
-    const [checkHope, setHope] = useState(false);
+  const handlerHope = () => {
+    setWent(false);
+    setHope(true);
+    setListState(hopeList);
+  }
 
-    const handlerWent = () => {
-        setWent(true);
-        setHope(false);
-        setListState(wentList);
-    }
+  return (
+    <BottomContainers>
+      {register && <RightTab handleOnChange={handleOnChange} handleSubmit={handleSubmit} handleDelete={handleDelete} value={value} />}
+      <SearchMap onClick={handlerWent}>
+        <span className={checkWent ? 'font' : 'font-active'}>가본 곳 {wentList.length}</span>
+      </SearchMap>
 
-    const handlerHope = () => {
-        setWent(false);
-        setHope(true);
-        setListState(hopeList);
-    }
+      <SearchMap onClick={handlerHope}>
+        <span className={checkHope ? 'font' : 'font-active'}>가보고 싶은 곳 {hopeList.length}</span>
+      </SearchMap>
+      <EditButton onClick={setEdit}>편집</EditButton>
+      {listState.length == 0 ?
+        <EmptyList>
+          <PlaceListContainer>
+            <Pencle />
+            <p>장소를 등록해 주세요</p>
+            <GotoRegister onClick={() => setRegister(!register)}>등록하기</GotoRegister>
+          </PlaceListContainer>
+        </EmptyList>
+        : null}
 
-    return (
-        <BottomContainers>
-            <SearchMap onClick={handlerWent}>
-                <span className={checkWent ? 'font' : 'font-active'}>가본 곳 {wentList.length}</span>
-            </SearchMap>
-
-            <SearchMap onClick={handlerHope}>
-                <span className={checkHope ? 'font' : 'font-active'}>가보고 싶은 곳 {hopeList.length}</span>
-            </SearchMap>
-            <EditButton onClick={setEdit}>편집</EditButton>
-            {listState.length == 0 ? 
-              <EmptyList>
-                <PlaceListContainer>
-                  <Pencle/>
-                  <p>장소를 등록해 주세요</p>
-                  <GotoRegister onClick={(()=><RightTab handleOnChange={handleOnChange} handleSubmit={handleSubmit} handleDelete={handleDelete} value={value} />)}>등록하기</GotoRegister>
-                </PlaceListContainer>
-              </EmptyList>
-            : listState}
-            {editState == true ?
-              <Footer>
-                <BaseButton value="취소" width="100%" height="3.25rem" fontSize="1rem" />
-                <br/>
-                <BaseButton value="삭제하기" width="100%" height="3.25rem" fontSize="1rem" />
-              </Footer>
-              : null
-            }
-        </BottomContainers>
-    )
+      {editState == true ?
+        <Footer>
+          <BaseButton value="취소" width="100%" height="3.25rem" fontSize="1rem" />
+          <br />
+          <BaseButton value="삭제하기" width="100%" height="3.25rem" fontSize="1rem" />
+        </Footer>
+        : null
+      }
+    </BottomContainers>
+  )
 }
 
 export default PlaceBottomContent;
