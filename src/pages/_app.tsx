@@ -8,6 +8,9 @@ import { RecoilRoot } from 'recoil';
 import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import React from 'react';
+import Script from 'next/script';
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 declare global {
   interface Window {
@@ -28,6 +31,26 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="description" content="get-together" />
         <meta key="viewport" name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />
+        {GA_ID && (
+          <Script
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          />
+        )}
+        {GA_ID && (
+          <Script
+            id="gtag-init"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_ID}');
+            `,
+            }}
+          />
+        )}
       </Head>
       <RecoilRoot>
         <ThemeProvider theme={theme}>
