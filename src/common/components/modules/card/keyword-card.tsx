@@ -143,20 +143,6 @@ const KeywordCard = (): JSX.Element => {
     getKeyword(data).then((res) => {
       console.log(res);
       let resData: searchElement[] = [];
-      /*
-        address_name: string;
-        category_group_code: string;
-        category_group_name: string;
-        category_name: string;
-        distance: string;
-        id: string;
-        phone: string;
-        place_name: string;
-        place_url: string;
-        road_address_name: string;
-        x: number;
-        y: number;
-      */
 
       res.data.map((o: KeywordSearchResult) => {
         resData.push({

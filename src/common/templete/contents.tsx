@@ -76,13 +76,6 @@ const Contents = (): JSX.Element => {
     setValue('');
   };
 
-  // 검색어를 입력하지 않고 검색 버튼을 눌렀을 경우
-  const valueChecker = () => {
-    if (value === '') {
-      alert('검색어를 입력해주세요.');
-    }
-  };
-
   const sideValue = {
     handleOnChange,
     handleSubmit,

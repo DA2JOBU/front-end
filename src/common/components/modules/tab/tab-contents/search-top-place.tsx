@@ -23,7 +23,7 @@ const SearchContainer = styled.section`
 const SearchTopContainer = styled.div`
   padding-bottom: 8rem;
   background: ${({ theme }) => theme.color.white};
-  height: 100vh;
+  height: calc(100vh - 217px);
   overflow-y: auto;
 
   &::-webkit-scrollbar {
