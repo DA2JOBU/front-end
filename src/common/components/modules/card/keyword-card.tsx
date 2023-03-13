@@ -12,7 +12,7 @@ import Brightness from '../rightTab/detailPlace/brightness';
 import Etc from '../rightTab/detailPlace/etc';
 import { getKeyword } from '@api/search';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { searchList } from 'src/state';
+import { keyword, keywordSearch, searchList } from 'src/state';
 
 const CardContainer = styled.form`
   width: 100%;
@@ -91,8 +91,9 @@ const CardFooter = styled.div`
 
 const KeywordCard = (): JSX.Element => {
   //검색 결과를 담는 것
-  //const setSearchList = useSetRecoilState(setSeachList);
-  const getSearchList = useRecoilValue(searchList);
+  const setSearchList = useSetRecoilState(keywordSearch);
+  const keywordSearchResult = useRecoilValue(keywordSearch);
+  const keywordState = useSetRecoilState(keyword);
   //입력 데이터
   const [inputData, setInput] = useState({
     participants: '',
@@ -142,30 +143,27 @@ const KeywordCard = (): JSX.Element => {
     // console.log(data);
     getKeyword(data).then((res) => {
       console.log(res);
-      let resData: searchElement[] = [];
+      let resData: KeywordSearchResult[] = [];
 
       res.data.map((o: KeywordSearchResult) => {
         resData.push({
-          address_name: o.E_address,
-          category_group_code: o.category,
-          category_group_name: "",
-          category_name: "",
-          distance: "",
+          E_address: o.E_address,
           id: o.id,
-          phone: "",
-          place_name: o.name,
-          place_url: "",
-          road_address_name: "",
-          x: parseInt(o.x),
-          y: parseInt(o.y),
+          name: o.name,
+          kakaoid: "",
+          category: o.category,
+          x: o.x,
+          y: o.y,
+          mood: o.mood,
           lighting: o.lighting,
           rating_avrg: o.rating_avrg,
           review_cnt: o.review_cnt,
           wantPlaceCnt: o.wantPlaceCnt
         });
       })
-      //setSearchList(resData);
-      console.log('여긴 키워드', resData);
+      setSearchList(resData);
+      keywordState('keyword');
+      console.log("키워드 검색", keywordSearchResult);
     });
   };
 

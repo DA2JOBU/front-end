@@ -1,12 +1,18 @@
 import { atom, selector } from 'recoil';
-import { searchElement } from 'src/types/searchType';
+import { KeywordSearchResult, searchElement } from 'src/types/searchType';
 import { PlaceRegister } from 'src/types/registerType';
 import user from '@components/modules/modal/user';
 import { User } from 'src/types/userType';
 import { getRegisterList } from '@api/mapApi';
 
+//카카오 정보 가져올 때
 export const searchList = atom<searchElement[]>({
   key: 'searchList',
+  default: [],
+});
+
+export const keywordSearch = atom<KeywordSearchResult[]>({
+  key: 'keywordSearch',
   default: [],
 });
 
@@ -21,11 +27,13 @@ export const searchList = atom<searchElement[]>({
 //   }
 // });
 
+//지도 내 검색 기능
 export const mapInSearch = atom<boolean>({
   key: 'inMap',
-  default:false,
-})
+  default: false,
+});
 
+//keyword면 키워드 검색
 export const keyword = atom<string>({
   key: 'keyword',
   default: '',

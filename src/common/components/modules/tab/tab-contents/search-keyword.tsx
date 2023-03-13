@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const KeywordContainer = styled.section`
   background-color: ${({ theme }) => theme.color.white};
-  height: calc(100vh - 60px);
+  height: calc(100vh - 50px);
   padding-bottom: 3.8rem;
 
   overflow-y:auto;
