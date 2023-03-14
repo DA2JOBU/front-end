@@ -91,9 +91,8 @@ const CardFooter = styled.div`
 
 const KeywordCard = (): JSX.Element => {
   //검색 결과를 담는 것
-  const setSearchList = useSetRecoilState(keywordSearch);
-  const keywordSearchResult = useRecoilValue(keywordSearch);
-  const keywordState = useSetRecoilState(keyword);
+  // const setterSearchList = useSetRecoilState(setSearchList);
+  // const getterSearchList = useRecoilValue(setSearchList);
   //입력 데이터
   const [inputData, setInput] = useState({
     participants: '',
@@ -121,6 +120,10 @@ const KeywordCard = (): JSX.Element => {
   };
 
   const submitForm = async () => {
+    if (sessionStorage.getItem('jwtToken') === null) {
+      alert('로그인 먼저 해주세요');
+      return;
+    }
     console.log(inputData);
     let param = inputData.participants.split(',');
     const data: KeywordSearchDto = {
@@ -161,9 +164,8 @@ const KeywordCard = (): JSX.Element => {
           wantPlaceCnt: o.wantPlaceCnt
         });
       })
-      setSearchList(resData);
-      keywordState('keyword');
-      console.log("키워드 검색", keywordSearchResult);
+      //setterSearchList(resData);
+      console.log("키워드 검색", resData);
     });
   };
 

@@ -16,7 +16,8 @@ export const keywordSearch = atom<KeywordSearchResult[]>({
   default: [],
 });
 
-// export const setSeachList = selector({
+//검색하면 atom값을 새로 세팅해주는 것
+// export const setSearchList = selector({
 //   key: 'setSearchList',
 //   get: async () => {
 //     const res = await getRegisterList();
