@@ -91,8 +91,8 @@ const CardFooter = styled.div`
 
 const KeywordCard = (): JSX.Element => {
   //검색 결과를 담는 것
-  // const setterSearchList = useSetRecoilState(setSearchList);
-  // const getterSearchList = useRecoilValue(setSearchList);
+  const setterSearchList = useSetRecoilState(searchList);
+  const getterSearchList = useRecoilValue(searchList);
   //입력 데이터
   const [inputData, setInput] = useState({
     participants: '',
@@ -146,17 +146,22 @@ const KeywordCard = (): JSX.Element => {
     // console.log(data);
     getKeyword(data).then((res) => {
       console.log(res);
-      let resData: KeywordSearchResult[] = [];
+      let resData: searchElement[] = [];
 
       res.data.map((o: KeywordSearchResult) => {
         resData.push({
-          E_address: o.E_address,
+          category_group_code: "",
+          category_group_name: o.category,
+          category_name: o.category,
+          distance: "",
           id: o.id,
-          name: o.name,
-          kakaoid: "",
-          category: o.category,
-          x: o.x,
-          y: o.y,
+          phone: "",
+          place_name: o.name,
+          place_url: "",
+          address_name: o.E_address,
+          road_address_name: o.E_address,
+          x: parseFloat(o.x),
+          y: parseFloat(o.y),
           mood: o.mood,
           lighting: o.lighting,
           rating_avrg: o.rating_avrg,
@@ -164,7 +169,7 @@ const KeywordCard = (): JSX.Element => {
           wantPlaceCnt: o.wantPlaceCnt
         });
       })
-      //setterSearchList(resData);
+      setterSearchList(resData);
       console.log("키워드 검색", resData);
     });
   };

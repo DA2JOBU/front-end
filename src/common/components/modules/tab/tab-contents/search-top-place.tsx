@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Icons from 'public/assets/images/icons';
 import axios from 'axios';
 import TopSearchDetail from '../tab-detail/top-serach-detail';
+import { getPlaceTopTen } from '@api/search';
 
 const SearchContainer = styled.section`
   float: left;
@@ -69,14 +70,10 @@ const SearchTopPlace = (): JSX.Element => {
   const [place, setPlace] = useState<Array<PlaceTopTen>>([]);
 
   useEffect(() => {
-    getPlaceTopTen();
+    getPlaceTopTen().then((res) => {
+      setPlaces(res);
+    });
   }, []);
-
-  const getPlaceTopTen = async () => {
-    const response = await axios.get(process.env.NEXT_PUBLIC_SERVER_URI + 'chart/top5');
-    console.log(response.data);
-    setPlaces(response.data);
-  };
 
   return (
     <>
@@ -91,7 +88,7 @@ const SearchTopPlace = (): JSX.Element => {
       </SearchBanner>
       <SearchTopContainer>
         <SearchContent>
-          {places.map((place: any, index: React.Key | null | undefined) => {
+          {places.length > 0 ? places.map((place: any, index: React.Key | null | undefined) => {
             return (
               <div key={place.id}>
                 <TopCard
@@ -103,7 +100,7 @@ const SearchTopPlace = (): JSX.Element => {
                 />
               </div>
             );
-          })}
+          }) : null}
         </SearchContent>
       </SearchTopContainer>
     </>
