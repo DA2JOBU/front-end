@@ -100,8 +100,11 @@ const SearchList = (props: Props) => {
   // const setMyPlaceList = useSetRecoilState(myPlace);
 
   const getCategory = (category_name: string) => {
+    // console.log('리스트', lists);
     if (category_name == "")
       return "";
+    if (category_name.indexOf(' ') === -1)
+      return category_name;
     const category_list = category_name.split('>');
     let category = category_list[3] ? category_list[3] : category_list[2] || category_list[1];
     return category.trim();
@@ -132,7 +135,7 @@ const SearchList = (props: Props) => {
         <span className="count">검색 결과 {lists.length}</span>
       </SearchListTitle>
       <SearchListContent>
-        {lists.map((list: searchElement | any, index: number) => {
+        {lists.length > 0 && lists.map((list: searchElement | any, index: number) => {
           let category = getCategory(list.category_name);
           return (
             <SearchPlaceContainer key={list.id}>

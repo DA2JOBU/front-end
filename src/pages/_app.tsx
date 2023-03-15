@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import React from 'react';
 import Script from 'next/script';
+import { ErrorBoundary } from 'react-error-boundary';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 

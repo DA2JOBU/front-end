@@ -2,7 +2,7 @@ import { getRegisterList } from '@api/mapApi';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { keyword, mapInSearch, searchList } from 'src/state';
+import { keyword, keywordSearch, mapInSearch, searchList } from 'src/state';
 import { reviewedPlaceList } from 'src/types/searchType';
 import { propsType } from '../../templete/contents';
 
@@ -21,7 +21,9 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
   //검색 결과를 담는 것
   const setterSearchList = useSetRecoilState(searchList);
   const getterSearchList = useRecoilValue(searchList);
-  // const getRegisterList = useRecoilValue(setSeachList);
+
+  const [keyword, setKeyword] = useState(props.searchKeyword);
+
   // 마커를 담는 배열
   const [registerPos, setRegister] = useState<any[]>([]);
 
@@ -29,19 +31,23 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
 
   let markers: any[] = [];
 
+  //키워드가 바뀌면 
   useEffect(() => {
-    if (registerPos.length > 0)
-      return;
-    //if (getterSearchList.length == 0) {
-    // setRegister(getRegisterList);
-    // console.log("현재 setSearchList: ", getRegisterList);
-    //return;
-    //}
-    // console.log("현재 searchList: ", getterSearchList);
-    getRegisterList().then((res: any) => {
-      setRegister(res);
-    });
-  }, [registerPos]);
+    setKeyword(props.searchKeyword);
+  }, [props.searchKeyword]);
+
+  useEffect(() => {
+    if (getterSearchList.length === 0) {
+      getRegisterList().then((res: any) => {
+        setRegister(res);
+      });
+    }
+    else {
+      console.log('여기?', getterSearchList);
+      console.log('registerPos', registerPos);
+      setRegister(getterSearchList);
+    }
+  }, [getterSearchList]);
 
   // 검색어가 바뀔 때마다 재렌더링되도록 useEffect 사용
   useEffect(() => {
@@ -63,26 +69,21 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
       const infowindow = new window.kakao.maps.InfoWindow({ zIndex: 1 });
 
       // 키워드로 장소를 검색합니다
-      searchPlaces();
+      if (keyword != props.searchKeyword) {
+
+        searchPlaces();
+      }
 
       // 키워드 검색을 요청하는 함수
       function searchPlaces() {
-        let keyword = props.searchKeyword;
-
-        //검색 옵션
-        // const searchOption = {
-        //   location: map.getCenter(),
-        //   radius: 1000,
-        //   size: 10, //검색할 개수를 설정할 수 있다.
-        // };
-
-        if (!keyword.replace(/^\s+|\s+$/g, '')) {
+        let keyword2 = props.searchKeyword;
+        if (!keyword2.replace(/^\s+|\s+$/g, '')) {
           // console.log('키워드를 입력해주세요!');
           return false;
         }
-
+        console.log(keyword2);
         // 장소검색 객체를 통해 키워드로 장소검색을 요청
-        ps.keywordSearch(keyword, placesSearchCB, !inMap ? null : {location: map.getCenter(), radius: 1000});
+        ps.keywordSearch(keyword2, placesSearchCB, !inMap ? null : { location: map.getCenter(), radius: 1000 });
       }
 
       // 장소검색이 완료됐을 때 호출되는 콜백함수
@@ -92,8 +93,6 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
           // 검색 목록과 마커를 표출
           displayPlaces(data);
           setterSearchList(data);
-          console.log(data);
-
           // 페이지 번호를 표출
           //displayPagination(pagination);
         } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
@@ -104,6 +103,11 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
           return;
         }
       }
+
+      // if (keyState === 'keyword') {
+      //   console.log('여기로 오나?');
+      //   setRegister(getterSearchList);
+      // }
 
       for (let i = 0; i < registerPos?.length; i++) {
         let placePosition = new window.kakao.maps.LatLng(registerPos[i].y, registerPos[i].x);
@@ -216,6 +220,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
             position: position, // 마커의 위치
             image: markerImage,
           });
+
 
         marker.setMap(map); // 지도 위에 마커를 표출
         markers.push(marker); // 배열에 생성된 마커를 추가

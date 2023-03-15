@@ -59,13 +59,12 @@ const Review = styled.span`
 
 const DetailReview = (props: {placeStatus: any}) => {
   const { placeStatus } = props;
-  console.log(placeStatus.simpleReview)
   return (
     <Container>
       <p className="review-text">
         {/* 리뷰 <span className="count">{placeStats.reviewCnt}</span> */}
       </p>
-      {placeStatus.simpleReview ? (
+      {placeStatus?.simpleReview ? (
         <ReviewContainer>
           <Comment>{placeStatus.simpleReview}</Comment>
           <Review>

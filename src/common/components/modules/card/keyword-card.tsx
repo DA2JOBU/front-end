@@ -12,7 +12,7 @@ import Brightness from '../rightTab/detailPlace/brightness';
 import Etc from '../rightTab/detailPlace/etc';
 import { getKeyword } from '@api/search';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { searchList } from 'src/state';
+import { keyword, keywordSearch, searchList } from 'src/state';
 
 const CardContainer = styled.form`
   width: 100%;
@@ -91,8 +91,8 @@ const CardFooter = styled.div`
 
 const KeywordCard = (): JSX.Element => {
   //검색 결과를 담는 것
-  //const setSearchList = useSetRecoilState(setSeachList);
-  const getSearchList = useRecoilValue(searchList);
+  const setterSearchList = useSetRecoilState(searchList);
+  const getterSearchList = useRecoilValue(searchList);
   //입력 데이터
   const [inputData, setInput] = useState({
     participants: '',
@@ -120,6 +120,10 @@ const KeywordCard = (): JSX.Element => {
   };
 
   const submitForm = async () => {
+    if (sessionStorage.getItem('jwtToken') === null) {
+      alert('로그인 먼저 해주세요');
+      return;
+    }
     console.log(inputData);
     let param = inputData.participants.split(',');
     const data: KeywordSearchDto = {
@@ -146,26 +150,27 @@ const KeywordCard = (): JSX.Element => {
 
       res.data.map((o: KeywordSearchResult) => {
         resData.push({
-          address_name: o.E_address,
-          category_group_code: o.category,
-          category_group_name: "",
-          category_name: "",
+          category_group_code: "",
+          category_group_name: o.category,
+          category_name: o.category,
           distance: "",
           id: o.id,
           phone: "",
           place_name: o.name,
           place_url: "",
-          road_address_name: "",
-          x: parseInt(o.x),
-          y: parseInt(o.y),
+          address_name: o.E_address,
+          road_address_name: o.E_address,
+          x: parseFloat(o.x),
+          y: parseFloat(o.y),
+          mood: o.mood,
           lighting: o.lighting,
           rating_avrg: o.rating_avrg,
           review_cnt: o.review_cnt,
           wantPlaceCnt: o.wantPlaceCnt
         });
       })
-      //setSearchList(resData);
-      console.log('여긴 키워드', resData);
+      setterSearchList(resData);
+      console.log("키워드 검색", resData);
     });
   };
 
