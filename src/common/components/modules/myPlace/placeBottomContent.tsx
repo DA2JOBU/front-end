@@ -5,6 +5,7 @@ import { wantPlaceList, wentPlaceList } from "@api/myPlace";
 import Pencle from '@public/images/pencle.svg';
 import BaseButton from '@components/modules/tab/tab-detail/datail-button/base-link';
 import RightTab from "../rightTab";
+import Place from "../rightTab/place";
 
 const BottomContainers = styled.article`
   background-color: ${({ theme }) => theme.color.white};
@@ -135,22 +136,34 @@ const PlaceBottomContent = (props: Props) => {
     setEditState(!editState);
   }
 
+  //바뀌면 보여 줄 데이터 관리
+  useEffect(() => {
+    setListState(wentList);
+  }, [wentList]);
+
+  useEffect(() => {
+    setListState(hopeList);
+  }, [hopeList]);
+
+  //데이터 세팅
   useEffect(() => {
     if (sessionStorage.getItem('jwtToken') == null) {
+      alert('로그인을 해주세요');
       return;
     }
     wentPlaceList().then((res) => {
       setWentList(res);
+      console.log(res);
     }).catch((error) => {
-      alert('로그인을 해주세요');
+      console.log(error);
     })
     wantPlaceList().then((res) => {
       console.log(res);
       setHopeList(res);
     }).catch((error) => {
-      alert('로그인을 해주세요');
+      console.log(error);
     });
-  }, [listState]);
+  }, []);
 
   const handlerWent = () => {
     setWent(true);
@@ -162,6 +175,10 @@ const PlaceBottomContent = (props: Props) => {
     setWent(false);
     setHope(true);
     setListState(hopeList);
+  }
+
+  const dateFormat = (date: string) => {
+    return date.substring(2, 10);
   }
 
   return (
@@ -178,12 +195,28 @@ const PlaceBottomContent = (props: Props) => {
       {listState.length == 0 ?
         <EmptyList>
           <PlaceListContainer>
-            <Pencle />
+            {editState == false ? <Pencle /> :
+              <label>
+                <input type='checkbox' id='checkbox' />
+              </label>
+            }
             <p>장소를 등록해 주세요</p>
             <GotoRegister onClick={() => setRegister(!register)}>등록하기</GotoRegister>
           </PlaceListContainer>
         </EmptyList>
-        : null}
+        : listState.map((info: any, index: number) => {
+          return (
+            <Place
+              key={index}
+              index={index}
+              address={info.address_name}
+              roadAddress={info.road_address_name}
+              placeName={info.place.name}
+              date={dateFormat(info.createdAt)}
+            />
+          );
+        })
+      }
 
       {editState == true ?
         <Footer>

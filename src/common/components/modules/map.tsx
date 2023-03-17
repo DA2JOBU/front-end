@@ -3,7 +3,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { keyword, keywordSearch, mapInSearch, searchList } from 'src/state';
-import { reviewedPlaceList } from 'src/types/searchType';
+import { reviewedPlaceList, searchElement } from 'src/types/searchType';
 import { propsType } from '../../templete/contents';
 
 interface placeType {
@@ -22,20 +22,22 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
   const setterSearchList = useSetRecoilState(searchList);
   const getterSearchList = useRecoilValue(searchList);
 
+  //키워드 값을 비교하기 위한 변수
   const [keyword, setKeyword] = useState(props.searchKeyword);
 
   // 마커를 담는 배열
-  const [registerPos, setRegister] = useState<any[]>([]);
+  const [registerPos, setRegister] = useState<searchElement[]>([]);
 
   const inMap = useRecoilValue(mapInSearch);
 
   let markers: any[] = [];
 
-  //키워드가 바뀌면 
+  //키워드가 바뀌면 호출하는 부수함수
   useEffect(() => {
     setKeyword(props.searchKeyword);
   }, [props.searchKeyword]);
 
+  //recoil의 atom값이 변경되면 호출
   useEffect(() => {
     if (getterSearchList.length === 0) {
       getRegisterList().then((res: any) => {
@@ -43,13 +45,11 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
       });
     }
     else {
-      console.log('여기?', getterSearchList);
-      console.log('registerPos', registerPos);
       setRegister(getterSearchList);
     }
   }, [getterSearchList]);
 
-  // 검색어가 바뀔 때마다 재렌더링되도록 useEffect 사용
+  // 검색어가 바뀌거나 마커가 바뀌면 재렌더링
   useEffect(() => {
     if (!mapContainer && registerPos.length == 0) return;
     window.kakao.maps.load(() => {
@@ -103,11 +103,6 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
           return;
         }
       }
-
-      // if (keyState === 'keyword') {
-      //   console.log('여기로 오나?');
-      //   setRegister(getterSearchList);
-      // }
 
       for (let i = 0; i < registerPos?.length; i++) {
         let placePosition = new window.kakao.maps.LatLng(registerPos[i].y, registerPos[i].x);
