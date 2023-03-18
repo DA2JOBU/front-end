@@ -39,7 +39,9 @@ export const registerFirstPlace = async (data: PlaceRegister) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
-  });
+  })
+    .then((res) => res.json())
+    .then((res) => res);
 };
 
 //리뷰 등록
@@ -55,6 +57,20 @@ export const registerReview = async (data: registerReviewType) => {
   });
 };
 
+//가고 싶은 곳 저장
+export const registerWantPlace = async (placeId: string) => {
+  const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + 'want-place';
+  return await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + sessionStorage.getItem('jwtToken'),
+    },
+    body: JSON.stringify({ placeId: placeId })
+  });
+}
+
+//장소 삭제하기
 export const deletedPlace = async (id: string) => {
   const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + 'want-place';
   return await fetch(apiUrl, {

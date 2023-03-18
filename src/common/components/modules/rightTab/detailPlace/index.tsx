@@ -11,7 +11,7 @@ import Brightness from './brightness';
 import Etc from './etc';
 import PlaceKinds from './placeKinds';
 import Satisfaction from './satisfaction';
-import { placeExist, registerFirstPlace, registerReview } from '@api/mapApi';
+import { placeExist, registerFirstPlace, registerReview, registerWantPlace } from '@api/mapApi';
 import { PlaceRegister, registerReviewType } from 'src/types/registerType';
 import Icons from 'public/assets/images/icons';
 import { useRouter } from 'next/router';
@@ -230,8 +230,45 @@ const DetailPlace = (props: placeDetail) => {
       ...inputData,
       [name]: value,
     });
-    console.log(inputData);
   };
+
+  //가고 싶은 곳 선택시 아래는 없애야 한다.
+  const [placeState, setPlaceState] = useState(true);
+  useEffect(() => {
+    if (inputData.placeKinds === '가고 싶은 곳')
+      setPlaceState(false);
+    else
+      setPlaceState(true);
+  }, [inputData.placeKinds])
+
+  //장소 등록
+  const registerPlace = async () => {
+    const requestData = inputData;
+    const existRes = await placeExist(requestData.placeId)
+      .then(async (res) => {
+        //없다면 장소 등록
+        if (res.id === '') {
+          const requestD: PlaceRegister = {
+            kakaoId: requestData.placeId,
+            name: requestData.placeName,
+            category: requestData.category,
+            x: requestData.x,
+            y: requestData.y,
+            info: {
+              url: requestData.url,
+              address: requestData.address,
+              roadAddress: requestData.roadAddress
+            }
+          }
+          //장소 등록
+          const firstPlaceres = await registerFirstPlace(requestD).then((ress) => {
+            return ress.id;
+          });
+        }
+        else
+          return res.id;
+      });
+  }
 
   //등록 버튼 클릭시 있는지 확인 후 없으면 새로 장소 등록 후 리뷰 등록
   const submitForm = async () => {
@@ -248,13 +285,13 @@ const DetailPlace = (props: placeDetail) => {
           info: {
             url: requestData.url,
             address: requestData.address,
-            roadAddress: requestData.roadAddress,
-          },
-        };
+            roadAddress: requestData.roadAddress
+          }
+        }
         const firstPlaceres = await registerFirstPlace(requestD).then(async (ress) => {
           //리뷰 등록
           const reqData: registerReviewType = {
-            placeId: res.id,
+            placeId: ress.id,
             participants: requestData.participants,
             rating: requestData.satisfaction,
             price_range: requestData.price,
@@ -265,16 +302,15 @@ const DetailPlace = (props: placeDetail) => {
             is_advance_payment: requestData.isAdvancePayment != '' ? true : false,
             is_rent: requestData.isRent != '' ? true : false,
             simple_review: requestData.simpleReview,
-            reveiwMoodDto: [
-              {
-                mood_category: 'Mood',
-                mood: requestData.mood,
-              },
-              {
-                mood_category: 'Lighting',
-                mood: requestData.light,
-              },
-            ],
+            reveiwMoodDto: [{
+              mood_category: 'Mood',
+              mood: requestData.mood
+            },
+            {
+              mood_category: 'Lighting',
+              mood: requestData.light
+            }
+            ]
           };
 
           const firstPlaceres = await registerReview(reqData).then((ress) => {
@@ -314,9 +350,36 @@ const DetailPlace = (props: placeDetail) => {
           alert('장소가 등록되었습니다');
           router.reload();
         });
-      }
+      };
     });
-  };
+  }
+
+  //저장버튼 클릭 시
+  const saveClick = async () => {
+    const requestData = inputData;
+    const existRes = await placeExist(requestData.placeId)
+      .then(async (res) => {
+        const requestD: PlaceRegister = {
+          kakaoId: requestData.placeId,
+          name: requestData.placeName,
+          category: requestData.category,
+          x: requestData.x,
+          y: requestData.y,
+          info: {
+            url: requestData.url,
+            address: requestData.address,
+            roadAddress: requestData.roadAddress
+          }
+        }
+        const firstPlaceres = await registerFirstPlace(requestD).then(async (ress) => {
+          //장소 등록 후 저장
+          const savePlace = await registerWantPlace(ress.id).then(() => {
+            alert('장소가 저장 되었습니다.');
+            router.reload();
+          });
+        });
+      });
+  }
 
   return (
     <DetailContainer className="scrollBar">
@@ -340,59 +403,60 @@ const DetailPlace = (props: placeDetail) => {
         <CardBody>
           <PlaceKinds onChange={onChange} name="placeKinds" />
         </CardBody>
-        <DivideLine />
-        <CardHeader>
+        {placeState && <DivideLine />}
+        {placeState && <CardHeader>
           <h2 className="people">만족도 </h2>
           {/* <TopBadge /> */}
-        </CardHeader>
-        <CardBody>
+        </CardHeader>}
+        {placeState && <CardBody>
           <Satisfaction onChange={onChange} name="satisfaction" />
-        </CardBody>
-        <CardHeader>
+        </CardBody>}
+        {placeState && <CardHeader>
           <h2 className="people">참석인원수 </h2>
           {/* <TopBadge /> */}
-        </CardHeader>
-        <CardBody>
+        </CardHeader>}
+        {placeState && <CardBody>
           <InputForm placeholder="0" onChange={onChange} name="participants" />
-        </CardBody>
-        <CardHeader>
+        </CardBody>}
+        {placeState && <CardHeader>
           <h2 className="people">인당 가격대 </h2>
           {/* <TopBadge /> */}
-        </CardHeader>
-        <CardBody>
+        </CardHeader>}
+        {placeState && <CardBody>
           <MoneyButton onChange={onChange} name="price" />
-        </CardBody>
-        <DivideLine />
-        <CardHeader>
+        </CardBody>}
+        {placeState && <DivideLine />}
+        {placeState && <CardHeader>
           <h2 className="people">분위기 </h2>
           {/* <TopBadge /> */}
-        </CardHeader>
-        <CardBody>
+        </CardHeader>}
+        {placeState && <CardBody>
           <Atmosphere onChange={onChange} name="mood" />
-        </CardBody>
-        <CardHeader>
+        </CardBody>}
+        {placeState && <CardHeader>
           <h2 className="people">조명 밝기</h2>
           {/* <TopBadge /> */}
-        </CardHeader>
-        <CardBody>
+        </CardHeader>}
+        {placeState && <CardBody>
           <Brightness onChange={onChange} name="light" />
-        </CardBody>
-        <CardHeader>
+        </CardBody>}
+        {placeState && <CardHeader>
           <h2 className="people">기타</h2>
           {/* <TopBadge /> */}
-        </CardHeader>
-        <CardBody>
+        </CardHeader>}
+        {placeState && <CardBody>
           <Etc onChange={onChange} />
-        </CardBody>
-        <CardHeader>
+        </CardBody>}
+        {placeState && <CardHeader>
           <h2 className="people">한 줄 리뷰</h2>
-        </CardHeader>
-        <CardBody>
-          <InputForm placeholder="후기를 적어주세요." onChange={onChange} name="simpleReview" />
-        </CardBody>
+        </CardHeader>}
+        {placeState && <CardBody>
+          <InputForm placeholder="후기를 적어주세요." onChange={onChange} name='simpleReview' />
+        </CardBody>}
       </CardContainer>
       <BottomContent>
-        <SubmitButton text="등록하기" onClick={submitForm} />
+        {placeState === true ? <SubmitButton text="등록하기" onClick={submitForm} /> :
+          <SubmitButton text='가고 싶은 곳 저장하기' onClick={saveClick} />}
       </BottomContent>
     </DetailContainer>
   );
