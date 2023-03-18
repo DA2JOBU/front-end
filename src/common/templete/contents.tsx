@@ -71,7 +71,7 @@ const Contents = (): JSX.Element => {
     setKeyword(value);
   };
 
-  const handleDelete = (e: { preventDefault: () => void; }) => {
+  const handleDelete = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setValue('');
   };
@@ -100,13 +100,23 @@ const Contents = (): JSX.Element => {
         </Nav>
         <Nav title="등록" onClick={() => !setIsOpen}>
           <SlideContainer>
-            <RightTab handleOnChange={handleOnChange} handleSubmit={handleSubmit} handleDelete={handleDelete} value={value} />
+            <RightTab
+              handleOnChange={handleOnChange}
+              handleSubmit={handleSubmit}
+              handleDelete={handleDelete}
+              value={value}
+            />
           </SlideContainer>
         </Nav>
 
         <Nav title="나의 회식 장소" onClick={() => !setIsOpen}>
           <SlideContainer>
-            <MyPlace handleOnChange={handleOnChange} handleSubmit={handleSubmit} handleDelete={handleDelete} value={value} />
+            <MyPlace
+              handleOnChange={handleOnChange}
+              handleSubmit={handleSubmit}
+              handleDelete={handleDelete}
+              value={value}
+            />
           </SlideContainer>
         </Nav>
 
