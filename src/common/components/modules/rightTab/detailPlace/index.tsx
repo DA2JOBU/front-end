@@ -24,7 +24,6 @@ const DetailContainer = styled.section`
   height: calc(100vh - 64px);
   background: ${({ theme }) => theme.color.white};
   border-left: 1px solid ${({ theme }) => theme.color.gray30};
-
 `;
 
 const DetailHeader = styled.div`
@@ -143,26 +142,26 @@ const InputForm = styled.input`
 const DivideLine = styled.div`
   border-top: 1px solid ${({ theme }) => theme.color.gray30};
   margin: 30px auto;
-  width: 100%;        
-`
+  width: 100%;
+`;
 
 const PlaceInfo = styled.div`
   padding: 30px 28px 12px 28px;
   background: ${({ theme }) => theme.color.gray20};
   border-bottom: 1px solid ${({ theme }) => theme.color.gray30};
-`
+`;
 
 const AddressContainer = styled.div`
   margin-bottom: 18px;
-`
+`;
 
 const AddressInfo = styled.label`
   border-radius: 6px;
   flex-direction: row;
-  background : ${({ theme }) => theme.color.gray20};
-  font-weight : ${({ theme }) => theme.color.gray20};
+  background: ${({ theme }) => theme.color.gray20};
+  font-weight: ${({ theme }) => theme.color.gray20};
   align-items: center;
-  border: 1px solid #D5D5D5;
+  border: 1px solid #d5d5d5;
   padding: 4px 6px;
   font-size: 1rem;
 `;
@@ -175,7 +174,7 @@ const BottomContent = styled.div`
   width: 23.75rem;
   background: ${({ theme }) => theme.color.white};
   bottom: 0;
-  vertical-align:middle;
+  vertical-align: middle;
   margin-bottom: 2rem;
 `;
 
@@ -185,7 +184,7 @@ export interface placeDetail {
   placeName: string;
   address: string;
   roadAddress: string;
-  category: string;//양식
+  category: string; //양식
   placeUrl: string;
   x: number;
   y: number;
@@ -196,10 +195,9 @@ const DetailPlace = (props: placeDetail) => {
   //카테고리 추출 함수
   const categoryFC = (word: string) => {
     let result = word.slice(word.indexOf('>') + 2);
-    if (result.indexOf(' ') > 0)
-      result = result.slice(0, result.indexOf(' '));
+    if (result.indexOf(' ') > 0) result = result.slice(0, result.indexOf(' '));
     return result;
-  }
+  };
   //입력 데이터
   const [inputData, setInput] = useState({
     placeId: props.placeId,
@@ -228,7 +226,6 @@ const DetailPlace = (props: placeDetail) => {
   //입력 폼 전체 상태 관리
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    console.log(e.target);
     setInput({
       ...inputData,
       [name]: value,
@@ -239,57 +236,22 @@ const DetailPlace = (props: placeDetail) => {
   //등록 버튼 클릭시 있는지 확인 후 없으면 새로 장소 등록 후 리뷰 등록
   const submitForm = async () => {
     const requestData = inputData;
-    const existRes = await placeExist(requestData.placeId)
-      .then(async (res) => {
-        console.log(res);
-        //없다면 장소 등록
-        if (res.id === '') {
-          const requestD: PlaceRegister = {
-            kakaoId: requestData.placeId,
-            name: requestData.placeName,
-            category: requestData.category,
-            x: requestData.x,
-            y: requestData.y,
-            info: {
-              url: requestData.url,
-              address: requestData.address,
-              roadAddress: requestData.roadAddress
-            }
-          }
-          const firstPlaceres = await registerFirstPlace(requestD).then(async (ress) => {
-            //리뷰 등록
-            const reqData: registerReviewType = {
-              placeId: res.id,
-              participants: requestData.participants,
-              rating: requestData.satisfaction,
-              price_range: requestData.price,
-              is_cork_charge: requestData.isCorkCharge != '' ? true : false,
-              is_room: requestData.isRoom != '' ? true : false,
-              is_reservation: requestData.isReservation != '' ? true : false,
-              is_parking: requestData.isParking != '' ? true : false,
-              is_advance_payment: requestData.isAdvancePayment != '' ? true : false,
-              is_rent: requestData.isRent != '' ? true : false,
-              simple_review: requestData.simpleReview,
-              reveiwMoodDto: [{
-                mood_category: 'Mood',
-                mood: requestData.mood
-              },
-              {
-                mood_category: 'Lighting',
-                mood: requestData.light
-              }
-              ]
-            };
-
-            const firstPlaceres = await registerReview(reqData).then((ress) => {
-              console.log(ress);
-              alert('장소가 등록되었습니다');
-              router.reload();
-            });
-          });
-        }
-        //있는 id면
-        else {
+    const existRes = await placeExist(requestData.placeId).then(async (res) => {
+      //없다면 장소 등록
+      if (res.id === '') {
+        const requestD: PlaceRegister = {
+          kakaoId: requestData.placeId,
+          name: requestData.placeName,
+          category: requestData.category,
+          x: requestData.x,
+          y: requestData.y,
+          info: {
+            url: requestData.url,
+            address: requestData.address,
+            roadAddress: requestData.roadAddress,
+          },
+        };
+        const firstPlaceres = await registerFirstPlace(requestD).then(async (ress) => {
           //리뷰 등록
           const reqData: registerReviewType = {
             placeId: res.id,
@@ -303,26 +265,57 @@ const DetailPlace = (props: placeDetail) => {
             is_advance_payment: requestData.isAdvancePayment != '' ? true : false,
             is_rent: requestData.isRent != '' ? true : false,
             simple_review: requestData.simpleReview,
-            reveiwMoodDto: [{
-              mood_category: 'Mood',
-              mood: requestData.mood
-            },
-            {
-              mood_category: 'Lighting',
-              mood: requestData.light
-            }
-            ]
+            reveiwMoodDto: [
+              {
+                mood_category: 'Mood',
+                mood: requestData.mood,
+              },
+              {
+                mood_category: 'Lighting',
+                mood: requestData.light,
+              },
+            ],
           };
 
-          console.log(reqData);
-
           const firstPlaceres = await registerReview(reqData).then((ress) => {
-            console.log(ress);
             alert('장소가 등록되었습니다');
             router.reload();
           });
-        }
-      });
+        });
+      }
+      //있는 id면
+      else {
+        //리뷰 등록
+        const reqData: registerReviewType = {
+          placeId: res.id,
+          participants: requestData.participants,
+          rating: requestData.satisfaction,
+          price_range: requestData.price,
+          is_cork_charge: requestData.isCorkCharge != '' ? true : false,
+          is_room: requestData.isRoom != '' ? true : false,
+          is_reservation: requestData.isReservation != '' ? true : false,
+          is_parking: requestData.isParking != '' ? true : false,
+          is_advance_payment: requestData.isAdvancePayment != '' ? true : false,
+          is_rent: requestData.isRent != '' ? true : false,
+          simple_review: requestData.simpleReview,
+          reveiwMoodDto: [
+            {
+              mood_category: 'Mood',
+              mood: requestData.mood,
+            },
+            {
+              mood_category: 'Lighting',
+              mood: requestData.light,
+            },
+          ],
+        };
+
+        const firstPlaceres = await registerReview(reqData).then((ress) => {
+          alert('장소가 등록되었습니다');
+          router.reload();
+        });
+      }
+    });
   };
 
   return (
@@ -345,7 +338,7 @@ const DetailPlace = (props: placeDetail) => {
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
-          <PlaceKinds onChange={onChange} name='placeKinds' />
+          <PlaceKinds onChange={onChange} name="placeKinds" />
         </CardBody>
         <DivideLine />
         <CardHeader>
@@ -395,7 +388,7 @@ const DetailPlace = (props: placeDetail) => {
           <h2 className="people">한 줄 리뷰</h2>
         </CardHeader>
         <CardBody>
-          <InputForm placeholder="후기를 적어주세요." onChange={onChange} name='simpleReview' />
+          <InputForm placeholder="후기를 적어주세요." onChange={onChange} name="simpleReview" />
         </CardBody>
       </CardContainer>
       <BottomContent>

@@ -159,10 +159,11 @@ const Container = styled.div`
 const onChange = () => {
   console.log('e');
 };
-const DetailData = (props: { placeList: any; info?: any; status?: any; category: string}) => {
-  const { placeList, info, status, category} = props;
-  console.log('ddd', category)
+const DetailData = (props: { placeList: any; info?: any; status?: any; category: string }) => {
+  const { placeList, info, status, category } = props;
 
+  // Q. 역할이 무엇인지?
+  // TODO 실제로 복사되게 작업 필요
   const onClick = () => {
     console.log('복사');
   };
@@ -226,7 +227,7 @@ const DetailData = (props: { placeList: any; info?: any; status?: any; category:
           <h2 className="people">분위기 </h2>
         </CardHeader>
         <CardBody>
-          <Atmosphere onChange={onChange}  name="mood"  />
+          <Atmosphere onChange={onChange} name="mood" />
         </CardBody>
         <CardHeader>
           <h2 className="people">조명 밝기</h2>

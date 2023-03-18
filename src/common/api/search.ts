@@ -14,8 +14,6 @@ export async function getPlaceTopTen() {
 }
 
 export async function getKeyword(data: any) {
-  console.log('data',data);
   const query = qs.stringify(data);
-  console.log(query)
   return await axios.get(process.env.NEXT_PUBLIC_SERVER_URI + `place/keyword?${query}`);
 }

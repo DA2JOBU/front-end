@@ -108,7 +108,7 @@ const KeywordCard = (): JSX.Element => {
     isReservation: '',
   });
 
-  const onClick = () => { };
+  const onClick = () => {};
 
   //입력 폼 전체 상태 관리
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -124,7 +124,6 @@ const KeywordCard = (): JSX.Element => {
       alert('로그인 먼저 해주세요');
       return;
     }
-    console.log(inputData);
     let param = inputData.participants.split(',');
     const data: KeywordSearchDto = {
       participants: {
@@ -135,29 +134,27 @@ const KeywordCard = (): JSX.Element => {
       lighting: inputData.lighting,
       mood: inputData.mood,
       etc: {
-        is_cork_charge: (inputData.isCorkCharge != '' ? true : false),
-        is_rent: (inputData.isRent != '' ? true : false),
-        is_room: (inputData.isRoom != '' ? true : false),
-        is_reservation: (inputData.isReservation != '' ? true : false),
-        is_parking: (inputData.isParking != '' ? true : false),
-        is_advance_payment: (inputData.isAdvancePayment != '' ? true : false),
+        is_cork_charge: inputData.isCorkCharge != '' ? true : false,
+        is_rent: inputData.isRent != '' ? true : false,
+        is_room: inputData.isRoom != '' ? true : false,
+        is_reservation: inputData.isReservation != '' ? true : false,
+        is_parking: inputData.isParking != '' ? true : false,
+        is_advance_payment: inputData.isAdvancePayment != '' ? true : false,
       },
     };
-    // console.log(data);
     getKeyword(data).then((res) => {
-      console.log(res);
       let resData: searchElement[] = [];
 
       res.data.map((o: KeywordSearchResult) => {
         resData.push({
-          category_group_code: "",
+          category_group_code: '',
           category_group_name: o.category,
           category_name: o.category,
-          distance: "",
+          distance: '',
           id: o.id,
-          phone: "",
+          phone: '',
           place_name: o.name,
-          place_url: "",
+          place_url: '',
           address_name: o.E_address,
           road_address_name: o.E_address,
           x: parseFloat(o.x),
@@ -166,11 +163,10 @@ const KeywordCard = (): JSX.Element => {
           lighting: o.lighting,
           rating_avrg: o.rating_avrg,
           review_cnt: o.review_cnt,
-          wantPlaceCnt: o.wantPlaceCnt
+          wantPlaceCnt: o.wantPlaceCnt,
         });
-      })
+      });
       setterSearchList(resData);
-      console.log("키워드 검색", resData);
     });
   };
 

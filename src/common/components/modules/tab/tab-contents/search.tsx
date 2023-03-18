@@ -60,7 +60,6 @@ const Search = (props: Props) => {
   const mapState = useSetRecoilState(mapInSearch);
   const mapStates = useRecoilValue(mapInSearch);
   const handlerCheck = () => {
-    console.log(mapStates);
     setCheck(!check);
     mapState(!check);
   };

@@ -43,8 +43,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
       getRegisterList().then((res: any) => {
         setRegister(res);
       });
-    }
-    else {
+    } else {
       setRegister(getterSearchList);
     }
   }, [getterSearchList]);
@@ -70,7 +69,6 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
 
       // 키워드로 장소를 검색합니다
       if (keyword != props.searchKeyword) {
-
         searchPlaces();
       }
 
@@ -81,7 +79,6 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
           // console.log('키워드를 입력해주세요!');
           return false;
         }
-        console.log(keyword2);
         // 장소검색 객체를 통해 키워드로 장소검색을 요청
         ps.keywordSearch(keyword2, placesSearchCB, !inMap ? null : { location: map.getCenter(), radius: 1000 });
       }
@@ -177,17 +174,18 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
             </span>
             <a href="${places.place_url}">
               <h5 class="info-item place-name">${places.place_name}</h5>
-              ${places.road_address_name
-            ? `<span class="info-item road-address-name">
+              ${
+                places.road_address_name
+                  ? `<span class="info-item road-address-name">
                     ${places.road_address_name}
                    </span>
                    <span class="info-item address-name">
                  	 ${places.address_name}
                	   </span>`
-            : `<span class="info-item address-name">
+                  : `<span class="info-item address-name">
              	     ${places.address_name}
                   </span>`
-          }
+              }
               <span class="info-item tel">
                 ${places.phone}
               </span>
@@ -215,7 +213,6 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
             position: position, // 마커의 위치
             image: markerImage,
           });
-
 
         marker.setMap(map); // 지도 위에 마커를 표출
         markers.push(marker); // 배열에 생성된 마커를 추가
