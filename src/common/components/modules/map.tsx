@@ -3,7 +3,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { keyword, keywordSearch, mapInSearch, searchList } from 'src/state';
-import { reviewedPlaceList } from 'src/types/searchType';
+import { reviewedPlaceList, searchElement } from 'src/types/searchType';
 import { propsType } from '../../templete/contents';
 
 interface placeType {
@@ -22,34 +22,33 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
   const setterSearchList = useSetRecoilState(searchList);
   const getterSearchList = useRecoilValue(searchList);
 
+  //키워드 값을 비교하기 위한 변수
   const [keyword, setKeyword] = useState(props.searchKeyword);
 
   // 마커를 담는 배열
-  const [registerPos, setRegister] = useState<any[]>([]);
+  const [registerPos, setRegister] = useState<searchElement[]>([]);
 
   const inMap = useRecoilValue(mapInSearch);
 
   let markers: any[] = [];
 
-  //키워드가 바뀌면 
+  //키워드가 바뀌면 호출하는 부수함수
   useEffect(() => {
     setKeyword(props.searchKeyword);
   }, [props.searchKeyword]);
 
+  //recoil의 atom값이 변경되면 호출
   useEffect(() => {
     if (getterSearchList.length === 0) {
       getRegisterList().then((res: any) => {
         setRegister(res);
       });
-    }
-    else {
-      console.log('여기?', getterSearchList);
-      console.log('registerPos', registerPos);
+    } else {
       setRegister(getterSearchList);
     }
   }, [getterSearchList]);
 
-  // 검색어가 바뀔 때마다 재렌더링되도록 useEffect 사용
+  // 검색어가 바뀌거나 마커가 바뀌면 재렌더링
   useEffect(() => {
     if (!mapContainer && registerPos.length == 0) return;
     window.kakao.maps.load(() => {
@@ -70,7 +69,6 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
 
       // 키워드로 장소를 검색합니다
       if (keyword != props.searchKeyword) {
-
         searchPlaces();
       }
 
@@ -81,7 +79,6 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
           // console.log('키워드를 입력해주세요!');
           return false;
         }
-        console.log(keyword2);
         // 장소검색 객체를 통해 키워드로 장소검색을 요청
         ps.keywordSearch(keyword2, placesSearchCB, !inMap ? null : { location: map.getCenter(), radius: 1000 });
       }
@@ -103,11 +100,6 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
           return;
         }
       }
-
-      // if (keyState === 'keyword') {
-      //   console.log('여기로 오나?');
-      //   setRegister(getterSearchList);
-      // }
 
       for (let i = 0; i < registerPos?.length; i++) {
         let placePosition = new window.kakao.maps.LatLng(registerPos[i].y, registerPos[i].x);
@@ -182,17 +174,18 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
             </span>
             <a href="${places.place_url}">
               <h5 class="info-item place-name">${places.place_name}</h5>
-              ${places.road_address_name
-            ? `<span class="info-item road-address-name">
+              ${
+                places.road_address_name
+                  ? `<span class="info-item road-address-name">
                     ${places.road_address_name}
                    </span>
                    <span class="info-item address-name">
                  	 ${places.address_name}
                	   </span>`
-            : `<span class="info-item address-name">
+                  : `<span class="info-item address-name">
              	     ${places.address_name}
                   </span>`
-          }
+              }
               <span class="info-item tel">
                 ${places.phone}
               </span>
@@ -220,7 +213,6 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
             position: position, // 마커의 위치
             image: markerImage,
           });
-
 
         marker.setMap(map); // 지도 위에 마커를 표출
         markers.push(marker); // 배열에 생성된 마커를 추가

@@ -2,7 +2,6 @@ import axios, { AxiosPromise } from 'axios';
 import { PlaceRegister, placeUUID, registerPlace, registerReviewType } from 'src/types/registerType';
 import { reviewedPlaceList } from 'src/types/searchType';
 
-
 //등록된 리스트 가져오기
 export const getRegisterList = async () => {
   const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + 'place/reviewed';
@@ -33,8 +32,6 @@ export const placeExist = async (kakaoId: string) => {
 
 //첫 장소 등록
 export const registerFirstPlace = async (data: PlaceRegister) => {
-  console.log('data', data)
-
   const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + 'place';
   return await fetch(apiUrl, {
     method: 'POST',
@@ -42,7 +39,9 @@ export const registerFirstPlace = async (data: PlaceRegister) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
-  });
+  })
+    .then((res) => res.json())
+    .then((res) => res);
 };
 
 //리뷰 등록
@@ -55,9 +54,23 @@ export const registerReview = async (data: registerReviewType) => {
       Authorization: 'Bearer ' + sessionStorage.getItem('jwtToken'),
     },
     body: JSON.stringify(data),
-  })
+  });
+};
+
+//가고 싶은 곳 저장
+export const registerWantPlace = async (placeId: string) => {
+  const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + 'want-place';
+  return await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + sessionStorage.getItem('jwtToken'),
+    },
+    body: JSON.stringify({ placeId: placeId })
+  });
 }
 
+//장소 삭제하기
 export const deletedPlace = async (id: string) => {
   const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + 'want-place';
   return await fetch(apiUrl, {
@@ -66,4 +79,4 @@ export const deletedPlace = async (id: string) => {
       'Content-Type': 'application/json',
     },
   });
-}
+};

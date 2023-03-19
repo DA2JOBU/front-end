@@ -16,18 +16,6 @@ export const keywordSearch = atom<KeywordSearchResult[]>({
   default: [],
 });
 
-//검색하면 atom값을 새로 세팅해주는 것
-// export const setSearchList = selector({
-//   key: 'setSearchList',
-//   get: async () => {
-//     const res = await getRegisterList();
-//     return res;
-//   },
-//   set: ({ set }, newValue: any) => {
-//     set(searchList, newValue);
-//   }
-// });
-
 //지도 내 검색 기능
 export const mapInSearch = atom<boolean>({
   key: 'inMap',
