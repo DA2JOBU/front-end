@@ -1,11 +1,13 @@
 import Brightness from '@components/modules/rightTab/detailPlace/brightness';
 import Etc from '@components/modules/rightTab/detailPlace/etc';
 import React from 'react';
-import { searchElement } from 'src/types/searchType';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import styled from 'styled-components';
 import Icons from 'public/assets/images/icons';
 import BaseButton from './datail-button/base-link';
 import Atmosphere from '@components/modules/rightTab/detailPlace/atmosphere';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DataContainer = styled.form`
   width: 100%;
@@ -162,10 +164,7 @@ const onChange = () => {
 };
 const TopDetailData = (props: { placeList: any; info?: any; status?: any }) => {
   const { placeList, info, status } = props;
-
-  const onClick = () => {
-    console.log('복사');
-  };
+  const copyToast = () => toast('복사 완료');
   return (
     <DataContainer>
       <DataHeader>
@@ -173,12 +172,16 @@ const TopDetailData = (props: { placeList: any; info?: any; status?: any }) => {
           <p className="address">
             <span className="text">도로명</span>
             <span className="name">{placeList.road_address_name || info.roadAddress}</span>
-            <Icons.Copy onClick={onClick} />
+            <CopyToClipboard text={placeList.road_address_name || info.roadAddress} onCopy={() => copyToast()}>
+              <Icons.Copy />
+            </CopyToClipboard>
           </p>
           <p className="address">
             <span className="text">지번</span>
             <span className="name">{placeList.address_name || info.address}</span>
-            <Icons.Copy onClick={onClick} />
+            <CopyToClipboard text={placeList.address_name || info.address} onCopy={() => copyToast()}>
+              <Icons.Copy />
+            </CopyToClipboard>
           </p>
         </div>
         <ContentContainer>
@@ -248,6 +251,7 @@ const TopDetailData = (props: { placeList: any; info?: any; status?: any }) => {
       <DataFooter>
         <BaseButton value="공유하기" width="20rem" height="52px" fontSize="16px" />
       </DataFooter>
+      <ToastContainer />
     </DataContainer>
   );
 };
