@@ -18,7 +18,7 @@ const UlStyled = styled.ul`
 `;
 
 type Props = {
-  children: ReactElement<NavTitleProps>[];
+  children?: ReactElement<NavTitleProps>[];
   preSelectedTabIndex?: number;
 };
 
@@ -29,7 +29,7 @@ const Navs = (props: Props): JSX.Element => {
   return (
     <NavContainer>
       <UlStyled>
-        {children.map((item, index) =>
+        {children && children.map((item, index) =>
           item.props.title === '로그인' ? (
             <NavLoginButton key={item.props.title} title={item.props.title} onClick={item.props.onClick} />
           ) : (
@@ -43,7 +43,7 @@ const Navs = (props: Props): JSX.Element => {
           )
         )}
       </UlStyled>
-      {children[selectedNavIndex]}
+      {children && children[selectedNavIndex]}
     </NavContainer>
   );
 };

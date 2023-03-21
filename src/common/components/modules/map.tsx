@@ -61,6 +61,24 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
       // 지도를 생성
       const map = new window.kakao.maps.Map(mapContainer, mapOption);
 
+      window.kakao.maps.event.addListener(map, 'dragend', function() {        
+          
+          // 지도 중심좌표를 얻어옵니다 
+          var latlng = map.getCenter();
+          //map.setCenter(latlng.getLat());
+          map.setCenter(new window.kakao.maps.LatLng(latlng.getLat(), latlng.getLng()));
+          console.log('호출중?', map.getCenter());
+          mapOption.center = new window.kakao.maps.LatLng(latlng.getLat(), latlng.getLng())
+          
+          // var message = '변경된 지도 중심좌표는 ' + latlng.getLat() + ' 이고, ';
+          // message += '경도는 ' + latlng.getLng() + ' 입니다';
+          
+          // let resultDiv = document.getElementById('result');  
+          // resultDiv!.innerHTML = message;
+          
+      });
+      
+
       // 장소 검색 객체를 생성
       const ps = new window.kakao.maps.services.Places();
 
@@ -80,6 +98,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
           return false;
         }
         // 장소검색 객체를 통해 키워드로 장소검색을 요청
+        console.log(map.getCenter());
         ps.keywordSearch(keyword2, placesSearchCB, !inMap ? null : { location: map.getCenter(), radius: 1000 });
       }
 
@@ -140,6 +159,11 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
 
             window.kakao.maps.event.addListener(marker, 'mouseout', function () {
               infowindow.close();
+            });
+
+            // 마커에 클릭이벤트를 등록합니다
+            window.kakao.maps.event.addListener(marker, 'click', function() {
+              alert(title);
             });
 
             itemEl.onmouseover = function () {
