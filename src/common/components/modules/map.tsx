@@ -5,6 +5,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { keyword, keywordSearch, mapInSearch, searchList } from 'src/state';
 import { reviewedPlaceList, searchElement } from 'src/types/searchType';
 import { propsType } from '../../templete/contents';
+import PlaceDetailInfo from 'src/common/templete/placeDetailInfo';
 
 interface placeType {
   place_name: string;
@@ -27,6 +28,11 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
 
   // 마커를 담는 배열
   const [registerPos, setRegister] = useState<searchElement[]>([]);
+
+  //상세정보에 필요한 상태
+  const [detailInfoState, setDetailInfo] = useState(false);
+  const [detailId, setId] = useState('');
+
 
   const inMap = useRecoilValue(mapInSearch);
 
@@ -143,7 +149,8 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
           // 마커를 생성하고 지도에 표시
           let placePosition = new window.kakao.maps.LatLng(places[i].y, places[i].x),
             marker = addMarker(placePosition, i, undefined),
-            itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성
+            itemEl = getListItem(i, places[i]), // 검색 결과 항목 Element를 생성
+            id = places[i].id;
 
           // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
           // LatLngBounds 객체에 좌표를 추가
@@ -163,7 +170,9 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
 
             // 마커에 클릭이벤트를 등록합니다
             window.kakao.maps.event.addListener(marker, 'click', function() {
-              alert(title);
+              console.log(id);
+              setId(id);
+              setDetailInfo(true);
             });
 
             itemEl.onmouseover = function () {
@@ -273,6 +282,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
   return (
     <div className="map-container">
       <div id="map" className="map" style={{ width: '100vw', height: '100vh' }}></div>
+      {detailInfoState && <PlaceDetailInfo onClose={() => setDetailInfo(false)} id={detailId}/>}
     </div>
   );
 };
