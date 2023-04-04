@@ -148,7 +148,6 @@ const PlaceBottomContent = (props: Props) => {
   //데이터 세팅
   useEffect(() => {
     if (sessionStorage.getItem('jwtToken') == null) {
-      alert('로그인을 해주세요');
       return;
     }
     wentPlaceList()

@@ -83,8 +83,6 @@ const Contents = (): JSX.Element => {
     handleDelete,
   };
 
-  const router = useRouter();
-
   return (
     <MainContainer>
       <Logo>
@@ -109,14 +107,20 @@ const Contents = (): JSX.Element => {
           </SlideContainer>
         </Nav>
 
-        <Nav title="나의 회식 장소" onClick={() => !setIsOpen}>
+        <Nav title="나의 회식 장소" onClick={() =>{
+          console.log('일로오나?');
+          if (sessionStorage.getItem('jwtToken') == null){
+            console.log('일로오나?');
+          }
+            alert('로그인을 해주세요')
+        }}>
           <SlideContainer>
-            <MyPlace
+            {accessToken ?<MyPlace
               handleOnChange={handleOnChange}
               handleSubmit={handleSubmit}
               handleDelete={handleDelete}
               value={value}
-            />
+            /> : <></>}
           </SlideContainer>
         </Nav>
 

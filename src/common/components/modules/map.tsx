@@ -5,6 +5,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { keyword, keywordSearch, mapInSearch, searchList } from 'src/state';
 import { reviewedPlaceList, searchElement } from 'src/types/searchType';
 import { propsType } from '../../templete/contents';
+import PlaceDetailInfo from 'src/common/templete/placeDetailInfo';
 
 interface placeType {
   place_name: string;
@@ -27,6 +28,11 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
 
   // 마커를 담는 배열
   const [registerPos, setRegister] = useState<searchElement[]>([]);
+
+  //상세정보에 필요한 상태
+  const [detailInfoState, setDetailInfo] = useState(false);
+  const [detailId, setId] = useState('');
+
 
   const inMap = useRecoilValue(mapInSearch);
 
@@ -61,6 +67,24 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
       // 지도를 생성
       const map = new window.kakao.maps.Map(mapContainer, mapOption);
 
+      window.kakao.maps.event.addListener(map, 'dragend', function() {        
+          
+          // 지도 중심좌표를 얻어옵니다 
+          var latlng = map.getCenter();
+          //map.setCenter(latlng.getLat());
+          map.setCenter(new window.kakao.maps.LatLng(latlng.getLat(), latlng.getLng()));
+          console.log('호출중?', map.getCenter());
+          mapOption.center = new window.kakao.maps.LatLng(latlng.getLat(), latlng.getLng())
+          
+          // var message = '변경된 지도 중심좌표는 ' + latlng.getLat() + ' 이고, ';
+          // message += '경도는 ' + latlng.getLng() + ' 입니다';
+          
+          // let resultDiv = document.getElementById('result');  
+          // resultDiv!.innerHTML = message;
+          
+      });
+      
+
       // 장소 검색 객체를 생성
       const ps = new window.kakao.maps.services.Places();
 
@@ -80,6 +104,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
           return false;
         }
         // 장소검색 객체를 통해 키워드로 장소검색을 요청
+        console.log(map.getCenter());
         ps.keywordSearch(keyword2, placesSearchCB, !inMap ? null : { location: map.getCenter(), radius: 1000 });
       }
 
@@ -124,7 +149,8 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
           // 마커를 생성하고 지도에 표시
           let placePosition = new window.kakao.maps.LatLng(places[i].y, places[i].x),
             marker = addMarker(placePosition, i, undefined),
-            itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성
+            itemEl = getListItem(i, places[i]), // 검색 결과 항목 Element를 생성
+            id = places[i].id;
 
           // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
           // LatLngBounds 객체에 좌표를 추가
@@ -140,6 +166,13 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
 
             window.kakao.maps.event.addListener(marker, 'mouseout', function () {
               infowindow.close();
+            });
+
+            // 마커에 클릭이벤트를 등록합니다
+            window.kakao.maps.event.addListener(marker, 'click', function() {
+              console.log(id);
+              setId(id);
+              setDetailInfo(true);
             });
 
             itemEl.onmouseover = function () {
@@ -249,6 +282,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
   return (
     <div className="map-container">
       <div id="map" className="map" style={{ width: '100vw', height: '100vh' }}></div>
+      {detailInfoState && <PlaceDetailInfo onClose={() => setDetailInfo(false)} id={detailId}/>}
     </div>
   );
 };
