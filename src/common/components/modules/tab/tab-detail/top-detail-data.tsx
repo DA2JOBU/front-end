@@ -164,6 +164,7 @@ const onChange = () => {
 };
 const TopDetailData = (props: { placeList: any; info?: any; status?: any }) => {
   const { placeList, info, status } = props;
+
   const copyToast = () => toast('복사 완료');
   return (
     <DataContainer>
@@ -245,7 +246,15 @@ const TopDetailData = (props: { placeList: any; info?: any; status?: any }) => {
         </CardBody>
       </DataBody>
       <DataFooter>
-        <BaseButton value="자세히 보기" width="13.35rem" height="52px" fontSize="16px" />
+        <BaseButton
+          value="자세히 보기"
+          width="13.35rem"
+          height="52px"
+          fontSize="16px"
+          onClick={() => {
+            window.open(`https://place.map.kakao.com/${placeList.kakaoId}`, '_blank', 'noopener, noreferrer');
+          }}
+        />
         <BaseButton value="등록하기" width="6.5rem" height="52px" fontSize="16px" />
       </DataFooter>
       <DataFooter>
