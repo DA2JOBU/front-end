@@ -1,7 +1,9 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import Icons from 'public/assets/images/icons';
-import { getDetailInfo } from '@api/search';
+import { getDetailInfo, getDetailKakaoInfo } from '@api/search';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { detailState } from 'src/state';
 
 type ModalProps = {
   onClose: () => void;
@@ -10,10 +12,19 @@ type ModalProps = {
 
 const PlaceDetailInfo = (props: ModalProps) => {
   const {onClose, id} = props;
+  const setterDetail = useSetRecoilState(detailState);
+  const getterDetail = useRecoilValue(detailState);
   useEffect(()=>{
-    getDetailInfo(id).then((res)=>{
-      console.log(res);
-    });
+    if(getterDetail === 0){
+      getDetailInfo(id).then((res)=>{
+        console.log(res);
+      });
+    }
+    else{
+      getDetailKakaoInfo(id).then((res)=>{
+        console.log(res);
+      });
+    }
   },[id]);
 
   return (

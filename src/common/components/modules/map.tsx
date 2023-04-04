@@ -2,7 +2,7 @@ import { getRegisterList } from '@api/mapApi';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { keyword, keywordSearch, mapInSearch, searchList } from 'src/state';
+import { detailState, keyword, keywordSearch, mapInSearch, searchList } from 'src/state';
 import { reviewedPlaceList, searchElement } from 'src/types/searchType';
 import { propsType } from '../../templete/contents';
 import PlaceDetailInfo from 'src/common/templete/placeDetailInfo';
@@ -33,6 +33,8 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
   const [detailInfoState, setDetailInfo] = useState(false);
   const [detailId, setId] = useState('');
 
+  //상세정보 상태
+  const setterDetail = useSetRecoilState(detailState);
 
   const inMap = useRecoilValue(mapInSearch);
 
@@ -115,6 +117,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
           // 검색 목록과 마커를 표출
           displayPlaces(data);
           setterSearchList(data);
+          setterDetail(1);
           // 페이지 번호를 표출
           //displayPagination(pagination);
         } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
