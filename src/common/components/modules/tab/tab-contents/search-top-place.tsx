@@ -84,23 +84,25 @@ const SearchTopPlace = (): JSX.Element => {
       )}
       <SearchBanner>
         <Icons.Hand />
-        <span className="title"> 회식장소 Top 10</span>
+        <span className="title"> 회식장소 Top 5</span>
       </SearchBanner>
       <SearchTopContainer>
         <SearchContent>
-          {places.length > 0 ? places.map((place: any, index: React.Key | null | undefined) => {
-            return (
-              <div key={place.id}>
-                <TopCard
-                  place={place}
-                  onClick={() => {
-                    setVisible(true);
-                    setPlace(place);
-                  }}
-                />
-              </div>
-            );
-          }) : null}
+          {places.length > 0
+            ? places.map((place: any, index: React.Key | null | undefined) => {
+                return (
+                  <div key={place.id}>
+                    <TopCard
+                      place={place}
+                      onClick={() => {
+                        setVisible(true);
+                        setPlace(place);
+                      }}
+                    />
+                  </div>
+                );
+              })
+            : null}
         </SearchContent>
       </SearchTopContainer>
     </>
