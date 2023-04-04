@@ -28,6 +28,11 @@ export const keyword = atom<string>({
   default: '',
 });
 
+export const detailState = atom<number>({
+  key: 'detail',
+  default: 0,
+});
+
 const localStorageEffect =
   (key: string) =>
     ({ setSelf, onSet }: any) => {

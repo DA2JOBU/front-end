@@ -33,3 +33,17 @@ export const getDetailInfo = async (id: string) => {
       .then((res) => res.json())
       .then((res) => res);
 }
+
+//카카오id로 상세정보 호출
+export const getDetailKakaoInfo = async (id: string) => {
+  const apiUrl: string = process.env.NEXT_PUBLIC_SERVER_URI + `place/detail/kakao/${id}`;
+  return await fetch(apiUrl, {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + sessionStorage.getItem('jwtToken'),
+      },
+  })
+      .then((res) => res.json())
+      .then((res) => res);
+}

@@ -12,7 +12,7 @@ import Brightness from '../rightTab/detailPlace/brightness';
 import Etc from '../rightTab/detailPlace/etc';
 import { getKeyword } from '@api/search';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { keyword, keywordSearch, searchList } from 'src/state';
+import { detailState, keyword, keywordSearch, searchList } from 'src/state';
 
 const CardContainer = styled.form`
   width: 100%;
@@ -93,6 +93,10 @@ const KeywordCard = (): JSX.Element => {
   //검색 결과를 담는 것
   const setterSearchList = useSetRecoilState(searchList);
   const getterSearchList = useRecoilValue(searchList);
+
+  //상세정보 상태
+  const setterDetail = useSetRecoilState(detailState);
+  
   //입력 데이터
   const [inputData, setInput] = useState({
     participants: '',
@@ -142,6 +146,7 @@ const KeywordCard = (): JSX.Element => {
         is_advance_payment: inputData.isAdvancePayment != '' ? true : false,
       },
     };
+    setterDetail(0);
     getKeyword(data).then((res) => {
       let resData: searchElement[] = [];
 
