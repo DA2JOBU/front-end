@@ -96,7 +96,7 @@ const KeywordCard = (): JSX.Element => {
 
   //상세정보 상태
   const setterDetail = useSetRecoilState(detailState);
-  
+
   //입력 데이터
   const [inputData, setInput] = useState({
     participants: '',

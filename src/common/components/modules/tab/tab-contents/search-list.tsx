@@ -87,6 +87,7 @@ type Props = {
 
 const SearchList = (props: Props) => {
   const { keyword } = props;
+
   const [place, setPlace] = useState<string>('');
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const [detailPopup, setVisible] = useState<boolean>(false);
@@ -97,14 +98,13 @@ const SearchList = (props: Props) => {
   const accessToken = sessionStorage.getItem('jwtToken');
 
   const lists = useRecoilValue<searchElement[]>(searchList);
+
   // const setMyPlaceList = useSetRecoilState(myPlace);
 
   const getCategory = (category_name: string) => {
     // console.log('리스트', lists);
-    if (category_name == "")
-      return "";
-    if (category_name.indexOf(' ') === -1)
-      return category_name;
+    if (category_name == '') return '';
+    if (category_name.indexOf(' ') === -1) return category_name;
     const category_list = category_name.split('>');
     let category = category_list[3] ? category_list[3] : category_list[2] || category_list[1];
     return category.trim();
@@ -135,34 +135,35 @@ const SearchList = (props: Props) => {
         <span className="count">검색 결과 {lists.length}</span>
       </SearchListTitle>
       <SearchListContent>
-        {lists.length > 0 && lists.map((list: searchElement | any, index: number) => {
-          let category = getCategory(list.category_name);
-          return (
-            <SearchPlaceContainer key={list.id}>
-              <label className="label">
-                <Icons.Favorites
-                  className={active ? 'save' : 'delete'}
+        {lists.length > 0 &&
+          lists.map((list: searchElement | any, index: number) => {
+            let category = getCategory(list.category_name);
+            return (
+              <SearchPlaceContainer key={list.id}>
+                <label className="label">
+                  <Icons.Favorites
+                    className={active ? 'save' : 'delete'}
+                    onClick={() => {
+                      handlerPlace(list, category);
+                      setIsModal(true);
+                    }}
+                  />
+                  <input type="checkbox" className="favorites" />
+                </label>
+                <SearchPlace
+                  key={index}
+                  list={list}
+                  id={list.id}
+                  category={category}
                   onClick={() => {
-                    handlerPlace(list, category);
-                    setIsModal(true);
+                    setIsSelected(true);
+                    setPlace(list);
+                    setVisible(true);
                   }}
                 />
-                <input type="checkbox" className="favorites" />
-              </label>
-              <SearchPlace
-                key={index}
-                list={list}
-                id={list.id}
-                category={category}
-                onClick={() => {
-                  setIsSelected(true);
-                  setPlace(list);
-                  setVisible(true);
-                }}
-              />
-            </SearchPlaceContainer>
-          );
-        })}
+              </SearchPlaceContainer>
+            );
+          })}
       </SearchListContent>
     </SearchListContainer>
   );
