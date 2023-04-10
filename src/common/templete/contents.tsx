@@ -34,6 +34,7 @@ const Logo = styled.div`
 `;
 
 const Contents = (): JSX.Element => {
+  const router = useRouter();
   const [accessToken, setAccessToken] = useState<string | null>(null);
   useEffect(() => {
     setAccessToken(sessionStorage.getItem('jwtToken'));
@@ -85,7 +86,7 @@ const Contents = (): JSX.Element => {
 
   return (
     <MainContainer>
-      <Logo>
+      <Logo onClick={() => router.reload()}>
         <img src="assets/images/logo.svg" alt="로고" className="logo" />
       </Logo>
       <Navs>
@@ -107,20 +108,26 @@ const Contents = (): JSX.Element => {
           </SlideContainer>
         </Nav>
 
-        <Nav title="나의 회식 장소" onClick={() =>{
-          console.log('일로오나?');
-          if (sessionStorage.getItem('jwtToken') == null){
-            console.log('일로오나?');
-          }
-            alert('로그인을 해주세요')
-        }}>
+        <Nav
+          title="나의 회식 장소"
+          onClick={() => {
+            if (sessionStorage.getItem('jwtToken') == null) {
+              console.log('일로오나?');
+            }
+            alert('로그인을 해주세요');
+          }}
+        >
           <SlideContainer>
-            {accessToken ?<MyPlace
-              handleOnChange={handleOnChange}
-              handleSubmit={handleSubmit}
-              handleDelete={handleDelete}
-              value={value}
-            /> : <></>}
+            {accessToken ? (
+              <MyPlace
+                handleOnChange={handleOnChange}
+                handleSubmit={handleSubmit}
+                handleDelete={handleDelete}
+                value={value}
+              />
+            ) : (
+              <></>
+            )}
           </SlideContainer>
         </Nav>
 
