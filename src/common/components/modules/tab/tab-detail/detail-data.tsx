@@ -117,17 +117,6 @@ const CardBody = styled.div`
     }
   }
 `;
-const CardFooter = styled.div`
-  width: 100%;
-  .title {
-    display: flex;
-  }
-  .comment {
-    border-radius: 6px;
-    margin-top: 14px;
-    font-size: 14px;
-  }
-`;
 
 const DataFooter = styled.div`
   display: flex;

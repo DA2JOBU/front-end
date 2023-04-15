@@ -116,12 +116,6 @@ const CardBody = styled.div`
   }
 `;
 
-const CardFooter = styled.div`
-  padding: 0px 28px 0px 28px;
-  width: 100%;
-  align-items: center;
-`;
-
 const InputForm = styled.input`
   width: 100%;
   width: 324px;

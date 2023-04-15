@@ -103,3 +103,32 @@ export interface KeywordSearchResult {
   review_cnt: number;
   rating_avrg: number;
 }
+
+export interface DetailInfo {
+  address: string;
+  category: string;
+  createdAt: string;
+  id: string;
+  is_advance_payment: number;
+  is_cork_charge: number;
+  is_parking: number;
+  is_rent: number;
+  is_reservation: number;
+  is_room: number;
+  kakaoId: string;
+  lighting: string;
+  lightingCnt: number;
+  mood: string;
+  moodCnt: number;
+  name: string;
+  participantsAvg: string;
+  priceRange: string;
+  ratingAvg: number;
+  reviewCnt: number;
+  roadAddress: string;
+  simple_review: string;
+  url: string;
+  wantPlaceCnt: number;
+  x: number;
+  y: number;
+}
