@@ -267,6 +267,15 @@ const DetailPlace = (props: placeDetail) => {
       return;
     }
     const requestData = inputData;
+    if (
+      requestData.placeKinds === '' ||
+      requestData.price === '' ||
+      requestData.satisfaction === 0 ||
+      requestData.participants === 0
+    ) {
+      alert('필수 입력 정보를 입력해주세요');
+      return;
+    }
     const existRes = await placeExist(requestData.placeId).then(async (res) => {
       //없다면 장소 등록
       if (res.id === '') {
@@ -391,7 +400,7 @@ const DetailPlace = (props: placeDetail) => {
       </PlaceInfo>
       <CardContainer>
         <CardHeader>
-          <h2 className="people">장소 구분</h2>
+          <h2 className="people">장소 구분 *</h2>
           {/* <TopBadge /> */}
         </CardHeader>
         <CardBody>
@@ -400,7 +409,7 @@ const DetailPlace = (props: placeDetail) => {
         {placeState && <DivideLine />}
         {placeState && (
           <CardHeader>
-            <h2 className="people">만족도 </h2>
+            <h2 className="people">만족도 * </h2>
             {/* <TopBadge /> */}
           </CardHeader>
         )}
@@ -411,7 +420,7 @@ const DetailPlace = (props: placeDetail) => {
         )}
         {placeState && (
           <CardHeader>
-            <h2 className="people">참석인원수 </h2>
+            <h2 className="people">참석인원수 * </h2>
             {/* <TopBadge /> */}
           </CardHeader>
         )}
@@ -422,7 +431,7 @@ const DetailPlace = (props: placeDetail) => {
         )}
         {placeState && (
           <CardHeader>
-            <h2 className="people">인당 가격대 </h2>
+            <h2 className="people">인당 가격대 * </h2>
             {/* <TopBadge /> */}
           </CardHeader>
         )}
