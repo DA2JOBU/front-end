@@ -240,13 +240,15 @@ const DetailData = (props: { placeList: any; info?: any; status?: any; category:
           height="52px"
           fontSize="16px"
           onClick={() => {
-            window.open(`https://place.map.kakao.com/${placeList.kakaoId}`, '_blank', 'noopener, noreferrer');
+            window.open(`https://place.map.kakao.com/${placeList.id}`, '_blank', 'noopener, noreferrer');
           }}
         />
         <BaseButton value="등록하기" width="6.5rem" height="52px" fontSize="16px" />
       </DataFooter>
       <DataFooter>
-        <BaseButton value="공유하기" width="20rem" height="52px" fontSize="16px" />
+        <CopyToClipboard text={`https://place.map.kakao.com/${placeList.id}`} onCopy={() => copyToast()}>
+          <BaseButton value="공유하기" width="20rem" height="52px" fontSize="16px" />
+        </CopyToClipboard>
       </DataFooter>
       <ToastContainer />
     </DataContainer>
