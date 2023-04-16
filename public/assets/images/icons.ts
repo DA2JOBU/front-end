@@ -22,6 +22,7 @@ import Copy from './copy.svg';
 import User from './user.svg';
 import Tag from './tag.svg';
 import Point from './point.svg';
+import SearchKeyword from './search_keyword.svg';
 
 const importedIcons = {
   Check,
@@ -46,6 +47,7 @@ const importedIcons = {
   User,
   Tag,
   Point,
+  SearchKeyword
 };
 
 type IconName = keyof typeof importedIcons;
