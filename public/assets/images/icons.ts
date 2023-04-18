@@ -23,6 +23,9 @@ import User from './user.svg';
 import Tag from './tag.svg';
 import Point from './point.svg';
 import SearchKeyword from './search_keyword.svg';
+import FoodColor from './foodcolor.svg';
+import Humancolor from './humancolor.svg';
+import Moneycolor from './moneycolor.svg';
 
 const importedIcons = {
   Check,
@@ -47,7 +50,10 @@ const importedIcons = {
   User,
   Tag,
   Point,
-  SearchKeyword
+  SearchKeyword,
+  FoodColor,
+  Humancolor,
+  Moneycolor,
 };
 
 type IconName = keyof typeof importedIcons;

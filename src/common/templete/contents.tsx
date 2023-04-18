@@ -31,6 +31,7 @@ const Logo = styled.div`
   position: absolute;
   top: 8px;
   left: 32px;
+  cursor: pointer;
 `;
 
 const Contents = (): JSX.Element => {

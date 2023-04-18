@@ -10,6 +10,7 @@ import Tabs from './tabs';
 import Tab from './tab';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { toast } from 'react-toastify';
+import Atmosphere from '@components/modules/rightTab/detailPlace/atmosphere';
 
 type ModalProps = {
   onClose: () => void;
@@ -73,10 +74,11 @@ const AddressContainer = styled.span`
 `;
 
 const ContentContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   gap: 20px;
   padding-top: 1.75rem;
+  justify-content: space-between;
+  padding: 1rem;
 `;
 
 const InnerContainer = styled.div`
@@ -130,6 +132,65 @@ const SearchMap = styled.span`
     background-color: #fff;
     padding-left: 0.2rem;
     font-size:0.7rem;
+  }
+`;
+
+const CardHeader = styled.div`
+  width: 100%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.8rem;
+
+  .people {
+    font-size: 1rem;
+    color: ${({ theme }) => theme.color.black};
+    font-weight: 600;
+    padding-right: 4px;
+  }
+`;
+
+const CardBody = styled.div`
+  margin-bottom: 1rem;
+  p {
+    display: flex;
+    margin: 0.3rem 0.1rem;
+  }
+  .title {
+    padding-bottom: 12px;
+    .food {
+      padding-right: 6px;
+      font-size: ${({ theme }) => theme.fontSize.Stitle};
+      // font-weight: 600;
+      color: ${({ theme }) => theme.color.gray90};
+      border-right: 1px solid ${({ theme }) => theme.color.gray40};
+    }
+    .address {
+      padding-left: 6px;
+      color: ${({ theme }) => theme.color.gray80};
+    }
+  }
+  .body {
+    align-items: center;
+    display: flex;
+
+    .star {
+      color: ${({ theme }) => theme.color.gray90};
+      font-size: 14px;
+      padding: 0 18px 0 2px;
+      font-weight: 700;
+    }
+
+    .review {
+      color: ${({ theme }) => theme.color.gray80};
+      font-size: 14px;
+      padding-right: 10px;
+    }
+    .save {
+      color: ${({ theme }) => theme.color.gray80};
+      font-size: 14px;
+      padding-right: 10px;
+    }
   }
 `;
 
@@ -213,7 +274,7 @@ const PlaceDetailInfo = (props: ModalProps) => {
                 <Container>
                   <span className="text-small">평균인원</span>
                   <p className="content-body">
-                    <Icons.User className="star" />
+                    <Icons.Humancolor className="star" />
                     <span className="content-text">{modalInfo?.participantsAvg !== null ? modalInfo?.participantsAvg : '-'} </span>
                     <span className="gray">명</span>
                   </p>
@@ -221,18 +282,24 @@ const PlaceDetailInfo = (props: ModalProps) => {
                 <Container>
                   <span className="text-small">음식종류</span>
                   <p className="content-body">
-                    <Icons.Point />
+                    <Icons.FoodColor />
                     <span className="content-text">{modalInfo?.category}</span>
                   </p>
                 </Container>
                 <Container>
                   <span className="text-small">가격대</span>
                   <p className="content-body">
-                    <Icons.Tag />
+                    <Icons.Moneycolor />
                     <span className="content-text">{modalInfo?.priceRange !== null ? modalInfo?.priceRange : '-'} </span>
                   </p>
                 </Container>
               </ContentContainer>
+              <CardHeader>
+                <h2 className="people">분위기 </h2>
+              </CardHeader>
+              <CardBody>
+                <Atmosphere name="mood" />
+              </CardBody>
             </Tab>
             <Tab title="리뷰">
               <div>
@@ -274,6 +341,10 @@ export const Container = styled.div`
   flex-direction: column;
   height: 100%;
   justify-content: space-between;
+  .text-small {
+    font-size: 0.8rem;
+    color: ${({ theme }) => theme.color.gray70};
+  }
 `;
 
 export const CloseIcon = styled.div`
