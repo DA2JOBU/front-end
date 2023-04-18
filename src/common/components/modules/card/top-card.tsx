@@ -142,7 +142,9 @@ const TopCard = (props: Props): JSX.Element => {
       </CardHeader>
       <CardBody>
         <p className="title">
-          <span className="food">{category}</span>
+          <span className="food" style={{ fontSize: '16px' }}>
+            {category}
+          </span>
           <span className="address">{place_Info?.roadAddress}</span>
         </p>
         <p className="body">
