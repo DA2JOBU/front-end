@@ -29,19 +29,20 @@ const Navs = (props: Props): JSX.Element => {
   return (
     <NavContainer>
       <UlStyled>
-        {children && children.map((item, index) =>
-          item.props.title === '로그인' ? (
-            <NavLoginButton key={item.props.title} title={item.props.title} onClick={item.props.onClick} />
-          ) : (
-            <NavTitle
-              key={item.props.title}
-              title={item.props.title}
-              index={index}
-              isActive={index === selectedNavIndex}
-              setSelectedNav={setSelectedNavIndex}
-            />
-          )
-        )}
+        {children &&
+          children.map((item, index) =>
+            item.props.title === '로그인' ? (
+              <NavLoginButton key={item.props.title} title={item.props.title} onClick={item.props.onClick} />
+            ) : (
+              <NavTitle
+                key={item.props.title}
+                title={item.props.title}
+                index={index}
+                isActive={index === selectedNavIndex}
+                setSelectedNav={setSelectedNavIndex}
+              />
+            )
+          )}
       </UlStyled>
       {children && children[selectedNavIndex]}
     </NavContainer>

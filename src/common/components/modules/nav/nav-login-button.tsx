@@ -9,11 +9,9 @@ export type NavLoginButtonProps = {
 const NavLoginButton = (props: NavLoginButtonProps): JSX.Element => {
   return (
     <LiStyled>
-      <ButtonStyle onClick={props.onClick}>
-        {props.title}
-      </ButtonStyle>
+      <ButtonStyle onClick={props.onClick}>{props.title}</ButtonStyle>
     </LiStyled>
   );
 };
-  
+
 export default NavLoginButton;

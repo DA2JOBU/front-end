@@ -15,8 +15,8 @@ const UserModal = () => {
         setUserInfo(data);
       });
     }
-  }, [accessToken])
-  
+  }, [accessToken]);
+
   return (
     <Overlay>
       <ModalWrap>
@@ -24,9 +24,7 @@ const UserModal = () => {
           <ModalHeader onClick={closeUserInfoModal}>
             <Icons.Close />
           </ModalHeader>
-          <ModalBody>
-             닉네임: {userInfo?.nickname}
-          </ModalBody>
+          <ModalBody>닉네임: {userInfo?.nickname}</ModalBody>
         </Container>
       </ModalWrap>
     </Overlay>
