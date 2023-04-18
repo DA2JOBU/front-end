@@ -130,7 +130,9 @@ const PlaceCard = (props: Props): JSX.Element => {
       </CardHeader>
       <CardBody>
         <p className="title">
-          <span className="food">{category_name}</span>
+          <span className="food" style={{ fontSize: '16px' }}>
+            {category_name}
+          </span>
           <span className="address">{address_name}</span>
         </p>
         <p className="body">
