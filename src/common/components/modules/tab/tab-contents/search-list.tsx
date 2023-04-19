@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import React, { useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import { searchList } from 'src/state';
 import { SearchPlace } from './search-place';
 import { searchElement } from 'src/types/searchType';
-import { PlaceRegister } from 'src/types/registerType';
 import styled from 'styled-components';
-import { channel } from 'diagnostics_channel';
-import { run } from 'node:test';
-import { deletedPlace, placeExist, registerFirstPlace } from '@api/mapApi';
+import { registerFirstPlace } from '@api/mapApi';
 import SearchDetail from '../tab-detail/serach-detail';
-import Icons from 'public/assets/images/icons';
 import { User } from 'src/types/userType';
 import { useUserInfoModalOpen } from 'src/common/hook/modal.hook';
-import { getUserInfo } from '@api/auth';
 import Modal from '@components/modules/modal';
 
 const SearchListContainer = styled.section`
@@ -110,22 +105,6 @@ const SearchList = (props: Props) => {
     return category.trim();
   };
 
-  const handlerPlace = (list: searchElement, category: string) => {
-    const data: any = {
-      kakaoId: list.id,
-      name: list.place_name,
-      category: category,
-      x: list.x,
-      y: list.y,
-      info: {
-        url: list.place_url,
-        address: list.address_name,
-        roadAddress: list.road_address_name,
-      },
-    };
-    registerFirstPlace(data);
-  };
-
   return (
     <SearchListContainer>
       {accessToken === null && isModal && <Modal onClose={() => setIsModal(false)} />}
@@ -140,7 +119,7 @@ const SearchList = (props: Props) => {
             let category = getCategory(list.category_name);
             return (
               <SearchPlaceContainer key={list.id}>
-                <label className="label">
+                {/* <label className="label">
                   <Icons.Favorites
                     className={active ? 'save' : 'delete'}
                     onClick={() => {
@@ -149,7 +128,7 @@ const SearchList = (props: Props) => {
                     }}
                   />
                   <input type="checkbox" className="favorites" />
-                </label>
+                </label> */}
                 <SearchPlace
                   key={index}
                   list={list}
