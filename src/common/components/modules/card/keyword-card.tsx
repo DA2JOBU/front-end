@@ -112,7 +112,7 @@ const KeywordCard = (): JSX.Element => {
     isReservation: '',
   });
 
-  const onClick = () => {};
+  const onClick = () => { };
 
   //입력 폼 전체 상태 관리
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -193,7 +193,7 @@ const KeywordCard = (): JSX.Element => {
         <h2 className="people">분위기 </h2>
       </CardHeader>
       <CardBody>
-        <Atmosphere onChange={onChange} name="mood" />
+        <Atmosphere width="6.4rem" onChange={onChange} name="mood" />
       </CardBody>
       <CardHeader>
         <h2 className="people">조명 밝기</h2>

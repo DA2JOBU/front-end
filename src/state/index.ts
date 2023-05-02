@@ -28,6 +28,7 @@ export const keyword = atom<string>({
   default: '',
 });
 
+//상세 페이지
 export const detailState = atom<number>({
   key: 'detail',
   default: 0,
