@@ -8,12 +8,13 @@ interface Props {
   count?: number | undefined;
   value?: string;
   mood?: string;
+  width?: string;
 }
 
 //벨류인것만 카운트
 
 const Atmosphere = (props: Props) => {
-  const { onChange, name, count, mood } = props;
+  const { onChange, name, count, mood, width } = props;
 
   const [light, setLight] = useState(false);
   const [normal, setNormal] = useState(false);

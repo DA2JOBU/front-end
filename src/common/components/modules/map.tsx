@@ -62,8 +62,8 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
     window.kakao.maps.load(() => {
       const mapContainer = document.getElementById('map');
       const mapOption = {
-        center: new window.kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-        level: 3, // 지도의 확대 레벨
+        center: new window.kakao.maps.LatLng(37.566826, 126.9886567), // 지도의 중심좌표
+        level: 5, // 지도의 확대 레벨
       };
 
       // 지도를 생성
@@ -119,7 +119,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
           // 검색 목록과 마커를 표출
           displayPlaces(data);
           setterSearchList(data);
-          setterDetail(1);
+          setterDetail(2);
           // 페이지 번호를 표출
           //displayPagination(pagination);
         } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
@@ -136,6 +136,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
         addMarker(placePosition, i, undefined);
       }
       displayPlaces(registerPos);
+      map.setLevel(4, { anchor: new window.kakao.maps.LatLng(37.566826, 126.9886567) });
 
       // 검색 결과 목록과 마커를 표출하는 함수
       function displayPlaces(places: string | any[]) {
@@ -155,7 +156,8 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
           let placePosition = new window.kakao.maps.LatLng(places[i].y, places[i].x),
             marker = addMarker(placePosition, i, undefined),
             itemEl = getListItem(i, places[i]), // 검색 결과 항목 Element를 생성
-            id = places[i].id;
+            id = places[i].id,
+            info = places[i];
 
           // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
           // LatLngBounds 객체에 좌표를 추가
@@ -175,7 +177,7 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
 
             // 마커에 클릭이벤트를 등록합니다
             window.kakao.maps.event.addListener(marker, 'click', function () {
-              console.log(id);
+              console.log(info);
               setId(id);
               setDetailInfo(true);
             });
@@ -212,18 +214,17 @@ const Map = (props: propsType, mapContainer: HTMLDivElement | null) => {
             </span>
             <a href="${places.place_url}">
               <h5 class="info-item place-name">${places.place_name}</h5>
-              ${
-                places.road_address_name
-                  ? `<span class="info-item road-address-name">
+              ${places.road_address_name
+            ? `<span class="info-item road-address-name">
                     ${places.road_address_name}
                    </span>
                    <span class="info-item address-name">
                  	 ${places.address_name}
                	   </span>`
-                  : `<span class="info-item address-name">
+            : `<span class="info-item address-name">
              	     ${places.address_name}
                   </span>`
-              }
+          }
               <span class="info-item tel">
                 ${places.phone}
               </span>

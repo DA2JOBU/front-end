@@ -11,10 +11,22 @@ import Tab from './tab';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { toast } from 'react-toastify';
 import Atmosphere from '@components/modules/rightTab/detailPlace/atmosphere';
+import BottomContent from '@components/elements/bottomContent';
 
 type ModalProps = {
   onClose: () => void;
   id: string;
+  address_name?: string;
+  category_group_code?: string;
+  category_group_name?: string;
+  category_name?: string;
+  distance?: string;
+  phone?: string;
+  place_name?: string;
+  place_url?: string;
+  road_address_name?: string;
+  x?: string;
+  y?: string;
 };
 
 const Title = styled.span`
@@ -194,6 +206,18 @@ const CardBody = styled.div`
   }
 `;
 
+const Footer = styled.div`
+  position: fixed;
+  padding: 0px 28px;
+  z-index: 10000;
+  width: 100%;
+  text-align: center;
+  background: ${({ theme }) => theme.color.white};
+  bottom: 0px;
+  vertical-align: middle;
+  margin-bottom: 2rem;
+`;
+
 const PlaceDetailInfo = (props: ModalProps) => {
   const { onClose, id } = props;
   const setterDetail = useSetRecoilState(detailState);
@@ -210,11 +234,42 @@ const PlaceDetailInfo = (props: ModalProps) => {
         setInfo(res);
       });
     }
-    else {
+    else if (getterDetail === 1) {
       getDetailKakaoInfo(id).then((res) => {
         console.log(res);
         setInfo(res);
       });
+    }
+    //카카오 상세 정보 2번
+    else {
+      // setInfo({
+      //   address: address_name;
+      //   category: string;
+      //   createdAt: "",
+      //   id: id,
+      //   is_advance_payment: 0,
+      //   is_cork_charge: 0,
+      //   is_parking: 0,
+      //   is_rent: 0,
+      //   is_reservation: 0,
+      //   is_room: 0,
+      //   kakaoId: id,
+      //   lighting: "",
+      //   lightingCnt: 0,
+      //   mood: "",
+      //   moodCnt: 0,
+      //   name: 
+      //   participantsAvg: string;
+      //   priceRange: string;
+      //   ratingAvg: number;
+      //   reviewCnt: number;
+      //   roadAddress: string;
+      //   simple_review: string;
+      //   url: string;
+      //   wantPlaceCnt: number;
+      //   x: number;
+      //   y: number;
+      // });
     }
   }, [id]);
 
@@ -307,6 +362,9 @@ const PlaceDetailInfo = (props: ModalProps) => {
               </div>
             </Tab>
           </Tabs>
+          <Footer>
+            아래
+          </Footer>
         </TabContainer>
       </ModalWrap>
     </Overlay>
