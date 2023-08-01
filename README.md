@@ -2,7 +2,11 @@
 
 ![Group 1732](https://user-images.githubusercontent.com/52316270/223913181-91a9f790-fcdd-4ffd-bfee-5c8c37c7b164.png)
 
+## Introduction
+- https://bside.best/projects/detail/P221017050213
 
+## User
+- 200명
 
 ## Concept
 
